@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 using FakeItEasy;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OnionPattern.Domain.Repository;
-using OnionPattern.Service.Requests;
+using OnionPattern.Domain.Services;
 using OnionPattern.Service.Requests.Platform;
 using OnionPattern.Service.Responses;
 
@@ -37,8 +38,8 @@ namespace OnionPattern.Service.Tests.Requests.Platform
                 var request = new GetAllPlatformsRequest(fakeRepository);
 
                 request.Should().NotBeNull();
-                request.Should().BeAssignableTo<IRequest<GetAllPlatformsResponse>>();
-                request.Should().BeAssignableTo<BaseRequest<Domain.Entities.Platform, GetAllPlatformsResponse>>();
+                request.Should().BeAssignableTo<IServiceRequest<Domain.Entities.Platform, GetAllPlatformsResponse>>();
+                request.Should().BeAssignableTo<BaseServiceRequest<Domain.Entities.Platform, GetAllPlatformsResponse>>();
                 request.Should().BeOfType<GetAllPlatformsRequest>();
             }
         }
@@ -47,7 +48,7 @@ namespace OnionPattern.Service.Tests.Requests.Platform
         public class MethodTests
         {
             [TestMethod]
-            public void Execute()
+            public async Task Execute()
             {
                Expression<Func<IEnumerable<Domain.Entities.Platform>>> getAll = () => fakeRepository.GetAll();
 
@@ -58,7 +59,7 @@ namespace OnionPattern.Service.Tests.Requests.Platform
                 var request = new GetAllPlatformsRequest(fakeRepository);
                 request.Should().NotBeNull();    
                 
-                var response = request.Execute();
+                var response = await request.Execute();
                 response.Should().NotBeNull();
                 response.Should().BeOfType<GetAllPlatformsResponse>();
 

@@ -58,9 +58,8 @@ namespace OnionPattern.Api
         /// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         /// </summary>
         /// <param name="app"></param>
-        /// <param name="environment"></param>
         /// <param name="loggerFactory"></param>
-        public void Configure(IApplicationBuilder app, IHostingEnvironment environment, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
         {
             loggerFactory.AddConsole(Configuration.GetSection(AppSettingsSections.Logging));
             loggerFactory.AddDebug();

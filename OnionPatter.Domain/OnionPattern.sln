@@ -34,6 +34,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnionPattern.Api", "OnionPa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnionPattern.Api.Tests", "OnionPattern.Api.Tests\OnionPattern.Api.Tests.csproj", "{E883E6B4-DD55-4444-B0E1-465DAFD01834}"
 EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "OnionPattern.Database", "OnionPattern.Database\OnionPattern.Database.sqlproj", "{0D72D142-FAE7-4984-A47F-47F10969F4B5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -80,6 +82,12 @@ Global
 		{E883E6B4-DD55-4444-B0E1-465DAFD01834}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E883E6B4-DD55-4444-B0E1-465DAFD01834}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E883E6B4-DD55-4444-B0E1-465DAFD01834}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D72D142-FAE7-4984-A47F-47F10969F4B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D72D142-FAE7-4984-A47F-47F10969F4B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D72D142-FAE7-4984-A47F-47F10969F4B5}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{0D72D142-FAE7-4984-A47F-47F10969F4B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D72D142-FAE7-4984-A47F-47F10969F4B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D72D142-FAE7-4984-A47F-47F10969F4B5}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -95,6 +103,7 @@ Global
 		{8C6EFEA2-FCBA-4A7E-A3A9-F4B75C8CAFD9} = {BD86FAFB-0DB9-46FA-BE21-350642B83A51}
 		{E8E2CA5C-A352-4E9C-A6DF-4C2CF01DE8A3} = {CDDBCFD6-438C-4583-A9C0-22EE5425E605}
 		{E883E6B4-DD55-4444-B0E1-465DAFD01834} = {BD86FAFB-0DB9-46FA-BE21-350642B83A51}
+		{0D72D142-FAE7-4984-A47F-47F10969F4B5} = {CDDBCFD6-438C-4583-A9C0-22EE5425E605}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {10BC7194-6404-43FB-9E97-A476E27278E2}

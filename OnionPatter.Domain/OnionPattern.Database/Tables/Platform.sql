@@ -1,0 +1,6 @@
+﻿CREATE TABLE [dbo].[Platform]
+(
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY(1, 1),
+	[Name] NVARCHAR(250) NOT NULL,
+	[ReleaseDate] DATETIME NOT NULL
+)

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace OnionPattern.Domain.Entities
 {
@@ -7,5 +8,7 @@ namespace OnionPattern.Domain.Entities
         public int Id { get; set; }
         public string Name { get; set; }
         public DateTime ReleaseDate { get; set; }
+
+        public ICollection<Game> Games { get; set; }
     }
 }

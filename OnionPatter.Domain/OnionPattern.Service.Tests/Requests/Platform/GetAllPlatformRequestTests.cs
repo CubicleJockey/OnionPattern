@@ -64,9 +64,9 @@ namespace OnionPattern.Service.Tests.Requests.Platform
                     ReleaseDate = new DateTime(1990, 11, 21)
                 };
 
-                Expression<Func<IEnumerable<Domain.Entities.Platform>>> GetAll = () => fakeRepository.GetAll();
+                Expression<Func<IEnumerable<Domain.Entities.Platform>>> getAll = () => fakeRepository.GetAll();
 
-                A.CallTo(GetAll).Returns(new[] { nintendo, superNintendo });
+                A.CallTo(getAll).Returns(new[] { nintendo, superNintendo });
 
                 var request = new GetAllPlatformsRequest(fakeRepository);
                 request.Should().NotBeNull();    
@@ -93,7 +93,7 @@ namespace OnionPattern.Service.Tests.Requests.Platform
                     platform.ReleaseDate.ShouldBeEquivalentTo(expected.ReleaseDate);
                 }
 
-                A.CallTo(GetAll).MustHaveHappened(Repeated.Exactly.Once);
+                A.CallTo(getAll).MustHaveHappened(Repeated.Exactly.Once);
             }
         }
     }

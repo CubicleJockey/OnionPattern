@@ -3,9 +3,9 @@ using OnionPattern.Domain.Entities;
 
 namespace OnionPattern.DataAccess.EF
 {
-    public class VideoVideoGameContext : DbContext, IVideoGameContext
+    public class VideoGameContext : DbContext, IVideoGameContext
     {
-        public VideoVideoGameContext(DbContextOptions options) : base(options) { }
+        public VideoGameContext(DbContextOptions options) : base(options) { }
 
         public DbSet<Game> Games { get; set; }
         public DbSet<Platform> Platforms { get; set; }

@@ -1,20 +1,20 @@
-﻿using MediatR;
+﻿using System.Threading.Tasks;
 using OnionPattern.Domain.Repository;
 using OnionPattern.Service.Responses;
 
 namespace OnionPattern.Service.Requests.Platform
 {
-    public class GetAllPlatformsRequest : BaseRequest<Domain.Entities.Platform, GetAllPlatformsResponse>, IRequest<GetAllPlatformsResponse>
+    public class GetAllPlatformsRequest : BaseServiceRequest<Domain.Entities.Platform, GetAllPlatformsResponse>
     {
         public GetAllPlatformsRequest(IRepository<Domain.Entities.Platform> repository) : base(repository) {}
 
-        public override GetAllPlatformsResponse Execute()
+        public override Task<GetAllPlatformsResponse> Execute()
         {
             var platforms = Repository.GetAll();
-            return new GetAllPlatformsResponse
+            return Task.FromResult(new GetAllPlatformsResponse
             {
                 Platforms = platforms
-            };
+            });
         }
     }
 }

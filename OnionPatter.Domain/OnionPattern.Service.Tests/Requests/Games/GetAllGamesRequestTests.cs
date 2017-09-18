@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using FakeItEasy;
+﻿using FakeItEasy;
 using FluentAssertions;
-using MediatR;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OnionPattern.Domain.Entities;
 using OnionPattern.Domain.Repository;
+using OnionPattern.Domain.Services;
 using OnionPattern.Service.Requests;
 using OnionPattern.Service.Requests.Games;
 using OnionPattern.Service.Responses;
@@ -38,7 +35,7 @@ namespace OnionPattern.Service.Tests.Requests.Games
                 var request = new GetAllGamesRequest(fakeRepository);
 
                 request.Should().NotBeNull();
-                request.Should().BeAssignableTo<IRequest<GetAllGamesResponse>>();
+                request.Should().BeAssignableTo<IServiceRequest<Game, GetAllGamesResponse>>();
                 request.Should().BeAssignableTo<BaseRequest<Game, GetAllGamesResponse>>();
                 request.Should().BeOfType<GetAllGamesRequest>();
             }

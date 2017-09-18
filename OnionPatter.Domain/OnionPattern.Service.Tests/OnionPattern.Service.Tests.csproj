@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Responses\**" />
+    <EmbeddedResource Remove="Responses\**" />
+    <None Remove="Responses\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="FakeItEasy" Version="4.0.0" />
     <PackageReference Include="FluentAssertions" Version="4.19.4" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.3.0" />
@@ -17,11 +23,6 @@
   <ItemGroup>
     <ProjectReference Include="..\OnionPatter.Domain\OnionPattern.Domain.csproj" />
     <ProjectReference Include="..\OnionPattern.Service\OnionPattern.Service.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="RequestHandlers\Games\" />
-    <Folder Include="Responses\" />
   </ItemGroup>
 
 </Project>

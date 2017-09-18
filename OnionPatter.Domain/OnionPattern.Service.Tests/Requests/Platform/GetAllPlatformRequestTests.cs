@@ -4,7 +4,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using FakeItEasy;
 using FluentAssertions;
-using MediatR;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OnionPattern.Domain.Repository;
 using OnionPattern.Service.Requests;

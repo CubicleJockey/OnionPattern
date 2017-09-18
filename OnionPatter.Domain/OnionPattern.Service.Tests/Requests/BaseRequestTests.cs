@@ -1,10 +1,10 @@
 ﻿using System;
+using System.Threading.Tasks;
 using FakeItEasy;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OnionPattern.Domain.Entities;
 using OnionPattern.Domain.Repository;
-using OnionPattern.Service.Requests;
 
 namespace OnionPattern.Service.Tests.Requests
 {
@@ -41,19 +41,20 @@ namespace OnionPattern.Service.Tests.Requests
                 var baseRequest = new MockBaseRequest(fakeRepository);
 
                 baseRequest.Should().NotBeNull();
-                baseRequest.Should().BeAssignableTo<BaseRequest<FakeEntity, string>>();
+                baseRequest.Should().BeAssignableTo<BaseServiceRequest<FakeEntity, string>>();
                 baseRequest.Should().BeOfType<MockBaseRequest>();
             }
         }
 
         #region Mocks
 
-        public class MockBaseRequest : BaseRequest<FakeEntity, string>
+        public class MockBaseRequest : BaseServiceRequest<FakeEntity, string>
         {
             public MockBaseRequest(IRepository<FakeEntity> repository) : base(repository) { }
-            public override string Execute()
+
+            public override Task<string> Execute()
             {
-                throw new System.NotImplementedException("Oh noes n' stuff!");
+                throw new NotImplementedException();
             }
         }
         public class FakeEntity : VideoGameEntity { }

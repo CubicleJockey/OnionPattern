@@ -6,6 +6,7 @@ using OnionPattern.DataAccess.EF;
 using OnionPattern.DataAccess.EF.Repository;
 using OnionPattern.Domain.Entities;
 using OnionPattern.Domain.Repository;
+using OnionPattern.Service.RequestHandlers.Platform;
 
 namespace OnionPattern.DependencyInjection
 {
@@ -24,7 +25,7 @@ namespace OnionPattern.DependencyInjection
                 return new Repository<Game>(dbContext);
             });
 
-            //services.AddMediatR(typeof(ProfileRequestHandlerAsync));
+            services.AddMediatR(typeof(GetAllPlatformRequestHandlerAsync));
         }
     }
 }

@@ -21,7 +21,6 @@
 
   <ItemGroup>
     <Folder Include="RequestHandlers\" />
-    <Folder Include="Requests\" />
     <Folder Include="Responses\" />
   </ItemGroup>
 

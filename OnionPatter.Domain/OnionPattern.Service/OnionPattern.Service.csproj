@@ -9,9 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="RequestHandlers\" />
-    <Folder Include="Responses\" />
-    <Folder Include="Requests\" />
+    <ProjectReference Include="..\OnionPatter.Domain\OnionPattern.Domain.csproj" />
   </ItemGroup>
 
 </Project>

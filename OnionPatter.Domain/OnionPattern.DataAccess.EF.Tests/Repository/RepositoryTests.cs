@@ -1,5 +1,6 @@
 ﻿using FakeItEasy;
 using FluentAssertions;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OnionPattern.DataAccess.EF.Repository;
 using OnionPattern.Domain.Entities;
@@ -15,7 +16,7 @@ namespace OnionPattern.DataAccess.EF.Tests.Repository
             [TestMethod]
             public void Inheritence()
             {
-                var fakeDbContext = A.Fake<IDbContext>();
+                var fakeDbContext = A.Fake<DbContext>();
                 var repository = new Repository<DummyEntity>(fakeDbContext);
 
                 repository.Should().NotBeNull();

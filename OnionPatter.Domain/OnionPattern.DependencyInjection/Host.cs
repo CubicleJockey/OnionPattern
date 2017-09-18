@@ -17,11 +17,11 @@ namespace OnionPattern.DependencyInjection
             if (string.IsNullOrWhiteSpace(connectionString)) { throw new ArgumentException($"{nameof(connectionString)} cannot be empty."); }
 
             services.AddDbContext<VideoVideoGameContext>(options => options.UseSqlServer(connectionString));
-            services.AddScoped<IDbContext>(provider => provider.GetService<VideoVideoGameContext>());
+            services.AddScoped<DbContext>(provider => provider.GetService<VideoVideoGameContext>());
 
             services.AddTransient<IRepository<Game>, Repository<Game>>(context =>
             {
-                IDbContext dbContext = context.GetService<VideoVideoGameContext>();
+                DbContext dbContext = context.GetService<VideoVideoGameContext>();
                 return new Repository<Game>(dbContext);
             });
 

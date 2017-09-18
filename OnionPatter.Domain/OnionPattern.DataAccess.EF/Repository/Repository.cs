@@ -11,14 +11,14 @@ namespace OnionPattern.DataAccess.EF.Repository
 {
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : VideoGameEntity
     {
-        private readonly IDbContext context;
+        private readonly DbContext context;
         private readonly DbSet<TEntity> dataSet;
 
         /// <summary>
         /// Ctor
         /// </summary>
         /// <param name="context"></param>
-        public Repository(IDbContext context)
+        public Repository(DbContext context)
         {
             this.context = context ?? throw new ArgumentNullException($"{nameof(context)} cannot be null.");
             dataSet = context.Set<TEntity>();

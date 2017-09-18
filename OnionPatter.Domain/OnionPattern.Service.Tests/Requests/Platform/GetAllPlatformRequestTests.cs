@@ -50,23 +50,11 @@ namespace OnionPattern.Service.Tests.Requests.Platform
             [TestMethod]
             public void Execute()
             {
-                var nintendo = new Domain.Entities.Platform
-                {
-                    Id = 1,
-                    Name = "Nintendo",
-                    ReleaseDate = new DateTime(1983, 07, 15)
-                };
+               Expression<Func<IEnumerable<Domain.Entities.Platform>>> getAll = () => fakeRepository.GetAll();
 
-                var superNintendo = new Domain.Entities.Platform
-                {
-                    Id = 2,
-                    Name = "Super Nintendo",
-                    ReleaseDate = new DateTime(1990, 11, 21)
-                };
+                var platforms = TestData.GetPlatforms().ToArray();
 
-                Expression<Func<IEnumerable<Domain.Entities.Platform>>> getAll = () => fakeRepository.GetAll();
-
-                A.CallTo(getAll).Returns(new[] { nintendo, superNintendo });
+                A.CallTo(getAll).Returns(platforms);
 
                 var request = new GetAllPlatformsRequest(fakeRepository);
                 request.Should().NotBeNull();    
@@ -79,11 +67,11 @@ namespace OnionPattern.Service.Tests.Requests.Platform
 
                 //platform 1 result
                 var nes = response.Platforms.ElementAt(0);
-                CheckValues(nes, nintendo);
+                CheckValues(nes, platforms.Single(p => p.Id == 1));
 
                 //platform 2 result
                 var snes = response.Platforms.ElementAt(1);
-                CheckValues(snes, superNintendo);
+                CheckValues(snes, platforms.Single(p => p.Id == 2));
 
                 void CheckValues(Domain.Entities.Platform platform, Domain.Entities.Platform expected)
                 {

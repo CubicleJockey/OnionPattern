@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="RequestHandlers\" />
+    <Folder Include="RequestHandlers\Games\" />
     <Folder Include="Responses\" />
   </ItemGroup>
 

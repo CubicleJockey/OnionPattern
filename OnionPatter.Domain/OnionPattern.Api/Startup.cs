@@ -66,7 +66,7 @@ namespace OnionPattern.Api
             loggerFactory.AddDebug();
             loggerFactory.AddSerilog();
 
-            if (!environment.IsEnvironment(EnvironmentTypes.Local))
+            if (environment.IsEnvironment(EnvironmentTypes.Local))
             {
                 app.UseDeveloperExceptionPage();
 

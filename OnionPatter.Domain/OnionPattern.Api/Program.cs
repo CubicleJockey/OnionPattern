@@ -33,7 +33,7 @@ namespace OnionPattern.Api
                 })
                 .UseKestrel(options =>
                 {
-                    options.Listen(IPAddress.Loopback, 60492, listenOptions =>
+                    options.Listen(IPAddress.Loopback, 52532, listenOptions =>
                     {
                         listenOptions.NoDelay = true;
                     });

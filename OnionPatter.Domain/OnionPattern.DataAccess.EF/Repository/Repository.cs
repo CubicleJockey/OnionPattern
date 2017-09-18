@@ -9,7 +9,7 @@ using OnionPattern.Domain.Repository;
 
 namespace OnionPattern.DataAccess.EF.Repository
 {
-    public class Repository<TEntity> : IRepository<TEntity> where TEntity : GameEntity
+    public class Repository<TEntity> : IRepository<TEntity> where TEntity : VideoGameEntity
     {
         private readonly IDbContext context;
         private readonly DbSet<TEntity> dataSet;

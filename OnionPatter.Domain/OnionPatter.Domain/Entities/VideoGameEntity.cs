@@ -4,7 +4,7 @@ using OnionPattern.Domain.Validation;
 
 namespace OnionPattern.Domain.Entities
 {
-    public abstract class GameEntity
+    public abstract class VideoGameEntity
     {
         [NotMapped]
         public bool IsValid { get; set; }

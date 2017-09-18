@@ -5,7 +5,7 @@ using OnionPattern.Domain.Entities;
 
 namespace OnionPattern.Domain.Repository
 {
-    public interface IRepository<TEntity> where TEntity : GameEntity
+    public interface IRepository<TEntity> where TEntity : VideoGameEntity
     {
         IEnumerable<TEntity> GetAll();
         TEntity Single(Expression<Func<TEntity, bool>> expression);

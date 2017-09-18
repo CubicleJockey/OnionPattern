@@ -1,7 +1,14 @@
 ﻿namespace OnionPattern.Api.AppConstants
 {
+    /// <summary>
+    /// Constants for App Settings Configuration Sections
+    /// </summary>
     public class AppSettingsSections
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        public static string ConnectionStrings = nameof(ConnectionStrings);
         /// <summary>
         /// Logging Configuration Sections
         /// </summary>

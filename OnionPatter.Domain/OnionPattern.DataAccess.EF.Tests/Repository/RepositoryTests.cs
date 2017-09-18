@@ -23,7 +23,7 @@ namespace OnionPattern.DataAccess.EF.Tests.Repository
                 repository.Should().BeOfType<Repository<DummyEntity>>();
             }
 
-            internal class DummyEntity : GameEntity { }
+            internal class DummyEntity : VideoGameEntity { }
         }
     }
 }

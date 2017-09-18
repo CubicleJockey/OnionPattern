@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using OnionPattern.DataAccess.EF;
 using OnionPattern.DataAccess.EF.Repository;
+using OnionPattern.Domain.Entities;
 using OnionPattern.Domain.Repository;
 
 namespace OnionPattern.DependencyInjection
@@ -14,14 +15,14 @@ namespace OnionPattern.DependencyInjection
         {
             if (string.IsNullOrWhiteSpace(connectionString)) { throw new ArgumentException($"{nameof(connectionString)} cannot be empty."); }
 
-            services.AddDbContext<GameContext>(options => options.UseSqlServer(connectionString));
-            services.AddScoped<IDbContext>(provider => provider.GetService<GameContext>());
+            services.AddDbContext<VideoVideoGameContext>(options => options.UseSqlServer(connectionString));
+            services.AddScoped<IDbContext>(provider => provider.GetService<VideoVideoGameContext>());
 
-            //services.AddTransient<IRepository<Agency>, Repository<Agency>>(context =>
-            //{
-            //    IDbContext dbContext = context.GetService<AccountContext>();
-            //    return new Repository<Agency>(dbContext);
-            //});
+            services.AddTransient<IRepository<Game>, Repository<Game>>(context =>
+            {
+                IDbContext dbContext = context.GetService<VideoVideoGameContext>();
+                return new Repository<Game>(dbContext);
+            });
 
             //services.AddMediatR(typeof(ProfileRequestHandlerAsync));
         }

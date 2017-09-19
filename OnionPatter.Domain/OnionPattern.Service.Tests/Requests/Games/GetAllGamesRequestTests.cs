@@ -12,6 +12,7 @@ namespace OnionPattern.Service.Tests.Requests.Games
     public class GetAllGamesRequestTests
     {
         private static IRepository<Game> fakeRepository;
+        private static IRepositoryAggregate fakeRepositoryAggregate;
 
         [TestClass]
         public class ConstructorTests
@@ -20,18 +21,20 @@ namespace OnionPattern.Service.Tests.Requests.Games
             public void TestInitialize()
             {
                 fakeRepository = A.Fake<IRepository<Game>>();
+                fakeRepositoryAggregate = A.Fake<IRepositoryAggregate>();
             }
 
             [TestCleanup]
             public void TestCleanup()
             {
                 Fake.ClearConfiguration(fakeRepository);
+                Fake.ClearConfiguration(fakeRepositoryAggregate);
             }
 
             [TestMethod]
             public void Inheritence()
             {
-                var request = new GetAllGamesRequest(fakeRepository);
+                var request = new GetAllGamesRequest(fakeRepository, fakeRepositoryAggregate);
 
                 request.Should().NotBeNull();
                 request.Should().BeAssignableTo<IServiceRequest<Game, GetAllGamesResponse>>();
@@ -47,12 +50,14 @@ namespace OnionPattern.Service.Tests.Requests.Games
             public void TestInitialize()
             {
                 fakeRepository = A.Fake<IRepository<Game>>();
+                fakeRepositoryAggregate = A.Fake<IRepositoryAggregate>();
             }
 
             [TestCleanup]
             public void TestCleanup()
             {
                 Fake.ClearConfiguration(fakeRepository);
+                Fake.ClearConfiguration(fakeRepositoryAggregate);
             }
         }
     }

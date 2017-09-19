@@ -16,6 +16,7 @@ namespace OnionPattern.Service.Tests.Requests.Platform
     public class GetAllPlatformRequestTests
     {
         private static IRepository<Domain.Entities.Platform> fakeRepository;
+        private static IRepositoryAggregate fakeRepositoryAggregate;
 
         [TestClass]
         public class ConstructorTests
@@ -24,18 +25,20 @@ namespace OnionPattern.Service.Tests.Requests.Platform
             public void TestInitialize()
             {
                 fakeRepository = A.Fake<IRepository<Domain.Entities.Platform>>();
+                fakeRepositoryAggregate = A.Fake<IRepositoryAggregate>();
             }
 
             [TestCleanup]
             public void TestCleanup()
             {
                 Fake.ClearConfiguration(fakeRepository);
+                Fake.ClearConfiguration(fakeRepositoryAggregate);
             }
 
             [TestMethod]
             public void Inheritence()
             {
-                var request = new GetAllPlatformsRequest(fakeRepository);
+                var request = new GetAllPlatformsRequest(fakeRepository, fakeRepositoryAggregate);
 
                 request.Should().NotBeNull();
                 request.Should().BeAssignableTo<IServiceRequest<Domain.Entities.Platform, GetAllPlatformsResponse>>();
@@ -56,7 +59,7 @@ namespace OnionPattern.Service.Tests.Requests.Platform
 
                 A.CallTo(getAll).Returns(platforms);
 
-                var request = new GetAllPlatformsRequest(fakeRepository);
+                var request = new GetAllPlatformsRequest(fakeRepository, fakeRepositoryAggregate);
                 request.Should().NotBeNull();    
                 
                 var response = await request.Execute();

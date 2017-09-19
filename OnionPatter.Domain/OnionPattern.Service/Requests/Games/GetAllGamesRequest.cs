@@ -7,7 +7,7 @@ namespace OnionPattern.Service.Requests.Games
 {
     public class GetAllGamesRequest : BaseServiceRequest<Game, GetAllGamesResponse>
     {
-        public GetAllGamesRequest(IRepository<Game> repository) : base(repository) { }
+        public GetAllGamesRequest(IRepository<Game> repository, IRepositoryAggregate repositoryAggregate) : base(repository, repositoryAggregate) { }
 
         public override Task<GetAllGamesResponse> Execute()
         {

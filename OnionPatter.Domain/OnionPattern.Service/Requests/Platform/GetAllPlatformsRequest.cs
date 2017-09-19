@@ -6,7 +6,7 @@ namespace OnionPattern.Service.Requests.Platform
 {
     public class GetAllPlatformsRequest : BaseServiceRequest<Domain.Entities.Platform, GetAllPlatformsResponse>
     {
-        public GetAllPlatformsRequest(IRepository<Domain.Entities.Platform> repository) : base(repository) {}
+        public GetAllPlatformsRequest(IRepository<Domain.Entities.Platform> repository, IRepositoryAggregate repositoryAggregate) : base(repository, repositoryAggregate) {}
 
         public override Task<GetAllPlatformsResponse> Execute()
         {

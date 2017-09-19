@@ -9,6 +9,6 @@ namespace OnionPattern.Domain.Entities
         public string Name { get; set; }
         public DateTime ReleaseDate { get; set; }
 
-        public ICollection<Game> Games { get; set; }
+        public ICollection<GamePlatform> GamePlatforms { get; set; }
     }
 }

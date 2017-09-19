@@ -7,5 +7,6 @@ namespace OnionPattern.DataAccess.EF
     {
         DbSet<Game> Games { get; set; }
         DbSet<Platform> Platforms { get; set; }
+        DbSet<GamePlatform> GamePlatforms { get; set; }
     }
 }

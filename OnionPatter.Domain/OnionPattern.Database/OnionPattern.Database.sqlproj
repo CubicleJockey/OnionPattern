@@ -64,7 +64,7 @@
   <ItemGroup>
     <Build Include="Tables\Game.sql" />
     <Build Include="Tables\Platform.sql" />
-    <Build Include="Tables\GamePlatforms.sql" />
+    <Build Include="Tables\GamePlatform.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Post.Scripts\SeedData.PostDeployment.sql" />

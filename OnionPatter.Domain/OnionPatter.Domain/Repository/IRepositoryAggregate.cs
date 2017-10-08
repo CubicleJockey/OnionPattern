@@ -1,5 +1,4 @@
-﻿using System.Dynamic;
-using OnionPattern.Domain.Entities;
+﻿using OnionPattern.Domain.Entities;
 
 namespace OnionPattern.Domain.Repository
 {

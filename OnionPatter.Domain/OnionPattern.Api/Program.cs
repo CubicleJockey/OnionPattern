@@ -9,6 +9,9 @@ using OnionPattern.Api.StartupConfigurations;
 
 namespace OnionPattern.Api
 {
+    /// <summary>
+    /// Program Host
+    /// </summary>
     public class Program
     {
         public static void Main(string[] args)

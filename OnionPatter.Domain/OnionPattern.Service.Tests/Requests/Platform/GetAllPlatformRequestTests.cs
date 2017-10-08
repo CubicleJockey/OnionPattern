@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 using FakeItEasy;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using OnionPattern.Domain.DataTransferObjects.Platform;
 using OnionPattern.Domain.Repository;
 using OnionPattern.Domain.Services;
+using OnionPattern.Domain.Services.Requests.Platform;
 using OnionPattern.Service.Requests.Platform;
 using OnionPattern.Service.Responses;
 
@@ -41,8 +43,8 @@ namespace OnionPattern.Service.Tests.Requests.Platform
                 var request = new GetAllPlatformsRequest(fakeRepository, fakeRepositoryAggregate);
 
                 request.Should().NotBeNull();
-                request.Should().BeAssignableTo<IServiceRequest<Domain.Entities.Platform, GetAllPlatformsResponse>>();
-                request.Should().BeAssignableTo<BaseServiceRequest<Domain.Entities.Platform, GetAllPlatformsResponse>>();
+                request.Should().BeAssignableTo<IGetAllPlatformsRequest>();
+                request.Should().BeAssignableTo<BaseServiceRequest<Domain.Entities.Platform>>();
                 request.Should().BeOfType<GetAllPlatformsRequest>();
             }
         }
@@ -51,7 +53,7 @@ namespace OnionPattern.Service.Tests.Requests.Platform
         public class MethodTests
         {
             [TestMethod]
-            public async Task Execute()
+            public void Execute()
             {
                Expression<Func<IEnumerable<Domain.Entities.Platform>>> getAll = () => fakeRepository.GetAll();
 
@@ -62,9 +64,9 @@ namespace OnionPattern.Service.Tests.Requests.Platform
                 var request = new GetAllPlatformsRequest(fakeRepository, fakeRepositoryAggregate);
                 request.Should().NotBeNull();    
                 
-                var response = await request.Execute();
+                var response = request.Execute();
                 response.Should().NotBeNull();
-                response.Should().BeOfType<GetAllPlatformsResponse>();
+                response.Should().BeOfType<PlatformListResponseDto>();
 
                 response.Platforms.Should().NotBeNullOrEmpty();
 
@@ -76,7 +78,7 @@ namespace OnionPattern.Service.Tests.Requests.Platform
                 var snes = response.Platforms.ElementAt(1);
                 CheckValues(snes, platforms.Single(p => p.Id == 2));
 
-                void CheckValues(Domain.Entities.Platform platform, Domain.Entities.Platform expected)
+                void CheckValues(IPlatform platform, IPlatform expected)
                 {
                     platform.Should().NotBeNull();
                     platform.Id.ShouldBeEquivalentTo(expected.Id);

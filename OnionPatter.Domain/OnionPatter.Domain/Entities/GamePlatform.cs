@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace OnionPattern.Domain.Entities
+﻿namespace OnionPattern.Domain.Entities
 {
     public class GamePlatform : VideoGameEntity
     {

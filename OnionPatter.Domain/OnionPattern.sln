@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.15
+VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnionPattern.Domain", "OnionPatter.Domain\OnionPattern.Domain.csproj", "{DD510D19-E406-4F06-9AD7-7A049DBE131F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnionPattern.Domain", "OnionPatter.Domain\OnionPattern.Domain.csproj", "{DD510D19-E406-4F06-9AD7-7A049DBE131F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{EE64414B-EA19-4CD6-8EC5-82D14970EFC4}"
 	ProjectSection(SolutionItems) = preProject
@@ -16,23 +16,23 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{CDDBCF
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{BD86FAFB-0DB9-46FA-BE21-350642B83A51}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnionPattern.Domain.Tests", "OnionPattern.Domain.Tests\OnionPattern.Domain.Tests.csproj", "{5E7060AB-F5DC-49E1-964C-2E43FFA6A2D4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnionPattern.Domain.Tests", "OnionPattern.Domain.Tests\OnionPattern.Domain.Tests.csproj", "{5E7060AB-F5DC-49E1-964C-2E43FFA6A2D4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnionPattern.DependencyInjection", "OnionPattern.DependencyInjection\OnionPattern.DependencyInjection.csproj", "{4461C80A-E29C-4197-B5D5-088914DDEF0C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnionPattern.DependencyInjection", "OnionPattern.DependencyInjection\OnionPattern.DependencyInjection.csproj", "{4461C80A-E29C-4197-B5D5-088914DDEF0C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnionPattern.DependencyInjection.Tests", "OnionPattern.DependencyInjection.Tests\OnionPattern.DependencyInjection.Tests.csproj", "{C4BDA5EF-38D0-44A0-A82F-7A8D8A567602}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnionPattern.DependencyInjection.Tests", "OnionPattern.DependencyInjection.Tests\OnionPattern.DependencyInjection.Tests.csproj", "{C4BDA5EF-38D0-44A0-A82F-7A8D8A567602}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnionPattern.DataAccess.EF", "OnionPattern.DataAccess.EF\OnionPattern.DataAccess.EF.csproj", "{61D88CD8-E023-44EF-A2D5-CFEE46DE3CC1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnionPattern.DataAccess.EF", "OnionPattern.DataAccess.EF\OnionPattern.DataAccess.EF.csproj", "{61D88CD8-E023-44EF-A2D5-CFEE46DE3CC1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnionPattern.Service", "OnionPattern.Service\OnionPattern.Service.csproj", "{2B582B62-200B-455A-8E3E-010A2B8A5EAC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnionPattern.Service", "OnionPattern.Service\OnionPattern.Service.csproj", "{2B582B62-200B-455A-8E3E-010A2B8A5EAC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnionPattern.Service.Tests", "OnionPattern.Service.Tests\OnionPattern.Service.Tests.csproj", "{7AC0DECB-81FD-46D2-A6DC-569D3EB95DBD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnionPattern.Service.Tests", "OnionPattern.Service.Tests\OnionPattern.Service.Tests.csproj", "{7AC0DECB-81FD-46D2-A6DC-569D3EB95DBD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnionPattern.DataAccess.EF.Tests", "OnionPattern.DataAccess.EF.Tests\OnionPattern.DataAccess.EF.Tests.csproj", "{8C6EFEA2-FCBA-4A7E-A3A9-F4B75C8CAFD9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnionPattern.DataAccess.EF.Tests", "OnionPattern.DataAccess.EF.Tests\OnionPattern.DataAccess.EF.Tests.csproj", "{8C6EFEA2-FCBA-4A7E-A3A9-F4B75C8CAFD9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnionPattern.Api", "OnionPattern.Api\OnionPattern.Api.csproj", "{E8E2CA5C-A352-4E9C-A6DF-4C2CF01DE8A3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnionPattern.Api", "OnionPattern.Api\OnionPattern.Api.csproj", "{E8E2CA5C-A352-4E9C-A6DF-4C2CF01DE8A3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnionPattern.Api.Tests", "OnionPattern.Api.Tests\OnionPattern.Api.Tests.csproj", "{E883E6B4-DD55-4444-B0E1-465DAFD01834}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnionPattern.Api.Tests", "OnionPattern.Api.Tests\OnionPattern.Api.Tests.csproj", "{E883E6B4-DD55-4444-B0E1-465DAFD01834}"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "OnionPattern.Database", "OnionPattern.Database\OnionPattern.Database.sqlproj", "{0D72D142-FAE7-4984-A47F-47F10969F4B5}"
 EndProject

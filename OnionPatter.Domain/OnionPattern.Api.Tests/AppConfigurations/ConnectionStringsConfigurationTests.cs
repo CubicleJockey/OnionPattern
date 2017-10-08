@@ -1,8 +1,8 @@
 ﻿using FluentAssertions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using OnionPattern.Api.AppConfigurations;
 using OnionPattern.Api.AppConstants;
+using OnionPattern.Domain.AppConfigurations;
 
 namespace OnionPattern.Api.Tests.AppConfigurations
 {

@@ -1,33 +1,33 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using OnionPattern.DataAccess.EF;
 using OnionPattern.DataAccess.EF.Repository;
+using OnionPattern.Domain.AppConfigurations;
 using OnionPattern.Domain.Entities;
 using OnionPattern.Domain.Repository;
-using OnionPattern.Domain.Services;
-using OnionPattern.Service.Requests.Games;
+using OnionPattern.Domain.Services.Requests.Game;
+using OnionPattern.Domain.Services.Requests.Platform;
+using OnionPattern.Service.Requests.Game;
 using OnionPattern.Service.Requests.Platform;
-using OnionPattern.Service.Responses;
+using System;
 
 namespace OnionPattern.DependencyInjection
 {
     public static class Host
     {
-        public static void Configure(IServiceCollection services, string connectionString)
+        public static void Configure(IServiceCollection services)
         {
-            ConfigureRepositories(services, connectionString);
+            ConfigureRepositories(services);
             ConfigureRequestAndResponses(services);
         }
 
-        private static void ConfigureRepositories(IServiceCollection services, string connectionString)
+        private static void ConfigureRepositories(IServiceCollection services)
         {
-            if (string.IsNullOrWhiteSpace(connectionString))
-            {
-                throw new ArgumentException($"{nameof(connectionString)} cannot be empty.");
-            }
+            var serviceProvider = services.BuildServiceProvider();
+            var connectionStrings = serviceProvider.GetService<IOptions<ConnectionStringsConfiguration>>();
 
-            services.AddDbContext<VideoGameContext>(options => options.UseSqlServer(connectionString));
+            services.AddDbContext<VideoGameContext>(options => options.UseSqlServer(connectionStrings.Value.VideoGamesConnection));
             services.AddScoped<DbContext>(provider => provider.GetService<VideoGameContext>());
 
             services.AddTransient<IRepository<Game>, Repository<Game>>(context =>
@@ -51,17 +51,31 @@ namespace OnionPattern.DependencyInjection
 
         private static void ConfigureRequestAndResponses(IServiceCollection services)
         {
-            services.AddTransient<IServiceRequest<Game, GetAllGamesResponse>>(context =>
+            services.AddTransient<IGetAllGamesRequest>(context =>
             {
                 var repositories = GetRepositories<Game>(context);
 
                 return new GetAllGamesRequest(repositories.Repository, repositories.RepositoryAggregate);
             });
 
-            services.AddTransient<IServiceRequest<Platform, GetAllPlatformsResponse>>(context =>
+            services.AddTransient<IGetAllGamesRequestAsync>(context =>
+            {
+                var repositories = GetAsyncRepositories<Game>(context);
+
+                return new GetAllGamesRequestAsync(repositories.Repository, repositories.RepositoryAggregate);
+            });
+
+
+            services.AddTransient<IGetAllPlatformsRequest>(context =>
             {
                 var repositories = GetRepositories<Platform>(context);
                 return new GetAllPlatformsRequest(repositories.Repository, repositories.RepositoryAggregate);
+            });
+
+            services.AddTransient<IGetAllPlatformsRequestAsync>(context =>
+            {
+                var repositories = GetAsyncRepositories<Platform>(context);
+                return new GetAllPlatformsRequestAsync(repositories.Repository, repositories.RepositoryAggregate);
             });
         }
 
@@ -69,6 +83,14 @@ namespace OnionPattern.DependencyInjection
         {
             var repository = context.GetService<IRepository<TEntity>>();
             var repositoryAggregate = context.GetService<IRepositoryAggregate>();
+
+            return (repository, repositoryAggregate);
+        }
+
+        private static (IRepositoryAsync<TEntity> Repository, IRepositoryAsyncAggregate RepositoryAggregate) GetAsyncRepositories<TEntity>(IServiceProvider context) where TEntity : VideoGameEntity
+        {
+            var repository = context.GetService<IRepositoryAsync<TEntity>>();
+            var repositoryAggregate = context.GetService<IRepositoryAsyncAggregate>();
 
             return (repository, repositoryAggregate);
         }

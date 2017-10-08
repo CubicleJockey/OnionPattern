@@ -14,6 +14,10 @@ namespace OnionPattern.Api
     /// </summary>
     public class Program
     {
+        /// <summary>
+        /// Main entry into the program.
+        /// </summary>
+        /// <param name="args"></param>
         public static void Main(string[] args)
         {
             //get the environment and appsettings

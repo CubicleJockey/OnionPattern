@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Serilog;
-using OnionPattern.Api.AppConfigurations;
 using OnionPattern.Api.AppConstants;
+using OnionPattern.Domain.AppConfigurations;
 
 namespace OnionPattern.Api.StartupConfigurations
 {

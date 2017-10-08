@@ -1,12 +1,10 @@
-﻿using System;
-using FakeItEasy;
+﻿using FakeItEasy;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OnionPattern.Api.Controllers;
-using OnionPattern.Domain.Entities;
-using OnionPattern.Domain.Services;
-using OnionPattern.Service.Responses;
+using OnionPattern.Domain.Services.Requests.Platform;
+using System;
 
 namespace OnionPattern.Api.Tests.Controllers
 {
@@ -16,12 +14,12 @@ namespace OnionPattern.Api.Tests.Controllers
         [TestClass]
         public class ConstructorTests
         {
-            private IServiceRequest<Platform, GetAllPlatformsResponse> fakeAllPlatformsRequest;
+            private IGetAllPlatformsRequest fakeAllPlatformsRequest;
 
             [TestInitialize]
             public void TestInitalize()
             {
-                fakeAllPlatformsRequest = A.Fake<IServiceRequest<Platform, GetAllPlatformsResponse>>();
+                fakeAllPlatformsRequest = A.Fake<IGetAllPlatformsRequest>();
             }
 
             [TestCleanup]

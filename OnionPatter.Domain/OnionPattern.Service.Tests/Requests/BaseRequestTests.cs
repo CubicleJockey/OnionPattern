@@ -1,10 +1,8 @@
-﻿using System;
-using System.Threading.Tasks;
-using FakeItEasy;
+﻿using FakeItEasy;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using OnionPattern.Domain.Entities;
 using OnionPattern.Domain.Repository;
+using System;
 
 namespace OnionPattern.Service.Tests.Requests
 {
@@ -52,24 +50,9 @@ namespace OnionPattern.Service.Tests.Requests
                 var baseRequest = new MockBaseRequest(fakeRepository, fakeRepositoryAggregate);
 
                 baseRequest.Should().NotBeNull();
-                baseRequest.Should().BeAssignableTo<BaseServiceRequest<FakeEntity, string>>();
+                baseRequest.Should().BeAssignableTo<BaseServiceRequest<FakeEntity>>();
                 baseRequest.Should().BeOfType<MockBaseRequest>();
             }
         }
-
-        #region Mocks
-
-        public class MockBaseRequest : BaseServiceRequest<FakeEntity, string>
-        {
-            public MockBaseRequest(IRepository<FakeEntity> repository, IRepositoryAggregate repositoryAggregate) : base(repository, repositoryAggregate) { }
-
-            public override Task<string> Execute()
-            {
-                throw new NotImplementedException();
-            }
-        }
-        public class FakeEntity : VideoGameEntity { }
-
-        #endregion Mocks
     }
 }

@@ -4,7 +4,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OnionPattern.Domain.Entities;
 using OnionPattern.Domain.Repository;
 using OnionPattern.Domain.Services;
-using OnionPattern.Service.Requests.Games;
+using OnionPattern.Domain.Services.Requests.Game;
+using OnionPattern.Service.Requests.Game;
 using OnionPattern.Service.Responses;
 
 namespace OnionPattern.Service.Tests.Requests.Games
@@ -37,8 +38,8 @@ namespace OnionPattern.Service.Tests.Requests.Games
                 var request = new GetAllGamesRequest(fakeRepository, fakeRepositoryAggregate);
 
                 request.Should().NotBeNull();
-                request.Should().BeAssignableTo<IServiceRequest<Game, GetAllGamesResponse>>();
-                request.Should().BeAssignableTo<BaseServiceRequest<Game, GetAllGamesResponse>>();
+                request.Should().BeAssignableTo<IGetAllGamesRequest>();
+                request.Should().BeAssignableTo<BaseServiceRequest<Game>>();
                 request.Should().BeOfType<GetAllGamesRequest>();
             }
         }

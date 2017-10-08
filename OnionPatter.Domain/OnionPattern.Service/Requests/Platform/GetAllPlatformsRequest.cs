@@ -1,20 +1,24 @@
-﻿using System.Threading.Tasks;
+﻿using OnionPattern.Domain.DataTransferObjects.Platform;
 using OnionPattern.Domain.Repository;
-using OnionPattern.Service.Responses;
+using OnionPattern.Domain.Services.Requests.Platform;
 
 namespace OnionPattern.Service.Requests.Platform
 {
-    public class GetAllPlatformsRequest : BaseServiceRequest<Domain.Entities.Platform, GetAllPlatformsResponse>
+    public class GetAllPlatformsRequest : BaseServiceRequest<Domain.Entities.Platform>, IGetAllPlatformsRequest
     {
         public GetAllPlatformsRequest(IRepository<Domain.Entities.Platform> repository, IRepositoryAggregate repositoryAggregate) : base(repository, repositoryAggregate) {}
 
-        public override Task<GetAllPlatformsResponse> Execute()
+        #region Implementation of IGetAllPlatformsRequest
+
+        public PlatformListResponseDto Execute()
         {
             var platforms = Repository.GetAll();
-            return Task.FromResult(new GetAllPlatformsResponse
+            return new PlatformListResponseDto
             {
                 Platforms = platforms
-            });
+            };
         }
+
+        #endregion
     }
 }

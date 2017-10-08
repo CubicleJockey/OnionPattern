@@ -1,10 +1,8 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using OnionPattern.Domain.DataTransferObjects.Game;
+using OnionPattern.Domain.Services.Requests.Game;
+using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using OnionPattern.Domain.Entities;
-using OnionPattern.Domain.Services;
-using OnionPattern.Service.Responses;
 
 namespace OnionPattern.Api.Controllers
 {
@@ -15,13 +13,13 @@ namespace OnionPattern.Api.Controllers
     [Route("api/v1/[controller]")]
     public class GamesController : Controller
     {
-        private IServiceRequest<Game, GetAllGamesResponse> GetAllGamesRequest { get; }
+        private IGetAllGamesRequest GetAllGamesRequest { get; }
 
         /// <summary>
         /// Video Games Controller
         /// </summary>
         /// <param name="getAllGamesRequest">Get All Games Request</param>
-        public GamesController(IServiceRequest<Game, GetAllGamesResponse> getAllGamesRequest)
+        public GamesController(IGetAllGamesRequest getAllGamesRequest)
         {
             GetAllGamesRequest = getAllGamesRequest ?? throw new ArgumentNullException($"{nameof(getAllGamesRequest)} cannot be null.");
         }
@@ -31,9 +29,9 @@ namespace OnionPattern.Api.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public async Task<IEnumerable<Game>> Get()
+        public IEnumerable<IGame> Get()
         {
-            var response = await GetAllGamesRequest.Execute();
+            var response = GetAllGamesRequest.Execute();
             return response.Games;
         }
     }

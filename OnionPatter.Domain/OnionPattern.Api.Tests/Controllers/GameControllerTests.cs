@@ -1,12 +1,10 @@
-﻿using System;
-using FakeItEasy;
+﻿using FakeItEasy;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OnionPattern.Api.Controllers;
-using OnionPattern.Domain.Entities;
-using OnionPattern.Domain.Services;
-using OnionPattern.Service.Responses;
+using OnionPattern.Domain.Services.Requests.Game;
+using System;
 
 namespace OnionPattern.Api.Tests.Controllers
 {
@@ -15,12 +13,12 @@ namespace OnionPattern.Api.Tests.Controllers
         [TestClass]
         public class ConstructorTests
         {
-            private IServiceRequest<Game, GetAllGamesResponse> fakeAllGamesRequest;
+            private IGetAllGamesRequest fakeAllGamesRequest;
 
             [TestInitialize]
             public void TestInitalize()
             {
-                fakeAllGamesRequest = A.Fake<IServiceRequest<Game, GetAllGamesResponse>>();
+                fakeAllGamesRequest = A.Fake<IGetAllGamesRequest>();
             }
 
             [TestCleanup]

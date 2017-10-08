@@ -8,4 +8,8 @@
     <ProjectReference Include="..\OnionPatter.Domain\OnionPattern.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Responses\GamePlatform\" />
+  </ItemGroup>
+
 </Project>

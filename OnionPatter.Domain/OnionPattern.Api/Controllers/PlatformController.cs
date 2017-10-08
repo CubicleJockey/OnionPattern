@@ -1,10 +1,8 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using OnionPattern.Domain.DataTransferObjects.Platform;
+using OnionPattern.Domain.Services.Requests.Platform;
+using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using OnionPattern.Domain.Entities;
-using OnionPattern.Domain.Services;
-using OnionPattern.Service.Responses;
 
 namespace OnionPattern.Api.Controllers
 {
@@ -15,12 +13,12 @@ namespace OnionPattern.Api.Controllers
     [Route("api/v1/[controller]")]
     public class PlatformController : Controller
     {
-        private IServiceRequest<Platform, GetAllPlatformsResponse> GetAllPlatformsRequest { get; }
+        private IGetAllPlatformsRequest GetAllPlatformsRequest { get; }
 
         /// <summary>
         /// Ctor
         /// </summary>
-        public PlatformController(IServiceRequest<Platform, GetAllPlatformsResponse> getAllPlatformsRequest)
+        public PlatformController(IGetAllPlatformsRequest getAllPlatformsRequest)
         {
             GetAllPlatformsRequest = getAllPlatformsRequest ?? throw new ArgumentNullException($"{nameof(getAllPlatformsRequest)} cannot be null.");
         }
@@ -30,9 +28,9 @@ namespace OnionPattern.Api.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public async Task<IEnumerable<Platform>> Get()
+        public IEnumerable<IPlatform> Get()
         {
-            var response = await GetAllPlatformsRequest.Execute();
+            var response = GetAllPlatformsRequest.Execute();
             return response.Platforms;
         }
     }

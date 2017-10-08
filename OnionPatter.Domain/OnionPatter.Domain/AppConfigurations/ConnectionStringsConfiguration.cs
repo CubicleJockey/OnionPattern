@@ -1,4 +1,4 @@
-﻿namespace OnionPattern.Api.AppConfigurations
+﻿namespace OnionPattern.Domain.AppConfigurations
 {
     /// <summary>
     /// Connection String Configuration Object

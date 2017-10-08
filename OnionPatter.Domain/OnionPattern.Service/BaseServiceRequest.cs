@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Threading.Tasks;
 using OnionPattern.Domain.Entities;
 using OnionPattern.Domain.Repository;
-using OnionPattern.Domain.Services;
 
 namespace OnionPattern.Service
 {
-    public abstract class BaseServiceRequest<TEntity, TResponse> : IServiceRequest<TEntity, TResponse> where TEntity : VideoGameEntity
+    public abstract class BaseServiceRequest<TEntity> where TEntity : VideoGameEntity
     {
         protected IRepository<TEntity> Repository { get; }
         protected IRepositoryAggregate RepositoryAggregate { get; }
@@ -16,7 +14,5 @@ namespace OnionPattern.Service
             Repository = repository ?? throw new ArgumentNullException($"{nameof(repository)} cannot be null.");
             RepositoryAggregate = repositoryAggregate ?? throw new ArgumentNullException($"{nameof(repositoryAggregate)} cannot be null.");
         }
-
-        public abstract Task<TResponse> Execute();
     }
 }

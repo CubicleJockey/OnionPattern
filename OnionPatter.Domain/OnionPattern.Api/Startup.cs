@@ -3,10 +3,11 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using OnionPattern.Api.AppConfigurations;
+using Microsoft.Extensions.Options;
 using OnionPattern.Api.AppConstants;
 using OnionPattern.Api.StartupConfigurations;
 using OnionPattern.DependencyInjection;
+using OnionPattern.Domain.AppConfigurations;
 using Serilog;
 
 namespace OnionPattern.Api
@@ -47,8 +48,10 @@ namespace OnionPattern.Api
             // Add framework services.
             services.AddMvc();
 
-            var connectionStringsConfiguration = Configuration.GetSection(AppSettingsSections.ConnectionStrings).Get<ConnectionStringsConfiguration>();
-            Host.Configure(services, connectionStringsConfiguration.VideoGamesConnection);
+            //Inject configuration setting. 
+            services.Configure<IOptions<ConnectionStringsConfiguration>>(Configuration.GetSection(AppSettingsSections.ConnectionStrings));
+
+            Host.Configure(services);
 
             // Swagger
             SwaggerStartupConfiguration.Create(services, environment);

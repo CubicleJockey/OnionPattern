@@ -1,8 +1,6 @@
 ﻿using FakeItEasy;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using OnionPattern.Domain.Entities;
-using OnionPattern.Domain.Services;
 
 namespace OnionPattern.Service.Tests
 {
@@ -14,18 +12,11 @@ namespace OnionPattern.Service.Tests
             [TestMethod]
             public void Inheritence()
             {
-                var mockBaseServiceRequest = A.Fake<BaseServiceRequest<FakeEntity, int>>();
+                var mockBaseServiceRequest = A.Fake<BaseServiceRequest<FakeEntity>>();
 
                 mockBaseServiceRequest.Should().NotBeNull();
-                mockBaseServiceRequest.Should().BeAssignableTo<IServiceRequest<FakeEntity, int>>();
-                mockBaseServiceRequest.Should().BeAssignableTo<BaseServiceRequest<FakeEntity, int>>();
+                mockBaseServiceRequest.Should().BeAssignableTo<BaseServiceRequest<FakeEntity>>();
             }
-
-            #region Mocks
-
-            public class FakeEntity : VideoGameEntity { }
-
-            #endregion Mocks
         }
     }
 }

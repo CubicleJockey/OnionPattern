@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using OnionPattern.Domain.DataTransferObjects.Platform;
 
 namespace OnionPattern.Domain.Entities
 {
-    public class Platform : VideoGameEntity
+    public class Platform : VideoGameEntity, IPlatform
     {
         public int Id { get; set; }
         public string Name { get; set; }

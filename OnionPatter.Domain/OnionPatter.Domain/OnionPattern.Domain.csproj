@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <Folder Include="Exceptions\" />
+    <Folder Include="Services\Requests\GamePlatform\" />
   </ItemGroup>
 
   <ItemGroup>

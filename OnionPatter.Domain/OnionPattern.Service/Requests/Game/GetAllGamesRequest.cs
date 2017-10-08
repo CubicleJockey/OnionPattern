@@ -1,4 +1,5 @@
-﻿using OnionPattern.Domain.DataTransferObjects.Game;
+﻿using System.Linq;
+using OnionPattern.Domain.DataTransferObjects.Game;
 using OnionPattern.Domain.Repository;
 using OnionPattern.Domain.Services.Requests.Game;
 
@@ -13,7 +14,7 @@ namespace OnionPattern.Service.Requests.Game
 
         public GameListResponseDto Execute()
         {
-            var games = Repository.GetAll();
+            var games = Repository.GetAll().ToArray();
             return new GameListResponseDto { Games = games };
         }
 

@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using OnionPattern.Domain.DataTransferObjects.Game;
 using OnionPattern.Domain.Services.Requests.Game;
 using System;
-using System.Collections.Generic;
 
 namespace OnionPattern.Api.Controllers
 {
@@ -10,6 +8,7 @@ namespace OnionPattern.Api.Controllers
     /// <summary>
     /// Games Controller
     /// </summary>
+    [Produces("application/json")]
     [Route("api/v1/[controller]")]
     public class GamesController : Controller
     {
@@ -29,10 +28,10 @@ namespace OnionPattern.Api.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public IEnumerable<IGame> Get()
+        public IActionResult Get()
         {
             var response = GetAllGamesRequest.Execute();
-            return response.Games;
+            return new ObjectResult(response.Games) { StatusCode = 200 };
         }
     }
 }

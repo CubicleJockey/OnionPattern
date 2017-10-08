@@ -5,7 +5,7 @@ using OnionPattern.Domain.Repository;
 
 namespace OnionPattern.DataAccess.EF.Repository
 {
-    public class RepositoryAsyncAggregate
+    public class RepositoryAsyncAggregate : IRepositoryAsyncAggregate 
     {
         private readonly DbContext dbContext;
 

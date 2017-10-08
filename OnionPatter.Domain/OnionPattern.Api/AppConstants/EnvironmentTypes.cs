@@ -6,7 +6,7 @@
     public static class EnvironmentTypes
     {
         /// <summary>
-        /// Local Mode
+        /// FileName Mode
         /// </summary>
         public static string Local = nameof(Local);
     }

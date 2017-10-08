@@ -3,8 +3,8 @@
     public class LogLocationsConfiguration
     {
         /// <summary>
-        /// Log location when in Local Build Mode
+        /// Log location when in FileName Build Mode
         /// </summary>
-        public string Local { get; set; }
+        public string FileName { get; set; }
     }
 }

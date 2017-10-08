@@ -42,6 +42,8 @@ namespace OnionPattern.DependencyInjection.Configurations
                 DbContext dbContext = context.GetService<VideoGameContext>();
                 return new Repository<GamePlatform>(dbContext);
             });
+
+            services.AddTransient<IRepositoryAggregate, RepositoryAggregate>();
         }
 
         private static void ConfigureAsync(IServiceCollection services)
@@ -63,6 +65,8 @@ namespace OnionPattern.DependencyInjection.Configurations
                 DbContext dbContext = context.GetService<VideoGameContext>();
                 return new RepositoryAsync<GamePlatform>(dbContext);
             });
+
+            services.AddTransient<IRepositoryAsyncAggregate, RepositoryAsyncAggregate>();
         }
     }
 }

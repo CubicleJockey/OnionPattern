@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using System.IO;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Serilog;
 using OnionPattern.Api.AppConstants;
@@ -22,14 +23,13 @@ namespace OnionPattern.Api.StartupConfigurations
                 .GetSection(AppSettingsSections.LogLocations)
                 .Get<LogLocationsConfiguration>();
 
-            //Setup Serilog
-            var logDirectory = webHostBuilderContext.HostingEnvironment.EnvironmentName == EnvironmentTypes.Local
-                ? logLocations.Local
-                : null;
+            var directoryCheck = (new FileInfo(logLocations.FileName)).Directory;
+            directoryCheck.Refresh();
+            if(!directoryCheck.Exists) { directoryCheck.Create(); }
 
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Debug()
-                .WriteTo.RollingFile(logDirectory)
+                .WriteTo.RollingFile(logLocations.FileName)
                 .CreateLogger();
         }
     }

@@ -49,7 +49,7 @@ namespace OnionPattern.Api
             services.AddMvc();
 
             //Inject configuration setting. 
-            services.Configure<IOptions<ConnectionStringsConfiguration>>(Configuration.GetSection(AppSettingsSections.ConnectionStrings));
+            services.Configure<ConnectionStringsConfiguration>(Configuration.GetSection(AppSettingsSections.ConnectionStrings));
 
             Host.Configure(services);
 

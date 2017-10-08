@@ -9,7 +9,7 @@ namespace OnionPattern.Api.Tests.AppConfigurations
         public static class ConnectionStringsKeys
         {
             public static string VideoGamesConnection => "ConnectionStrings:VideoGamesConnection";
-            public static string LogLocationsLocal => "LogLocations:Local";
+            public static string LogLocationsLocal => "LogLocations:FileName";
         }
         private static IDictionary<string, string> GetDevConfiguration()
         {

@@ -3,6 +3,7 @@ using OnionPattern.Domain.Repository;
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -26,44 +27,60 @@ namespace OnionPattern.DataAccess.EF.Repository
 
         #region Implementation of IRepositoryAsync<TEntity>
 
-        public Task<IEnumerable<TEntity>> GetAllAsync()
+        public async Task<IEnumerable<TEntity>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            try
+            {
+                dataSet.AsNoTracking();
+                var data = await Task.FromResult(dataSet.Where(f => true));
+                return data;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error getting records: {ex.Message}", ex);
+            }
         }
 
-        public Task<TEntity> SingleAsync(Expression<Func<TEntity, bool>> expression)
+        public async Task<TEntity> SingleAsync(Expression<Func<TEntity, bool>> expression)
         {
-            throw new NotImplementedException();
+            return await dataSet.SingleAsync(expression);
         }
 
-        public Task<TEntity> SingleOrDefaultAsync(Expression<Func<TEntity, bool>> expression)
+        public async Task<TEntity> SingleOrDefaultAsync(Expression<Func<TEntity, bool>> expression)
         {
-            throw new NotImplementedException();
+            return await dataSet.SingleOrDefaultAsync(expression);
         }
 
-        public Task<IEnumerable<TEntity>> FindAsync(Expression<Func<TEntity, bool>> expression)
+        public async Task<IEnumerable<TEntity>> FindAsync(Expression<Func<TEntity, bool>> expression)
         {
-            throw new NotImplementedException();
+            return await Task.FromResult(dataSet.Where(expression));
         }
 
-        public Task<TEntity> CreateAsync(TEntity entity)
+        public async Task<TEntity> CreateAsync(TEntity entity)
         {
-            throw new NotImplementedException();
+            var createdEntity = await dataSet.AddAsync(entity);
+            await SaveChangesAsync();
+            return createdEntity.Entity;
         }
 
-        public Task<TEntity> UpdateAsync(TEntity entity)
+        public async Task<TEntity> UpdateAsync(TEntity entity)
         {
-            throw new NotImplementedException();
+            if (!dataSet.Local.Contains(entity)) { dataSet.Attach(entity); }
+            context.Entry(entity).State = EntityState.Modified;
+            await SaveChangesAsync();
+            return entity;
         }
 
-        public Task<bool> DeleteAsync(TEntity entity)
+        public async Task<TEntity> DeleteAsync(TEntity entity)
         {
-            throw new NotImplementedException();
+            var deleteEntity = dataSet.Remove(entity);
+            await SaveChangesAsync();
+            return deleteEntity.Entity;
         }
 
         #endregion
 
-        private async Task<int> SaveChanges()
+        private async Task<int> SaveChangesAsync()
         {
             try
             {

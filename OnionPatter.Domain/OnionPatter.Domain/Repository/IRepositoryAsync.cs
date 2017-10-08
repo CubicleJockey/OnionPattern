@@ -14,6 +14,6 @@ namespace OnionPattern.Domain.Repository
         Task<IEnumerable<TEntity>> FindAsync(Expression<Func<TEntity, bool>> expression);
         Task<TEntity> CreateAsync(TEntity entity);
         Task<TEntity> UpdateAsync(TEntity entity);
-        Task<bool> DeleteAsync(TEntity entity);
+        Task<TEntity> DeleteAsync(TEntity entity);
     }
 }

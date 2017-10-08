@@ -28,17 +28,17 @@ namespace OnionPattern.DataAccess.EF.Repository
 
         public IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> expression)
         {
-            throw new NotImplementedException();
+            yield return dataSet.Find(expression);
         }
 
         public TEntity Single(Expression<Func<TEntity, bool>> expression)
         {
-            throw new NotImplementedException();
+            return dataSet.Single(expression);
         }
 
         public TEntity SingleOrDefault(Expression<Func<TEntity, bool>> expression)
         {
-            throw new NotImplementedException();
+            return dataSet.SingleOrDefault(expression);
         }
 
         #endregion Queries

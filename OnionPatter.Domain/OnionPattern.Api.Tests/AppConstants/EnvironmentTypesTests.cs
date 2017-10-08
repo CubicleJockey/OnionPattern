@@ -10,7 +10,7 @@ namespace OnionPattern.Api.Tests.AppConstants
         [TestMethod]
         public void ValidValues()
         {
-            EnvironmentTypes.Local.Should().BeEquivalentTo("FileName");
+            EnvironmentTypes.Local.Should().BeEquivalentTo("Local");
         }
     }
 }

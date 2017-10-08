@@ -29,7 +29,7 @@ namespace OnionPattern.Service.Requests.Platform
             }
             catch (Exception x)
             {
-                Log.Logger.Information($"Failed to get Platforms List. [{x.Message}].");
+                Log.Logger.Error($"Failed to get Platforms List. [{x.Message}].");
                 HandleErrors(platformListResponse, x);
             }
             return platformListResponse;

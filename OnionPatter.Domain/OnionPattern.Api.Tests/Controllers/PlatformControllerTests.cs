@@ -31,7 +31,7 @@ namespace OnionPattern.Api.Tests.Controllers
             [TestMethod]
             public void GetAllGamesRequestIsNull()
             {
-                Action ctor = () => new PlatformController(null);
+                Action ctor = () => new PlatformsController(null);
 
                 ctor.ShouldThrow<ArgumentNullException>()
                     .WithMessage($"Value cannot be null.{Environment.NewLine}Parameter name: getAllPlatformsRequest cannot be null.");
@@ -40,11 +40,11 @@ namespace OnionPattern.Api.Tests.Controllers
             [TestMethod]
             public void Inheritence()
             {
-                var controller = new PlatformController(fakeAllPlatformsRequest);
+                var controller = new PlatformsController(fakeAllPlatformsRequest);
 
                 controller.Should().NotBeNull();
                 controller.Should().BeAssignableTo<Controller>();
-                controller.Should().BeOfType<PlatformController>();
+                controller.Should().BeOfType<PlatformsController>();
             }
         }
     }

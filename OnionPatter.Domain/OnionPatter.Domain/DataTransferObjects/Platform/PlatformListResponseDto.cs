@@ -3,8 +3,8 @@ using System.Collections.Generic;
 
 namespace OnionPattern.Domain.DataTransferObjects.Platform
 {
-    public class PlatformListResponseDto : ErrorDetails
+    public class PlatformListResponseDto : ErrorDetail
     {
-        public IEnumerable<IPlatform> Platforms { get; set; }
+        public IEnumerable<IPlatform> Platforms { get; set; } = new List<IPlatform>();
     }
 }

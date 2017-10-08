@@ -5,7 +5,7 @@ namespace OnionPattern.Domain.Errors
     /// <summary>
     /// Response Error Message Object
     /// </summary>
-    public abstract class ErrorDetails
+    public abstract class ErrorDetail
     {
         /// <summary>
         /// Response Status Code

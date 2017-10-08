@@ -31,7 +31,7 @@ namespace OnionPattern.Api.Controllers
         public IActionResult Get()
         {
             var response = GetAllGamesRequest.Execute();
-            return new ObjectResult(response.Games) { StatusCode = 200 };
+            return new ObjectResult(response.Games) { StatusCode = response.StatusCode };
         }
     }
 }

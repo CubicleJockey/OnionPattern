@@ -16,7 +16,7 @@ namespace OnionPattern.Domain.Tests.DataTransferObjects.Game
                 var response = new GameListResponseDto();
 
                 response.Should().NotBeNull();
-                response.Should().BeAssignableTo<ErrorDetails>();
+                response.Should().BeAssignableTo<ErrorDetail>();
                 response.Should().BeOfType<GameListResponseDto>();
             }
         }

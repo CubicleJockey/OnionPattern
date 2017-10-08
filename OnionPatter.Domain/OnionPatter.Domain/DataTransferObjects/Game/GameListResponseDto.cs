@@ -3,8 +3,8 @@ using System.Collections.Generic;
 
 namespace OnionPattern.Domain.DataTransferObjects.Game
 {
-    public class GameListResponseDto : ErrorDetails
+    public class GameListResponseDto : ErrorDetail
     {
-        public IEnumerable<IGame> Games { get; set; }
+        public IEnumerable<IGame> Games { get; set; } = new List<IGame>();
     }
 }

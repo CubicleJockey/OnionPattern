@@ -1,7 +1,9 @@
 ﻿using OnionPattern.Domain.DataTransferObjects.Platform;
 using OnionPattern.Domain.Repository;
 using OnionPattern.Domain.Services.Requests.Platform;
-using System.Collections.Generic;
+using Serilog;
+using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace OnionPattern.Service.Requests.Platform
@@ -13,10 +15,24 @@ namespace OnionPattern.Service.Requests.Platform
 
         #region Implementation of IGetAllPlatformsRequestAsync
 
-        public async Task<IEnumerable<IPlatform>> Execute()
+        public async Task<PlatformListResponseDto> Execute()
         {
-            var platforms = await RepositoryAsync.GetAllAsync();
-            return platforms;
+            Log.Logger.Information("Retrieving Platform List...");
+            var platformListResponse = new PlatformListResponseDto();
+            try
+            {
+                var platforms = (await RepositoryAsync.GetAllAsync())?.ToArray();
+                if (platforms == null || !platforms.Any()) { throw new Exception("No Platforms Returned."); }
+                platformListResponse.Platforms = platforms;
+                platformListResponse.StatusCode = 200;
+                Log.Logger.Information($"Retrieved [{platformListResponse.Platforms.Count()}] Platforms.");
+            }
+            catch (Exception x)
+            {
+                Log.Logger.Information($"Failed to get Platforms List. [{x.Message}].");
+                HandleErrors(platformListResponse, x);
+            }
+            return platformListResponse;
         }
 
         #endregion

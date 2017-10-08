@@ -11,14 +11,14 @@ namespace OnionPattern.Api.Controllers
     /// Platform Controller
     /// </summary>
     [Route("api/v1/[controller]")]
-    public class PlatformController : Controller
+    public class PlatformsController : Controller
     {
         private IGetAllPlatformsRequest GetAllPlatformsRequest { get; }
 
         /// <summary>
         /// Ctor
         /// </summary>
-        public PlatformController(IGetAllPlatformsRequest getAllPlatformsRequest)
+        public PlatformsController(IGetAllPlatformsRequest getAllPlatformsRequest)
         {
             GetAllPlatformsRequest = getAllPlatformsRequest ?? throw new ArgumentNullException($"{nameof(getAllPlatformsRequest)} cannot be null.");
         }
@@ -28,10 +28,10 @@ namespace OnionPattern.Api.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public IEnumerable<IPlatform> Get()
+        public IActionResult Get()
         {
             var response = GetAllPlatformsRequest.Execute();
-            return response.Platforms;
+            return new ObjectResult(response.Platforms) { StatusCode = response.StatusCode };
         }
     }
 }

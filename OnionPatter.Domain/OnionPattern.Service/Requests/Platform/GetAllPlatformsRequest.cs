@@ -1,6 +1,9 @@
-﻿using OnionPattern.Domain.DataTransferObjects.Platform;
+﻿using System;
+using System.Linq;
+using OnionPattern.Domain.DataTransferObjects.Platform;
 using OnionPattern.Domain.Repository;
 using OnionPattern.Domain.Services.Requests.Platform;
+using Serilog;
 
 namespace OnionPattern.Service.Requests.Platform
 {
@@ -12,11 +15,22 @@ namespace OnionPattern.Service.Requests.Platform
 
         public PlatformListResponseDto Execute()
         {
-            var platforms = Repository.GetAll();
-            return new PlatformListResponseDto
+            Log.Logger.Information("Retrieving Platform List...");
+            var platformListResponse = new PlatformListResponseDto();
+            try
             {
-                Platforms = platforms
-            };
+                var platforms = Repository.GetAll()?.ToArray();
+                if (platforms == null || !platforms.Any()) { throw new Exception("No Platforms Returned."); }
+                platformListResponse.Platforms = platforms;
+                platformListResponse.StatusCode = 200;
+                Log.Logger.Information($"Retrieved [{platformListResponse.Platforms.Count()}] Platforms.");
+            }
+            catch (Exception x)
+            {
+                Log.Logger.Information($"Failed to get Platforms List. [{x.Message}].");
+                HandleErrors(platformListResponse, x);
+            }
+            return platformListResponse;
         }
 
         #endregion

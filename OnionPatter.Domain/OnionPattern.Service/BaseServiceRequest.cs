@@ -1,10 +1,11 @@
 ﻿using System;
 using OnionPattern.Domain.Entities;
+using OnionPattern.Domain.Errors;
 using OnionPattern.Domain.Repository;
 
 namespace OnionPattern.Service
 {
-    public abstract class BaseServiceRequest<TEntity> where TEntity : VideoGameEntity
+    public abstract class BaseServiceRequest<TEntity>: ServiceHandleError where TEntity : VideoGameEntity
     {
         protected IRepository<TEntity> Repository { get; }
         protected IRepositoryAggregate RepositoryAggregate { get; }

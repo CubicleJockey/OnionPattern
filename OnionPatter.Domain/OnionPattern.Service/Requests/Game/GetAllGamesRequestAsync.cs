@@ -1,7 +1,10 @@
-﻿using OnionPattern.Domain.DataTransferObjects.Game;
+﻿using System;
+using System.Linq;
+using OnionPattern.Domain.DataTransferObjects.Game;
 using OnionPattern.Domain.Repository;
 using OnionPattern.Domain.Services.Requests.Game;
 using System.Threading.Tasks;
+using Serilog;
 
 namespace OnionPattern.Service.Requests.Game
 {
@@ -14,8 +17,30 @@ namespace OnionPattern.Service.Requests.Game
 
         public async Task<GameListResponseDto> Execute()
         {
-            var games = await RepositoryAsync.GetAllAsync();
-            return new GameListResponseDto { Games = games };
+            Log.Logger.Information("Retrieving Games List (async)...");
+            var gameListResponse = new GameListResponseDto();
+            try
+            {
+                var games = (await RepositoryAsync.GetAllAsync())?.ToArray();
+
+                if (games == null || !games.Any())
+                {
+                    throw new Exception("No Games Returned.");
+                }
+
+                gameListResponse = new GameListResponseDto
+                {
+                    Games = games,
+                    StatusCode = 200
+                };
+                Log.Logger.Information($"Retrieved [{gameListResponse.Games.Count()}] Games (async).");
+            }
+            catch (Exception x)
+            {
+                Log.Logger.Error($"Failed to get All Games List. {x.Message}");
+                HandleErrors(gameListResponse, x);
+            }
+            return gameListResponse;
         }
 
         #endregion

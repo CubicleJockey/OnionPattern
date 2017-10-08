@@ -16,7 +16,7 @@ namespace OnionPattern.Domain.Tests.DataTransferObjects.Platform
                 var response = new PlatformListResponseDto();
 
                 response.Should().NotBeNull();
-                response.Should().BeAssignableTo<ErrorDetails>();
+                response.Should().BeAssignableTo<ErrorDetail>();
                 response.Should().BeOfType<PlatformListResponseDto>();
             }
         }

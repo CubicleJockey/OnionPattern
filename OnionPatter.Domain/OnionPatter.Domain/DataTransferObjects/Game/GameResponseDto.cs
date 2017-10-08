@@ -3,7 +3,7 @@ using System;
 
 namespace OnionPattern.Domain.DataTransferObjects.Game
 {
-    public class GameResponseDto : ErrorDetails, IGame
+    public class GameResponseDto : ErrorDetail, IGame
     {
         public int Id { get; set; }
         public string Name { get; set; }

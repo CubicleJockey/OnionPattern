@@ -4,7 +4,7 @@ using System;
 
 namespace OnionPattern.Service
 {
-    public abstract class BaseServiceRequestAsync<TEntity> where TEntity : VideoGameEntity
+    public abstract class BaseServiceRequestAsync<TEntity> : ServiceHandleError where TEntity : VideoGameEntity
     {
         protected IRepositoryAsync<TEntity> RepositoryAsync { get; }
         protected IRepositoryAsyncAggregate RepositoryAggregateAsync { get; }

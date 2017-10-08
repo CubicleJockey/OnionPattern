@@ -6,6 +6,6 @@ namespace OnionPattern.Domain.Services.Requests.Platform
 {
     public interface IGetAllPlatformsRequestAsync
     {
-        Task<IEnumerable<IPlatform>> Execute();
+        Task<PlatformListResponseDto> Execute();
     }
 }

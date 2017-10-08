@@ -8,12 +8,12 @@ using OnionPattern.Service.Requests.Game;
 
 namespace OnionPattern.Service.Tests.Requests.Games
 {
-    public class GetAllGamesRequestTests
+    public class GetGameByIdRequestTests
     {
-
         [TestClass]
         public class ConstructorTests : TestBase<Game>
         {
+
             [TestInitialize]
             public void TestInitialize()
             {
@@ -29,29 +29,14 @@ namespace OnionPattern.Service.Tests.Requests.Games
             [TestMethod]
             public void Inheritence()
             {
-                var request = new GetAllGamesRequest(FakeRepository, FakeRepositoryAggregate);
+                var request = new GetGameByIdRequest(FakeRepository, FakeRepositoryAggregate);
 
                 request.Should().NotBeNull();
-                request.Should().BeAssignableTo<IGetAllGamesRequest>();
+                request.Should().BeAssignableTo<IGetGameByIdRequest>();
                 request.Should().BeAssignableTo<BaseServiceRequest<Game>>();
-                request.Should().BeOfType<GetAllGamesRequest>();
-            }
-        }
-
-        [TestClass]
-        public class MethodTests : TestBase<Game>
-        {
-            [TestInitialize]
-            public void TestInitialize()
-            {
-                InitializeFakes();
-            }
-
-            [TestCleanup]
-            public void TestCleanup()
-            {
-                ClearFakes();
+                request.Should().BeOfType<GetGameByIdRequest>();
             }
         }
     }
 }
+

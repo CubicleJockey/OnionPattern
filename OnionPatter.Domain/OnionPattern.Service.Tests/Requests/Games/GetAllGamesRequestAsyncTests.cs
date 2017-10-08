@@ -1,8 +1,6 @@
-﻿using FakeItEasy;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OnionPattern.Domain.Entities;
-using OnionPattern.Domain.Repository;
 using OnionPattern.Domain.Services.Requests.Game;
 using OnionPattern.Service.Requests.Game;
 
@@ -10,30 +8,26 @@ namespace OnionPattern.Service.Tests.Requests.Games
 {
     public class GetAllGamesRequestAsyncTests
     {
-        private static IRepositoryAsync<Game> fakeRepository;
-        private static IRepositoryAsyncAggregate fakeRepositoryAggregate;
 
         [TestClass]
-        public class ConstructorTests
+        public class ConstructorTests : TestBaseAsync<Game>
         {
             [TestInitialize]
             public void TestInitialize()
             {
-                fakeRepository = A.Fake<IRepositoryAsync<Game>>();
-                fakeRepositoryAggregate = A.Fake<IRepositoryAsyncAggregate>();
+                InitializeFakes();
             }
 
             [TestCleanup]
             public void TestCleanup()
             {
-                Fake.ClearConfiguration(fakeRepository);
-                Fake.ClearConfiguration(fakeRepositoryAggregate);
+                ClearFakes();
             }
 
             [TestMethod]
             public void Inheritence()
             {
-                var request = new GetAllGamesRequestAsync(fakeRepository, fakeRepositoryAggregate);
+                var request = new GetAllGamesRequestAsync(FakeRepositoryAsync, FakeRepositoryAsyncAggregate);
 
                 request.Should().NotBeNull();
                 request.Should().BeAssignableTo<IGetAllGamesRequestAsync>();
@@ -43,20 +37,18 @@ namespace OnionPattern.Service.Tests.Requests.Games
         }
 
         [TestClass]
-        public class MethodTests
+        public class MethodTests : TestBaseAsync<Game>
         {
             [TestInitialize]
             public void TestInitialize()
             {
-                fakeRepository = A.Fake<IRepositoryAsync<Game>>();
-                fakeRepositoryAggregate = A.Fake<IRepositoryAsyncAggregate>();
+                InitializeFakes();
             }
 
             [TestCleanup]
             public void TestCleanup()
             {
-                Fake.ClearConfiguration(fakeRepository);
-                Fake.ClearConfiguration(fakeRepositoryAggregate);
+                ClearFakes();
             }
         }
     }

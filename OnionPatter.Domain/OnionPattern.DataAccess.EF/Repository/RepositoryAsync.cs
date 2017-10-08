@@ -2,6 +2,7 @@
 using OnionPattern.Domain.Repository;
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -61,5 +62,25 @@ namespace OnionPattern.DataAccess.EF.Repository
         }
 
         #endregion
+
+        private async Task<int> SaveChanges()
+        {
+            try
+            {
+                return await context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException ex)
+            {
+                throw new Exception($"Concurrency Error: {ex.Message}", ex);
+            }
+            catch (DbUpdateException ex)
+            {
+                throw new Exception($"Database Update Error: {ex.Message}", ex);
+            }
+            catch (DbException ex)
+            {
+                throw new Exception($"Entity Validation Errors: {ex.Message}", ex);
+            }
+        }
     }
 }

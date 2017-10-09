@@ -4,8 +4,9 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using OnionPattern.Api.AppConstants;
 using OnionPattern.Api.StartupConfigurations;
+using OnionPattern.Domain.Constants;
+using Serilog;
 
 namespace OnionPattern.Api
 {
@@ -51,8 +52,10 @@ namespace OnionPattern.Api
                     logging.AddConfiguration(hostingContext.Configuration.GetSection(AppSettingsSections.Logging));
                     logging.AddConsole();
                     logging.AddDebug();
+                    logging.AddSerilog();
 
-                    LoggingStartupConfiguration.Create(hostingContext);
+                    //LoggingStartupConfiguration.Create(hostingContext);
+
                 })
                 .UseApplicationInsights()
                 .UseContentRoot(Directory.GetCurrentDirectory())

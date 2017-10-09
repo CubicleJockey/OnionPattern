@@ -1,8 +1,8 @@
 ﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using OnionPattern.Api.AppConstants;
+using OnionPattern.Domain.Constants;
 
-namespace OnionPattern.Api.Tests.AppConstants
+namespace OnionPattern.Domain.Tests.Constants
 {
     [TestClass]
     public class EnvironmentTypesTests

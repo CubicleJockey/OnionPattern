@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Serilog.Sinks.RollingFile" Version="3.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\OnionPatter.Domain\OnionPattern.Domain.csproj" />
     <ProjectReference Include="..\OnionPattern.DataAccess.EF\OnionPattern.DataAccess.EF.csproj" />
     <ProjectReference Include="..\OnionPattern.Service\OnionPattern.Service.csproj" />

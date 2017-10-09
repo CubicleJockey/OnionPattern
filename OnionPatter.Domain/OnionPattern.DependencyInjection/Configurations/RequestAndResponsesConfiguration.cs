@@ -6,6 +6,7 @@ using OnionPattern.Domain.Services.Requests.Game;
 using OnionPattern.Domain.Services.Requests.Platform;
 using OnionPattern.Service.Requests.Game;
 using OnionPattern.Service.Requests.Platform;
+using Serilog;
 
 namespace OnionPattern.DependencyInjection.Configurations
 {
@@ -22,26 +23,26 @@ namespace OnionPattern.DependencyInjection.Configurations
             #region Non-Async
             services.AddTransient<IGetAllGamesRequest>(context =>
             {
-                var repositories = GetRepositories<Game>(context);
-                return new GetAllGamesRequest(repositories.Repository, repositories.RepositoryAggregate);
+                var dependencies = GetRequestDependencies<Game>(context);
+                return new GetAllGamesRequest(dependencies.Repository, dependencies.RepositoryAggregate, dependencies.logger);
             });
             
             services.AddTransient<IGetGameByIdRequest>(context =>
             {
-                var repositories = GetRepositories<Game>(context);
-                return new GetGameByIdRequest(repositories.Repository, repositories.RepositoryAggregate);
+                var dependencies = GetRequestDependencies<Game>(context);
+                return new GetGameByIdRequest(dependencies.Repository, dependencies.RepositoryAggregate, dependencies.logger);
             });
             
             services.AddTransient<IDeleteGameByIdRequest>(context =>
             {
-                var repositories = GetRepositories<Game>(context);
-                return new DeleteGameByIdRequest(repositories.Repository, repositories.RepositoryAggregate);
+                var dependencies = GetRequestDependencies<Game>(context);
+                return new DeleteGameByIdRequest(dependencies.Repository, dependencies.RepositoryAggregate, dependencies.logger);
             });
 
             services.AddTransient<ICreateGameRequest>(context =>
             {
-                var repositories = GetRepositories<Game>(context);
-                return new CreateGameRequest(repositories.Repository, repositories.RepositoryAggregate);
+                var dependencies = GetRequestDependencies<Game>(context);
+                return new CreateGameRequest(dependencies.Repository, dependencies.RepositoryAggregate, dependencies.logger);
             });
             #endregion Non-Async
 
@@ -65,8 +66,8 @@ namespace OnionPattern.DependencyInjection.Configurations
             #region Non-Async
             services.AddTransient<IGetAllPlatformsRequest>(context =>
             {
-                var repositories = GetRepositories<Platform>(context);
-                return new GetAllPlatformsRequest(repositories.Repository, repositories.RepositoryAggregate);
+                var dependencies = GetRequestDependencies<Platform>(context);
+                return new GetAllPlatformsRequest(dependencies.Repository, dependencies.RepositoryAggregate, dependencies.logger);
             });
             #endregion Non-Async
 
@@ -79,12 +80,13 @@ namespace OnionPattern.DependencyInjection.Configurations
             #endregion Async
         }
 
-        private static (IRepository<TEntity> Repository, IRepositoryAggregate RepositoryAggregate) GetRepositories<TEntity>(IServiceProvider context) where TEntity : VideoGameEntity
+        private static (IRepository<TEntity> Repository, IRepositoryAggregate RepositoryAggregate, ILogger logger) GetRequestDependencies<TEntity>(IServiceProvider context) where TEntity : VideoGameEntity
         {
             var repository = context.GetService<IRepository<TEntity>>();
             var repositoryAggregate = context.GetService<IRepositoryAggregate>();
+            var logger = context.GetService<ILogger>();
 
-            return (repository, repositoryAggregate);
+            return (repository, repositoryAggregate, logger);
         }
 
         private static (IRepositoryAsync<TEntity> Repository, IRepositoryAsyncAggregate RepositoryAggregate) GetAsyncRepositories<TEntity>(IServiceProvider context) where TEntity : VideoGameEntity

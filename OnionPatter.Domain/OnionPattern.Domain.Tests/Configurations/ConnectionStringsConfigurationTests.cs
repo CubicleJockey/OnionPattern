@@ -1,10 +1,10 @@
 ﻿using FluentAssertions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using OnionPattern.Api.AppConstants;
-using OnionPattern.Domain.AppConfigurations;
+using OnionPattern.Domain.Configurations;
+using OnionPattern.Domain.Constants;
 
-namespace OnionPattern.Api.Tests.AppConfigurations
+namespace OnionPattern.Domain.Tests.Configurations
 {
     [TestClass]
     public class ConnectionStringsConfigurationTests : ConfigurationTestBase

@@ -1,4 +1,4 @@
-﻿namespace OnionPattern.Api.AppConstants
+﻿namespace OnionPattern.Domain.Constants
 {
     /// <summary>
     /// Constants for App Settings Configuration Sections

@@ -9,8 +9,8 @@ namespace OnionPattern.Service.Requests.Game
 {
     public class GetGameByIdRequest : BaseServiceRequest<Domain.Entities.Game>, IGetGameByIdRequest
     {
-        public GetGameByIdRequest(IRepository<Domain.Entities.Game> repository, IRepositoryAggregate repositoryAggregate) 
-            : base(repository, repositoryAggregate) { }
+        public GetGameByIdRequest(IRepository<Domain.Entities.Game> repository, IRepositoryAggregate repositoryAggregate, ILogger logger) 
+            : base(repository, repositoryAggregate, logger) { }
 
         #region Implementation of IGetGameByIdRequest
 
@@ -19,7 +19,7 @@ namespace OnionPattern.Service.Requests.Game
             var gameResponse = new GameResponseDto();
             try
             {
-               Log.Logger.Information($"Retrieving game title : [{id}]");
+                Logger.Information($"Retrieving game title : [{id}]");
 
                 var game = Repository.SingleOrDefault(g => g.Id == id);
                 if (game == null)
@@ -36,7 +36,7 @@ namespace OnionPattern.Service.Requests.Game
             }
             catch (Exception x)
             {
-                Log.Logger.Error($"Failed to get Game for title [{id}].");
+                Logger.Error($"Failed to get Game for title [{id}].");
                 HandleErrors(gameResponse, x);
             }
             return gameResponse;

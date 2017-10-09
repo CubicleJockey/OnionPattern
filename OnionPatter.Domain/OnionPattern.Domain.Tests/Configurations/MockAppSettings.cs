@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace OnionPattern.Api.Tests.AppConfigurations
+namespace OnionPattern.Domain.Tests.Configurations
 {
     public static class MockAppSettings
     {

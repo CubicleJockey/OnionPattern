@@ -9,15 +9,15 @@ namespace OnionPattern.Service.Requests.Game
 {
     public class GetAllGamesRequest : BaseServiceRequest<Domain.Entities.Game>, IGetAllGamesRequest
     {
-        public GetAllGamesRequest(IRepository<Domain.Entities.Game> repository, IRepositoryAggregate repositoryAggregate) 
-            : base(repository, repositoryAggregate) { }
+        public GetAllGamesRequest(IRepository<Domain.Entities.Game> repository, IRepositoryAggregate repositoryAggregate, ILogger logger) 
+            : base(repository, repositoryAggregate, logger) { }
 
 
         #region Implementation of IGetAllGamesRequest
 
         public GameListResponseDto Execute()
         {
-            Log.Logger.Information("Retrieving Games List...");
+            Logger.Information("Retrieving Games List...");
             var gameListResponse = new GameListResponseDto();
             try
             {
@@ -37,12 +37,12 @@ namespace OnionPattern.Service.Requests.Game
                         Games = games,
                         StatusCode = 200
                     };
-                    Log.Logger.Information($"Retrieved [{gameListResponse.Games.Count()}] Games.");
+                    Logger.Information($"Retrieved [{gameListResponse.Games.Count()}] Games.");
                 }
             }
             catch (Exception x)
             {
-                Log.Logger.Error($"Failed to get All Games List. {x.Message}");
+                Logger.Error($"Failed to get All Games List. {x.Message}");
                 HandleErrors(gameListResponse, x);
             }
             return gameListResponse;

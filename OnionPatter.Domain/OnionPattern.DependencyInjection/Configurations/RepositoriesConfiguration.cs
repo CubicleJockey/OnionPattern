@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using OnionPattern.DataAccess.EF;
 using OnionPattern.DataAccess.EF.Repository;
-using OnionPattern.Domain.AppConfigurations;
+using OnionPattern.Domain.Configurations;
 using OnionPattern.Domain.Entities;
 using OnionPattern.Domain.Repository;
 

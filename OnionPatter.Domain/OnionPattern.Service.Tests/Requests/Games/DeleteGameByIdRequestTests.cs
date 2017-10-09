@@ -26,7 +26,7 @@ namespace OnionPattern.Service.Tests.Requests.Games
             [TestMethod]
             public void Inheritence()
             {
-                var request = new DeleteGameByIdRequest(FakeRepository, FakeRepositoryAggregate);
+                var request = new DeleteGameByIdRequest(FakeRepository, FakeRepositoryAggregate, FakeLogger);
 
                 request.Should().NotBeNull();
                 request.Should().BeAssignableTo<IDeleteGameByIdRequest>();

@@ -1,6 +1,6 @@
-﻿namespace OnionPattern.Domain.AppConfigurations
+﻿namespace OnionPattern.Domain.Configurations
 {
-    public class LogLocationsConfiguration
+    public class LogLocationConfiguration
     {
         /// <summary>
         /// Log location when in FileName Build Mode

@@ -1,46 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Threading.Tasks;
-using FakeItEasy;
+﻿using FakeItEasy;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OnionPattern.Domain.DataTransferObjects.Platform;
-using OnionPattern.Domain.Repository;
-using OnionPattern.Domain.Services;
 using OnionPattern.Domain.Services.Requests.Platform;
 using OnionPattern.Service.Requests.Platform;
-using OnionPattern.Service.Responses;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 
 namespace OnionPattern.Service.Tests.Requests.Platform
 {
     public class GetAllPlatformRequestTests
     {
-        private static IRepository<Domain.Entities.Platform> fakeRepository;
-        private static IRepositoryAggregate fakeRepositoryAggregate;
 
         [TestClass]
-        public class ConstructorTests
+        public class ConstructorTests : TestBase<Domain.Entities.Platform>
         {
             [TestInitialize]
             public void TestInitialize()
             {
-                fakeRepository = A.Fake<IRepository<Domain.Entities.Platform>>();
-                fakeRepositoryAggregate = A.Fake<IRepositoryAggregate>();
+               InitializeFakes();
             }
 
             [TestCleanup]
             public void TestCleanup()
             {
-                Fake.ClearConfiguration(fakeRepository);
-                Fake.ClearConfiguration(fakeRepositoryAggregate);
+                ClearFakes();
             }
 
             [TestMethod]
             public void Inheritence()
             {
-                var request = new GetAllPlatformsRequest(fakeRepository, fakeRepositoryAggregate);
+                var request = new GetAllPlatformsRequest(FakeRepository, FakeRepositoryAggregate, FakeLogger);
 
                 request.Should().NotBeNull();
                 request.Should().BeAssignableTo<IGetAllPlatformsRequest>();
@@ -50,18 +42,30 @@ namespace OnionPattern.Service.Tests.Requests.Platform
         }
 
         [TestClass]
-        public class MethodTests
+        public class MethodTests : TestBase<Domain.Entities.Platform>
         {
+            [TestInitialize]
+            public void TestInitalize()
+            {
+                InitializeFakes();
+            }
+
+            [TestCleanup]
+            public void TestCleanup()
+            {
+                ClearFakes();
+            }
+
             [TestMethod]
             public void Execute()
             {
-               Expression<Func<IEnumerable<Domain.Entities.Platform>>> getAll = () => fakeRepository.GetAll();
+               Expression<Func<IEnumerable<Domain.Entities.Platform>>> getAll = () => FakeRepository.GetAll();
 
                 var platforms = TestData.GetPlatforms().ToArray();
 
                 A.CallTo(getAll).Returns(platforms);
 
-                var request = new GetAllPlatformsRequest(fakeRepository, fakeRepositoryAggregate);
+                var request = new GetAllPlatformsRequest(FakeRepository, FakeRepositoryAggregate, FakeLogger);
                 request.Should().NotBeNull();    
                 
                 var response = request.Execute();

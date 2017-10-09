@@ -4,10 +4,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using OnionPattern.Api.AppConstants;
 using OnionPattern.Api.StartupConfigurations;
 using OnionPattern.DependencyInjection;
-using OnionPattern.Domain.AppConfigurations;
+using OnionPattern.Domain.Configurations;
+using OnionPattern.Domain.Constants;
 using Serilog;
 
 namespace OnionPattern.Api
@@ -50,6 +50,7 @@ namespace OnionPattern.Api
 
             //Inject configuration setting. 
             services.Configure<ConnectionStringsConfiguration>(Configuration.GetSection(AppSettingsSections.ConnectionStrings));
+            services.Configure<LogLocationConfiguration>(Configuration.GetSection(AppSettingsSections.LogLocations));
 
             Host.Configure(services);
 
@@ -66,7 +67,6 @@ namespace OnionPattern.Api
         {
             loggerFactory.AddConsole(Configuration.GetSection(AppSettingsSections.Logging));
             loggerFactory.AddDebug();
-            loggerFactory.AddSerilog();
 
             if (environment.IsEnvironment(EnvironmentTypes.Local))
             {

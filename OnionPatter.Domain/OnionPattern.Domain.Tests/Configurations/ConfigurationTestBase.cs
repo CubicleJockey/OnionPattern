@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 
-namespace OnionPattern.Api.Tests.AppConfigurations
+namespace OnionPattern.Domain.Tests.Configurations
 {
     public abstract class ConfigurationTestBase
     {

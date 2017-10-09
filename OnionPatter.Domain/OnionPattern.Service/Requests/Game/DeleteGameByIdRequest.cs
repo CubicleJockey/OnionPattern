@@ -9,8 +9,8 @@ namespace OnionPattern.Service.Requests.Game
 {
     public class DeleteGameByIdRequest : BaseServiceRequest<Domain.Entities.Game>, IDeleteGameByIdRequest
     {
-        public DeleteGameByIdRequest(IRepository<Domain.Entities.Game> repository, IRepositoryAggregate repositoryAggregate) 
-            : base(repository, repositoryAggregate) { }
+        public DeleteGameByIdRequest(IRepository<Domain.Entities.Game> repository, IRepositoryAggregate repositoryAggregate, ILogger logger) 
+            : base(repository, repositoryAggregate, logger) { }
 
         #region Implementation of IDeleteGameByIdRequest
 
@@ -19,7 +19,7 @@ namespace OnionPattern.Service.Requests.Game
             var gameResponse = new GameResponseDto();
             try
             {
-                Log.Logger.Information($"Deleting Game by Id:[{id}]...");
+                Logger.Information($"Deleting Game by Id:[{id}]...");
                 var toDelete = Repository.SingleOrDefault(game => game.Id == id);
                 if (toDelete == null)
                 {
@@ -46,12 +46,12 @@ namespace OnionPattern.Service.Requests.Game
 
                     Repository.Delete(toDelete);
                     gameResponse.StatusCode = 200;
-                    Log.Logger.Information($"Deleted Game [{toDelete.Name}] for Id:[{toDelete.Id}].");
+                    Logger.Information($"Deleted Game [{toDelete.Name}] for Id:[{toDelete.Id}].");
                 }
             }
             catch (Exception x)
             {
-                Log.Logger.Error($"Failed to Delete Game. [{x.Message}].");
+                Logger.Error($"Failed to Delete Game. [{x.Message}].");
                 HandleErrors(gameResponse, x);
             }
             return gameResponse;

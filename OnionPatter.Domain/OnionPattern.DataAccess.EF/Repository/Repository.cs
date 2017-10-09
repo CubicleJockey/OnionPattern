@@ -61,30 +61,33 @@ namespace OnionPattern.DataAccess.EF.Repository
 
         #endregion Gets
 
-        public void Create(TEntity entity)
+        public TEntity Create(TEntity entity)
         {
-            dataSet.Add(entity);
+            var savedEntity = dataSet.Add(entity);
             SaveChanges();
+            return savedEntity.Entity;
         }
 
-        public void Delete(TEntity entity)
+        public TEntity Delete(TEntity entity)
         {
-            dataSet.Remove(entity);
+            var deletedEntity = dataSet.Remove(entity);
             SaveChanges();
+            return deletedEntity.Entity;
         }
 
-        public void Update(TEntity entity)
+        public TEntity Update(TEntity entity)
         {
             if (!dataSet.Local.Contains(entity)) { dataSet.Attach(entity); }
             context.Entry(entity).State = EntityState.Modified;
             SaveChanges();
+            return entity;
         }
 
-        private void SaveChanges()
+        private int SaveChanges()
         {
             try
             {
-                context.SaveChanges();
+                return context.SaveChanges();
             }
             catch (DbUpdateConcurrencyException ex)
             {

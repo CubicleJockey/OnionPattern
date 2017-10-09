@@ -19,10 +19,37 @@ namespace OnionPattern.DependencyInjection.Configurations
 
         private static void ConfigureGame(IServiceCollection services)
         {
+            #region Non-Async
             services.AddTransient<IGetAllGamesRequest>(context =>
             {
                 var repositories = GetRepositories<Game>(context);
                 return new GetAllGamesRequest(repositories.Repository, repositories.RepositoryAggregate);
+            });
+            
+            services.AddTransient<IGetGameByIdRequest>(context =>
+            {
+                var repositories = GetRepositories<Game>(context);
+                return new GetGameByIdRequest(repositories.Repository, repositories.RepositoryAggregate);
+            });
+            
+            services.AddTransient<IDeleteGameByIdRequest>(context =>
+            {
+                var repositories = GetRepositories<Game>(context);
+                return new DeleteGameByIdRequest(repositories.Repository, repositories.RepositoryAggregate);
+            });
+
+            services.AddTransient<ICreateGameRequest>(context =>
+            {
+                var repositories = GetRepositories<Game>(context);
+                return new CreateGameRequest(repositories.Repository, repositories.RepositoryAggregate);
+            });
+            #endregion Non-Async
+
+            #region Async
+            services.AddTransient<IGetGameByIdRequestAsync>(context =>
+            {
+                var repositories = GetAsyncRepositories<Game>(context);
+                return new GetGameByIdRequestAsync(repositories.Repository, repositories.RepositoryAggregate);
             });
 
             services.AddTransient<IGetAllGamesRequestAsync>(context =>
@@ -30,39 +57,26 @@ namespace OnionPattern.DependencyInjection.Configurations
                 var repositories = GetAsyncRepositories<Game>(context);
                 return new GetAllGamesRequestAsync(repositories.Repository, repositories.RepositoryAggregate);
             });
-
-            services.AddTransient<IGetGameByIdRequest>(context =>
-            {
-                var repositories = GetRepositories<Game>(context);
-                return new GetGameByIdRequest(repositories.Repository, repositories.RepositoryAggregate);
-            });
-
-            services.AddTransient<IGetGameByIdRequestAsync>(context =>
-            {
-                var repositories = GetAsyncRepositories<Game>(context);
-                return new GetGameByIdRequestAsync(repositories.Repository, repositories.RepositoryAggregate);
-            });
-
-            services.AddTransient<IDeleteGameByIdRequest>(context =>
-            {
-                var repositories = GetRepositories<Game>(context);
-                return new DeleteGameByIdRequest(repositories.Repository, repositories.RepositoryAggregate);
-            });
+            #endregion Async
         }
 
         private static void ConfigurePlatform(IServiceCollection services)
         {
+            #region Non-Async
             services.AddTransient<IGetAllPlatformsRequest>(context =>
             {
                 var repositories = GetRepositories<Platform>(context);
                 return new GetAllPlatformsRequest(repositories.Repository, repositories.RepositoryAggregate);
             });
+            #endregion Non-Async
 
+            #region Async
             services.AddTransient<IGetAllPlatformsRequestAsync>(context =>
             {
                 var repositories = GetAsyncRepositories<Platform>(context);
                 return new GetAllPlatformsRequestAsync(repositories.Repository, repositories.RepositoryAggregate);
             });
+            #endregion Async
         }
 
         private static (IRepository<TEntity> Repository, IRepositoryAggregate RepositoryAggregate) GetRepositories<TEntity>(IServiceProvider context) where TEntity : VideoGameEntity

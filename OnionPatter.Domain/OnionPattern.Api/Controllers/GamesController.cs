@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnionPattern.Domain.Services.Requests.Game;
 using System;
+using OnionPattern.Domain.DataTransferObjects.Game;
 
 namespace OnionPattern.Api.Controllers
 {
@@ -14,6 +15,7 @@ namespace OnionPattern.Api.Controllers
     {
         private IGetAllGamesRequest GetAllGamesRequest { get; }
         private IGetGameByIdRequest GetGameByIdRequest { get; }
+        private ICreateGameRequest CreateGameRequest { get; }
         private IDeleteGameByIdRequest DeleteGameByIdRequest { get; }
 
         /// <summary>
@@ -21,13 +23,16 @@ namespace OnionPattern.Api.Controllers
         /// </summary>
         /// <param name="getAllGamesRequest">Get All Games Request</param>
         /// <param name="getGameByIdRequest">Get Game By Name Request</param>
+        /// <param name="createGameRequest"></param>
         /// <param name="deleteGameByIdRequest">Delete Game by Id</param>
         public GamesController(IGetAllGamesRequest getAllGamesRequest, 
-                               IGetGameByIdRequest getGameByIdRequest,
+                               IGetGameByIdRequest getGameByIdRequest, 
+                               ICreateGameRequest createGameRequest,
                                IDeleteGameByIdRequest deleteGameByIdRequest)
         {
             GetAllGamesRequest = getAllGamesRequest ?? throw new ArgumentNullException($"{nameof(getAllGamesRequest)} cannot be null.");
             GetGameByIdRequest = getGameByIdRequest ?? throw new ArgumentNullException($"{nameof(getGameByIdRequest)} cannot be null.");
+            CreateGameRequest = createGameRequest ??throw new ArgumentNullException($"{nameof(createGameRequest)} cannot be null.");
             DeleteGameByIdRequest = deleteGameByIdRequest ?? throw new ArgumentNullException($"{nameof(deleteGameByIdRequest)} cannot be null.");
         }
         
@@ -53,6 +58,19 @@ namespace OnionPattern.Api.Controllers
         {
             var response = GetGameByIdRequest.Execute(id);
             return new ObjectResult(response) { StatusCode = response.StatusCode };
+        }
+
+        /// <summary>
+        /// Creates a new Game Entry
+        /// </summary>
+        /// <param name="game">Create Game Information</param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("Create/")]
+        public IActionResult Post(CreateGameDto game)
+        {
+            var response = CreateGameRequest.Execute(game);
+            return new ObjectResult(response){ StatusCode = response.StatusCode };
         }
 
         /// <summary>

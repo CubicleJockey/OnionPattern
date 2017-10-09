@@ -9,9 +9,10 @@ namespace OnionPattern.DependencyInjection.Configurations
     {
         public static void Configure()
         {
-            Mapper.Initialize(config =>
+            Mapper.Initialize(configs =>
             {
-                config.CreateMap<Game, GameResponseDto>().ConvertUsing<GameToGameResponseDtoTypeConverter>();
+                configs.CreateMap<Game, GameResponseDto>().ConvertUsing<GameToGameResponseDtoTypeConverter>();
+                configs.CreateMap<CreateGameDto, Game>().ConvertUsing<CreateGameDtoToGameTypeConverter>();
             });
             Mapper.AssertConfigurationIsValid();
         }

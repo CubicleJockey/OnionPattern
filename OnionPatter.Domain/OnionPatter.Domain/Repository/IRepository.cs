@@ -11,9 +11,9 @@ namespace OnionPattern.Domain.Repository
         TEntity Single(Expression<Func<TEntity, bool>> expression);
         TEntity SingleOrDefault(Expression<Func<TEntity, bool>> expression);
         IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> expression);
-        void Create(TEntity entity);
-        void Update(TEntity entity);
-        void Delete(TEntity entity);
+        TEntity Create(TEntity entity);
+        TEntity Update(TEntity entity);
+        TEntity Delete(TEntity entity);
     }
 }
 

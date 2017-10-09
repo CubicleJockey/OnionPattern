@@ -25,17 +25,20 @@ namespace OnionPattern.Service.Requests.Game
 
                 if (games == null || !games.Any())
                 {
-                    throw new Exception("No Games Returned.");
+                    var exception = new Exception("No Games Returned.");
+                    HandleErrors(gameListResponse, exception, 404);
                 }
-                
-                //TODO: Aggregate the Platforms data.
-
-                gameListResponse = new GameListResponseDto
+                else
                 {
-                    Games = games,
-                    StatusCode = 200
-                };
-                Log.Logger.Information($"Retrieved [{gameListResponse.Games.Count()}] Games.");
+                    //TODO: Aggregate the Platforms data.
+
+                    gameListResponse = new GameListResponseDto
+                    {
+                        Games = games,
+                        StatusCode = 200
+                    };
+                    Log.Logger.Information($"Retrieved [{gameListResponse.Games.Count()}] Games.");
+                }
             }
             catch (Exception x)
             {

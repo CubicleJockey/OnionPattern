@@ -14,26 +14,29 @@ namespace OnionPattern.Api.Tests.Controllers
         public class ConstructorTests
         {
             private IGetAllGamesRequest fakeAllGamesRequest;
-            private IGetGameByIdRequest _fakeGetGameByIdRequest;
+            private IGetGameByIdRequest fakeGetGameByIdRequest;
+            private IDeleteGameByIdRequest fakeDeleteGameByIdRequest;
 
             [TestInitialize]
             public void TestInitalize()
             {
                 fakeAllGamesRequest = A.Fake<IGetAllGamesRequest>();
-                _fakeGetGameByIdRequest = A.Fake<IGetGameByIdRequest>();
+                fakeGetGameByIdRequest = A.Fake<IGetGameByIdRequest>();
+                fakeDeleteGameByIdRequest = A.Fake<IDeleteGameByIdRequest>();
             }
 
             [TestCleanup]
             public void TestCleanup()
             {
                 Fake.ClearConfiguration(fakeAllGamesRequest);
-                Fake.ClearConfiguration(_fakeGetGameByIdRequest);
+                Fake.ClearConfiguration(fakeGetGameByIdRequest);
+                Fake.ClearConfiguration(fakeDeleteGameByIdRequest);
             }
 
             [TestMethod]
             public void GetAllGamesRequestIsNull()
             {
-                Action ctor = () => new GamesController(null, _fakeGetGameByIdRequest);
+                Action ctor = () => new GamesController(null, fakeGetGameByIdRequest, fakeDeleteGameByIdRequest);
 
                 ctor.ShouldThrow<ArgumentNullException>()
                     .WithMessage($"Value cannot be null.{Environment.NewLine}Parameter name: getAllGamesRequest cannot be null.");
@@ -42,16 +45,25 @@ namespace OnionPattern.Api.Tests.Controllers
             [TestMethod]
             public void GetGameByNameRequestIsNull()
             {
-                Action ctor = () => new GamesController(fakeAllGamesRequest, null);
+                Action ctor = () => new GamesController(fakeAllGamesRequest, null, fakeDeleteGameByIdRequest);
 
                 ctor.ShouldThrow<ArgumentNullException>()
                     .WithMessage($"Value cannot be null.{Environment.NewLine}Parameter name: getGameByIdRequest cannot be null.");
             }
 
             [TestMethod]
+            public void DeleteGameByIdRequestIsNull()
+            {
+                Action ctor = () => new GamesController(fakeAllGamesRequest, fakeGetGameByIdRequest, null);
+
+                ctor.ShouldThrow<ArgumentNullException>()
+                    .WithMessage($"Value cannot be null.{Environment.NewLine}Parameter name: deleteGameByIdRequest cannot be null.");
+            }
+
+            [TestMethod]
             public void Inheritence()
             {
-                var controller = new GamesController(fakeAllGamesRequest, _fakeGetGameByIdRequest);
+                var controller = new GamesController(fakeAllGamesRequest, fakeGetGameByIdRequest, fakeDeleteGameByIdRequest);
 
                 controller.Should().NotBeNull();
                 controller.Should().BeAssignableTo<Controller>();

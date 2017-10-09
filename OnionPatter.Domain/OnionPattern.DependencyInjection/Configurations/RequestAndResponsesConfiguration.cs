@@ -42,6 +42,12 @@ namespace OnionPattern.DependencyInjection.Configurations
                 var repositories = GetAsyncRepositories<Game>(context);
                 return new GetGameByIdRequestAsync(repositories.Repository, repositories.RepositoryAggregate);
             });
+
+            services.AddTransient<IDeleteGameByIdRequest>(context =>
+            {
+                var repositories = GetRepositories<Game>(context);
+                return new DeleteGameByIdRequest(repositories.Repository, repositories.RepositoryAggregate);
+            });
         }
 
         private static void ConfigurePlatform(IServiceCollection services)

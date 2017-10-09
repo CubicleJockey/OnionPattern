@@ -15,7 +15,7 @@ namespace OnionPattern.DataAccess.EF
         {
             modelBuilder.Entity<Game>().ToTable(nameof(Game));
             modelBuilder.Entity<Platform>().ToTable(nameof(Platform));
-            modelBuilder.Entity<GamePlatform>().ToTable(nameof(GamePlatform)).HasKey(gp => new { gp.GameId, gp.PlatformId });
+            modelBuilder.Entity<GamePlatform>().ToTable(nameof(GamePlatform));//.HasKey(gp => new { gp.GameId, gp.PlatformId });
         }
     }
 }

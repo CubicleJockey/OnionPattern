@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\OnionPatter.Domain\OnionPattern.Domain.csproj" />
+    <ProjectReference Include="..\OnionPattern.Mapping\OnionPattern.Mapping.csproj" />
   </ItemGroup>
 
   <ItemGroup>

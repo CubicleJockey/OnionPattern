@@ -9,6 +9,7 @@ namespace OnionPattern.DependencyInjection
         {
             RepositoriesConfiguration.Configure(services);
             RequestAndResponsesConfiguration.Configure(services);
+            AutomapperConfiguration.Configure();
         }
     }
 }

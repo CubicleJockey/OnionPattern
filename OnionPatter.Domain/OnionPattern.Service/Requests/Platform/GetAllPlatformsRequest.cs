@@ -20,10 +20,17 @@ namespace OnionPattern.Service.Requests.Platform
             try
             {
                 var platforms = Repository.GetAll()?.ToArray();
-                if (platforms == null || !platforms.Any()) { throw new Exception("No Platforms Returned."); }
-                platformListResponse.Platforms = platforms;
-                platformListResponse.StatusCode = 200;
-                Log.Logger.Information($"Retrieved [{platformListResponse.Platforms.Count()}] Platforms.");
+                if (platforms == null || !platforms.Any())
+                {
+                    var exception = new Exception("No Platforms Returned.");
+                    HandleErrors(platformListResponse, exception, 404);
+                }
+                else
+                {
+                    platformListResponse.Platforms = platforms;
+                    platformListResponse.StatusCode = 200;
+                    Log.Logger.Information($"Retrieved [{platformListResponse.Platforms.Count()}] Platforms.");
+                }
             }
             catch (Exception x)
             {

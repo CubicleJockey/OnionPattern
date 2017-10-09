@@ -28,7 +28,7 @@ namespace OnionPattern.DataAccess.EF.Repository
 
         public IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> expression)
         {
-            yield return dataSet.Find(expression);
+            return dataSet.Where(expression);
         }
 
         public TEntity Single(Expression<Func<TEntity, bool>> expression)

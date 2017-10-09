@@ -2,6 +2,7 @@
 using OnionPattern.Domain.Repository;
 using OnionPattern.Domain.Services.Requests.Game;
 using System;
+using AutoMapper;
 using Serilog;
 
 namespace OnionPattern.Service.Requests.Game
@@ -23,16 +24,15 @@ namespace OnionPattern.Service.Requests.Game
                 var game = Repository.SingleOrDefault(g => g.Id == id);
                 if (game == null)
                 {
-                    throw new Exception($"No game found by title : [{id}].");
+                    var exception = new Exception($"No game found by title : [{id}].");
+                    HandleErrors(gameResponse, exception, 404);
                 }
-
-                //NOTE: Not sure if I want to do something like AutoMapper for this example.
-                gameResponse.Id = game.Id;
-                gameResponse.Name = game.Name;
-                gameResponse.Genre = game.Genre;
-                gameResponse.Price = game.Price;
-                gameResponse.ReleaseDate = game.ReleaseDate;
-                gameResponse.StatusCode = 200;
+                else
+                {
+                    //NOTE: Not sure if I want to do something like AutoMapper for this example.
+                    gameResponse = Mapper.Map<Domain.Entities.Game, GameResponseDto>(game);
+                    gameResponse.StatusCode = 200;
+                }
             }
             catch (Exception x)
             {

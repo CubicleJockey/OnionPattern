@@ -21,7 +21,7 @@ namespace OnionPattern.Service.Requests.Platform
             var platformListResponse = new PlatformListResponseDto();
             try
             {
-                var platforms = (await RepositoryAsync.GetAllAsync())?.ToArray();
+                var platforms = (await Repository.GetAllAsync())?.ToArray();
                 if (platforms == null || !platforms.Any()) { throw new Exception("No Platforms Returned."); }
                 platformListResponse.Platforms = platforms;
                 platformListResponse.StatusCode = 200;

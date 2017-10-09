@@ -1,48 +1,48 @@
-﻿using FakeItEasy;
+﻿using System;
+using FakeItEasy;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OnionPattern.Api.Controllers;
 using OnionPattern.Domain.Services.Requests.Game;
-using System;
 
 namespace OnionPattern.Api.Tests.Controllers
 {
-    public class GameControllerTests
+    public class GamesAsyncControllerTests
     {
         [TestClass]
         public class ConstructorTests
         {
-            private IGetAllGamesRequest fakeAllGamesRequest;
-            private IGetGameByIdRequest _fakeGetGameByIdRequest;
+            private IGetAllGamesRequestAsync fakeGetAllGamesRequestAsync;
+            private IGetGameByIdRequestAsync fakeGetGameByIdRequestAsync;
 
             [TestInitialize]
-            public void TestInitalize()
+            public void TestInitialize()
             {
-                fakeAllGamesRequest = A.Fake<IGetAllGamesRequest>();
-                _fakeGetGameByIdRequest = A.Fake<IGetGameByIdRequest>();
+                fakeGetAllGamesRequestAsync = A.Fake<IGetAllGamesRequestAsync>();
+                fakeGetGameByIdRequestAsync = A.Fake<IGetGameByIdRequestAsync>();
             }
 
             [TestCleanup]
             public void TestCleanup()
             {
-                Fake.ClearConfiguration(fakeAllGamesRequest);
-                Fake.ClearConfiguration(_fakeGetGameByIdRequest);
+                Fake.ClearConfiguration(fakeGetAllGamesRequestAsync);
+                Fake.ClearConfiguration(fakeGetGameByIdRequestAsync);
             }
 
             [TestMethod]
-            public void GetAllGamesRequestIsNull()
+            public void GetAllGamesRequestAsyncIsNull()
             {
-                Action ctor = () => new GamesController(null, _fakeGetGameByIdRequest);
+                Action ctor = () => new GamesAsyncController(null, fakeGetGameByIdRequestAsync);
 
                 ctor.ShouldThrow<ArgumentNullException>()
                     .WithMessage($"Value cannot be null.{Environment.NewLine}Parameter name: getAllGamesRequest cannot be null.");
             }
 
             [TestMethod]
-            public void GetGameByNameRequestIsNull()
+            public void GetGamesByIdRequestAsyncIsNull()
             {
-                Action ctor = () => new GamesController(fakeAllGamesRequest, null);
+                Action ctor = () => new GamesAsyncController(fakeGetAllGamesRequestAsync, null);
 
                 ctor.ShouldThrow<ArgumentNullException>()
                     .WithMessage($"Value cannot be null.{Environment.NewLine}Parameter name: getGameByIdRequest cannot be null.");
@@ -51,11 +51,11 @@ namespace OnionPattern.Api.Tests.Controllers
             [TestMethod]
             public void Inheritence()
             {
-                var controller = new GamesController(fakeAllGamesRequest, _fakeGetGameByIdRequest);
+                var controller = new GamesAsyncController(fakeGetAllGamesRequestAsync, fakeGetGameByIdRequestAsync);
 
                 controller.Should().NotBeNull();
                 controller.Should().BeAssignableTo<Controller>();
-                controller.Should().BeOfType<GamesController>();
+                controller.Should().BeOfType<GamesAsyncController>();
             }
         }
     }

@@ -21,7 +21,7 @@ namespace OnionPattern.Service.Requests.Game
             var gameListResponse = new GameListResponseDto();
             try
             {
-                var games = (await RepositoryAsync.GetAllAsync())?.ToArray();
+                var games = (await Repository.GetAllAsync())?.ToArray();
 
                 if (games == null || !games.Any())
                 {

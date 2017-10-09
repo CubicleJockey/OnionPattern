@@ -6,13 +6,13 @@ namespace OnionPattern.Service
 {
     public abstract class BaseServiceRequestAsync<TEntity> : ServiceHandleError where TEntity : VideoGameEntity
     {
-        protected IRepositoryAsync<TEntity> RepositoryAsync { get; }
-        protected IRepositoryAsyncAggregate RepositoryAggregateAsync { get; }
+        protected IRepositoryAsync<TEntity> Repository { get; }
+        protected IRepositoryAsyncAggregate RepositoryAggregate { get; }
 
         protected BaseServiceRequestAsync(IRepositoryAsync<TEntity> repository, IRepositoryAsyncAggregate repositoryAggregate)
         {
-            RepositoryAsync = repository ?? throw new ArgumentNullException($"{nameof(repository)} cannot be null.");
-            RepositoryAggregateAsync = repositoryAggregate ?? throw new ArgumentNullException($"{nameof(repositoryAggregate)} cannot be null.");
+            Repository = repository ?? throw new ArgumentNullException($"{nameof(repository)} cannot be null.");
+            RepositoryAggregate = repositoryAggregate ?? throw new ArgumentNullException($"{nameof(repositoryAggregate)} cannot be null.");
         }
     }
 }

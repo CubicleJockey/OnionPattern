@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using OnionPattern.Domain.DataTransferObjects.Platform;
 using OnionPattern.Domain.Services.Requests.Platform;
 using System;
-using System.Collections.Generic;
 
 namespace OnionPattern.Api.Controllers
 {
@@ -11,7 +9,7 @@ namespace OnionPattern.Api.Controllers
     /// Platform Controller
     /// </summary>
     [Route("api/v1/[controller]")]
-    public class PlatformsController : Controller
+    public class PlatformsController : BaseController
     {
         private IGetAllPlatformsRequest GetAllPlatformsRequest { get; }
 
@@ -30,8 +28,7 @@ namespace OnionPattern.Api.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            var response = GetAllPlatformsRequest.Execute();
-            return new ObjectResult(response.Platforms) { StatusCode = response.StatusCode };
+            return ExecuteAndHandleRequest(() => GetAllPlatformsRequest.Execute());
         }
     }
 }

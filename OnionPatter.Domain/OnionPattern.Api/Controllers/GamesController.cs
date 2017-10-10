@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OnionPattern.Domain.DataTransferObjects.Game;
 using OnionPattern.Domain.Services.Requests.Game;
 using System;
-using OnionPattern.Domain.DataTransferObjects.Game;
-using OnionPattern.Domain.Errors;
 
 namespace OnionPattern.Api.Controllers
 {
@@ -12,7 +11,7 @@ namespace OnionPattern.Api.Controllers
     /// </summary>
     [Produces("application/json")]
     [Route("api/v1/[controller]")]
-    public class GamesController : Controller
+    public class GamesController : BaseController
     {
         private IGetAllGamesRequest GetAllGamesRequest { get; }
         private IGetGameByIdRequest GetGameByIdRequest { get; }
@@ -44,8 +43,7 @@ namespace OnionPattern.Api.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            var response = GetAllGamesRequest.Execute();
-            return new ObjectResult(response.Games) { StatusCode = response.StatusCode };
+            return ExecuteAndHandleRequest(() => GetAllGamesRequest.Execute());
         }
 
         /// <summary>
@@ -57,8 +55,7 @@ namespace OnionPattern.Api.Controllers
         [Route("{id}")]
         public IActionResult Get(int id)
         {
-            var response = GetGameByIdRequest.Execute(id);
-            return new ObjectResult(response) { StatusCode = response.StatusCode };
+            return ExecuteAndHandleRequest(() => GetGameByIdRequest.Execute(id));
         }
 
         /// <summary>
@@ -70,8 +67,7 @@ namespace OnionPattern.Api.Controllers
         [Route("Create/")]
         public IActionResult Post(CreateGameDto game)
         {
-            var response = CreateGameRequest.Execute(game);
-            return new ObjectResult(response){ StatusCode = response.StatusCode };
+            return ExecuteAndHandleRequest(() => CreateGameRequest.Execute(game));
         }
 
         /// <summary>
@@ -83,8 +79,7 @@ namespace OnionPattern.Api.Controllers
         [Route("Delete/{id}")]
         public IActionResult Delete(int id)
         {
-            var response = DeleteGameByIdRequest.Execute(id);
-            return new ObjectResult(response) { StatusCode = response.StatusCode };
+            return ExecuteAndHandleRequest(() => DeleteGameByIdRequest.Execute(id));
         }
     }
 }

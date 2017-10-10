@@ -5,12 +5,13 @@ using OnionPattern.Domain.Services.Requests.Platform;
 
 namespace OnionPattern.Api.Controllers
 {
+    /// <inheritdoc />
     /// <summary>
     /// Async version of the Platform Controller
     /// </summary>
     [Produces("application/json")]
     [Route("api/v1/[controller]")]
-    public class PlatfomsAsyncController
+    public class PlatfomsAsyncController : BaseAsyncController
     {
         private IGetAllPlatformsRequestAsync GetAllPlatformsRequest { get; }
 
@@ -29,8 +30,7 @@ namespace OnionPattern.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var response = await GetAllPlatformsRequest.Execute();
-            return new ObjectResult(response.Platforms) { StatusCode = response.StatusCode };
+            return await ExecuteAndHandleRequestAsync(() => GetAllPlatformsRequest.Execute());
         }
     }
 }

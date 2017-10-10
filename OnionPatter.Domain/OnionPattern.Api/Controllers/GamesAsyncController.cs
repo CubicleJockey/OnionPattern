@@ -10,7 +10,7 @@ namespace OnionPattern.Api.Controllers
     /// </summary>
     [Produces("application/json")]
     [Route("api/v1/[controller]")]
-    public class GamesAsyncController : Controller
+    public class GamesAsyncController : BaseAsyncController
     {
         private IGetAllGamesRequestAsync GetAllGamesRequestAsync { get; }
         private IGetGameByIdRequestAsync GetGameByIdRequestAsync { get; }
@@ -33,8 +33,7 @@ namespace OnionPattern.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var response = await GetAllGamesRequestAsync.Execute();
-            return new ObjectResult(response.Games) { StatusCode = response.StatusCode };
+            return await ExecuteAndHandleRequestAsync(() => GetAllGamesRequestAsync.Execute());
         }
 
         /// <summary>
@@ -46,8 +45,7 @@ namespace OnionPattern.Api.Controllers
         [Route("{id}")]
         public async Task<IActionResult> Get(int id)
         {
-            var response = await GetGameByIdRequestAsync.Execute(id);
-            return new ObjectResult(response) { StatusCode = response.StatusCode };
+            return await ExecuteAndHandleRequestAsync(() => GetGameByIdRequestAsync.Execute(id));
         }
     }
 }

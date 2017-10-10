@@ -2,6 +2,7 @@
 using OnionPattern.Domain.Services.Requests.Game;
 using System;
 using OnionPattern.Domain.DataTransferObjects.Game;
+using OnionPattern.Domain.Errors;
 
 namespace OnionPattern.Api.Controllers
 {

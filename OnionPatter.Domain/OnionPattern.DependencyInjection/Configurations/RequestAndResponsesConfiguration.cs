@@ -49,14 +49,14 @@ namespace OnionPattern.DependencyInjection.Configurations
             #region Async
             services.AddTransient<IGetGameByIdRequestAsync>(context =>
             {
-                var repositories = GetAsyncRepositories<Game>(context);
-                return new GetGameByIdRequestAsync(repositories.Repository, repositories.RepositoryAggregate);
+                var asyncDependencies = GetAsyncDependencies<Game>(context);
+                return new GetGameByIdRequestAsync(asyncDependencies.Repository, asyncDependencies.RepositoryAggregate, asyncDependencies.logger);
             });
 
             services.AddTransient<IGetAllGamesRequestAsync>(context =>
             {
-                var repositories = GetAsyncRepositories<Game>(context);
-                return new GetAllGamesRequestAsync(repositories.Repository, repositories.RepositoryAggregate);
+                var asyncDependencies = GetAsyncDependencies<Game>(context);
+                return new GetAllGamesRequestAsync(asyncDependencies.Repository, asyncDependencies.RepositoryAggregate, asyncDependencies.logger);
             });
             #endregion Async
         }
@@ -74,8 +74,8 @@ namespace OnionPattern.DependencyInjection.Configurations
             #region Async
             services.AddTransient<IGetAllPlatformsRequestAsync>(context =>
             {
-                var repositories = GetAsyncRepositories<Platform>(context);
-                return new GetAllPlatformsRequestAsync(repositories.Repository, repositories.RepositoryAggregate);
+                var asyncDependencies = GetAsyncDependencies<Platform>(context);
+                return new GetAllPlatformsRequestAsync(asyncDependencies.Repository, asyncDependencies.RepositoryAggregate, asyncDependencies.logger);
             });
             #endregion Async
         }
@@ -89,12 +89,13 @@ namespace OnionPattern.DependencyInjection.Configurations
             return (repository, repositoryAggregate, logger);
         }
 
-        private static (IRepositoryAsync<TEntity> Repository, IRepositoryAsyncAggregate RepositoryAggregate) GetAsyncRepositories<TEntity>(IServiceProvider context) where TEntity : VideoGameEntity
+        private static (IRepositoryAsync<TEntity> Repository, IRepositoryAsyncAggregate RepositoryAggregate, ILogger logger) GetAsyncDependencies<TEntity>(IServiceProvider context) where TEntity : VideoGameEntity
         {
             var repository = context.GetService<IRepositoryAsync<TEntity>>();
             var repositoryAggregate = context.GetService<IRepositoryAsyncAggregate>();
+            var logger = context.GetService<ILogger>();
 
-            return (repository, repositoryAggregate);
+            return (repository, repositoryAggregate, logger);
         }
     }
 }

@@ -10,14 +10,14 @@ namespace OnionPattern.Service.Requests.Platform
 {
     public class GetAllPlatformsRequestAsync : BaseServiceRequestAsync<Domain.Entities.Platform>, IGetAllPlatformsRequestAsync
     {
-        public GetAllPlatformsRequestAsync(IRepositoryAsync<Domain.Entities.Platform> repository, IRepositoryAsyncAggregate repositoryAggregate) 
-            : base(repository, repositoryAggregate) { }
+        public GetAllPlatformsRequestAsync(IRepositoryAsync<Domain.Entities.Platform> repository, IRepositoryAsyncAggregate repositoryAggregate, ILogger logger) 
+            : base(repository, repositoryAggregate, logger) { }
 
         #region Implementation of IGetAllPlatformsRequestAsync
 
         public async Task<PlatformListResponseDto> Execute()
         {
-            Log.Logger.Information("Retrieving Platform List...");
+            Logger.Information("Retrieving Platform List...");
             var platformListResponse = new PlatformListResponseDto();
             try
             {
@@ -31,12 +31,12 @@ namespace OnionPattern.Service.Requests.Platform
                 {
                     platformListResponse.Platforms = platforms;
                     platformListResponse.StatusCode = 200;
-                    Log.Logger.Information($"Retrieved [{platformListResponse.Platforms.Count()}] Platforms.");
+                    Logger.Information($"Retrieved [{platformListResponse.Platforms.Count()}] Platforms.");
                 }
             }
             catch (Exception x)
             {
-                Log.Logger.Error($"Failed to get Platforms List. [{x.Message}].");
+                Logger.Error($"Failed to get Platforms List. [{x.Message}].");
                 HandleErrors(platformListResponse, x);
             }
             return platformListResponse;

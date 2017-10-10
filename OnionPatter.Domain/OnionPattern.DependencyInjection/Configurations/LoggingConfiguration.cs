@@ -20,7 +20,7 @@ namespace OnionPattern.DependencyInjection.Configurations
                 if (!directoryCheck.Exists) { directoryCheck.Create(); }
 
                 return new LoggerConfiguration()
-                    .MinimumLevel.Debug()
+                    .MinimumLevel.Verbose()
                     .WriteTo.RollingFile(logLocationConfig.Value.FileName)
                     .CreateLogger();
             });

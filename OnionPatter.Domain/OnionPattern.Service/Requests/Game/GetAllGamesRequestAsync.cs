@@ -10,14 +10,14 @@ namespace OnionPattern.Service.Requests.Game
 {
     public class GetAllGamesRequestAsync : BaseServiceRequestAsync<Domain.Entities.Game>, IGetAllGamesRequestAsync
     {
-        public GetAllGamesRequestAsync(IRepositoryAsync<Domain.Entities.Game> repository, IRepositoryAsyncAggregate repositoryAggregate) 
-            : base(repository, repositoryAggregate) { }
+        public GetAllGamesRequestAsync(IRepositoryAsync<Domain.Entities.Game> repository, IRepositoryAsyncAggregate repositoryAggregate, ILogger logger) 
+            : base(repository, repositoryAggregate, logger) { }
 
         #region Implementation of IGetAllGamesRequestAsync
 
         public async Task<GameListResponseDto> Execute()
         {
-            Log.Logger.Information("Retrieving Games List (async)...");
+            Logger.Information("Retrieving Games List (async)...");
             var gameListResponse = new GameListResponseDto();
             try
             {
@@ -35,12 +35,12 @@ namespace OnionPattern.Service.Requests.Game
                         Games = games,
                         StatusCode = 200
                     };
-                    Log.Logger.Information($"Retrieved [{gameListResponse.Games.Count()}] Games (async).");
+                    Logger.Information($"Retrieved [{gameListResponse.Games.Count()}] Games (async).");
                 }
             }
             catch (Exception x)
             {
-                Log.Logger.Error($"Failed to get All Games List. {x.Message}");
+                Logger.Error($"Failed to get All Games List. {x.Message}");
                 HandleErrors(gameListResponse, x);
             }
             return gameListResponse;

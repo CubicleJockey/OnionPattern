@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using OnionPattern.Domain.DataTransferObjects.Game;
 using OnionPattern.Domain.Repository;
-using OnionPattern.Domain.Services.Requests.Game;
-using System.Threading.Tasks;
+using OnionPattern.Domain.Services.Requests.Game.Async;
 using Serilog;
 
-namespace OnionPattern.Service.Requests.Game
+namespace OnionPattern.Service.Requests.Game.Async
 {
     public class GetAllGamesRequestAsync : BaseServiceRequestAsync<Domain.Entities.Game>, IGetAllGamesRequestAsync
     {
@@ -23,7 +23,7 @@ namespace OnionPattern.Service.Requests.Game
             {
                 var games = (await Repository.GetAllAsync())?.ToArray();
 
-                if (games == null || !games.Any())
+                if (games == null || !Enumerable.Any<Domain.Entities.Game>(games))
                 {
                     var exception = new Exception("No Games Returned.");
                     HandleErrors(gameListResponse, exception, 404);

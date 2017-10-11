@@ -2,6 +2,7 @@
 using OnionPattern.Domain.Services.Requests.Game;
 using System;
 using System.Threading.Tasks;
+using OnionPattern.Domain.Services.Requests.Game.Async;
 
 namespace OnionPattern.Api.Controllers
 {

@@ -1,13 +1,13 @@
 ﻿using AutoMapper;
-using OnionPattern.Domain.DataTransferObjects.Game;
+using OnionPattern.Domain.DataTransferObjects.Game.Input;
 
 namespace OnionPattern.Mapping.Game
 {
-    public class CreateGameDtoToGameTypeConverter : ITypeConverter<CreateGameDto, Domain.Entities.Game>
+    public class CreateGameDtoToGameTypeConverter : ITypeConverter<CreateGameInputDto, Domain.Entities.Game>
     {
         #region Implementation of ITypeConverter<in IGame,Game>
 
-        public Domain.Entities.Game Convert(CreateGameDto source, Domain.Entities.Game destination, ResolutionContext context)
+        public Domain.Entities.Game Convert(CreateGameInputDto source, Domain.Entities.Game destination, ResolutionContext context)
         {
             destination = new Domain.Entities.Game
             {

@@ -2,6 +2,7 @@
 using OnionPattern.Domain.DataTransferObjects.Game;
 using OnionPattern.Domain.Services.Requests.Game;
 using System;
+using OnionPattern.Domain.DataTransferObjects.Game.Input;
 
 namespace OnionPattern.Api.Controllers
 {
@@ -16,6 +17,7 @@ namespace OnionPattern.Api.Controllers
         private IGetAllGamesRequest GetAllGamesRequest { get; }
         private IGetGameByIdRequest GetGameByIdRequest { get; }
         private ICreateGameRequest CreateGameRequest { get; }
+        private IUpdateGameRequest UpdateGameRequest { get; }
         private IDeleteGameByIdRequest DeleteGameByIdRequest { get; }
 
         /// <summary>
@@ -24,15 +26,18 @@ namespace OnionPattern.Api.Controllers
         /// <param name="getAllGamesRequest">Get All Games Request</param>
         /// <param name="getGameByIdRequest">Get Game By Name Request</param>
         /// <param name="createGameRequest"></param>
+        /// <param name="updateGameTitleRequest"></param>
         /// <param name="deleteGameByIdRequest">Delete Game by Id</param>
         public GamesController(IGetAllGamesRequest getAllGamesRequest, 
                                IGetGameByIdRequest getGameByIdRequest, 
-                               ICreateGameRequest createGameRequest,
+                               ICreateGameRequest createGameRequest, 
+                               IUpdateGameRequest updateGameTitleRequest, 
                                IDeleteGameByIdRequest deleteGameByIdRequest)
         {
             GetAllGamesRequest = getAllGamesRequest ?? throw new ArgumentNullException($"{nameof(getAllGamesRequest)} cannot be null.");
             GetGameByIdRequest = getGameByIdRequest ?? throw new ArgumentNullException($"{nameof(getGameByIdRequest)} cannot be null.");
             CreateGameRequest = createGameRequest ??throw new ArgumentNullException($"{nameof(createGameRequest)} cannot be null.");
+            UpdateGameRequest = updateGameTitleRequest ?? throw new ArgumentNullException($"{nameof(updateGameTitleRequest)} cannot be null.");
             DeleteGameByIdRequest = deleteGameByIdRequest ?? throw new ArgumentNullException($"{nameof(deleteGameByIdRequest)} cannot be null.");
         }
         
@@ -65,9 +70,21 @@ namespace OnionPattern.Api.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("Create/")]
-        public IActionResult Post(CreateGameDto game)
+        public IActionResult Post(CreateGameInputDto game)
         {
             return ExecuteAndHandleRequest(() => CreateGameRequest.Execute(game));
+        }
+
+        /// <summary>
+        /// Update a Game Title by it's Id.
+        /// </summary>
+        /// <param name="input">Update Inputs</param>
+        /// <returns></returns>
+        [HttpPut]
+        [Route("Update/")]
+        public IActionResult Put(UpdateGameTitleInputDto input)
+        {
+            return ExecuteAndHandleRequest(() => UpdateGameRequest.Execute(input));
         }
 
         /// <summary>

@@ -3,8 +3,8 @@ using OnionPattern.Domain.DataTransferObjects.Game.Input;
 
 namespace OnionPattern.Domain.Services.Requests.Game
 {
-    public interface ICreateGameRequest
+    public interface IUpdateGameRequest
     {
-        GameResponseDto Execute(CreateGameInputDto input);
+        GameResponseDto Execute(UpdateGameTitleInputDto input);
     }
 }

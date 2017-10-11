@@ -3,9 +3,13 @@ using Microsoft.Extensions.DependencyInjection;
 using OnionPattern.Domain.Entities;
 using OnionPattern.Domain.Repository;
 using OnionPattern.Domain.Services.Requests.Game;
+using OnionPattern.Domain.Services.Requests.Game.Async;
 using OnionPattern.Domain.Services.Requests.Platform;
+using OnionPattern.Domain.Services.Requests.Platform.Async;
 using OnionPattern.Service.Requests.Game;
+using OnionPattern.Service.Requests.Game.Async;
 using OnionPattern.Service.Requests.Platform;
+using OnionPattern.Service.Requests.Platform.Async;
 using Serilog;
 
 namespace OnionPattern.DependencyInjection.Configurations
@@ -43,6 +47,12 @@ namespace OnionPattern.DependencyInjection.Configurations
             {
                 var dependencies = GetRequestDependencies<Game>(context);
                 return new CreateGameRequest(dependencies.Repository, dependencies.RepositoryAggregate, dependencies.logger);
+            });
+
+            services.AddTransient<IUpdateGameRequest>(context =>
+            {
+                var dependencies = GetRequestDependencies<Game>(context);
+                return new UpdateGameTitleRequest(dependencies.Repository, dependencies.RepositoryAggregate, dependencies.logger);
             });
             #endregion Non-Async
 

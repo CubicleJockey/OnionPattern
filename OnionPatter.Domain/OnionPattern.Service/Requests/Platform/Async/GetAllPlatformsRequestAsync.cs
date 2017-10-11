@@ -1,12 +1,12 @@
-﻿using OnionPattern.Domain.DataTransferObjects.Platform;
-using OnionPattern.Domain.Repository;
-using OnionPattern.Domain.Services.Requests.Platform;
-using Serilog;
-using System;
+﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using OnionPattern.Domain.DataTransferObjects.Platform;
+using OnionPattern.Domain.Repository;
+using OnionPattern.Domain.Services.Requests.Platform.Async;
+using Serilog;
 
-namespace OnionPattern.Service.Requests.Platform
+namespace OnionPattern.Service.Requests.Platform.Async
 {
     public class GetAllPlatformsRequestAsync : BaseServiceRequestAsync<Domain.Entities.Platform>, IGetAllPlatformsRequestAsync
     {
@@ -22,7 +22,7 @@ namespace OnionPattern.Service.Requests.Platform
             try
             {
                 var platforms = (await Repository.GetAllAsync())?.ToArray();
-                if (platforms == null || !platforms.Any())
+                if (platforms == null || !Enumerable.Any<Domain.Entities.Platform>(platforms))
                 {
                     var exception = new Exception("No Platforms Returned.");
                     HandleErrors(platformListResponse, exception, 404);

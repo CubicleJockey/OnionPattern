@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace OnionPattern.Domain.DataTransferObjects.Game
+namespace OnionPattern.Domain.DataTransferObjects.Game.Input
 {
-    public class CreateGameDto
+    public class CreateGameInputDto
     {
         #region Implementation of IGame
 

@@ -1,10 +1,10 @@
 ﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OnionPattern.Domain.Entities;
-using OnionPattern.Domain.Services.Requests.Game;
-using OnionPattern.Service.Requests.Game;
+using OnionPattern.Domain.Services.Requests.Game.Async;
+using OnionPattern.Service.Requests.Game.Async;
 
-namespace OnionPattern.Service.Tests.Requests.Games
+namespace OnionPattern.Service.Tests.Requests.Games.Async
 {
     public class GetAllGamesRequestAsyncTests
     {

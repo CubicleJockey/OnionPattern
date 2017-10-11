@@ -5,6 +5,7 @@ using FakeItEasy;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OnionPattern.Domain.DataTransferObjects.Game;
+using OnionPattern.Domain.DataTransferObjects.Game.Input;
 using OnionPattern.Mapping.Game;
 
 namespace OnionPattern.Mapping.Tests.Game
@@ -19,7 +20,7 @@ namespace OnionPattern.Mapping.Tests.Game
             {
                 var converter = new CreateGameDtoToGameTypeConverter();
                 converter.Should().NotBeNull();
-                converter.Should().BeAssignableTo<ITypeConverter<CreateGameDto, Domain.Entities.Game>>();
+                converter.Should().BeAssignableTo<ITypeConverter<CreateGameInputDto, Domain.Entities.Game>>();
                 converter.Should().BeOfType<CreateGameDtoToGameTypeConverter>();
             }
         }
@@ -30,7 +31,7 @@ namespace OnionPattern.Mapping.Tests.Game
             [TestMethod]
             public void ValidConversion()
             {
-                var source = new CreateGameDto
+                var source = new CreateGameInputDto
                 {
                     Name = "Thingy",
                     Genre = "Some Kind of Genre",

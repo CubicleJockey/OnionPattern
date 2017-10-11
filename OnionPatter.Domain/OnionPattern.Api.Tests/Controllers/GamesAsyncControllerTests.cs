@@ -1,10 +1,10 @@
-﻿using System;
-using FakeItEasy;
+﻿using FakeItEasy;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OnionPattern.Api.Controllers;
-using OnionPattern.Domain.Services.Requests.Game;
+using OnionPattern.Domain.Services.Requests.Game.Async;
+using System;
 
 namespace OnionPattern.Api.Tests.Controllers
 {

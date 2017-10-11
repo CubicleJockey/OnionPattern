@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using OnionPattern.Domain.Services.Requests.Platform.Async;
+using System;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using OnionPattern.Domain.Services.Requests.Platform;
 
 namespace OnionPattern.Api.Controllers
 {

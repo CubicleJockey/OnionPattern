@@ -3,10 +3,10 @@ using System.Threading.Tasks;
 using AutoMapper;
 using OnionPattern.Domain.DataTransferObjects.Game;
 using OnionPattern.Domain.Repository;
-using OnionPattern.Domain.Services.Requests.Game;
+using OnionPattern.Domain.Services.Requests.Game.Async;
 using Serilog;
 
-namespace OnionPattern.Service.Requests.Game
+namespace OnionPattern.Service.Requests.Game.Async
 {
     public class GetGameByIdRequestAsync : BaseServiceRequestAsync<Domain.Entities.Game>, IGetGameByIdRequestAsync
     {

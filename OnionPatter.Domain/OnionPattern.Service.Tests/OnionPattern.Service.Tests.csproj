@@ -25,4 +25,8 @@
     <ProjectReference Include="..\OnionPattern.Service\OnionPattern.Service.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Requests\Platform\Async\" />
+  </ItemGroup>
+
 </Project>

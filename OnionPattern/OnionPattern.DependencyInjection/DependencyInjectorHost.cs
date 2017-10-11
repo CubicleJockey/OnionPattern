@@ -3,7 +3,7 @@ using OnionPattern.DependencyInjection.Configurations;
 
 namespace OnionPattern.DependencyInjection
 {
-    public static class Host
+    public static class DependencyInjectorHost
     {
         public static void Configure(IServiceCollection services)
         {

@@ -11,7 +11,7 @@ using Serilog;
 namespace OnionPattern.Api
 {
     /// <summary>
-    /// Program Host
+    /// Program DependencyInjectorHost
     /// </summary>
     public class Program
     {

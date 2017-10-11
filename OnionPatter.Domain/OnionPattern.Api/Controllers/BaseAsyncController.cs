@@ -9,7 +9,7 @@ namespace OnionPattern.Api.Controllers
     /// <summary>
     /// Base Async Controller for Common Methods
     /// </summary>
-    public class BaseAsyncController : Controller
+    public abstract class BaseAsyncController : Controller
     {
         /// <summary>
         /// Execute and Handle the Request
@@ -17,7 +17,7 @@ namespace OnionPattern.Api.Controllers
         /// <typeparam name="TReturn">Return Type of the Action</typeparam>
         /// <param name="action">Action to Execute</param>
         /// <returns>IActionResult</returns>
-        protected async Task<IActionResult> ExecuteAndHandleRequestAsync<TReturn>(Func<Task<TReturn>> action) where TReturn : ErrorDetail
+        protected virtual async Task<IActionResult> ExecuteAndHandleRequestAsync<TReturn>(Func<Task<TReturn>> action) where TReturn : ErrorDetail
         {
             var response = await action();
             return new ObjectResult(response) { StatusCode = response.StatusCode };

@@ -16,7 +16,7 @@ namespace OnionPattern.Api.Controllers
         /// <typeparam name="TReturn">Return Type of the Action</typeparam>
         /// <param name="action">Action to Execute</param>
         /// <returns>IActionResult</returns>
-        protected IActionResult ExecuteAndHandleRequest<TReturn>(Func<TReturn> action) where TReturn : ErrorDetail
+        protected virtual IActionResult ExecuteAndHandleRequest<TReturn>(Func<TReturn> action) where TReturn : ErrorDetail
         {
             var response = action();
             return new ObjectResult(response) { StatusCode = response.StatusCode };

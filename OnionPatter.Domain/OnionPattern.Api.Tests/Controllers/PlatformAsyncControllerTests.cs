@@ -4,22 +4,20 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OnionPattern.Api.Controllers;
 using OnionPattern.Domain.Services.Requests.Platform;
-using System;
 
 namespace OnionPattern.Api.Tests.Controllers
 {
-    public class PlatformControllerTests
+    public class PlatformAsyncControllerTests
     {
-
         [TestClass]
         public class ConstructorTests
         {
-            private IGetAllPlatformsRequest fakeAllPlatformsRequest;
+            private IGetAllPlatformsRequestAsync fakeAllPlatformsRequest;
 
             [TestInitialize]
             public void TestInitalize()
             {
-                fakeAllPlatformsRequest = A.Fake<IGetAllPlatformsRequest>();
+                fakeAllPlatformsRequest = A.Fake<IGetAllPlatformsRequestAsync>();
             }
 
             [TestCleanup]
@@ -29,23 +27,14 @@ namespace OnionPattern.Api.Tests.Controllers
             }
 
             [TestMethod]
-            public void GetAllGamesRequestIsNull()
-            {
-                Action ctor = () => new PlatformsController(null);
-
-                ctor.ShouldThrow<ArgumentNullException>()
-                    .WithMessage($"Value cannot be null.{Environment.NewLine}Parameter name: getAllPlatformsRequest cannot be null.");
-            }
-
-            [TestMethod]
             public void Inheritence()
             {
-                var controller = new PlatformsController(fakeAllPlatformsRequest);
+                var controller = new PlatfomsAsyncController(fakeAllPlatformsRequest);
 
                 controller.Should().NotBeNull();
                 controller.Should().BeAssignableTo<Controller>();
-                controller.Should().BeAssignableTo<BaseController>();
-                controller.Should().BeOfType<PlatformsController>();
+                controller.Should().BeAssignableTo<BaseAsyncController>();
+                controller.Should().BeOfType<PlatfomsAsyncController>();
             }
         }
     }

@@ -79,6 +79,7 @@ namespace OnionPattern.Api.Tests.Controllers
 
                 controller.Should().NotBeNull();
                 controller.Should().BeAssignableTo<Controller>();
+                controller.Should().BeAssignableTo<BaseController>();
                 controller.Should().BeOfType<GamesController>();
             }
         }

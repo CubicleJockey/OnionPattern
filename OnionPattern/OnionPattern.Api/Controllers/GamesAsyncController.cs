@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using OnionPattern.Domain.Services.Requests.Game;
+using OnionPattern.Domain.Services.Requests.Game.Async;
 using System;
 using System.Threading.Tasks;
-using OnionPattern.Domain.Services.Requests.Game.Async;
 
 namespace OnionPattern.Api.Controllers
 {
+    /// <inheritdoc />
     /// <summary>
     /// Async version of Game Controller
     /// </summary>
@@ -13,18 +13,15 @@ namespace OnionPattern.Api.Controllers
     [Route("api/v1/[controller]")]
     public class GamesAsyncController : BaseAsyncController
     {
-        private IGetAllGamesRequestAsync GetAllGamesRequestAsync { get; }
-        private IGetGameByIdRequestAsync GetGameByIdRequestAsync { get; }
+        private readonly IGameRequestAggregateAsync gameRequestAggregateAsync;
 
         /// <summary>
         /// Video Games Controller
         /// </summary>
-        /// <param name="getAllGamesRequest">Get All Games Request</param>
-        /// <param name="getGameByIdRequest"></param>
-        public GamesAsyncController(IGetAllGamesRequestAsync getAllGamesRequest, IGetGameByIdRequestAsync getGameByIdRequest)
+        /// <param name="gameRequestAggregateAsync"></param>
+        public GamesAsyncController(IGameRequestAggregateAsync gameRequestAggregateAsync)
         {
-            GetAllGamesRequestAsync = getAllGamesRequest ?? throw new ArgumentNullException($"{nameof(getAllGamesRequest)} cannot be null.");
-            GetGameByIdRequestAsync = getGameByIdRequest ?? throw new ArgumentNullException($"{nameof(getGameByIdRequest)} cannot be null.");
+            this.gameRequestAggregateAsync = gameRequestAggregateAsync ?? throw new ArgumentNullException($"{nameof(gameRequestAggregateAsync)} cannot be null.");
         }
 
         /// <summary>
@@ -34,7 +31,7 @@ namespace OnionPattern.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            return await ExecuteAndHandleRequestAsync(() => GetAllGamesRequestAsync.Execute());
+            return await ExecuteAndHandleRequestAsync(() => gameRequestAggregateAsync.GetAllGamesRequestAsync.Execute());
         }
 
         /// <summary>
@@ -46,7 +43,7 @@ namespace OnionPattern.Api.Controllers
         [Route("{id}")]
         public async Task<IActionResult> Get(int id)
         {
-            return await ExecuteAndHandleRequestAsync(() => GetGameByIdRequestAsync.Execute(id));
+            return await ExecuteAndHandleRequestAsync(() => gameRequestAggregateAsync.GetGameByIdRequestAsync.Execute(id));
         }
     }
 }

@@ -11,7 +11,9 @@ namespace OnionPattern.Service.Requests.Game
         private readonly IRepositoryAggregate repositoryAggregate;
         private readonly ILogger logger;
 
-        public GameRequestAggregate(IRepository<Domain.Entities.Game> repository, IRepositoryAggregate repositoryAggregate, ILogger logger)
+        public GameRequestAggregate(IRepository<Domain.Entities.Game> repository, 
+                                    IRepositoryAggregate repositoryAggregate, 
+                                    ILogger logger)
         {
             this.repository = repository ?? throw new ArgumentNullException($"{nameof(repository)} cannot be null.");
             this.repositoryAggregate = repositoryAggregate ?? throw new ArgumentNullException($"{nameof(repositoryAggregate)} cannot be null.");

@@ -4,7 +4,7 @@ using OnionPattern.Domain.DataTransferObjects.Game.Input;
 
 namespace OnionPattern.Domain.Services.Requests.Game.Async
 {
-    public interface IUpdateGameTitleRequest
+    public interface IUpdateGameTitleRequestAsync
     {
         Task<GameResponseDto> ExecuteAsync(UpdateGameTitleInputDto input);
     }

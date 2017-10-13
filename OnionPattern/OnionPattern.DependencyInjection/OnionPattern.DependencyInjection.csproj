@@ -12,6 +12,7 @@
   <ItemGroup>
     <ProjectReference Include="..\OnionPatter.Domain\OnionPattern.Domain.csproj" />
     <ProjectReference Include="..\OnionPattern.DataAccess.EF\OnionPattern.DataAccess.EF.csproj" />
+    <ProjectReference Include="..\OnionPattern.Domain\OnionPattern.Domain.csproj" />
     <ProjectReference Include="..\OnionPattern.Service\OnionPattern.Service.csproj" />
   </ItemGroup>
 

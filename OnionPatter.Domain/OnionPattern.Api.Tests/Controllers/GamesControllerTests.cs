@@ -72,7 +72,7 @@ namespace OnionPattern.Api.Tests.Controllers
                 Action ctor = () => new GamesController(fakeAllGamesRequest, fakeGetGameByIdRequest, fakeCreateGameRequest, null, fakeDeleteGameByIdRequest);
 
                 ctor.ShouldThrow<ArgumentNullException>()
-                    .WithMessage($"Value cannot be null.{Environment.NewLine}Parameter name: updateGameTitleRequest  cannot be null.");
+                    .WithMessage($"Value cannot be null.{Environment.NewLine}Parameter name: updateGameTitleRequest cannot be null.");
             }
 
             [TestMethod]

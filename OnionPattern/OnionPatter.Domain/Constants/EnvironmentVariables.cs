@@ -9,7 +9,7 @@ namespace OnionPattern.Domain.Constants
 
         public static bool GetInMemoryDbValue()
         {
-            var inMemoryDbEnvironmentVar = Environment.GetEnvironmentVariable(EnvironmentVariables.InMemoryDb);
+            var inMemoryDbEnvironmentVar = Environment.GetEnvironmentVariable(InMemoryDb);
             var inMemoryDb = string.Equals(bool.TrueString, inMemoryDbEnvironmentVar, StringComparison.CurrentCultureIgnoreCase);
             return inMemoryDb;
         }

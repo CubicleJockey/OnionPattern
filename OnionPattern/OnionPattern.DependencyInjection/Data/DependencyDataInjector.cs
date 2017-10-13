@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace OnionPattern.DependencyInjection.Data
 {
-    public static class SeedData
+    public static class DependencyDataInjector
     {
-        public static async void InitializeAsync(VideoGameContext context)
+        public static async void InjectAsync(VideoGameContext context)
         {
             await InitializePlatforms(context);
             await InitalizeGames(context);
@@ -16,7 +16,7 @@ namespace OnionPattern.DependencyInjection.Data
             await context.SaveChangesAsync();
         }
 
-        public static void Initialize(VideoGameContext context)
+        public static void Inject(VideoGameContext context)
         {
             Task.WaitAll(InitializePlatforms(context), InitalizeGames(context), InitailizeGamePlatforms(context));
             context.SaveChanges();

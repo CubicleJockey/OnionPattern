@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.DotNet.PlatformAbstractions;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,7 +17,7 @@ namespace OnionPattern.Api.StartupConfigurations
         /// </summary>
         /// <param name="services"></param>
         /// <param name="hostingEnvironment"></param>
-        public static void Create(IServiceCollection services, IHostingEnvironment hostingEnvironment)
+        public static void ConfigureService(IServiceCollection services, IHostingEnvironment hostingEnvironment)
         {
             var path = Path.Combine(ApplicationEnvironment.ApplicationBasePath, "OnionPattern.Api.xml");
 
@@ -29,6 +30,22 @@ namespace OnionPattern.Api.StartupConfigurations
                 });
                 options.IncludeXmlComments(path);
                 options.DescribeAllEnumsAsStrings();
+            });
+        }
+
+        /// <summary>
+        /// Configure the Swagger Endpoints and Middleware
+        /// </summary>
+        /// <param name="application"></param>
+        public static void Configure(IApplicationBuilder application)
+        {
+            // Enable middleware to serve generated Swagger as a JSON endpoint
+            application.UseSwagger();
+
+            // Enable middleware to serve swagger-ui assets (HTML, JS, CSS etc.)
+            application.UseSwaggerUI(config =>
+            {
+                config.SwaggerEndpoint("/swagger/v1/swagger.json", "Onion Pattern V1");
             });
         }
     }

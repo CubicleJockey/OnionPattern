@@ -56,7 +56,7 @@ namespace OnionPattern.Api
             DependencyInjectorHost.Configure(services);
 
             // Swagger
-            SwaggerStartupConfiguration.Create(services, environment);
+            SwaggerStartupConfiguration.ConfigureService(services, environment);
         }
 
         /// <summary>
@@ -75,21 +75,14 @@ namespace OnionPattern.Api
 
                 app.UseStaticFiles();
 
-                // Enable middleware to serve generated Swagger as a JSON endpoint
-                app.UseSwagger();
-
-                // Enable middleware to serve swagger-ui assets (HTML, JS, CSS etc.)
-                app.UseSwaggerUI(config =>
-                {
-                    config.SwaggerEndpoint("/swagger/v1/swagger.json", "Onion Pattern V1");
-                });
+               SwaggerStartupConfiguration.Configure(app);
             }
 
             
             if (EnvironmentVariables.GetInMemoryDbValue())
             {
                 var context = app.ApplicationServices.GetService<VideoGameContext>();
-                SeedData.Initialize(context);
+                DependencyDataInjector.Inject(context);
             }
             app.UseMvc();
         }

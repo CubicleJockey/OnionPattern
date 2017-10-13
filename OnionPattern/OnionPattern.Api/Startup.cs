@@ -48,11 +48,9 @@ namespace OnionPattern.Api
             // Add framework services.
             services.AddMvc();
 
-            //Inject configuration setting. 
-            services.Configure<ConnectionStringsConfiguration>(Configuration.GetSection(AppSettingsSections.ConnectionStrings));
-            services.Configure<LogLocationConfiguration>(Configuration.GetSection(AppSettingsSections.LogLocations));
+            LoadAppSettings.IntoInjector(services, Configuration);
 
-            Host.Configure(services);
+            DependencyInjectorHost.Configure(services);
 
             // Swagger
             SwaggerStartupConfiguration.Create(services, environment);

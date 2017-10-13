@@ -1,11 +1,14 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using OnionPattern.Api.StartupConfigurations;
+using OnionPattern.DataAccess.EF;
 using OnionPattern.DependencyInjection;
+using OnionPattern.DependencyInjection.Data;
 using OnionPattern.Domain.Configurations;
 using OnionPattern.Domain.Constants;
 using Serilog;
@@ -82,6 +85,12 @@ namespace OnionPattern.Api
                 });
             }
 
+            
+            if (EnvironmentVariables.GetInMemoryDbValue())
+            {
+                var context = app.ApplicationServices.GetService<VideoGameContext>();
+                SeedData.Initialize(context);
+            }
             app.UseMvc();
         }
     }

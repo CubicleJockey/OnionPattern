@@ -27,12 +27,14 @@ namespace OnionPattern.Service.Requests.Game
                 if (input.Id <= 0)
                 {
                     var exception = new ArgumentException($"{nameof(input.Id)} must be 1 or more.");
+                    Logger.Error(exception.Message);
                     HandleErrors(gameResponse, exception);
                     return gameResponse;
                 }
                 if (string.IsNullOrWhiteSpace(input.NewTitle))
                 {
                     var exception = new ArgumentException($"{nameof(input.NewTitle)} cannot be empty.");
+                    Logger.Error(exception.Message);
                     HandleErrors(gameResponse, exception);
                     return gameResponse;
                 }
@@ -41,6 +43,7 @@ namespace OnionPattern.Service.Requests.Game
                 if (gameToUpdate == null)
                 {
                     var exception = new Exception($"Failed to find game for id: [{input.Id}].");
+                    Logger.Error(exception.Message);
                     HandleErrors(gameResponse, exception, 404);
                     return gameResponse;
                 }

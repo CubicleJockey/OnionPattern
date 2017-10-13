@@ -26,6 +26,7 @@ namespace OnionPattern.Service.Requests.Game
                 if (games == null || !games.Any())
                 {
                     var exception = new Exception("No Games Returned.");
+                    Logger.Error(exception.Message);
                     HandleErrors(gameListResponse, exception, 404);
                 }
                 else

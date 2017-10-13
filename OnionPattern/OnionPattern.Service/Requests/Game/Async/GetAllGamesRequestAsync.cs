@@ -23,9 +23,10 @@ namespace OnionPattern.Service.Requests.Game.Async
             {
                 var games = (await Repository.GetAllAsync())?.ToArray();
 
-                if (games == null || !Enumerable.Any<Domain.Entities.Game>(games))
+                if (games == null || !games.Any())
                 {
                     var exception = new Exception("No Games Returned.");
+                    Logger.Error(exception.Message);
                     HandleErrors(gameListResponse, exception, 404);
                 }
                 else

@@ -24,6 +24,7 @@ namespace OnionPattern.Service.Requests.Platform
                 if (platforms == null || !platforms.Any())
                 {
                     var exception = new Exception("No Platforms Returned.");
+                    Logger.Error(exception.Message);
                     HandleErrors(platformListResponse, exception, 404);
                 }
                 else

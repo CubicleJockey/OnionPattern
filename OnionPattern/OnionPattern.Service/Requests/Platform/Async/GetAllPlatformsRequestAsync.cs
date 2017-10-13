@@ -22,9 +22,10 @@ namespace OnionPattern.Service.Requests.Platform.Async
             try
             {
                 var platforms = (await Repository.GetAllAsync())?.ToArray();
-                if (platforms == null || !Enumerable.Any<Domain.Entities.Platform>(platforms))
+                if (platforms == null || !platforms.Any())
                 {
                     var exception = new Exception("No Platforms Returned.");
+                    Logger.Error(exception.Message);
                     HandleErrors(platformListResponse, exception, 404);
                 }
                 else

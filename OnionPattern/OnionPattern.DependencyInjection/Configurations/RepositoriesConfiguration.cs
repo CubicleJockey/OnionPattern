@@ -4,8 +4,10 @@ using Microsoft.Extensions.Options;
 using OnionPattern.DataAccess.EF;
 using OnionPattern.DataAccess.EF.Repository;
 using OnionPattern.Domain.Configurations;
+using OnionPattern.Domain.Constants;
 using OnionPattern.Domain.Entities;
 using OnionPattern.Domain.Repository;
+using System;
 
 namespace OnionPattern.DependencyInjection.Configurations
 {
@@ -16,7 +18,11 @@ namespace OnionPattern.DependencyInjection.Configurations
             var serviceProvider = services.BuildServiceProvider();
             var connectionStrings = serviceProvider.GetService<IOptions<ConnectionStringsConfiguration>>();
 
-            services.AddDbContext<VideoGameContext>(options => options.UseSqlServer(connectionStrings.Value.VideoGamesConnection));
+            services.AddDbContext<VideoGameContext>(options =>
+            {
+                if (EnvironmentVariables.GetInMemoryDbValue()) { options.UseInMemoryDatabase("Onion.Pattern"); }
+                else { options.UseSqlServer(connectionStrings.Value.VideoGamesConnection); }
+            });
             services.AddScoped<DbContext>(provider => provider.GetService<VideoGameContext>());
 
             ConfigureNonAsync(services);

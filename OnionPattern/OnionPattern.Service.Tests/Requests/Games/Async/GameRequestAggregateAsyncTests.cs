@@ -27,7 +27,7 @@ namespace OnionPattern.Service.Tests.Requests.Games.Async
             [TestMethod]
             public void RepositoryIsNull()
             {
-                Action ctor = () => new GetAllGamesRequestAsync(null, FakeRepositoryAsyncAggregate, FakeLogger);
+                Action ctor = () => new GameRequestAggregateAsync(null, FakeRepositoryAsyncAggregate, FakeLogger);
 
                 ctor.ShouldThrow<ArgumentNullException>()
                     .WithMessage($"Value cannot be null.{Environment.NewLine}Parameter name: repositoryAsync cannot be null.");
@@ -36,16 +36,16 @@ namespace OnionPattern.Service.Tests.Requests.Games.Async
             [TestMethod]
             public void ReposiotyrAggregateIsNull()
             {
-                Action ctor = () => new GetAllGamesRequestAsync(FakeRepositoryAsync, null, FakeLogger);
+                Action ctor = () => new GameRequestAggregateAsync(FakeRepositoryAsync, null, FakeLogger);
 
                 ctor.ShouldThrow<ArgumentNullException>()
-                    .WithMessage($"Value cannot be null.{Environment.NewLine}Parameter name: repositoryAggregateAsync cannot be null.");
+                    .WithMessage($"Value cannot be null.{Environment.NewLine}Parameter name: repositoryAsyncAggregate cannot be null.");
             }
 
             [TestMethod]
             public void LoggerIsNull()
             {
-                Action ctor = () => new GetAllGamesRequestAsync(FakeRepositoryAsync, FakeRepositoryAsyncAggregate, null);
+                Action ctor = () => new GameRequestAggregateAsync(FakeRepositoryAsync, FakeRepositoryAsyncAggregate, null);
 
                 ctor.ShouldThrow<ArgumentNullException>()
                     .WithMessage($"Value cannot be null.{Environment.NewLine}Parameter name: logger cannot be null.");
@@ -54,7 +54,7 @@ namespace OnionPattern.Service.Tests.Requests.Games.Async
             [TestMethod]
             public void Inheritence()
             {
-                var controller = new GetAllGamesRequestAsync(FakeRepositoryAsync, FakeRepositoryAsyncAggregate, FakeLogger);
+                var controller = new GameRequestAggregateAsync(FakeRepositoryAsync, FakeRepositoryAsyncAggregate, FakeLogger);
 
                 controller.Should().NotBeNull();
                 controller.Should().BeAssignableTo<IGameRequestAggregateAsync>();

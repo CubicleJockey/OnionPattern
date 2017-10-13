@@ -15,9 +15,9 @@ namespace OnionPattern.Service.Requests.Game.Async
                                          IRepositoryAsyncAggregate repositoryAsyncAggregate, 
                                          ILogger logger)
         {
-            this.repositoryAsync = repositoryAsync;
-            this.repositoryAsyncAggregate = repositoryAsyncAggregate;
-            this.logger = logger;
+            this.repositoryAsync = repositoryAsync ?? throw new ArgumentNullException($"{nameof(repositoryAsync)} cannot be null.");
+            this.repositoryAsyncAggregate = repositoryAsyncAggregate ?? throw new ArgumentNullException($"{nameof(repositoryAsyncAggregate)} cannot be null.");
+            this.logger = logger ?? throw new ArgumentNullException($"{nameof(logger)} cannot be null.");
         }
 
         #region Implementation of IGameRequestAggregateAsync

@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using OnionPattern.Domain.DataTransferObjects.Game;
+using OnionPattern.Domain.DataTransferObjects.Game.Input;
 using OnionPattern.Domain.Services.Requests.Game;
 using System;
-using OnionPattern.Domain.DataTransferObjects.Game.Input;
 
 namespace OnionPattern.Api.Controllers
 {
@@ -14,31 +13,15 @@ namespace OnionPattern.Api.Controllers
     [Route("api/v1/[controller]")]
     public class GamesController : BaseController
     {
-        private IGetAllGamesRequest GetAllGamesRequest { get; }
-        private IGetGameByIdRequest GetGameByIdRequest { get; }
-        private ICreateGameRequest CreateGameRequest { get; }
-        private IUpdateGameRequest UpdateGameRequest { get; }
-        private IDeleteGameByIdRequest DeleteGameByIdRequest { get; }
+        private readonly IGameRequestAggregate gameRequestAggregate;
 
         /// <summary>
         /// Video Games Controller
         /// </summary>
-        /// <param name="getAllGamesRequest">Get All Games Request</param>
-        /// <param name="getGameByIdRequest">Get Game By Name Request</param>
-        /// <param name="createGameRequest"></param>
-        /// <param name="updateGameTitleRequest"></param>
-        /// <param name="deleteGameByIdRequest">Delete Game by Id</param>
-        public GamesController(IGetAllGamesRequest getAllGamesRequest, 
-                               IGetGameByIdRequest getGameByIdRequest, 
-                               ICreateGameRequest createGameRequest, 
-                               IUpdateGameRequest updateGameTitleRequest, 
-                               IDeleteGameByIdRequest deleteGameByIdRequest)
+        /// <param name="gameRequestAggregate"></param>
+        public GamesController(IGameRequestAggregate gameRequestAggregate)
         {
-            GetAllGamesRequest = getAllGamesRequest ?? throw new ArgumentNullException($"{nameof(getAllGamesRequest)} cannot be null.");
-            GetGameByIdRequest = getGameByIdRequest ?? throw new ArgumentNullException($"{nameof(getGameByIdRequest)} cannot be null.");
-            CreateGameRequest = createGameRequest ??throw new ArgumentNullException($"{nameof(createGameRequest)} cannot be null.");
-            UpdateGameRequest = updateGameTitleRequest ?? throw new ArgumentNullException($"{nameof(updateGameTitleRequest)} cannot be null.");
-            DeleteGameByIdRequest = deleteGameByIdRequest ?? throw new ArgumentNullException($"{nameof(deleteGameByIdRequest)} cannot be null.");
+            this.gameRequestAggregate = gameRequestAggregate ?? throw new ArgumentNullException($"{nameof(gameRequestAggregate)} cannot be null.");
         }
         
         /// <summary>
@@ -48,7 +31,7 @@ namespace OnionPattern.Api.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return ExecuteAndHandleRequest(() => GetAllGamesRequest.Execute());
+            return ExecuteAndHandleRequest(() => gameRequestAggregate.GetAllGamesRequest.Execute());
         }
 
         /// <summary>
@@ -60,7 +43,19 @@ namespace OnionPattern.Api.Controllers
         [Route("{id}")]
         public IActionResult Get(int id)
         {
-            return ExecuteAndHandleRequest(() => GetGameByIdRequest.Execute(id));
+            return ExecuteAndHandleRequest(() => gameRequestAggregate.GetGameByIdRequest.Execute(id));
+        }
+
+        /// <summary>
+        /// Gets a list of games associated with a genre.
+        /// </summary>
+        /// <param name="genre">The Genre to filter by.</param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("ByGenre/{genre}")]
+        public IActionResult Get(string genre)
+        {
+            return ExecuteAndHandleRequest(() => gameRequestAggregate.GetGamesByGenreRequest.Execute(genre));
         }
 
         /// <summary>
@@ -72,7 +67,7 @@ namespace OnionPattern.Api.Controllers
         [Route("Create/")]
         public IActionResult Post(CreateGameInputDto game)
         {
-            return ExecuteAndHandleRequest(() => CreateGameRequest.Execute(game));
+            return ExecuteAndHandleRequest(() => gameRequestAggregate.CreateGameRequest.Execute(game));
         }
 
         /// <summary>
@@ -84,7 +79,7 @@ namespace OnionPattern.Api.Controllers
         [Route("Update/")]
         public IActionResult Put(UpdateGameTitleInputDto input)
         {
-            return ExecuteAndHandleRequest(() => UpdateGameRequest.Execute(input));
+            return ExecuteAndHandleRequest(() => gameRequestAggregate.UpdateGameTitleRequest.Execute(input));
         }
 
         /// <summary>
@@ -96,7 +91,7 @@ namespace OnionPattern.Api.Controllers
         [Route("Delete/{id}")]
         public IActionResult Delete(int id)
         {
-            return ExecuteAndHandleRequest(() => DeleteGameByIdRequest.Execute(id));
+            return ExecuteAndHandleRequest(() => gameRequestAggregate.DeleteGameByIdRequest.Execute(id));
         }
     }
 }

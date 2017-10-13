@@ -18,45 +18,23 @@ namespace OnionPattern.DependencyInjection.Configurations
     {
         public static void Configure(IServiceCollection services)
         {
+            ConfigureGameRequestAggregate(services);
             ConfigureGame(services);
             ConfigurePlatform(services);
         }
 
+        private static void ConfigureGameRequestAggregate(IServiceCollection services)
+        {
+            services.AddTransient<IGameRequestAggregate>(context =>
+            {
+                var dependencies = GetRequestDependencies<Game>(context);
+                return new GameRequestAggregate(dependencies.Repository, dependencies.RepositoryAggregate, dependencies.logger);
+            });
+        }
+
         private static void ConfigureGame(IServiceCollection services)
         {
-            #region Non-Async
-            services.AddTransient<IGetAllGamesRequest>(context =>
-            {
-                var dependencies = GetRequestDependencies<Game>(context);
-                return new GetAllGamesRequest(dependencies.Repository, dependencies.RepositoryAggregate, dependencies.logger);
-            });
-            
-            services.AddTransient<IGetGameByIdRequest>(context =>
-            {
-                var dependencies = GetRequestDependencies<Game>(context);
-                return new GetGameByIdRequest(dependencies.Repository, dependencies.RepositoryAggregate, dependencies.logger);
-            });
-            
-            services.AddTransient<IDeleteGameByIdRequest>(context =>
-            {
-                var dependencies = GetRequestDependencies<Game>(context);
-                return new DeleteGameByIdRequest(dependencies.Repository, dependencies.RepositoryAggregate, dependencies.logger);
-            });
-
-            services.AddTransient<ICreateGameRequest>(context =>
-            {
-                var dependencies = GetRequestDependencies<Game>(context);
-                return new CreateGameRequest(dependencies.Repository, dependencies.RepositoryAggregate, dependencies.logger);
-            });
-
-            services.AddTransient<IUpdateGameRequest>(context =>
-            {
-                var dependencies = GetRequestDependencies<Game>(context);
-                return new UpdateGameTitleRequest(dependencies.Repository, dependencies.RepositoryAggregate, dependencies.logger);
-            });
-            #endregion Non-Async
-
-            #region Async
+           #region Async
             services.AddTransient<IGetGameByIdRequestAsync>(context =>
             {
                 var asyncDependencies = GetAsyncDependencies<Game>(context);

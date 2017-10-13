@@ -8,14 +8,14 @@ using AutoMapper;
 
 namespace OnionPattern.Service.Requests.Game
 {
-    public class UpdateGameTitleRequest : BaseServiceRequest<Domain.Entities.Game>, IUpdateGameRequest
+    public class UpdateGameTitleRequest : BaseServiceRequest<Domain.Entities.Game>, IUpdateGameTitleRequest
     {
         public UpdateGameTitleRequest(IRepository<Domain.Entities.Game> repository, 
                                       IRepositoryAggregate repositoryAggregate, 
                                       ILogger logger) 
             : base(repository, repositoryAggregate, logger) { }
 
-        #region Implementation of IUpdateGameRequest
+        #region Implementation of IUpdateGameTitleRequest
 
         public GameResponseDto Execute(UpdateGameTitleInputDto input)
         {

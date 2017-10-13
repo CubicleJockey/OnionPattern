@@ -15,7 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\OnionPatter.Domain\OnionPattern.Domain.csproj" />
     <ProjectReference Include="..\OnionPattern.DependencyInjection\OnionPattern.DependencyInjection.csproj" />
     <ProjectReference Include="..\OnionPattern.Domain\OnionPattern.Domain.csproj" />
   </ItemGroup>

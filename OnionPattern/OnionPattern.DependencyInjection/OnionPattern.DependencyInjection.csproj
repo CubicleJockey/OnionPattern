@@ -5,21 +5,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="2.0.0" />
     <PackageReference Include="Serilog.Sinks.RollingFile" Version="3.3.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\OnionPatter.Domain\OnionPattern.Domain.csproj" />
     <ProjectReference Include="..\OnionPattern.DataAccess.EF\OnionPattern.DataAccess.EF.csproj" />
     <ProjectReference Include="..\OnionPattern.Domain\OnionPattern.Domain.csproj" />
     <ProjectReference Include="..\OnionPattern.Service\OnionPattern.Service.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="Microsoft.AspNetCore.Http">
-      <HintPath>..\..\..\..\..\..\..\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.aspnetcore.http\2.0.0\lib\netstandard2.0\Microsoft.AspNetCore.Http.dll</HintPath>
-    </Reference>
   </ItemGroup>
 
 </Project>

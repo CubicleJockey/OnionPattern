@@ -10,8 +10,8 @@ namespace OnionPattern.Service.Requests.Game
 {
     public class GetGamesByGenreRequest : BaseServiceRequest<Domain.Entities.Game>, IGetGamesByGenreRequest
     {
-        public GetGamesByGenreRequest(IRepository<Domain.Entities.Game> repository, IRepositoryAggregate repositoryAggregate, ILogger logger) 
-            : base(repository, repositoryAggregate, logger) { }
+        public GetGamesByGenreRequest(IRepository<Domain.Entities.Game> repository, IRepositoryAggregate repositoryAggregate) 
+            : base(repository, repositoryAggregate) { }
 
         #region Implementation of IGetGamesByGenreRequest
 

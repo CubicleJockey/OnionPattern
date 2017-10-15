@@ -9,15 +9,11 @@ namespace OnionPattern.Service.Requests.Game.Async
     {
         private readonly IRepositoryAsync<Domain.Entities.Game> repositoryAsync;
         private readonly IRepositoryAsyncAggregate repositoryAsyncAggregate;
-        private readonly ILogger logger;
 
-        public GameRequestAggregateAsync(IRepositoryAsync<Domain.Entities.Game> repositoryAsync,
-                                         IRepositoryAsyncAggregate repositoryAsyncAggregate, 
-                                         ILogger logger)
+        public GameRequestAggregateAsync(IRepositoryAsync<Domain.Entities.Game> repositoryAsync, IRepositoryAsyncAggregate repositoryAsyncAggregate)
         {
             this.repositoryAsync = repositoryAsync ?? throw new ArgumentNullException($"{nameof(repositoryAsync)} cannot be null.");
             this.repositoryAsyncAggregate = repositoryAsyncAggregate ?? throw new ArgumentNullException($"{nameof(repositoryAsyncAggregate)} cannot be null.");
-            this.logger = logger ?? throw new ArgumentNullException($"{nameof(logger)} cannot be null.");
         }
 
         #region Implementation of IGameRequestAggregateAsync
@@ -31,11 +27,11 @@ namespace OnionPattern.Service.Requests.Game.Async
         private IGetAllGamesRequestAsync getAllGamesRequestAsync;
 
         public IGetAllGamesRequestAsync GetAllGamesRequestAsync => getAllGamesRequestAsync ??
-                                                                   (getAllGamesRequestAsync = new GetAllGamesRequestAsync(repositoryAsync, repositoryAsyncAggregate, logger));
+                                                                   (getAllGamesRequestAsync = new GetAllGamesRequestAsync(repositoryAsync, repositoryAsyncAggregate));
 
         private IGetGameByIdRequestAsync getGameByIdRequestAsync;
         public IGetGameByIdRequestAsync GetGameByIdRequestAsync => getGameByIdRequestAsync ??
-                                                              (getGameByIdRequestAsync = new GetGameByIdRequestAsync(repositoryAsync, repositoryAsyncAggregate, logger));
+                                                              (getGameByIdRequestAsync = new GetGameByIdRequestAsync(repositoryAsync, repositoryAsyncAggregate));
 
         private IGetGamesByGenreRequestAsync getGamesByGenreRequestAsync;
         public IGetGamesByGenreRequestAsync GetGamesByGenreRequestAsync => throw new NotImplementedException("TODO!");

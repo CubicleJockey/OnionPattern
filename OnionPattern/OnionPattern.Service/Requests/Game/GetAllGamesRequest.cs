@@ -9,8 +9,8 @@ namespace OnionPattern.Service.Requests.Game
 {
     public class GetAllGamesRequest : BaseServiceRequest<Domain.Entities.Game>, IGetAllGamesRequest
     {
-        public GetAllGamesRequest(IRepository<Domain.Entities.Game> repository, IRepositoryAggregate repositoryAggregate, ILogger logger) 
-            : base(repository, repositoryAggregate, logger) { }
+        public GetAllGamesRequest(IRepository<Domain.Entities.Game> repository, IRepositoryAggregate repositoryAggregate) 
+            : base(repository, repositoryAggregate) { }
 
 
         #region Implementation of IGetAllGamesRequest

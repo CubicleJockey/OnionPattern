@@ -9,8 +9,8 @@ namespace OnionPattern.Service.Requests.Platform
 {
     public class GetAllPlatformsRequest : BaseServiceRequest<Domain.Entities.Platform>, IGetAllPlatformsRequest
     {
-        public GetAllPlatformsRequest(IRepository<Domain.Entities.Platform> repository, IRepositoryAggregate repositoryAggregate, ILogger logger) 
-            : base(repository, repositoryAggregate, logger) {}
+        public GetAllPlatformsRequest(IRepository<Domain.Entities.Platform> repository, IRepositoryAggregate repositoryAggregate) 
+            : base(repository, repositoryAggregate) {}
 
         #region Implementation of IGetAllPlatformsRequest
 

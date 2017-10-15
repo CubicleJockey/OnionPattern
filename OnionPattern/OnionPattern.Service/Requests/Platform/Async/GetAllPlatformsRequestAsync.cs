@@ -10,14 +10,14 @@ namespace OnionPattern.Service.Requests.Platform.Async
 {
     public class GetAllPlatformsRequestAsync : BaseServiceRequestAsync<Domain.Entities.Platform>, IGetAllPlatformsRequestAsync
     {
-        public GetAllPlatformsRequestAsync(IRepositoryAsync<Domain.Entities.Platform> repository, IRepositoryAsyncAggregate repositoryAggregate, ILogger logger) 
-            : base(repository, repositoryAggregate, logger) { }
+        public GetAllPlatformsRequestAsync(IRepositoryAsync<Domain.Entities.Platform> repository, IRepositoryAsyncAggregate repositoryAggregate) 
+            : base(repository, repositoryAggregate) { }
 
         #region Implementation of IGetAllPlatformsRequestAsync
 
         public async Task<PlatformListResponseDto> Execute()
         {
-            Logger.Information("Retrieving Platform List...");
+            Log.Logger.Information("Retrieving Platform List...");
             var platformListResponse = new PlatformListResponseDto();
             try
             {
@@ -25,19 +25,19 @@ namespace OnionPattern.Service.Requests.Platform.Async
                 if (platforms == null || !platforms.Any())
                 {
                     var exception = new Exception("No Platforms Returned.");
-                    Logger.Error(exception.Message);
+                    Log.Logger.Error(exception.Message);
                     HandleErrors(platformListResponse, exception, 404);
                 }
                 else
                 {
                     platformListResponse.Platforms = platforms;
                     platformListResponse.StatusCode = 200;
-                    Logger.Information($"Retrieved [{platformListResponse.Platforms.Count()}] Platforms.");
+                    Log.Logger.Information($"Retrieved [{platformListResponse.Platforms.Count()}] Platforms.");
                 }
             }
             catch (Exception x)
             {
-                Logger.Error($"Failed to get Platforms List. [{x.Message}].");
+                Log.Logger.Error($"Failed to get Platforms List. [{x.Message}].");
                 HandleErrors(platformListResponse, x);
             }
             return platformListResponse;

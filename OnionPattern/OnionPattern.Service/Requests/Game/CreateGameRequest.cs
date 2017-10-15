@@ -10,8 +10,8 @@ namespace OnionPattern.Service.Requests.Game
 {
     public class CreateGameRequest : BaseServiceRequest<Domain.Entities.Game>, ICreateGameRequest
     {
-        public CreateGameRequest(IRepository<Domain.Entities.Game> repository, IRepositoryAggregate repositoryAggregate, ILogger logger) 
-            : base(repository, repositoryAggregate, logger) { }
+        public CreateGameRequest(IRepository<Domain.Entities.Game> repository, IRepositoryAggregate repositoryAggregate) 
+            : base(repository, repositoryAggregate) { }
 
         #region Implementation of ICreateGameRequest
 

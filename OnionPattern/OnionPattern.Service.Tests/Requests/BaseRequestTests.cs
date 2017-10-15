@@ -49,14 +49,6 @@ namespace OnionPattern.Service.Tests.Requests
             }
 
             [TestMethod]
-            public void LoggerIsNull()
-            {
-                Action ctor = () => new MockBaseRequest(fakeRepository, fakeRepositoryAggregate, null);
-                ctor.ShouldThrow<ArgumentNullException>()
-                    .WithMessage($"Value cannot be null.{Environment.NewLine}Parameter name: logger cannot be null.");
-            }
-
-            [TestMethod]
             public void IsValid()
             {
                 var baseRequest = new MockBaseRequest(fakeRepository, fakeRepositoryAggregate, fakeLogger);

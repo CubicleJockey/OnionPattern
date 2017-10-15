@@ -1,8 +1,7 @@
-﻿using System;
-using OnionPattern.Domain.Entities;
-using OnionPattern.Domain.Errors;
+﻿using OnionPattern.Domain.Entities;
 using OnionPattern.Domain.Repository;
 using Serilog;
+using System;
 
 namespace OnionPattern.Service
 {
@@ -12,11 +11,10 @@ namespace OnionPattern.Service
         protected IRepositoryAggregate RepositoryAggregate { get; }
         protected ILogger Logger { get; }
 
-        protected BaseServiceRequest(IRepository<TEntity> repository, IRepositoryAggregate repositoryAggregate, ILogger logger)
+        protected BaseServiceRequest(IRepository<TEntity> repository, IRepositoryAggregate repositoryAggregate)
         {
             Repository = repository ?? throw new ArgumentNullException($"{nameof(repository)} cannot be null.");
             RepositoryAggregate = repositoryAggregate ?? throw new ArgumentNullException($"{nameof(repositoryAggregate)} cannot be null.");
-            Logger = logger ?? throw new ArgumentNullException($"{nameof(logger)} cannot be null.");
         }
     }
 }

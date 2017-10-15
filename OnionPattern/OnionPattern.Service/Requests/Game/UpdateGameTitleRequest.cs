@@ -10,10 +10,8 @@ namespace OnionPattern.Service.Requests.Game
 {
     public class UpdateGameTitleRequest : BaseServiceRequest<Domain.Entities.Game>, IUpdateGameTitleRequest
     {
-        public UpdateGameTitleRequest(IRepository<Domain.Entities.Game> repository, 
-                                      IRepositoryAggregate repositoryAggregate, 
-                                      ILogger logger) 
-            : base(repository, repositoryAggregate, logger) { }
+        public UpdateGameTitleRequest(IRepository<Domain.Entities.Game> repository, IRepositoryAggregate repositoryAggregate) 
+            : base(repository, repositoryAggregate) { }
 
         #region Implementation of IUpdateGameTitleRequest
 

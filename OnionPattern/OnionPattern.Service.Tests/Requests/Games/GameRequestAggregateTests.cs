@@ -28,7 +28,7 @@ namespace OnionPattern.Service.Tests.Requests.Games
             [TestMethod]
             public void RepositoryIsNull()
             {
-                Action ctor = () => new GameRequestAggregate(null, FakeRepositoryAggregate, FakeLogger);
+                Action ctor = () => new GameRequestAggregate(null, FakeRepositoryAggregate);
 
                 ctor.ShouldThrow<ArgumentNullException>()
                     .WithMessage($"Value cannot be null.{Environment.NewLine}Parameter name: repository cannot be null.");
@@ -37,25 +37,16 @@ namespace OnionPattern.Service.Tests.Requests.Games
             [TestMethod]
             public void ReposiotyrAggregateIsNull()
             {
-                Action ctor = () => new GameRequestAggregate(FakeRepository, null, FakeLogger);
+                Action ctor = () => new GameRequestAggregate(FakeRepository, null);
 
                 ctor.ShouldThrow<ArgumentNullException>()
                     .WithMessage($"Value cannot be null.{Environment.NewLine}Parameter name: repositoryAggregate cannot be null.");
             }
 
             [TestMethod]
-            public void LoggerIsNull()
-            {
-                Action ctor = () => new GameRequestAggregate(FakeRepository, FakeRepositoryAggregate, null);
-
-                ctor.ShouldThrow<ArgumentNullException>()
-                    .WithMessage($"Value cannot be null.{Environment.NewLine}Parameter name: logger cannot be null.");
-            }
-
-            [TestMethod]
             public void Inheritence()
             {
-                var controller = new GameRequestAggregate(FakeRepository, FakeRepositoryAggregate, FakeLogger);
+                var controller = new GameRequestAggregate(FakeRepository, FakeRepositoryAggregate);
 
                 controller.Should().NotBeNull();
                 controller.Should().BeAssignableTo<IGameRequestAggregate>();

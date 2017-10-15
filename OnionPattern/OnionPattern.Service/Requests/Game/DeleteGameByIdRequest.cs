@@ -9,8 +9,8 @@ namespace OnionPattern.Service.Requests.Game
 {
     public class DeleteGameByIdRequest : BaseServiceRequest<Domain.Entities.Game>, IDeleteGameByIdRequest
     {
-        public DeleteGameByIdRequest(IRepository<Domain.Entities.Game> repository, IRepositoryAggregate repositoryAggregate, ILogger logger) 
-            : base(repository, repositoryAggregate, logger) { }
+        public DeleteGameByIdRequest(IRepository<Domain.Entities.Game> repository, IRepositoryAggregate repositoryAggregate) 
+            : base(repository, repositoryAggregate) { }
 
         #region Implementation of IDeleteGameByIdRequest
 

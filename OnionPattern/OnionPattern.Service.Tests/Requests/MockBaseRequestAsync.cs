@@ -5,7 +5,7 @@ namespace OnionPattern.Service.Tests.Requests
 {
     public class MockBaseRequestAsync : BaseServiceRequestAsync<FakeEntity>
     {
-        public MockBaseRequestAsync(IRepositoryAsync<FakeEntity> repository, IRepositoryAsyncAggregate repositoryAggregate, ILogger logger) 
-            : base(repository, repositoryAggregate, logger) { }
+        public MockBaseRequestAsync(IRepositoryAsync<FakeEntity> repository, IRepositoryAsyncAggregate repositoryAggregate) 
+            : base(repository, repositoryAggregate) { }
     }
 }

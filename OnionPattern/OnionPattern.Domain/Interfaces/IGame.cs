@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OnionPattern.Domain.DataTransferObjects.Game
+namespace OnionPattern.Domain.Interfaces
 {
     public interface IGame
     {

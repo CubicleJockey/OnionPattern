@@ -3,6 +3,7 @@ using AutoMapper;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OnionPattern.Domain.DataTransferObjects.Game;
+using OnionPattern.Domain.Interfaces;
 using OnionPattern.Mapping.Game;
 
 namespace OnionPattern.Mapping.Tests.Game

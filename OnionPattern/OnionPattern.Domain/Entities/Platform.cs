@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using OnionPattern.Domain.DataTransferObjects.Platform;
+using OnionPattern.Domain.Interfaces;
 
 namespace OnionPattern.Domain.Entities
 {

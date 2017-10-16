@@ -1,5 +1,6 @@
 ﻿using OnionPattern.Domain.Errors;
 using System;
+using OnionPattern.Domain.Interfaces;
 
 namespace OnionPattern.Domain.DataTransferObjects.Game
 {

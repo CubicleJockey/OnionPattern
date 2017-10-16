@@ -1,26 +1,28 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
+using AutoMapper;
 using OnionPattern.Domain.DataTransferObjects.Game;
 using OnionPattern.Domain.Repository;
-using OnionPattern.Domain.Services.Requests.Game;
+using OnionPattern.Domain.Services.Requests.Game.Async;
 using Serilog;
 
-namespace OnionPattern.Service.Requests.Game
+namespace OnionPattern.Service.Requests.Game.Async
 {
-    public class DeleteGameByIdRequest : BaseServiceRequest<Domain.Entities.Game>, IDeleteGameByIdRequest
+    public class DeleteGameByIdRequestAsync : BaseServiceRequestAsync<Domain.Entities.Game>, IDeleteGameByIdRequestAsync
     {
-        public DeleteGameByIdRequest(IRepository<Domain.Entities.Game> repository, IRepositoryAggregate repositoryAggregate) 
+        public DeleteGameByIdRequestAsync(IRepositoryAsync<Domain.Entities.Game> repository, IRepositoryAsyncAggregate repositoryAggregate) 
             : base(repository, repositoryAggregate) { }
 
-        #region Implementation of IDeleteGameByIdRequest
+        #region Implementation of IDeleteGameByIdRequestAsync
 
-        public GameResponseDto Execute(int id)
+        public async Task<GameResponseDto> ExecuteAsync(int id)
         {
             var gameResponse = new GameResponseDto();
             try
             {
                 Log.Logger.Information($"Deleting Game by Id:[{id}]...");
-                var toDelete = Repository.SingleOrDefault(game => game.Id == id);
+                var toDelete = await Repository.SingleOrDefaultAsync(game => game.Id == id);
                 if (toDelete == null)
                 {
                     var exception = new Exception($"No Game found for Id:[{id}].");
@@ -31,20 +33,20 @@ namespace OnionPattern.Service.Requests.Game
                     #region Delete GamePlatform References
 
                     Log.Information($"Retrieving GamePlatoforms for Game: [{toDelete.Name}] with Id: [{toDelete.Id}].");
-                    var gamePlatforms = RepositoryAggregate.GamePlatforms.Find(gp => gp.Id == id)?.ToArray();
-                    if(gamePlatforms != null && gamePlatforms.Any())
+                    var gamePlatforms = (await RepositoryAggregate.GamePlatforms.FindAsync(gp => gp.Id == id))?.ToArray();
+                    if (gamePlatforms != null && gamePlatforms.Any())
                     {
                         Log.Logger.Information($"Deleting [{gamePlatforms.Length}] GamePlatforms for Game: [{toDelete.Name}]...");
                         foreach (var gp in gamePlatforms)
                         {
-                            RepositoryAggregate.GamePlatforms.Delete(gp);
+                            await RepositoryAggregate.GamePlatforms.DeleteAsync(gp);
                         }
                         Log.Logger.Information($"Finished deleting GamePlatform enteries. Procceeding to delete Game: {toDelete.Name} with Id: [{toDelete.Id}].");
                     }
 
                     #endregion Delete GamePlatform References
 
-                    Repository.Delete(toDelete);
+                    gameResponse = Mapper.Map<Domain.Entities.Game, GameResponseDto>(await Repository.DeleteAsync(toDelete));
                     gameResponse.StatusCode = 200;
                     Log.Logger.Information($"Deleted Game [{toDelete.Name}] for Id:[{toDelete.Id}].");
                 }

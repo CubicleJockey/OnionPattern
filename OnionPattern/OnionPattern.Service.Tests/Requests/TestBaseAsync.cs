@@ -11,6 +11,8 @@ namespace OnionPattern.Service.Tests.Requests
         protected IRepositoryAsyncAggregate FakeRepositoryAsyncAggregate;
         protected ILogger FakeLogger;
 
+        //TODO: Look into moving the Fake Initialization into a static constructor
+        //TODO: so this happens automatically for all the tests.
         protected void InitializeFakes()
         {
             FakeRepositoryAsync = A.Fake<IRepositoryAsync<TEntity>>();

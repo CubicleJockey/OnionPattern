@@ -9,7 +9,6 @@ namespace OnionPattern.Service
     {
         protected IRepository<TEntity> Repository { get; }
         protected IRepositoryAggregate RepositoryAggregate { get; }
-        protected ILogger Logger { get; }
 
         protected BaseServiceRequest(IRepository<TEntity> repository, IRepositoryAggregate repositoryAggregate)
         {

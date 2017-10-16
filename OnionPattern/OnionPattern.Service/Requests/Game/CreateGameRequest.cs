@@ -20,14 +20,14 @@ namespace OnionPattern.Service.Requests.Game
             var gameResponse = new GameResponseDto();
             try
             {
-                Logger.Information($"Creating Game Entry for [{game.Name}].");
+                Log.Logger.Information($"Creating Game Entry for [{game.Name}].");
                 var gameEntity = Mapper.Map<CreateGameInputDto, Domain.Entities.Game>(game);
                 gameResponse = Mapper.Map<Domain.Entities.Game, GameResponseDto>(Repository.Create(gameEntity));
                 gameResponse.StatusCode = 200;
             }
             catch (Exception x)
             {
-                Logger.Information($"Failed to Create Game: [{game.Name}].");
+                Log.Logger.Information($"Failed to Create Game: [{game.Name}].");
                 HandleErrors(gameResponse, x);
             }
             return gameResponse;

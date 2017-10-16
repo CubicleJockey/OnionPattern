@@ -19,10 +19,12 @@ namespace OnionPattern.Service.Requests.Game.Async
         #region Implementation of IGameRequestAggregateAsync
 
         private ICreateGameRequestAsync createGameRequestAsync;
-        public ICreateGameRequestAsync CreateGameRequestAsync => throw new NotImplementedException("TODO!");
+        public ICreateGameRequestAsync CreateGameRequestAsync => createGameRequestAsync ??
+                                                                 (createGameRequestAsync = new CreateGameRequestAsync(repositoryAsync, repositoryAsyncAggregate));
 
         private IDeleteGameByIdRequestAsync deleteGameByIdRequestAsync;
-        public IDeleteGameByIdRequestAsync DeleteGameByIdRequestAsync => throw new NotImplementedException("TODO!");
+        public IDeleteGameByIdRequestAsync DeleteGameByIdRequestAsync => deleteGameByIdRequestAsync ??
+                                                                         (deleteGameByIdRequestAsync = new DeleteGameByIdRequestAsync(repositoryAsync, repositoryAsyncAggregate));
 
         private IGetAllGamesRequestAsync getAllGamesRequestAsync;
 
@@ -31,13 +33,15 @@ namespace OnionPattern.Service.Requests.Game.Async
 
         private IGetGameByIdRequestAsync getGameByIdRequestAsync;
         public IGetGameByIdRequestAsync GetGameByIdRequestAsync => getGameByIdRequestAsync ??
-                                                              (getGameByIdRequestAsync = new GetGameByIdRequestAsync(repositoryAsync, repositoryAsyncAggregate));
+                                                                   (getGameByIdRequestAsync = new GetGameByIdRequestAsync(repositoryAsync, repositoryAsyncAggregate));
 
         private IGetGamesByGenreRequestAsync getGamesByGenreRequestAsync;
-        public IGetGamesByGenreRequestAsync GetGamesByGenreRequestAsync => throw new NotImplementedException("TODO!");
+        public IGetGamesByGenreRequestAsync GetGamesByGenreRequestAsync => getGamesByGenreRequestAsync ??
+                                                                          (getGamesByGenreRequestAsync = new GetGamesByGenreRequestAsync(repositoryAsync, repositoryAsyncAggregate));
 
         private IUpdateGameTitleRequestAsync updateGameTitleRequestAsync;
-        public IUpdateGameTitleRequestAsync UpdateGameTitleRequest => throw new NotImplementedException("TODO!");
+        public IUpdateGameTitleRequestAsync UpdateGameTitleRequestAsync => updateGameTitleRequestAsync ?? 
+                                                                          (updateGameTitleRequestAsync = new UpdateGameTitleRequestAsync(repositoryAsync, repositoryAsyncAggregate));
 
         #endregion
     }

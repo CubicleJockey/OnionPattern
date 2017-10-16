@@ -7,6 +7,6 @@
         IGetAllGamesRequestAsync GetAllGamesRequestAsync { get; }
         IGetGameByIdRequestAsync GetGameByIdRequestAsync { get; }
         IGetGamesByGenreRequestAsync GetGamesByGenreRequestAsync { get; }
-        IUpdateGameTitleRequestAsync UpdateGameTitleRequest { get; }
+        IUpdateGameTitleRequestAsync UpdateGameTitleRequestAsync { get; }
     }
 }

@@ -1,20 +1,15 @@
-﻿using System;
-using OnionPattern.Domain.Repository;
+﻿using OnionPattern.Domain.Repository;
 using OnionPattern.Domain.Services.Requests.Game.Async;
-using Serilog;
 
 namespace OnionPattern.Service.Requests.Game.Async
 {
-    public class GameRequestAggregateAsync : IGameRequestAggregateAsync
+    public class GameRequestAsyncAggregate : BaseRequestAsyncAggregate<Domain.Entities.Game>, IGameRequestAggregateAsync
     {
         private readonly IRepositoryAsync<Domain.Entities.Game> repositoryAsync;
         private readonly IRepositoryAsyncAggregate repositoryAsyncAggregate;
 
-        public GameRequestAggregateAsync(IRepositoryAsync<Domain.Entities.Game> repositoryAsync, IRepositoryAsyncAggregate repositoryAsyncAggregate)
-        {
-            this.repositoryAsync = repositoryAsync ?? throw new ArgumentNullException($"{nameof(repositoryAsync)} cannot be null.");
-            this.repositoryAsyncAggregate = repositoryAsyncAggregate ?? throw new ArgumentNullException($"{nameof(repositoryAsyncAggregate)} cannot be null.");
-        }
+        public GameRequestAsyncAggregate(IRepositoryAsync<Domain.Entities.Game> repositoryAsync, IRepositoryAsyncAggregate repositoryAsyncAggregate)
+            : base(repositoryAsync, repositoryAsyncAggregate) { }
 
         #region Implementation of IGameRequestAggregateAsync
 

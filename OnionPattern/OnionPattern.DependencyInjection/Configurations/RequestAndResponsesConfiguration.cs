@@ -18,7 +18,7 @@ namespace OnionPattern.DependencyInjection.Configurations
         public static void Configure(IServiceCollection services)
         {
             ConfigureGameRequestAggregates(services);
-            ConfigurePlatform(services);
+            ConfigurePlatformAggregate(services);
         }
 
         private static void ConfigureGameRequestAggregates(IServiceCollection services)
@@ -32,17 +32,17 @@ namespace OnionPattern.DependencyInjection.Configurations
             services.AddTransient<IGameRequestAggregateAsync>(context =>
             {
                 var dependencies = GetRequestAsyncDependencies<Game>(context);
-                return new GameRequestAggregateAsync(dependencies.Repository, dependencies.RepositoryAggregate);
+                return new GameRequestAsyncAggregate(dependencies.Repository, dependencies.RepositoryAggregate);
             });
         }
 
-        private static void ConfigurePlatform(IServiceCollection services)
+        private static void ConfigurePlatformAggregate(IServiceCollection services)
         {
             #region Non-Async
-            services.AddTransient<IGetAllPlatformsRequest>(context =>
+            services.AddTransient<IPlatformRequestAggregate>(context =>
             {
                 var dependencies = GetRequestDependencies<Platform>(context);
-                return new GetAllPlatformsRequest(dependencies.Repository, dependencies.RepositoryAggregate);
+                return new PlatformRequestAggregate(dependencies.Repository, dependencies.RepositoryAggregate);
             });
             #endregion Non-Async
 

@@ -1,39 +1,33 @@
 ﻿using OnionPattern.Domain.Repository;
 using OnionPattern.Domain.Services.Requests.Game;
-using System;
 
 namespace OnionPattern.Service.Requests.Game
 {
-    public class GameRequestAggregate : IGameRequestAggregate
+    public class GameRequestAggregate : BaseRequestAggregate<Domain.Entities.Game>, IGameRequestAggregate
     {
-        private readonly IRepository<Domain.Entities.Game> repository;
-        private readonly IRepositoryAggregate repositoryAggregate;
 
-        public GameRequestAggregate(IRepository<Domain.Entities.Game> repository, IRepositoryAggregate repositoryAggregate)
-        {
-            this.repository = repository ?? throw new ArgumentNullException($"{nameof(repository)} cannot be null.");
-            this.repositoryAggregate = repositoryAggregate ?? throw new ArgumentNullException($"{nameof(repositoryAggregate)} cannot be null.");
-        }
+        public GameRequestAggregate(IRepository<Domain.Entities.Game> repository, IRepositoryAggregate repositoryAggregate) 
+            : base(repository, repositoryAggregate)  {}
 
         #region Implementation of IGameRequestAggregate
 
         private ICreateGameRequest createGameRequest;
-        public ICreateGameRequest CreateGameRequest => createGameRequest ?? (createGameRequest = new CreateGameRequest(repository, repositoryAggregate));
+        public ICreateGameRequest CreateGameRequest => createGameRequest ?? (createGameRequest = new CreateGameRequest(Repository, RepositoryAggregate));
 
         private IDeleteGameByIdRequest deleteGameByIdRequest;
-        public IDeleteGameByIdRequest DeleteGameByIdRequest =>deleteGameByIdRequest ?? (deleteGameByIdRequest = new DeleteGameByIdRequest(repository, repositoryAggregate));
+        public IDeleteGameByIdRequest DeleteGameByIdRequest =>deleteGameByIdRequest ?? (deleteGameByIdRequest = new DeleteGameByIdRequest(Repository, RepositoryAggregate));
 
         private IGetAllGamesRequest getAllGamesRequest;
-        public IGetAllGamesRequest GetAllGamesRequest => getAllGamesRequest ?? (getAllGamesRequest = new GetAllGamesRequest(repository, repositoryAggregate));
+        public IGetAllGamesRequest GetAllGamesRequest => getAllGamesRequest ?? (getAllGamesRequest = new GetAllGamesRequest(Repository, RepositoryAggregate));
 
         private IGetGameByIdRequest getGameByIdRequest;
-        public IGetGameByIdRequest GetGameByIdRequest => getGameByIdRequest ?? (getGameByIdRequest = new GetGameByIdRequest(repository, repositoryAggregate));
+        public IGetGameByIdRequest GetGameByIdRequest => getGameByIdRequest ?? (getGameByIdRequest = new GetGameByIdRequest(Repository, RepositoryAggregate));
 
         private IGetGamesByGenreRequest getGamesByGenreRequest;
-        public IGetGamesByGenreRequest GetGamesByGenreRequest => getGamesByGenreRequest ?? (getGamesByGenreRequest = new GetGamesByGenreRequest(repository, repositoryAggregate));
+        public IGetGamesByGenreRequest GetGamesByGenreRequest => getGamesByGenreRequest ?? (getGamesByGenreRequest = new GetGamesByGenreRequest(Repository, RepositoryAggregate));
 
         private IUpdateGameTitleRequest updateGameTitleRequest;
-        public IUpdateGameTitleRequest UpdateGameTitleRequest => updateGameTitleRequest ?? (updateGameTitleRequest = new UpdateGameTitleRequest(repository, repositoryAggregate));
+        public IUpdateGameTitleRequest UpdateGameTitleRequest => updateGameTitleRequest ?? (updateGameTitleRequest = new UpdateGameTitleRequest(Repository, RepositoryAggregate));
 
         #endregion
     }

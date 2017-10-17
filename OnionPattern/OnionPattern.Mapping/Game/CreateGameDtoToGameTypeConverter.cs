@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System;
+using AutoMapper;
 using OnionPattern.Domain.DataTransferObjects.Game.Input;
 
 namespace OnionPattern.Mapping.Game
@@ -9,13 +10,14 @@ namespace OnionPattern.Mapping.Game
 
         public Domain.Entities.Game Convert(CreateGameInputDto source, Domain.Entities.Game destination, ResolutionContext context)
         {
-            destination = new Domain.Entities.Game
-            {
-                Name = source.Name,
-                Genre = source.Genre,
-                Price = source.Price,
-                ReleaseDate = source.ReleaseDate
-            };
+            if(source == null) {  throw new ArgumentNullException($"{nameof(source)} cannot be null."); }
+            if(destination == null) {  destination = new Domain.Entities.Game(); }
+
+            destination.Name = source.Name;
+            destination.Genre = source.Genre;
+            destination.Price = source.Price;
+            destination.ReleaseDate = source.ReleaseDate;
+                
             return destination;
         }
 

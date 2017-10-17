@@ -10,14 +10,14 @@ namespace OnionPattern.Service.Requests.Game.Async
 {
     public class GetAllGamesRequestAsync : BaseServiceRequestAsync<Domain.Entities.Game>, IGetAllGamesRequestAsync
     {
-        public GetAllGamesRequestAsync(IRepositoryAsync<Domain.Entities.Game> repository, IRepositoryAsyncAggregate repositoryAggregate, ILogger logger) 
-            : base(repository, repositoryAggregate, logger) { }
+        public GetAllGamesRequestAsync(IRepositoryAsync<Domain.Entities.Game> repository, IRepositoryAsyncAggregate repositoryAggregate) 
+            : base(repository, repositoryAggregate) { }
 
         #region Implementation of IGetAllGamesRequestAsync
 
         public async Task<GameListResponseDto> Execute()
         {
-            Logger.Information("Retrieving Games List (async)...");
+            Log.Logger.Information("Retrieving Games List (async)...");
             var gameListResponse = new GameListResponseDto();
             try
             {
@@ -26,7 +26,7 @@ namespace OnionPattern.Service.Requests.Game.Async
                 if (games == null || !games.Any())
                 {
                     var exception = new Exception("No Games Returned.");
-                    Logger.Error(exception.Message);
+                    Log.Logger.Error(exception.Message);
                     HandleErrors(gameListResponse, exception, 404);
                 }
                 else
@@ -36,12 +36,12 @@ namespace OnionPattern.Service.Requests.Game.Async
                         Games = games,
                         StatusCode = 200
                     };
-                    Logger.Information($"Retrieved [{gameListResponse.Games.Count()}] Games (async).");
+                    Log.Logger.Information($"Retrieved [{gameListResponse.Games.Count()}] Games (async).");
                 }
             }
             catch (Exception x)
             {
-                Logger.Error($"Failed to get All Games List. {x.Message}");
+                Log.Logger.Error($"Failed to get All Games List. {x.Message}");
                 HandleErrors(gameListResponse, x);
             }
             return gameListResponse;

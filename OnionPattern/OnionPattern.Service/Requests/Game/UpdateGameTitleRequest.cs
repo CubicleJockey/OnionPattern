@@ -10,10 +10,8 @@ namespace OnionPattern.Service.Requests.Game
 {
     public class UpdateGameTitleRequest : BaseServiceRequest<Domain.Entities.Game>, IUpdateGameTitleRequest
     {
-        public UpdateGameTitleRequest(IRepository<Domain.Entities.Game> repository, 
-                                      IRepositoryAggregate repositoryAggregate, 
-                                      ILogger logger) 
-            : base(repository, repositoryAggregate, logger) { }
+        public UpdateGameTitleRequest(IRepository<Domain.Entities.Game> repository, IRepositoryAggregate repositoryAggregate) 
+            : base(repository, repositoryAggregate) { }
 
         #region Implementation of IUpdateGameTitleRequest
 
@@ -22,19 +20,19 @@ namespace OnionPattern.Service.Requests.Game
             var gameResponse = new GameResponseDto();
             try
             {
-                Logger.Information($"Updating GameId: [{input.Id}] to new title [{input.NewTitle}]...");
+                Log.Logger.Information($"Updating GameId: [{input.Id}] to new title [{input.NewTitle}]...");
 
                 if (input.Id <= 0)
                 {
                     var exception = new ArgumentException($"{nameof(input.Id)} must be 1 or more.");
-                    Logger.Error(exception.Message);
+                    Log.Logger.Error(exception.Message);
                     HandleErrors(gameResponse, exception);
                     return gameResponse;
                 }
                 if (string.IsNullOrWhiteSpace(input.NewTitle))
                 {
                     var exception = new ArgumentException($"{nameof(input.NewTitle)} cannot be empty.");
-                    Logger.Error(exception.Message);
+                    Log.Logger.Error(exception.Message);
                     HandleErrors(gameResponse, exception);
                     return gameResponse;
                 }
@@ -43,7 +41,7 @@ namespace OnionPattern.Service.Requests.Game
                 if (gameToUpdate == null)
                 {
                     var exception = new Exception($"Failed to find game for id: [{input.Id}].");
-                    Logger.Error(exception.Message);
+                    Log.Logger.Error(exception.Message);
                     HandleErrors(gameResponse, exception, 404);
                     return gameResponse;
                 }
@@ -53,11 +51,11 @@ namespace OnionPattern.Service.Requests.Game
                 gameResponse = Mapper.Map<Domain.Entities.Game, GameResponseDto>(updatedGame);
                 gameResponse.StatusCode = 200;
 
-                Logger.Information($"Successful updated GameId: [{input.Id}] to title [{input.NewTitle}].");
+                Log.Logger.Information($"Successful updated GameId: [{input.Id}] to title [{input.NewTitle}].");
             }
             catch (Exception x)
             {
-                Logger.Error($"Failed to update title to [{input.NewTitle}] for GameId: [{input.Id}].");
+                Log.Logger.Error($"Failed to update title to [{input.NewTitle}] for GameId: [{input.Id}].");
                 HandleErrors(gameResponse, x);
             }
             return gameResponse;

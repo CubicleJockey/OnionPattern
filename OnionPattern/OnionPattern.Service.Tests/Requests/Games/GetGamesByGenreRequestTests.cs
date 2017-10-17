@@ -26,7 +26,7 @@ namespace OnionPattern.Service.Tests.Requests.Games
             [TestMethod]
             public void Inheritence()
             {
-                var request = new GetGamesByGenreRequest(FakeRepository, FakeRepositoryAggregate, FakeLogger);
+                var request = new GetGamesByGenreRequest(FakeRepository, FakeRepositoryAggregate);
 
                 request.Should().NotBeNull();
                 request.Should().BeAssignableTo<BaseServiceRequest<Game>>();

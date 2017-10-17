@@ -9,8 +9,8 @@ namespace OnionPattern.Service.Requests.Platform
 {
     public class GetAllPlatformsRequest : BaseServiceRequest<Domain.Entities.Platform>, IGetAllPlatformsRequest
     {
-        public GetAllPlatformsRequest(IRepository<Domain.Entities.Platform> repository, IRepositoryAggregate repositoryAggregate, ILogger logger) 
-            : base(repository, repositoryAggregate, logger) {}
+        public GetAllPlatformsRequest(IRepository<Domain.Entities.Platform> repository, IRepositoryAggregate repositoryAggregate) 
+            : base(repository, repositoryAggregate) {}
 
         #region Implementation of IGetAllPlatformsRequest
 
@@ -24,7 +24,7 @@ namespace OnionPattern.Service.Requests.Platform
                 if (platforms == null || !platforms.Any())
                 {
                     var exception = new Exception("No Platforms Returned.");
-                    Logger.Error(exception.Message);
+                    Log.Logger.Error(exception.Message);
                     HandleErrors(platformListResponse, exception, 404);
                 }
                 else

@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OnionPattern.Domain.DataTransferObjects.Game;
 using OnionPattern.Domain.Errors;
+using OnionPattern.Domain.Interfaces;
 
 namespace OnionPattern.Domain.Tests.DataTransferObjects.Game
 {

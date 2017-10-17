@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OnionPattern.Domain.DataTransferObjects.Platform
+namespace OnionPattern.Domain.Interfaces
 {
     public interface IPlatform
     {

@@ -6,9 +6,8 @@ using OnionPattern.Service.Requests.Game.Async;
 
 namespace OnionPattern.Service.Tests.Requests.Games.Async
 {
-    public class GetAllGamesRequestAsyncTests
+    public class UpdateGameTitleRequestAsyncTests
     {
-
         [TestClass]
         public class ConstructorTests : TestBaseAsync<Game>
         {
@@ -27,28 +26,12 @@ namespace OnionPattern.Service.Tests.Requests.Games.Async
             [TestMethod]
             public void Inheritence()
             {
-                var request = new GetAllGamesRequestAsync(FakeRepositoryAsync, FakeRepositoryAsyncAggregate);
+                var request = new UpdateGameTitleRequestAsync(FakeRepositoryAsync, FakeRepositoryAsyncAggregate);
 
                 request.Should().NotBeNull();
-                request.Should().BeAssignableTo<IGetAllGamesRequestAsync>();
                 request.Should().BeAssignableTo<BaseServiceRequestAsync<Game>>();
-                request.Should().BeOfType<GetAllGamesRequestAsync>();
-            }
-        }
-
-        [TestClass]
-        public class MethodTests : TestBaseAsync<Game>
-        {
-            [TestInitialize]
-            public void TestInitialize()
-            {
-                InitializeFakes();
-            }
-
-            [TestCleanup]
-            public void TestCleanup()
-            {
-                ClearFakes();
+                request.Should().BeAssignableTo<IUpdateGameTitleRequestAsync>();
+                request.Should().BeOfType<UpdateGameTitleRequestAsync>();
             }
         }
     }

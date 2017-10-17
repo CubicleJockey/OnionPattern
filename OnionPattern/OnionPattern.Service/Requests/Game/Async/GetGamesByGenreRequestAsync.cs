@@ -1,28 +1,29 @@
-﻿using System;
-using System.Linq;
-using AutoMapper;
+﻿using AutoMapper;
 using OnionPattern.Domain.DataTransferObjects.Game;
 using OnionPattern.Domain.Repository;
-using OnionPattern.Domain.Services.Requests.Game;
+using OnionPattern.Domain.Services.Requests.Game.Async;
 using Serilog;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace OnionPattern.Service.Requests.Game
+namespace OnionPattern.Service.Requests.Game.Async
 {
-    public class GetGamesByGenreRequest : BaseServiceRequest<Domain.Entities.Game>, IGetGamesByGenreRequest
+    public class GetGamesByGenreRequestAsync : BaseServiceRequestAsync<Domain.Entities.Game>, IGetGamesByGenreRequestAsync
     {
-        public GetGamesByGenreRequest(IRepository<Domain.Entities.Game> repository, IRepositoryAggregate repositoryAggregate) 
+        public GetGamesByGenreRequestAsync(IRepositoryAsync<Domain.Entities.Game> repository, IRepositoryAsyncAggregate repositoryAggregate) 
             : base(repository, repositoryAggregate) { }
 
-        #region Implementation of IGetGamesByGenreRequest
+        #region Implementation of IGetGamesByGenreRequestAsync
 
-        public GameListResponseDto Execute(string genre)
+        public async Task<GameListResponseDto> ExecuteAsync(string genre)
         {
             var gameListResponse = new GameListResponseDto();
             try
             {
                 Log.Logger.Information($"Retrieving game Genre : [{genre}]");
 
-                var games = Repository.Find(g => string.Equals(g.Genre, genre, StringComparison.CurrentCultureIgnoreCase));
+                var games = (await Repository.FindAsync(g => string.Equals(g.Genre, genre, StringComparison.CurrentCultureIgnoreCase)))?.ToArray();
                 if (games == null)
                 {
                     var exception = new Exception($"No game found by Genre : [{genre}].");

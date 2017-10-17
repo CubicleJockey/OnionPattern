@@ -18,7 +18,7 @@ namespace OnionPattern.Service.Requests.Game.Async
 
         public async Task<GameResponseDto> ExecuteAsync(UpdateGameTitleInputDto input)
         {
-            Log.Logger.Information($"Updating title for game with id: [{input.Id}]...");
+            Log.Information($"Updating title for game with id: [{input.Id}]...");
             var gameResponse = new GameResponseDto();
             try
             {
@@ -33,7 +33,7 @@ namespace OnionPattern.Service.Requests.Game.Async
                 if (gameToUpdate == null)
                 {
                     var exception = new Exception($"Update failed: No Game found for Id: [{input.Id}].");
-                    Log.Logger.Error(exception.Message);
+                    Log.Error(exception.Message);
                     HandleErrors(gameResponse, exception, 404);
                 }
                 else
@@ -45,7 +45,7 @@ namespace OnionPattern.Service.Requests.Game.Async
             }
             catch (Exception x)
             {
-                Log.Logger.Error(x.Message);
+                Log.Error(x.Message);
                 HandleErrors(gameResponse, x);
             }
             return gameResponse;

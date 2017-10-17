@@ -19,7 +19,7 @@ namespace OnionPattern.Service.Requests.Game
             var gameResponse = new GameResponseDto();
             try
             {
-                Log.Logger.Information($"Deleting Game by Id:[{id}]...");
+                Log.Information($"Deleting Game by Id:[{id}]...");
                 var toDelete = Repository.SingleOrDefault(game => game.Id == id);
                 if (toDelete == null)
                 {
@@ -34,24 +34,24 @@ namespace OnionPattern.Service.Requests.Game
                     var gamePlatforms = RepositoryAggregate.GamePlatforms.Find(gp => gp.Id == id)?.ToArray();
                     if(gamePlatforms != null && gamePlatforms.Any())
                     {
-                        Log.Logger.Information($"Deleting [{gamePlatforms.Length}] GamePlatforms for Game: [{toDelete.Name}]...");
+                        Log.Information($"Deleting [{gamePlatforms.Length}] GamePlatforms for Game: [{toDelete.Name}]...");
                         foreach (var gp in gamePlatforms)
                         {
                             RepositoryAggregate.GamePlatforms.Delete(gp);
                         }
-                        Log.Logger.Information($"Finished deleting GamePlatform enteries. Procceeding to delete Game: {toDelete.Name} with Id: [{toDelete.Id}].");
+                        Log.Information($"Finished deleting GamePlatform enteries. Procceeding to delete Game: {toDelete.Name} with Id: [{toDelete.Id}].");
                     }
 
                     #endregion Delete GamePlatform References
 
                     Repository.Delete(toDelete);
                     gameResponse.StatusCode = 200;
-                    Log.Logger.Information($"Deleted Game [{toDelete.Name}] for Id:[{toDelete.Id}].");
+                    Log.Information($"Deleted Game [{toDelete.Name}] for Id:[{toDelete.Id}].");
                 }
             }
             catch (Exception x)
             {
-                Log.Logger.Error($"Failed to Delete Game. [{x.Message}].");
+                Log.Error($"Failed to Delete Game. [{x.Message}].");
                 HandleErrors(gameResponse, x);
             }
             return gameResponse;

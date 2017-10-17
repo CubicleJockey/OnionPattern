@@ -14,18 +14,18 @@ namespace OnionPattern.Api.Tests.Controllers
         [TestClass]
         public class ConstructorTests
         {
-            private IGetAllPlatformsRequest fakeAllPlatformsRequest;
+            private IPlatformRequestAggregate fakePlatformRequestAggregate;
 
             [TestInitialize]
             public void TestInitalize()
             {
-                fakeAllPlatformsRequest = A.Fake<IGetAllPlatformsRequest>();
+                fakePlatformRequestAggregate = A.Fake<IPlatformRequestAggregate>();
             }
 
             [TestCleanup]
             public void TestCleanup()
             {
-                Fake.ClearConfiguration(fakeAllPlatformsRequest);
+                Fake.ClearConfiguration(fakePlatformRequestAggregate);
             }
 
             [TestMethod]
@@ -34,13 +34,13 @@ namespace OnionPattern.Api.Tests.Controllers
                 Action ctor = () => new PlatformsController(null);
 
                 ctor.ShouldThrow<ArgumentNullException>()
-                    .WithMessage($"Value cannot be null.{Environment.NewLine}Parameter name: getAllPlatformsRequest cannot be null.");
+                    .WithMessage($"Value cannot be null.{Environment.NewLine}Parameter name: requestAggregate cannot be null.");
             }
 
             [TestMethod]
             public void Inheritence()
             {
-                var controller = new PlatformsController(fakeAllPlatformsRequest);
+                var controller = new PlatformsController(fakePlatformRequestAggregate);
 
                 controller.Should().NotBeNull();
                 controller.Should().BeAssignableTo<Controller>();

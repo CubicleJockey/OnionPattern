@@ -1,9 +1,10 @@
 ﻿using System;
+using OnionPattern.Domain.Errors;
 using OnionPattern.Domain.Interfaces;
 
 namespace OnionPattern.Domain.DataTransferObjects.Platform
 {
-    public class PlatformResponseDto : IPlatform
+    public class PlatformResponseDto : ErrorDetail, IPlatform
     {
         #region Implementation of IPlatform
 

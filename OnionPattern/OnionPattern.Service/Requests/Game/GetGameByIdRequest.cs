@@ -19,13 +19,13 @@ namespace OnionPattern.Service.Requests.Game
             var gameResponse = new GameResponseDto();
             try
             {
-                Log.Logger.Information($"Retrieving game title : [{id}]");
+                Log.Information($"Retrieving game title : [{id}]");
 
                 var game = Repository.SingleOrDefault(g => g.Id == id);
                 if (game == null)
                 {
                     var exception = new Exception($"No game found by title : [{id}].");
-                    Log.Logger.Error(exception.Message);
+                    Log.Error(exception.Message);
                     HandleErrors(gameResponse, exception, 404);
                 }
                 else
@@ -37,7 +37,7 @@ namespace OnionPattern.Service.Requests.Game
             }
             catch (Exception x)
             {
-                Log.Logger.Error($"Failed to get Game for title [{id}].");
+                Log.Error($"Failed to get Game for title [{id}].");
                 HandleErrors(gameResponse, x);
             }
             return gameResponse;

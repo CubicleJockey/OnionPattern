@@ -20,13 +20,13 @@ namespace OnionPattern.Service.Requests.Game.Async
             var gameResponse = new GameResponseDto();
             try
             {
-                Log.Logger.Information($"Retrieving game title : [{id}]...");
+                Log.Information($"Retrieving game title : [{id}]...");
 
                 var game = await Repository.SingleOrDefaultAsync(g => g.Id == id);
                 if (game == null)
                 {
                     var exception = new Exception($"No game found by title : [{id}].");
-                    Log.Logger.Error(exception.Message);
+                    Log.Error(exception.Message);
                     HandleErrors(gameResponse, exception, 404);
                 }
                 else
@@ -34,12 +34,12 @@ namespace OnionPattern.Service.Requests.Game.Async
                     //NOTE: Not sure if I want to do something like AutoMapper for this example.
                     gameResponse = Mapper.Map<Domain.Entities.Game, GameResponseDto>(game);
                     gameResponse.StatusCode = 200;
-                    Log.Logger.Information($"Retrieved [{gameResponse.Name}] for Id: [{id}].");
+                    Log.Information($"Retrieved [{gameResponse.Name}] for Id: [{id}].");
                 }
             }
             catch (Exception x)
             {
-                Log.Logger.Error($"Failed to get Game for title [{id}].");
+                Log.Error($"Failed to get Game for title [{id}].");
                 HandleErrors(gameResponse, x);
             }
             return gameResponse;

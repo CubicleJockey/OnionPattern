@@ -3,6 +3,7 @@ using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OnionPattern.Domain.Repository;
 using System;
+using OnionPattern.Service.Tests.Requests.Mocks;
 using Serilog;
 
 namespace OnionPattern.Service.Tests.Requests

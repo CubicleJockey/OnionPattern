@@ -1,7 +1,7 @@
 ﻿using OnionPattern.Domain.Repository;
 using Serilog;
 
-namespace OnionPattern.Service.Tests.Requests
+namespace OnionPattern.Service.Tests.Requests.Mocks
 {
     public class MockBaseRequest : BaseServiceRequest<FakeEntity>
     {

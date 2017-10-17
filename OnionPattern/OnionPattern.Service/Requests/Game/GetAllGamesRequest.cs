@@ -17,7 +17,7 @@ namespace OnionPattern.Service.Requests.Game
 
         public GameListResponseDto Execute()
         {
-            Log.Logger.Information("Retrieving Games List...");
+            Log.Information("Retrieving Games List...");
             var gameListResponse = new GameListResponseDto();
             try
             {
@@ -26,7 +26,7 @@ namespace OnionPattern.Service.Requests.Game
                 if (games == null || !games.Any())
                 {
                     var exception = new Exception("No Games Returned.");
-                    Log.Logger.Error(exception.Message);
+                    Log.Error(exception.Message);
                     HandleErrors(gameListResponse, exception, 404);
                 }
                 else
@@ -38,12 +38,12 @@ namespace OnionPattern.Service.Requests.Game
                         Games = games,
                         StatusCode = 200
                     };
-                    Log.Logger.Information($"Retrieved [{gameListResponse.Games.Count()}] Games.");
+                    Log.Information($"Retrieved [{gameListResponse.Games.Count()}] Games.");
                 }
             }
             catch (Exception x)
             {
-                Log.Logger.Error($"Failed to get All Games List. {x.Message}");
+                Log.Error($"Failed to get All Games List. {x.Message}");
                 HandleErrors(gameListResponse, x);
             }
             return gameListResponse;

@@ -16,7 +16,7 @@ namespace OnionPattern.Service.Requests.Platform
 
         public PlatformListResponseDto Execute()
         {
-            Log.Logger.Information("Retrieving Platform List...");
+            Log.Information("Retrieving Platform List...");
             var platformListResponse = new PlatformListResponseDto();
             try
             {
@@ -24,19 +24,19 @@ namespace OnionPattern.Service.Requests.Platform
                 if (platforms == null || !platforms.Any())
                 {
                     var exception = new Exception("No Platforms Returned.");
-                    Log.Logger.Error(exception.Message);
+                    Log.Error(exception.Message);
                     HandleErrors(platformListResponse, exception, 404);
                 }
                 else
                 {
                     platformListResponse.Platforms = platforms;
                     platformListResponse.StatusCode = 200;
-                    Log.Logger.Information($"Retrieved [{platformListResponse.Platforms.Count()}] Platforms.");
+                    Log.Information($"Retrieved [{platformListResponse.Platforms.Count()}] Platforms.");
                 }
             }
             catch (Exception x)
             {
-                Log.Logger.Error($"Failed to get Platforms List. [{x.Message}].");
+                Log.Error($"Failed to get Platforms List. [{x.Message}].");
                 HandleErrors(platformListResponse, x);
             }
             return platformListResponse;

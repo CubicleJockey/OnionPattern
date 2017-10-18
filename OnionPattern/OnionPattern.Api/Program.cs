@@ -6,7 +6,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using OnionPattern.Api.StartupConfigurations;
 using OnionPattern.Domain.Constants;
-using Serilog;
 
 namespace OnionPattern.Api
 {

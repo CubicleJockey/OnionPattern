@@ -11,7 +11,6 @@ using OnionPattern.DependencyInjection;
 using OnionPattern.DependencyInjection.Data;
 using OnionPattern.Domain.Configurations;
 using OnionPattern.Domain.Constants;
-using Serilog;
 
 namespace OnionPattern.Api
 {

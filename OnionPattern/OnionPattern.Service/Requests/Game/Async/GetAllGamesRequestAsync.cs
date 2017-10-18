@@ -15,7 +15,7 @@ namespace OnionPattern.Service.Requests.Game.Async
 
         #region Implementation of IGetAllGamesRequestAsync
 
-        public async Task<GameListResponseDto> Execute()
+        public async Task<GameListResponseDto> ExecuteAsync()
         {
             Log.Information("Retrieving Games List (async)...");
             var gameListResponse = new GameListResponseDto();

@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using OnionPattern.Domain.Services.Requests.Platform;
-using System;
 
-namespace OnionPattern.Api.Controllers
+namespace OnionPattern.Api.Controllers.Platform
 {
     /// <inheritdoc />
     /// <summary>
@@ -29,6 +29,18 @@ namespace OnionPattern.Api.Controllers
         public IActionResult Get()
         {
             return ExecuteAndHandleRequest(() => requestAggregate.GetAllPlatformsRequest.Execute());
+        }
+
+        /// <summary>
+        /// Get A Platform by it's id.
+        /// </summary>
+        /// <param name="id">Id of the Platform</param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("{id:int}")]
+        public IActionResult Get(int id)
+        {
+            return ExecuteAndHandleRequest(() => requestAggregate.GetPlatformByIdRequest.Execute(id));
         }
     }
 }

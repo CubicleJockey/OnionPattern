@@ -1,12 +1,13 @@
-﻿using FakeItEasy;
+﻿using System;
+using FakeItEasy;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OnionPattern.Api.Controllers;
+using OnionPattern.Api.Controllers.Platform;
 using OnionPattern.Domain.Services.Requests.Platform;
-using System;
 
-namespace OnionPattern.Api.Tests.Controllers
+namespace OnionPattern.Api.Tests.Controllers.Platform
 {
     public class PlatformControllerTests
     {

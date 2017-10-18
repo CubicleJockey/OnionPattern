@@ -3,9 +3,10 @@ using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OnionPattern.Api.Controllers;
+using OnionPattern.Api.Controllers.Platform;
 using OnionPattern.Domain.Services.Requests.Platform.Async;
 
-namespace OnionPattern.Api.Tests.Controllers
+namespace OnionPattern.Api.Tests.Controllers.Platform
 {
     public class PlatformAsyncControllerTests
     {

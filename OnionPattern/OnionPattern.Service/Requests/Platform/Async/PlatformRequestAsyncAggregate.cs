@@ -12,11 +12,12 @@ namespace OnionPattern.Service.Requests.Platform.Async
         #region Implementation of IPlatformRequestAsyncAggregate
 
         private IGetAllPlatformsRequestAsync getAllPlatformsRequestAsync;
-        public IGetAllPlatformsRequestAsync GetAllPlatformsRequestAsync => getAllPlatformsRequestAsync 
-                                                                           ?? (getAllPlatformsRequestAsync = new GetAllPlatformsRequestAsync(RepositoryAsync, RepositoryAsyncAggregate));
+        public IGetAllPlatformsRequestAsync GetAllPlatformsRequestAsync => getAllPlatformsRequestAsync ?? 
+                                                                          (getAllPlatformsRequestAsync = new GetAllPlatformsRequestAsync(RepositoryAsync, RepositoryAsyncAggregate));
 
         private IGetPlatformByIdRequestAsync getPlatformByIdRequestAsync;
-        public IGetPlatformByIdRequestAsync GetPlatformByIdRequestAsync => throw new NotImplementedException();
+        public IGetPlatformByIdRequestAsync GetPlatformByIdRequestAsync => getPlatformByIdRequestAsync ??
+                                                                          (getPlatformByIdRequestAsync = new GetPlatformByIdRequestAsync(RepositoryAsync, RepositoryAsyncAggregate));
 
         private IUpdatePlatformNameRequestAsync updatePlatformNameRequestAsync;
         public IUpdatePlatformNameRequestAsync UpdatePlatformNameRequestAsync => throw new NotImplementedException();

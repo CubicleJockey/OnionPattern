@@ -5,6 +5,6 @@ namespace OnionPattern.Domain.Services.Requests.Game.Async
 {
     public interface IGetGameByIdRequestAsync
     {
-        Task<GameResponseDto> Execute(int id);
+        Task<GameResponseDto> ExecuteAsync(int id);
     }
 }

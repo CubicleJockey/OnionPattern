@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using OnionPattern.Domain.DataTransferObjects.Game.Input;
 using OnionPattern.Domain.Services.Requests.Game;
-using System;
 
-namespace OnionPattern.Api.Controllers
+namespace OnionPattern.Api.Controllers.Game
 {
     /// <inheritdoc />
     /// <summary>

@@ -1,10 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using OnionPattern.Domain.Services.Requests.Game.Async;
-using System;
+﻿using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using OnionPattern.Domain.DataTransferObjects.Game.Input;
+using OnionPattern.Domain.Services.Requests.Game.Async;
 
-namespace OnionPattern.Api.Controllers
+namespace OnionPattern.Api.Controllers.Game
 {
     /// <inheritdoc />
     /// <summary>
@@ -32,7 +32,7 @@ namespace OnionPattern.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            return await ExecuteAndHandleRequestAsync(() => gameRequestAggregateAsync.GetAllGamesRequestAsync.Execute());
+            return await ExecuteAndHandleRequestAsync(() => gameRequestAggregateAsync.GetAllGamesRequestAsync.ExecuteAsync());
         }
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace OnionPattern.Api.Controllers
         [Route("{id}")]
         public async Task<IActionResult> Get(int id)
         {
-            return await ExecuteAndHandleRequestAsync(() => gameRequestAggregateAsync.GetGameByIdRequestAsync.Execute(id));
+            return await ExecuteAndHandleRequestAsync(() => gameRequestAggregateAsync.GetGameByIdRequestAsync.ExecuteAsync(id));
         }
 
         /// <summary>

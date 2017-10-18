@@ -16,7 +16,7 @@ namespace OnionPattern.Service.Requests.Platform
         public IGetAllPlatformsRequest GetAllPlatformsRequest => getAllPlatformsRequest ?? (getAllPlatformsRequest = new GetAllPlatformsRequest(Repository, RepositoryAggregate));
 
         private IGetPlatformByIdRequest getPlatformByIdRequest;
-        public IGetPlatformByIdRequest GetPlatformByIdRequest => throw new NotImplementedException();
+        public IGetPlatformByIdRequest GetPlatformByIdRequest => getPlatformByIdRequest ?? (getPlatformByIdRequest = new GetPlatformByIdRequest(Repository, RepositoryAggregate));
 
         private IUpdatePlatformNameRequest updatePlatformNameRequest;
         public IUpdatePlatformNameRequest UpdatePlatformNameRequest => throw new NotImplementedException();

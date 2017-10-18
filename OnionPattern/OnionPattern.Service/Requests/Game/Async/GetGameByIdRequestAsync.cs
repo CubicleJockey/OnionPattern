@@ -15,7 +15,7 @@ namespace OnionPattern.Service.Requests.Game.Async
 
         #region Implementation of IGetGameByIdRequestAsync
 
-        public async Task<GameResponseDto> Execute(int id)
+        public async Task<GameResponseDto> ExecuteAsync(int id)
         {
             var gameResponse = new GameResponseDto();
             try

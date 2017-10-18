@@ -15,7 +15,7 @@ namespace OnionPattern.Service.Requests.Platform.Async
 
         #region Implementation of IGetAllPlatformsRequestAsync
 
-        public async Task<PlatformListResponseDto> Execute()
+        public async Task<PlatformListResponseDto> ExecuteAsync()
         {
             Log.Information("Retrieving Platform List...");
             var platformListResponse = new PlatformListResponseDto();

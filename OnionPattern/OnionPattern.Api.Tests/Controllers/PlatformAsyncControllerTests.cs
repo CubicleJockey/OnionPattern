@@ -12,24 +12,24 @@ namespace OnionPattern.Api.Tests.Controllers
         [TestClass]
         public class ConstructorTests
         {
-            private IGetAllPlatformsRequestAsync fakeAllPlatformsRequest;
+            private IPlatformRequestAsyncAggregate fakePlatformRequestAsyncAggregate;
 
             [TestInitialize]
             public void TestInitalize()
             {
-                fakeAllPlatformsRequest = A.Fake<IGetAllPlatformsRequestAsync>();
+                fakePlatformRequestAsyncAggregate = A.Fake<IPlatformRequestAsyncAggregate>();
             }
 
             [TestCleanup]
             public void TestCleanup()
             {
-                Fake.ClearConfiguration(fakeAllPlatformsRequest);
+                Fake.ClearConfiguration(fakePlatformRequestAsyncAggregate);
             }
 
             [TestMethod]
             public void Inheritence()
             {
-                var controller = new PlatfomsAsyncController(fakeAllPlatformsRequest);
+                var controller = new PlatfomsAsyncController(fakePlatformRequestAsyncAggregate);
 
                 controller.Should().NotBeNull();
                 controller.Should().BeAssignableTo<Controller>();

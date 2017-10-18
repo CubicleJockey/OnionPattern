@@ -47,10 +47,10 @@ namespace OnionPattern.DependencyInjection.Configurations
             #endregion Non-Async
 
             #region Async
-            services.AddTransient<IGetAllPlatformsRequestAsync>(context =>
+            services.AddTransient<IPlatformRequestAsyncAggregate>(context =>
             {
                 var asyncDependencies = GetRequestAsyncDependencies<Platform>(context);
-                return new GetAllPlatformsRequestAsync(asyncDependencies.Repository, asyncDependencies.RepositoryAggregate);
+                return new PlatformRequestAsyncAggregate(asyncDependencies.Repository, asyncDependencies.RepositoryAggregate);
             });
             #endregion Async
         }

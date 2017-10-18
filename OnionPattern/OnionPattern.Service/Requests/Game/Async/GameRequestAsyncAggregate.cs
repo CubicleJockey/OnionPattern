@@ -5,9 +5,6 @@ namespace OnionPattern.Service.Requests.Game.Async
 {
     public class GameRequestAsyncAggregate : BaseRequestAsyncAggregate<Domain.Entities.Game>, IGameRequestAggregateAsync
     {
-        private readonly IRepositoryAsync<Domain.Entities.Game> repositoryAsync;
-        private readonly IRepositoryAsyncAggregate repositoryAsyncAggregate;
-
         public GameRequestAsyncAggregate(IRepositoryAsync<Domain.Entities.Game> repositoryAsync, IRepositoryAsyncAggregate repositoryAsyncAggregate)
             : base(repositoryAsync, repositoryAsyncAggregate) { }
 
@@ -15,28 +12,27 @@ namespace OnionPattern.Service.Requests.Game.Async
 
         private ICreateGameRequestAsync createGameRequestAsync;
         public ICreateGameRequestAsync CreateGameRequestAsync => createGameRequestAsync ??
-                                                                 (createGameRequestAsync = new CreateGameRequestAsync(repositoryAsync, repositoryAsyncAggregate));
+                                                                 (createGameRequestAsync = new CreateGameRequestAsync(RepositoryAsync, RepositoryAsyncAggregate));
 
         private IDeleteGameByIdRequestAsync deleteGameByIdRequestAsync;
         public IDeleteGameByIdRequestAsync DeleteGameByIdRequestAsync => deleteGameByIdRequestAsync ??
-                                                                         (deleteGameByIdRequestAsync = new DeleteGameByIdRequestAsync(repositoryAsync, repositoryAsyncAggregate));
+                                                                         (deleteGameByIdRequestAsync = new DeleteGameByIdRequestAsync(RepositoryAsync, RepositoryAsyncAggregate));
 
         private IGetAllGamesRequestAsync getAllGamesRequestAsync;
-
         public IGetAllGamesRequestAsync GetAllGamesRequestAsync => getAllGamesRequestAsync ??
-                                                                   (getAllGamesRequestAsync = new GetAllGamesRequestAsync(repositoryAsync, repositoryAsyncAggregate));
+                                                                   (getAllGamesRequestAsync = new GetAllGamesRequestAsync(RepositoryAsync, RepositoryAsyncAggregate));
 
         private IGetGameByIdRequestAsync getGameByIdRequestAsync;
         public IGetGameByIdRequestAsync GetGameByIdRequestAsync => getGameByIdRequestAsync ??
-                                                                   (getGameByIdRequestAsync = new GetGameByIdRequestAsync(repositoryAsync, repositoryAsyncAggregate));
+                                                                   (getGameByIdRequestAsync = new GetGameByIdRequestAsync(RepositoryAsync, RepositoryAsyncAggregate));
 
         private IGetGamesByGenreRequestAsync getGamesByGenreRequestAsync;
         public IGetGamesByGenreRequestAsync GetGamesByGenreRequestAsync => getGamesByGenreRequestAsync ??
-                                                                          (getGamesByGenreRequestAsync = new GetGamesByGenreRequestAsync(repositoryAsync, repositoryAsyncAggregate));
+                                                                          (getGamesByGenreRequestAsync = new GetGamesByGenreRequestAsync(RepositoryAsync, RepositoryAsyncAggregate));
 
         private IUpdateGameTitleRequestAsync updateGameTitleRequestAsync;
         public IUpdateGameTitleRequestAsync UpdateGameTitleRequestAsync => updateGameTitleRequestAsync ?? 
-                                                                          (updateGameTitleRequestAsync = new UpdateGameTitleRequestAsync(repositoryAsync, repositoryAsyncAggregate));
+                                                                          (updateGameTitleRequestAsync = new UpdateGameTitleRequestAsync(RepositoryAsync, RepositoryAsyncAggregate));
 
         #endregion
     }

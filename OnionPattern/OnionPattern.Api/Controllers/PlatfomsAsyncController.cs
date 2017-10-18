@@ -13,14 +13,14 @@ namespace OnionPattern.Api.Controllers
     [Route("api/v1/[controller]")]
     public class PlatfomsAsyncController : BaseAsyncController
     {
-        private IGetAllPlatformsRequestAsync GetAllPlatformsRequest { get; }
+        private IPlatformRequestAsyncAggregate requestAsyncAggregate { get; }
 
         /// <summary>
         /// Ctor
         /// </summary>
-        public PlatfomsAsyncController(IGetAllPlatformsRequestAsync getAllPlatformsRequest)
+        public PlatfomsAsyncController(IPlatformRequestAsyncAggregate requestAsyncAggregate)
         {
-            GetAllPlatformsRequest = getAllPlatformsRequest ?? throw new ArgumentNullException($"{nameof(getAllPlatformsRequest)} cannot be null.");
+            this.requestAsyncAggregate = requestAsyncAggregate ?? throw new ArgumentNullException($"{nameof(requestAsyncAggregate)} cannot be null.");
         }
 
         /// <summary>
@@ -30,7 +30,7 @@ namespace OnionPattern.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            return await ExecuteAndHandleRequestAsync(() => GetAllPlatformsRequest.Execute());
+            return await ExecuteAndHandleRequestAsync(() => requestAsyncAggregate.GetAllPlatformsRequestAsync.Execute());
         }
     }
 }

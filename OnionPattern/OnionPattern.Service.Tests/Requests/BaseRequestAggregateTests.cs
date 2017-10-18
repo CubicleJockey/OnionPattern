@@ -1,42 +1,31 @@
-﻿using FakeItEasy;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using OnionPattern.Domain.Repository;
-using System;
 using OnionPattern.Service.Tests.Requests.Mocks;
-using Serilog;
+using System;
 
 namespace OnionPattern.Service.Tests.Requests
 {
-    public class BaseRequestTests
+    public class BaseRequestAggregateTests
     {
         [TestClass]
-        public class ConstructorTests
+        public class ConstructorTests : TestBase<FakeEntity>
         {
-            private IRepository<FakeEntity> fakeRepository;
-            private IRepositoryAggregate fakeRepositoryAggregate;
-            private ILogger fakeLogger;
-
-            [TestInitialize]
+           [TestInitialize]
             public void TestInitialize()
             {
-                fakeRepository = A.Fake<IRepository<FakeEntity>>();
-                fakeRepositoryAggregate = A.Fake<IRepositoryAggregate>();
-                fakeLogger = A.Fake<ILogger>();
+                InitializeFakes();
             }
 
             [TestCleanup]
             public void TestCleanup()
             {
-                Fake.ClearConfiguration(fakeRepository);
-                Fake.ClearConfiguration(fakeRepositoryAggregate);
-                Fake.ClearConfiguration(fakeLogger);
+               ClearFakes();
             }
 
             [TestMethod]
             public void RepositoryIsNull()
             {
-                Action ctor = () => new MockBaseRequest(null, fakeRepositoryAggregate, fakeLogger);
+                Action ctor = () => new MockBaseRequest(null, FakeRepositoryAggregate);
                 ctor.ShouldThrow<ArgumentNullException>()
                     .WithMessage($"Value cannot be null.{Environment.NewLine}Parameter name: repository cannot be null.");
             }
@@ -44,7 +33,7 @@ namespace OnionPattern.Service.Tests.Requests
             [TestMethod]
             public void RepositoryAggregateIsNull()
             {
-                Action ctor = () => new MockBaseRequest(fakeRepository, null, fakeLogger);
+                Action ctor = () => new MockBaseRequest(FakeRepository, null);
                 ctor.ShouldThrow<ArgumentNullException>()
                     .WithMessage($"Value cannot be null.{Environment.NewLine}Parameter name: repositoryAggregate cannot be null.");
             }
@@ -52,7 +41,7 @@ namespace OnionPattern.Service.Tests.Requests
             [TestMethod]
             public void IsValid()
             {
-                var baseRequest = new MockBaseRequest(fakeRepository, fakeRepositoryAggregate, fakeLogger);
+                var baseRequest = new MockBaseRequest(FakeRepository, FakeRepositoryAggregate);
 
                 baseRequest.Should().NotBeNull();
                 baseRequest.Should().BeAssignableTo<BaseServiceRequest<FakeEntity>>();

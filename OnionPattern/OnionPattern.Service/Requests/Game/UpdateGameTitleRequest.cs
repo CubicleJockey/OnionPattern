@@ -20,19 +20,19 @@ namespace OnionPattern.Service.Requests.Game
             var gameResponse = new GameResponseDto();
             try
             {
-                Log.Information($"Updating GameId: [{input.Id}] to new title [{input.NewTitle}]...");
+                Log.Information("Updating GameId: [{Id}] to new title [{NewTitle}]...", input.Id, input.NewTitle);
 
                 if (input.Id <= 0)
                 {
                     var exception = new ArgumentException($"{nameof(input.Id)} must be 1 or more.");
-                    Log.Error(exception.Message);
+                    Log.Error("{Message}", exception.Message);
                     HandleErrors(gameResponse, exception);
                     return gameResponse;
                 }
                 if (string.IsNullOrWhiteSpace(input.NewTitle))
                 {
                     var exception = new ArgumentException($"{nameof(input.NewTitle)} cannot be empty.");
-                    Log.Error(exception.Message);
+                    Log.Error("{Message}", exception.Message);
                     HandleErrors(gameResponse, exception);
                     return gameResponse;
                 }
@@ -41,7 +41,7 @@ namespace OnionPattern.Service.Requests.Game
                 if (gameToUpdate == null)
                 {
                     var exception = new Exception($"Failed to find game for id: [{input.Id}].");
-                    Log.Error(exception.Message);
+                    Log.Error("{Message}", exception.Message);
                     HandleErrors(gameResponse, exception, 404);
                     return gameResponse;
                 }
@@ -51,11 +51,11 @@ namespace OnionPattern.Service.Requests.Game
                 gameResponse = Mapper.Map<Domain.Entities.Game, GameResponseDto>(updatedGame);
                 gameResponse.StatusCode = 200;
 
-                Log.Information($"Successful updated GameId: [{input.Id}] to title [{input.NewTitle}].");
+                Log.Information("Successful updated GameId: [{Id}] to title [{NewTitle}].", input.Id, input.NewTitle);
             }
             catch (Exception x)
             {
-                Log.Error($"Failed to update title to [{input.NewTitle}] for GameId: [{input.Id}].");
+                Log.Error("Failed to update title to [{NewTitle}] for GameId: [{Id}].", input.NewTitle, input.Id);
                 HandleErrors(gameResponse, x);
             }
             return gameResponse;

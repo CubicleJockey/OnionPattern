@@ -19,7 +19,7 @@ namespace OnionPattern.Service.Requests.Game
             var gameResponse = new GameResponseDto();
             try
             {
-                Log.Information($"Deleting Game by Id:[{id}]...");
+                Log.Information("Deleting Game by Id:[{Id}]...", id);
                 var toDelete = Repository.SingleOrDefault(game => game.Id == id);
                 if (toDelete == null)
                 {
@@ -30,28 +30,28 @@ namespace OnionPattern.Service.Requests.Game
                 {
                     #region Delete GamePlatform References
 
-                    Log.Information($"Retrieving GamePlatoforms for Game: [{toDelete.Name}] with Id: [{toDelete.Id}].");
+                    Log.Information("Retrieving GamePlatoforms for Game: [{Name}] with Id: [{Id}].", toDelete.Name, toDelete.Id);
                     var gamePlatforms = RepositoryAggregate.GamePlatforms.Find(gp => gp.Id == id)?.ToArray();
                     if(gamePlatforms != null && gamePlatforms.Any())
                     {
-                        Log.Information($"Deleting [{gamePlatforms.Length}] GamePlatforms for Game: [{toDelete.Name}]...");
+                        Log.Information("Deleting [{Length}] GamePlatforms for Game: [{Name}]...", gamePlatforms.Length, toDelete.Name);
                         foreach (var gp in gamePlatforms)
                         {
                             RepositoryAggregate.GamePlatforms.Delete(gp);
                         }
-                        Log.Information($"Finished deleting GamePlatform enteries. Procceeding to delete Game: {toDelete.Name} with Id: [{toDelete.Id}].");
+                        Log.Information("Finished deleting GamePlatform enteries. Procceeding to delete Game: {Name} with Id: [{Id}].", toDelete.Name, toDelete.Id);
                     }
 
                     #endregion Delete GamePlatform References
 
                     Repository.Delete(toDelete);
                     gameResponse.StatusCode = 200;
-                    Log.Information($"Deleted Game [{toDelete.Name}] for Id:[{toDelete.Id}].");
+                    Log.Information("Deleted Game [{Name}] for Id:[{Id}].", toDelete.Name, toDelete.Id);
                 }
             }
             catch (Exception x)
             {
-                Log.Error($"Failed to Delete Game. [{x.Message}].");
+                Log.Error("Failed to Delete Game. [{Message}].", x.Message);
                 HandleErrors(gameResponse, x);
             }
             return gameResponse;

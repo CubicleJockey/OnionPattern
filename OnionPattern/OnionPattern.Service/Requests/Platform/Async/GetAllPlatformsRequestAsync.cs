@@ -25,19 +25,19 @@ namespace OnionPattern.Service.Requests.Platform.Async
                 if (platforms == null || !platforms.Any())
                 {
                     var exception = new Exception("No Platforms Returned.");
-                    Log.Error(exception.Message);
+                    Log.Error("{Message}", exception.Message);
                     HandleErrors(platformListResponse, exception, 404);
                 }
                 else
                 {
                     platformListResponse.Platforms = platforms;
                     platformListResponse.StatusCode = 200;
-                    Log.Information($"Retrieved [{platformListResponse.Platforms.Count()}] Platforms.");
+                    Log.Information("Retrieved [{V}] Platforms.", platformListResponse.Platforms.Count());
                 }
             }
             catch (Exception x)
             {
-                Log.Error($"Failed to get Platforms List. [{x.Message}].");
+                Log.Error("Failed to get Platforms List. [{Message}].", x.Message);
                 HandleErrors(platformListResponse, x);
             }
             return platformListResponse;

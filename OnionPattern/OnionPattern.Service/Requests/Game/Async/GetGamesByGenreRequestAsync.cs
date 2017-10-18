@@ -21,13 +21,13 @@ namespace OnionPattern.Service.Requests.Game.Async
             var gameListResponse = new GameListResponseDto();
             try
             {
-                Log.Information($"Retrieving game Genre : [{genre}]");
+                Log.Information("Retrieving game Genre : [{Genre}]", genre);
 
                 var games = (await Repository.FindAsync(g => string.Equals(g.Genre, genre, StringComparison.CurrentCultureIgnoreCase)))?.ToArray();
                 if (games == null)
                 {
                     var exception = new Exception($"No game found by Genre : [{genre}].");
-                    Log.Error(exception.Message);
+                    Log.Error("{Message}", exception.Message);
                     HandleErrors(gameListResponse, exception, 404);
                 }
                 else
@@ -39,7 +39,7 @@ namespace OnionPattern.Service.Requests.Game.Async
             }
             catch (Exception x)
             {
-                Log.Error($"Failed to get Game for Genre [{genre}].");
+                Log.Error("Failed to get Game for Genre [{Genre}].", genre);
                 HandleErrors(gameListResponse, x);
             }
             return gameListResponse;

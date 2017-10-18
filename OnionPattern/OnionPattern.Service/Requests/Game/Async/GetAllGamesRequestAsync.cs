@@ -26,7 +26,7 @@ namespace OnionPattern.Service.Requests.Game.Async
                 if (games == null || !games.Any())
                 {
                     var exception = new Exception("No Games Returned.");
-                    Log.Error(exception.Message);
+                    Log.Error("{Message}", exception.Message);
                     HandleErrors(gameListResponse, exception, 404);
                 }
                 else
@@ -36,12 +36,12 @@ namespace OnionPattern.Service.Requests.Game.Async
                         Games = games,
                         StatusCode = 200
                     };
-                    Log.Information($"Retrieved [{gameListResponse.Games.Count()}] Games (async).");
+                    Log.Information("Retrieved [{V}] Games (async).", gameListResponse.Games.Count());
                 }
             }
             catch (Exception x)
             {
-                Log.Error($"Failed to get All Games List. {x.Message}");
+                Log.Error("Failed to get All Games List. {Message}", x.Message);
                 HandleErrors(gameListResponse, x);
             }
             return gameListResponse;

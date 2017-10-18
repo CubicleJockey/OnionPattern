@@ -17,7 +17,7 @@ namespace OnionPattern.Service.Requests.Platform
 
         public async Task<PlatformResponseDto> ExecuteAsync(int id)
         {
-            Log.Information($"Retrieving Platform by Id: [{id}]...");
+            Log.Information("Retrieving Platform by Id: [{Id}]...", id);
             var platformResponse = new PlatformResponseDto();
             try
             {
@@ -31,12 +31,12 @@ namespace OnionPattern.Service.Requests.Platform
                 {
                     platformResponse = Mapper.Map<Domain.Entities.Platform, PlatformResponseDto>(platform);
                     platformResponse.StatusCode = 200;
-                    Log.Information($"Retrieved [{platformResponse.Name}] for Id: [{id}].");
+                    Log.Information("Retrieved [{Name}] for Id: [{Id}].", platformResponse.Name, id);
                 }
             }
             catch (Exception x)
             {
-                Log.Error($"Failed to get Platforms List. [{x.Message}].");
+                Log.Error("Failed to get Platforms List. [{Message}].", x.Message);
                 HandleErrors(platformResponse, x);
             }
             return platformResponse;

@@ -21,7 +21,7 @@ namespace OnionPattern.Service.Requests.Game.Async
             var gameResponse = new GameResponseDto();
             try
             {
-                Log.Information($"Deleting Game by Id:[{id}]...");
+                Log.Information("Deleting Game by Id:[{Id}]...", id);
                 var toDelete = await Repository.SingleOrDefaultAsync(game => game.Id == id);
                 if (toDelete == null)
                 {
@@ -32,28 +32,28 @@ namespace OnionPattern.Service.Requests.Game.Async
                 {
                     #region Delete GamePlatform References
 
-                    Log.Information($"Retrieving GamePlatoforms for Game: [{toDelete.Name}] with Id: [{toDelete.Id}].");
+                    Log.Information("Retrieving GamePlatoforms for Game: [{Name}] with Id: [{Id}].", toDelete.Name, toDelete.Id);
                     var gamePlatforms = (await RepositoryAggregate.GamePlatforms.FindAsync(gp => gp.Id == id))?.ToArray();
                     if (gamePlatforms != null && gamePlatforms.Any())
                     {
-                        Log.Information($"Deleting [{gamePlatforms.Length}] GamePlatforms for Game: [{toDelete.Name}]...");
+                        Log.Information("Deleting [{Length}] GamePlatforms for Game: [{Name}]...", gamePlatforms.Length, toDelete.Name);
                         foreach (var gp in gamePlatforms)
                         {
                             await RepositoryAggregate.GamePlatforms.DeleteAsync(gp);
                         }
-                        Log.Information($"Finished deleting GamePlatform enteries. Procceeding to delete Game: {toDelete.Name} with Id: [{toDelete.Id}].");
+                        Log.Information("Finished deleting GamePlatform enteries. Procceeding to delete Game: {Name} with Id: [{Id}].", toDelete.Name, toDelete.Id);
                     }
 
                     #endregion Delete GamePlatform References
 
                     gameResponse = Mapper.Map<Domain.Entities.Game, GameResponseDto>(await Repository.DeleteAsync(toDelete));
                     gameResponse.StatusCode = 200;
-                    Log.Information($"Deleted Game [{toDelete.Name}] for Id:[{toDelete.Id}].");
+                    Log.Information("Deleted Game [{Name}] for Id:[{Id}].", toDelete.Name, toDelete.Id);
                 }
             }
             catch (Exception x)
             {
-                Log.Error($"Failed to Delete Game. [{x.Message}].");
+                Log.Error("Failed to Delete Game. [{Message}].", x.Message);
                 HandleErrors(gameResponse, x);
             }
             return gameResponse;

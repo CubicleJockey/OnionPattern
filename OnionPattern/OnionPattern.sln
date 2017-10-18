@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.16
+VisualStudioVersion = 15.0.27004.2002
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnionPattern.Domain", "OnionPattern.Domain\OnionPattern.Domain.csproj", "{DD510D19-E406-4F06-9AD7-7A049DBE131F}"
 EndProject
@@ -9,6 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		..\.gitattributes = ..\.gitattributes
 		..\.gitignore = ..\.gitignore
+		LICENSE.md = LICENSE.md
 		..\README.md = ..\README.md
 	EndProjectSection
 EndProject
@@ -36,9 +37,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnionPattern.Api.Tests", "O
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "OnionPattern.Database", "OnionPattern.Database\OnionPattern.Database.sqlproj", "{0D72D142-FAE7-4984-A47F-47F10969F4B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnionPattern.Mapping", "OnionPattern.Mapping\OnionPattern.Mapping.csproj", "{AA56B2A6-72B2-414F-8F65-8CC50492DD85}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnionPattern.Mapping", "OnionPattern.Mapping\OnionPattern.Mapping.csproj", "{AA56B2A6-72B2-414F-8F65-8CC50492DD85}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnionPattern.Mapping.Tests", "OnionPattern.Mapping.Tests\OnionPattern.Mapping.Tests.csproj", "{07C8421D-3EFE-451D-9020-59FE56FE9027}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnionPattern.Mapping.Tests", "OnionPattern.Mapping.Tests\OnionPattern.Mapping.Tests.csproj", "{07C8421D-3EFE-451D-9020-59FE56FE9027}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

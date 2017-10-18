@@ -1,18 +1,20 @@
 # Onion Pattern (Onion Architecture)
 
-####  Overview:
+#### Table of Contents:
+ * [Overview](#overview)
+ * [Documentation](#documentation)
+ * [Prerequisites](#prerequisites)
+ * [Features](#features)
+ * [Architecture](#architecture)
+ * [Helpful Links](#helpfullinks)
+
+
+####  Overview {#overview}:
 This is a project in which I am creating myself an example of Onion Patter/Onion Architecture. To perform this we need loosely
 coupled code, so understanding Dependency Injection is helpful. See Jeffrey Palermo article below for description of what 
 Onion Architecture is.
 
  *[Overview - Jeffrey Palermo](http://jeffreypalermo.com/blog/the-onion-architecture-part-1/)
-
-#### Table of Contents:
- * [Documentation](#documention)
- * [Prerequisites](#prerequisites)
- * [Features](#features)
- * [Architecture](#architecture)
- * [Helpful Links](#helpfullinks)
 
 #### Documentation {#documentation}:
  * [Microsoft Documentation](https://docs.microsoft.com/en-us/)

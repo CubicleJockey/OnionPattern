@@ -31,23 +31,23 @@ namespace OnionPattern.Service.Requests.Game
                 {
                     #region Delete GamePlatform References
 
-                    Log.Information("Retrieving GamePlatoforms for Game: [{Name}] with Id: [{Id}].", toDelete.Name, toDelete.Id);
+                    Log.Information("Retrieving GamePlatoforms for Game: [{NewName}] with Id: [{Id}].", toDelete.Name, toDelete.Id);
                     var gamePlatforms = RepositoryAggregate.GamePlatforms.Find(gp => gp.Id == id)?.ToArray();
                     if(gamePlatforms != null && gamePlatforms.Any())
                     {
-                        Log.Information("Deleting [{Length}] GamePlatforms for Game: [{Name}]...", gamePlatforms.Length, toDelete.Name);
+                        Log.Information("Deleting [{Length}] GamePlatforms for Game: [{NewName}]...", gamePlatforms.Length, toDelete.Name);
                         foreach (var gp in gamePlatforms)
                         {
                             RepositoryAggregate.GamePlatforms.Delete(gp);
                         }
-                        Log.Information("Finished deleting GamePlatform enteries. Procceeding to delete Game: {Name} with Id: [{Id}].", toDelete.Name, toDelete.Id);
+                        Log.Information("Finished deleting GamePlatform enteries. Procceeding to delete Game: {NewName} with Id: [{Id}].", toDelete.Name, toDelete.Id);
                     }
 
                     #endregion Delete GamePlatform References
 
                     Repository.Delete(toDelete);
                     gameResponse.StatusCode = 200;
-                    Log.Information("Deleted Game [{Name}] for Id:[{Id}].", toDelete.Name, toDelete.Id);
+                    Log.Information("Deleted Game [{NewName}] for Id:[{Id}].", toDelete.Name, toDelete.Id);
                 }
             }
             catch (Exception x)

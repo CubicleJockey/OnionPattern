@@ -60,7 +60,7 @@ namespace OnionPattern.Service.Tests.Requests.Platform
                 Action execute = () => request.Execute(null);
 
                 execute.ShouldThrow<ArgumentNullException>()
-                    .WithMessage($"Value cannot be null.{Environment.NewLine}Parameter name: input cannot be null.");
+                    .WithMessage($"Value cannot be null.{Environment.NewLine}Parameter name: input");
             }
 
             [DataTestMethod]
@@ -68,7 +68,7 @@ namespace OnionPattern.Service.Tests.Requests.Platform
             [DataRow(0)]
             public void InvalidInputIdNotValid(int Id)
             {
-                var invalidInput = new UpdatePlatformNameInputDto { Id = Id, Name = "Something" };
+                var invalidInput = new UpdatePlatformNameInputDto { Id = Id, NewName = "Something" };
                 Action execute = () => request.Execute(invalidInput);
 
                 execute.ShouldThrow<ArgumentException>()
@@ -81,11 +81,11 @@ namespace OnionPattern.Service.Tests.Requests.Platform
             [DataRow("      ")]
             public void InvalidInputNameIsEmpty(string name)
             {
-                var invalidInput = new UpdatePlatformNameInputDto { Id = 666, Name = name };
+                var invalidInput = new UpdatePlatformNameInputDto { Id = 666, NewName = name };
                 Action execute = () => request.Execute(invalidInput);
 
                 execute.ShouldThrow<ArgumentException>()
-                    .WithMessage("Input Name cannot be empty.");
+                    .WithMessage("Input NewName cannot be empty.");
             }
         }
     }

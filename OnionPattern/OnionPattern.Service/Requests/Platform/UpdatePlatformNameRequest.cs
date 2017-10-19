@@ -3,6 +3,7 @@ using OnionPattern.Domain.DataTransferObjects.Platform;
 using OnionPattern.Domain.DataTransferObjects.Platform.Input;
 using OnionPattern.Domain.Repository;
 using OnionPattern.Domain.Services.Requests.Platform;
+using Serilog;
 
 namespace OnionPattern.Service.Requests.Platform
 {
@@ -19,7 +20,14 @@ namespace OnionPattern.Service.Requests.Platform
             var platformResponse = new PlatformResponseDto();
             try
             {
-                throw new NotImplementedException("Oh noes' n stuff.");
+                Log.Information("Updating name Platform with Id: [{Id}] to [{NewName}]...", input.Id, input.NewName);
+                var platformToUpdate = Repository.SingleOrDefault(p => p.Id == input.Id);
+                if (platformToUpdate == null)
+                {
+                    var exception = new Exception($"Failed to find platform with Id: [{input.Id}].");
+                    Log.Error(exception, EXCEPTION_MESSAGE_TEMPLATE, exception.Message);
+                    HandleErrors(platformResponse, exception, 404);
+                }
             }
             catch (Exception x)
             {
@@ -32,9 +40,9 @@ namespace OnionPattern.Service.Requests.Platform
 
         private void CheckInputValidity(UpdatePlatformNameInputDto input)
         {
-            if (input == null) { throw new ArgumentNullException($"{nameof(input)} cannot be null."); }
+            if (input == null) { throw new ArgumentNullException(nameof(input)); }
             if (input.Id <= 0) { throw new ArgumentException($"Input {nameof(input.Id)} must be 1 or greater."); }
-            if(string.IsNullOrWhiteSpace(input.Name)) { throw new ArgumentException($"Input {nameof(input.Name)} cannot be empty."); }
+            if(string.IsNullOrWhiteSpace(input.NewName)) { throw new ArgumentException($"Input {nameof(input.NewName)} cannot be empty."); }
         }
     }
 }

@@ -17,7 +17,7 @@ namespace OnionPattern.Service.Requests.Game.Async
 
         public async Task<GameListResponseDto> ExecuteAsync()
         {
-            Log.Information("Retrieving Games List (async)...");
+            Log.Information("Retrieving Games List...");
             var gameListResponse = new GameListResponseDto();
             try
             {
@@ -37,7 +37,7 @@ namespace OnionPattern.Service.Requests.Game.Async
                         StatusCode = 200
                     };
                     var count = games.Length;
-                    Log.Information("Retrieved [{Count}] Games (async).", count);
+                    Log.Information("Retrieved [{Count}] Games.", count);
                 }
             }
             catch (Exception x)

@@ -65,7 +65,7 @@ namespace OnionPattern.Service.Tests.Requests.Games
                 var response =  request.Execute(null);
                 response.Should().NotBeNull();
                 response.ErrorSummary.Should().NotBeNullOrWhiteSpace();
-                response.ErrorSummary.Should().BeEquivalentTo($"Value cannot be null.{Environment.NewLine}Parameter name: input cannot be null.");
+                response.ErrorSummary.Should().BeEquivalentTo($"Value cannot be null.{Environment.NewLine}Parameter name: input");
             }
 
             [DataTestMethod]

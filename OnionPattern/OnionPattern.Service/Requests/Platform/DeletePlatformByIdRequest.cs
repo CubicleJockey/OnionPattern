@@ -33,7 +33,7 @@ namespace OnionPattern.Service.Requests.Platform
                     platformResponse = Mapper.Map(platform, platformResponse);
                     platformResponse.StatusCode = 200;
 
-                    Log.Information("Retrieved Platform [{Name}] for Id: [{Id}].", platform.Name, platform.Id);
+                    Log.Information("Retrieved Platform [{NewName}] for Id: [{Id}].", platform.Name, platform.Id);
                 }
             }
             catch (Exception x)

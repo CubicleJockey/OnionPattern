@@ -34,15 +34,6 @@ namespace OnionPattern.Mapping.Tests.Platform
             }
 
             [TestMethod]
-            public void SourceIsNull()
-            {
-                Action convert = () => converter.Convert(null, default(PlatformResponseDto), default(ResolutionContext));
-
-                convert.ShouldThrow<ArgumentNullException>()
-                    .WithMessage($"Value cannot be null.{Environment.NewLine}Parameter name: source cannot be null.");
-            }
-
-            [TestMethod]
             public void ValidConversion()
             {
                 var expected = new Domain.Entities.Platform

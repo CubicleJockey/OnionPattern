@@ -34,7 +34,7 @@ namespace OnionPattern.Service.Requests.Game.Async
                     //NOTE: Not sure if I want to do something like AutoMapper for this example.
                     gameResponse = Mapper.Map(game, gameResponse);
                     gameResponse.StatusCode = 200;
-                    Log.Information("Retrieved [{Name}] for Id: [{Id}].", gameResponse.Name, id);
+                    Log.Information("Retrieved [{NewName}] for Id: [{Id}].", gameResponse.Name, id);
                 }
             }
             catch (Exception x)

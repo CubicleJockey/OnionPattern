@@ -1,17 +1,17 @@
 ﻿using AutoMapper;
 using OnionPattern.Domain.DataTransferObjects.Platform;
-using System;
 
 namespace OnionPattern.Mapping.Platform
 {
-    public class PlatformToPlatformResponseDtoTypeConverter : ITypeConverter<Domain.Entities.Platform, PlatformResponseDto>
+    public class PlatformToPlatformResponseDtoTypeConverter :
+        BaseTypeConverter<Domain.Entities.Platform, PlatformResponseDto>,
+        ITypeConverter<Domain.Entities.Platform, PlatformResponseDto>
     {
         #region Implementation of ITypeConverter<in Platform,PlatformResponseDto>
 
         public PlatformResponseDto Convert(Domain.Entities.Platform source, PlatformResponseDto destination, ResolutionContext context)
         {
-            if (source == null) {  throw new ArgumentNullException($"{nameof(source)} cannot be null."); }
-            if (destination == null) { destination = new PlatformResponseDto(); }
+            Guard(source, ref destination);
 
             destination.Id = source.Id;
             destination.Name = source.Name;

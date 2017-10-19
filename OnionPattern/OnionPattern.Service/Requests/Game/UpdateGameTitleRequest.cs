@@ -53,7 +53,7 @@ namespace OnionPattern.Service.Requests.Game
 
         private void CheckInputValidity(UpdateGameTitleInputDto input)
         {
-            if (input == null) { throw new ArgumentNullException($"{nameof(input)} cannot be null."); }
+            if (input == null) { throw new ArgumentNullException(nameof(input)); }
             if (input.Id <= 0) { throw new ArgumentException($"Input {nameof(input.Id)} must be 1 or greater."); }
             if (string.IsNullOrWhiteSpace(input.NewTitle)) { throw new ArgumentException($"Input {nameof(input.NewTitle)} cannot be empty."); }
         }

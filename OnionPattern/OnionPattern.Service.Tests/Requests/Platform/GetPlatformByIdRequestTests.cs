@@ -61,7 +61,7 @@ namespace OnionPattern.Service.Tests.Requests.Platform
                 Action execute = () => request.Execute(id);
 
                 execute.ShouldThrow<ArgumentException>()
-                    .WithMessage($"{nameof(id)} cannot be null.");
+                    .WithMessage($"{nameof(id)} must be 1 or greater.");
             }
         }
     }

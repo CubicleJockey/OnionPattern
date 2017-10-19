@@ -35,7 +35,7 @@ namespace OnionPattern.Service.Requests.Platform.Async
                 {
                     platformResponse = Mapper.Map(platform, platformResponse);
                     platformResponse.StatusCode = 200;
-                    Log.Information("Retrieved [{Name}] for Id: [{Id}].", platformResponse.Name, id);
+                    Log.Information("Retrieved [{NewName}] for Id: [{Id}].", platformResponse.Name, id);
                 }
             }
             catch (Exception x)
@@ -50,7 +50,7 @@ namespace OnionPattern.Service.Requests.Platform.Async
 
         private void CheckInputValidity(int id)
         {
-            if (id <= 0) { throw new ArgumentException($"{nameof(id)} cannot be null."); }
+            if (id <= 0) { throw new ArgumentException($"{nameof(id)} must be 1 or greater."); }
         }
     }
 }

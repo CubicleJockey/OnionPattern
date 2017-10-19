@@ -35,7 +35,7 @@ namespace OnionPattern.Api.Controllers.Game
         }
 
         /// <summary>
-        /// Get a Game by it's Name/Title
+        /// Get a Game by it's NewName/Title
         /// </summary>
         /// <param name="id">Id of the Game.</param>
         /// <returns></returns>

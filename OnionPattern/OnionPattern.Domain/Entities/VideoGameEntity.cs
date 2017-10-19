@@ -6,6 +6,8 @@ namespace OnionPattern.Domain.Entities
 {
     public abstract class VideoGameEntity
     {
+        public int Id { get; set; }
+
         [NotMapped]
         public bool IsValid { get; set; }
 

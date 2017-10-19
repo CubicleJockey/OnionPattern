@@ -34,15 +34,6 @@ namespace OnionPattern.Mapping.Tests.Game
             }
 
             [TestMethod]
-            public void SourceIsNull()
-            {
-                Action convert = () => converter.Convert(null, default(GameResponseDto), default(ResolutionContext));
-
-                convert.ShouldThrow<ArgumentNullException>()
-                    .WithMessage($"Value cannot be null.{Environment.NewLine}Parameter name: source cannot be null.");
-            }
-
-            [TestMethod]
             public void ValidConversion()
             {
                 var source = new Domain.Entities.Game

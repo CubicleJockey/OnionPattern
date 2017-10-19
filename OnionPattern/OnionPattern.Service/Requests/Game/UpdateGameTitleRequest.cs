@@ -29,7 +29,7 @@ namespace OnionPattern.Service.Requests.Game
                 if (gameToUpdate == null)
                 {
                     var exception = new Exception($"Failed to find game for id: [{input.Id}].");
-                    Log.Error("{Message}", exception.Message);
+                    Log.Error(exception, EXCEPTION_MESSAGE_TEMPLATE, exception.Message);
                     HandleErrors(gameResponse, exception, 404);
                     return gameResponse;
                 }
@@ -43,7 +43,7 @@ namespace OnionPattern.Service.Requests.Game
             }
             catch (Exception x)
             {
-                Log.Error(x, "{Message}", x.Message);
+                Log.Error(x, EXCEPTION_MESSAGE_TEMPLATE, x.Message);
                 HandleErrors(gameResponse, x);
             }
             return gameResponse;

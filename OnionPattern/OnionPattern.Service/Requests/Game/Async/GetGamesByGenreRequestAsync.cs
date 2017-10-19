@@ -27,7 +27,7 @@ namespace OnionPattern.Service.Requests.Game.Async
                 if (games == null)
                 {
                     var exception = new Exception($"No game found by Genre : [{genre}].");
-                    Log.Error("{Message}", exception.Message);
+                    Log.Error(exception, EXCEPTION_MESSAGE_TEMPLATE, exception.Message);
                     HandleErrors(gameListResponse, exception, 404);
                 }
                 else
@@ -39,7 +39,7 @@ namespace OnionPattern.Service.Requests.Game.Async
             }
             catch (Exception x)
             {
-                Log.Error("Failed to get Game for Genre [{Genre}].", genre);
+                Log.Error(x, "Failed to get Game for Genre [{Genre}].", genre);
                 HandleErrors(gameListResponse, x);
             }
             return gameListResponse;

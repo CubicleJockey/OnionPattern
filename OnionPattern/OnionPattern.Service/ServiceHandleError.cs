@@ -5,6 +5,8 @@ namespace OnionPattern.Service
 {
     public abstract class ServiceHandleError
     {
+        protected const string EXCEPTION_MESSAGE_TEMPLATE = "{Message}";
+
         /// <summary>
         /// Fill in Error Details.
         /// </summary>

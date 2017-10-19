@@ -25,7 +25,7 @@ namespace OnionPattern.Service.Requests.Platform.Async
                 if (platforms == null || !platforms.Any())
                 {
                     var exception = new Exception("No Platforms Returned.");
-                    Log.Error("{Message}", exception.Message);
+                    Log.Error(exception, EXCEPTION_MESSAGE_TEMPLATE, exception.Message);
                     HandleErrors(platformListResponse, exception, 404);
                 }
                 else
@@ -37,7 +37,7 @@ namespace OnionPattern.Service.Requests.Platform.Async
             }
             catch (Exception x)
             {
-                Log.Error("Failed to get Platforms List. [{Message}].", x.Message);
+                Log.Error(x, "Failed to get Platforms List.");
                 HandleErrors(platformListResponse, x);
             }
             return platformListResponse;

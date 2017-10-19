@@ -33,7 +33,7 @@ namespace OnionPattern.Service.Requests.Game.Async
                 if (gameToUpdate == null)
                 {
                     var exception = new Exception($"Update failed: No Game found for Id: [{input.Id}].");
-                    Log.Error("{Message}", exception.Message);
+                    Log.Error(exception, EXCEPTION_MESSAGE_TEMPLATE, exception.Message);
                     HandleErrors(gameResponse, exception, 404);
                 }
                 else
@@ -45,7 +45,7 @@ namespace OnionPattern.Service.Requests.Game.Async
             }
             catch (Exception x)
             {
-                Log.Error("{Message}", x.Message);
+                Log.Error(x, EXCEPTION_MESSAGE_TEMPLATE, x.Message);
                 HandleErrors(gameResponse, x);
             }
             return gameResponse;

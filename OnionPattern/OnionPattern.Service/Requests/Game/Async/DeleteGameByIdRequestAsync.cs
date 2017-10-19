@@ -26,6 +26,7 @@ namespace OnionPattern.Service.Requests.Game.Async
                 if (toDelete == null)
                 {
                     var exception = new Exception($"No Game found for Id:[{id}].");
+                    Log.Error(exception, EXCEPTION_MESSAGE_TEMPLATE, exception.Message);
                     HandleErrors(gameResponse, exception, 404);
                 }
                 else
@@ -53,7 +54,7 @@ namespace OnionPattern.Service.Requests.Game.Async
             }
             catch (Exception x)
             {
-                Log.Error("Failed to Delete Game. [{Message}].", x.Message);
+                Log.Error(x, "Failed to Delete Game.");
                 HandleErrors(gameResponse, x);
             }
             return gameResponse;

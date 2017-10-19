@@ -28,6 +28,7 @@ namespace OnionPattern.Service.Requests.Platform.Async
                 if (platform == null)
                 {
                     var exception = new Exception($"Could not find Platform with Id: [{id}].");
+                    Log.Error(exception, EXCEPTION_MESSAGE_TEMPLATE, exception.Message);
                     HandleErrors(platformResponse, exception, 404);
                 }
                 else
@@ -39,7 +40,7 @@ namespace OnionPattern.Service.Requests.Platform.Async
             }
             catch (Exception x)
             {
-                Log.Error("Failed to get Platforms List. [{Message}].", x.Message);
+                Log.Error(x, "Failed to get Platforms List.");
                 HandleErrors(platformResponse, x);
             }
             return platformResponse;

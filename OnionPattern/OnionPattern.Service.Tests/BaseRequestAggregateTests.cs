@@ -1,10 +1,9 @@
-﻿using System;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using OnionPattern.Domain.Entities;
 using OnionPattern.Service.Requests;
 using OnionPattern.Service.Tests.Requests;
 using OnionPattern.Service.Tests.Requests.Mocks;
+using System;
 
 namespace OnionPattern.Service.Tests
 {

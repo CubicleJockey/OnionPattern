@@ -17,6 +17,9 @@ namespace OnionPattern.Service.Requests.Platform
         public PlatformResponseDto Execute(int id)
         {
             Log.Information("Retrieving Platform by Id: [{Id}]...", id);
+
+            CheckInputValidity(id);
+
             var platformResponse = new PlatformResponseDto();
             try
             {
@@ -42,5 +45,10 @@ namespace OnionPattern.Service.Requests.Platform
         }
 
         #endregion
+
+        private void CheckInputValidity(int id)
+        {
+            if(id <= 0) {  throw new ArgumentException($"{nameof(id)} cannot be null.");}
+        }
     }
 }

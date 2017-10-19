@@ -17,26 +17,14 @@ namespace OnionPattern.Service.Requests.Game
 
         public GameResponseDto Execute(UpdateGameTitleInputDto input)
         {
+
             var gameResponse = new GameResponseDto();
             try
             {
+                CheckInputValidity(input);
+
                 Log.Information("Updating GameId: [{Id}] to new title [{NewTitle}]...", input.Id, input.NewTitle);
-
-                if (input.Id <= 0)
-                {
-                    var exception = new ArgumentException($"{nameof(input.Id)} must be 1 or more.");
-                    Log.Error("{Message}", exception.Message);
-                    HandleErrors(gameResponse, exception);
-                    return gameResponse;
-                }
-                if (string.IsNullOrWhiteSpace(input.NewTitle))
-                {
-                    var exception = new ArgumentException($"{nameof(input.NewTitle)} cannot be empty.");
-                    Log.Error("{Message}", exception.Message);
-                    HandleErrors(gameResponse, exception);
-                    return gameResponse;
-                }
-
+                
                 var gameToUpdate = Repository.SingleOrDefault(game => game.Id == input.Id);
                 if (gameToUpdate == null)
                 {
@@ -55,12 +43,19 @@ namespace OnionPattern.Service.Requests.Game
             }
             catch (Exception x)
             {
-                Log.Error("Failed to update title to [{NewTitle}] for GameId: [{Id}].", input.NewTitle, input.Id);
+                Log.Error(x, "{Message}", x.Message);
                 HandleErrors(gameResponse, x);
             }
             return gameResponse;
         }
 
         #endregion
+
+        private void CheckInputValidity(UpdateGameTitleInputDto input)
+        {
+            if (input == null) { throw new ArgumentNullException($"{nameof(input)} cannot be null."); }
+            if (input.Id <= 0) { throw new ArgumentException($"Input {nameof(input.Id)} must be 1 or greater."); }
+            if (string.IsNullOrWhiteSpace(input.NewTitle)) { throw new ArgumentException($"Input {nameof(input.NewTitle)} cannot be empty."); }
+        }
     }
 }

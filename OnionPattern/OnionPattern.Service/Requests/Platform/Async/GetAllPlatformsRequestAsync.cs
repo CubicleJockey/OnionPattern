@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using OnionPattern.Domain.DataTransferObjects.Platform;
 using OnionPattern.Domain.Repository;
 using OnionPattern.Domain.Services.Requests.Platform.Async;
@@ -30,9 +31,11 @@ namespace OnionPattern.Service.Requests.Platform.Async
                 }
                 else
                 {
-                    platformListResponse.Platforms = platforms;
+                    platformListResponse.Platforms = platforms.Select(Mapper.Map<Domain.Entities.Platform, PlatformResponseDto>);
                     platformListResponse.StatusCode = 200;
-                    Log.Information("Retrieved [{V}] Platforms.", platformListResponse.Platforms.Count());
+
+                    var count = platforms.Length;
+                    Log.Information("Retrieved [{Count}] Platforms.", count);
                 }
             }
             catch (Exception x)

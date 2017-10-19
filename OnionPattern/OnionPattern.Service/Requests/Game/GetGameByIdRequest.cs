@@ -31,7 +31,7 @@ namespace OnionPattern.Service.Requests.Game
                 else
                 {
                     //NOTE: Not sure if I want to do something like AutoMapper for this example.
-                    gameResponse = Mapper.Map<Domain.Entities.Game, GameResponseDto>(game);
+                    gameResponse = Mapper.Map(game, gameResponse);
                     gameResponse.StatusCode = 200;
                 }
             }

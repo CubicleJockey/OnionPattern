@@ -38,7 +38,7 @@ namespace OnionPattern.Service.Requests.Game
                         Games = games,
                         StatusCode = 200
                     };
-                    var count = gameListResponse.Games.Count();
+                    var count = games.Length;
                     Log.Information("Retrieved [{Count}] Games.", count);
                 }
             }

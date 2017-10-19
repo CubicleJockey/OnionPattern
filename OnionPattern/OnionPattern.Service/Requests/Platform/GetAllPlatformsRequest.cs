@@ -31,7 +31,9 @@ namespace OnionPattern.Service.Requests.Platform
                 {
                     platformListResponse.Platforms = platforms;
                     platformListResponse.StatusCode = 200;
-                    Log.Information("Retrieved [{V}] Platforms.", platformListResponse.Platforms.Count());
+
+                    var count = platforms.Length;
+                    Log.Information("Retrieved [{Count}] Platforms.", count);
                 }
             }
             catch (Exception x)

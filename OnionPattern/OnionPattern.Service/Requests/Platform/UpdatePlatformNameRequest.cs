@@ -19,7 +19,7 @@ namespace OnionPattern.Service.Requests.Platform
             var platformResponse = new PlatformResponseDto();
             try
             {
-
+                throw new NotImplementedException("Oh noes' n stuff.");
             }
             catch (Exception x)
             {

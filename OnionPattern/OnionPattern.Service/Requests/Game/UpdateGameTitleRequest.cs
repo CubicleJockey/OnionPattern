@@ -36,7 +36,7 @@ namespace OnionPattern.Service.Requests.Game
 
                 gameToUpdate.Name = input.NewTitle;
                 var updatedGame = Repository.Update(gameToUpdate);
-                gameResponse = Mapper.Map<Domain.Entities.Game, GameResponseDto>(updatedGame);
+                gameResponse = Mapper.Map(updatedGame, gameResponse);
                 gameResponse.StatusCode = 200;
 
                 Log.Information("Successful updated GameId: [{Id}] to title [{NewTitle}].", input.Id, input.NewTitle);

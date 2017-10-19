@@ -47,7 +47,7 @@ namespace OnionPattern.Service.Requests.Game.Async
 
                     #endregion Delete GamePlatform References
 
-                    gameResponse = Mapper.Map<Domain.Entities.Game, GameResponseDto>(await Repository.DeleteAsync(toDelete));
+                    gameResponse = Mapper.Map(await Repository.DeleteAsync(toDelete), gameResponse);
                     gameResponse.StatusCode = 200;
                     Log.Information("Deleted Game [{Name}] for Id:[{Id}].", toDelete.Name, toDelete.Id);
                 }

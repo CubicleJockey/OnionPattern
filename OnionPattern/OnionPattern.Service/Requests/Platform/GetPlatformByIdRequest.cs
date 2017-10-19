@@ -31,7 +31,7 @@ namespace OnionPattern.Service.Requests.Platform
                 }
                 else
                 {
-                    platformResponse = Mapper.Map<Domain.Entities.Platform, PlatformResponseDto>(platform);
+                    platformResponse = Mapper.Map(platform, platformResponse);
                     platformResponse.StatusCode = 200;
                     Log.Information("Retrieved [{Name}] for Id: [{Id}].", platformResponse.Name, id);
                 }

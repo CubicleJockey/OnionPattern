@@ -32,7 +32,7 @@ namespace OnionPattern.Api.Tests.Controllers.Game
                 Action ctor = () => new GamesController(null);
 
                 ctor.ShouldThrow<ArgumentNullException>()
-                    .WithMessage($"Value cannot be null.{Environment.NewLine}Parameter name: gameRequestAggregate cannot be null.");
+                    .WithMessage($"Value cannot be null.{Environment.NewLine}Parameter name: gameRequestAggregate");
             }
         }
     }

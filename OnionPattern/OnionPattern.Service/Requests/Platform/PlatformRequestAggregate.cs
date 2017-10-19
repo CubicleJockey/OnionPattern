@@ -1,6 +1,7 @@
 ﻿using System;
 using OnionPattern.Domain.Repository;
 using OnionPattern.Domain.Services.Requests.Platform;
+using OnionPattern.Service.Requests.Game;
 
 namespace OnionPattern.Service.Requests.Platform
 {
@@ -19,10 +20,10 @@ namespace OnionPattern.Service.Requests.Platform
         public IGetPlatformByIdRequest GetPlatformByIdRequest => getPlatformByIdRequest ?? (getPlatformByIdRequest = new GetPlatformByIdRequest(Repository, RepositoryAggregate));
 
         private IUpdatePlatformNameRequest updatePlatformNameRequest;
-        public IUpdatePlatformNameRequest UpdatePlatformNameRequest => throw new NotImplementedException();
+        public IUpdatePlatformNameRequest UpdatePlatformNameRequest => updatePlatformNameRequest ?? (updatePlatformNameRequest = new UpdatePlatformNameRequest(Repository, RepositoryAggregate));
 
         private IDeletePlatformByIdRequest deletePlatformByIdRequest;
-        public IDeletePlatformByIdRequest DeletePlatformByIdRequest => throw new NotImplementedException();
+        public IDeletePlatformByIdRequest DeletePlatformByIdRequest => deletePlatformByIdRequest ?? (deletePlatformByIdRequest = new DeletePlatformByIdRequest(Repository, RepositoryAggregate));
 
         private ICreatePlatformRequest createPlatformRequest;
         public ICreatePlatformRequest CreatePlatformRequest => throw new NotImplementedException();

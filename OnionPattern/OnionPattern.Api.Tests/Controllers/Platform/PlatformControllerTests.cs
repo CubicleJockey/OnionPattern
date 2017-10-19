@@ -35,7 +35,7 @@ namespace OnionPattern.Api.Tests.Controllers.Platform
                 Action ctor = () => new PlatformsController(null);
 
                 ctor.ShouldThrow<ArgumentNullException>()
-                    .WithMessage($"Value cannot be null.{Environment.NewLine}Parameter name: requestAggregate cannot be null.");
+                    .WithMessage($"Value cannot be null.{Environment.NewLine}Parameter name: requestAggregate");
             }
 
             [TestMethod]

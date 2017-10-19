@@ -27,7 +27,7 @@ namespace OnionPattern.Service.Requests.Game
             }
             catch (Exception x)
             {
-                Log.Information("Failed to Create Game: [{NewName}].", game.Name);
+                Log.Error(x, "Failed to Create Game: [{NewName}].", game.Name);
                 HandleErrors(gameResponse, x);
             }
             return gameResponse;

@@ -22,7 +22,7 @@ namespace OnionPattern.Api.Controllers.Game
         /// <param name="gameRequestAggregateAsync"></param>
         public GamesAsyncController(IGameRequestAggregateAsync gameRequestAggregateAsync)
         {
-            this.gameRequestAggregateAsync = gameRequestAggregateAsync ?? throw new ArgumentNullException($"{nameof(gameRequestAggregateAsync)} cannot be null.");
+            this.gameRequestAggregateAsync = gameRequestAggregateAsync ?? throw new ArgumentNullException(nameof(gameRequestAggregateAsync));
         }
 
         /// <summary>

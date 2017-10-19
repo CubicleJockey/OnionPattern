@@ -34,7 +34,7 @@ namespace OnionPattern.Api.Tests.Controllers.Game
                 Action ctor = () => new GamesAsyncController(null);
 
                 ctor.ShouldThrow<ArgumentNullException>()
-                    .WithMessage($"Value cannot be null.{Environment.NewLine}Parameter name: gameRequestAggregateAsync cannot be null.");
+                    .WithMessage($"Value cannot be null.{Environment.NewLine}Parameter name: gameRequestAggregateAsync");
             }
 
             [TestMethod]

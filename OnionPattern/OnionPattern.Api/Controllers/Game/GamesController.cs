@@ -21,7 +21,7 @@ namespace OnionPattern.Api.Controllers.Game
         /// <param name="gameRequestAggregate"></param>
         public GamesController(IGameRequestAggregate gameRequestAggregate)
         {
-            this.gameRequestAggregate = gameRequestAggregate ?? throw new ArgumentNullException($"{nameof(gameRequestAggregate)} cannot be null.");
+            this.gameRequestAggregate = gameRequestAggregate ?? throw new ArgumentNullException(nameof(gameRequestAggregate));
         }
         
         /// <summary>

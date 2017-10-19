@@ -13,8 +13,8 @@ namespace OnionPattern.DataAccess.EF
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Game>().ToTable(nameof(Game));
-            modelBuilder.Entity<Platform>().ToTable(nameof(Platform));
+            modelBuilder.Entity<Game>().ToTable(nameof(Game)).Property(g => g.Id).ValueGeneratedOnAdd();
+            modelBuilder.Entity<Platform>().ToTable(nameof(Platform)).Property(p => p.Id).ValueGeneratedOnAdd();
             modelBuilder.Entity<GamePlatform>().ToTable(nameof(GamePlatform));//.HasKey(gp => new { gp.GameId, gp.PlatformId });
         }
     }

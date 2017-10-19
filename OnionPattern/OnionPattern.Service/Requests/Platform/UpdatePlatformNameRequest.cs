@@ -1,4 +1,5 @@
 ﻿using System;
+using AutoMapper;
 using OnionPattern.Domain.DataTransferObjects.Platform;
 using OnionPattern.Domain.DataTransferObjects.Platform.Input;
 using OnionPattern.Domain.Repository;
@@ -28,9 +29,21 @@ namespace OnionPattern.Service.Requests.Platform
                     Log.Error(exception, EXCEPTION_MESSAGE_TEMPLATE, exception.Message);
                     HandleErrors(platformResponse, exception, 404);
                 }
+                else
+                {
+                    var previousName = platformToUpdate.Name;
+                    platformToUpdate.Name = input.NewName;
+                    var updatedPlatform = Repository.Update(platformToUpdate);
+
+                    platformResponse = Mapper.Map(updatedPlatform, platformResponse);
+                    platformResponse.StatusCode = 200;
+
+                    Log.Information("Updated Platform from [{PreviousName}] to [{NewName}].", previousName, input.NewName);
+                }
             }
             catch (Exception x)
             {
+                Log.Error(x, "Failed to update Platform with Id: [{Id}] to new name [{NewName}].", input.Id, input.NewName);
                 HandleErrors(platformResponse, x);
             }
             return platformResponse;

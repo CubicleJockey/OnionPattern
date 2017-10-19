@@ -20,7 +20,7 @@ namespace OnionPattern.Api.Controllers.Platform
         /// </summary>
         public PlatfomsAsyncController(IPlatformRequestAsyncAggregate requestAsyncAggregate)
         {
-            RequestAsyncAggregate = requestAsyncAggregate ?? throw new ArgumentNullException($"{nameof(requestAsyncAggregate)} cannot be null.");
+            RequestAsyncAggregate = requestAsyncAggregate ?? throw new ArgumentNullException(nameof(requestAsyncAggregate));
         }
 
         /// <summary>

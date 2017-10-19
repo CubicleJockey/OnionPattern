@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
+using OnionPattern.Domain.DataTransferObjects.Platform.Input;
 using OnionPattern.Domain.Services.Requests.Platform;
 
 namespace OnionPattern.Api.Controllers.Platform
@@ -18,7 +19,7 @@ namespace OnionPattern.Api.Controllers.Platform
         /// </summary>
         public PlatformsController(IPlatformRequestAggregate requestAggregate)
         {
-            this.requestAggregate = requestAggregate ?? throw new ArgumentNullException($"{nameof(requestAggregate)} cannot be null.");
+            this.requestAggregate = requestAggregate ?? throw new ArgumentNullException(nameof(requestAggregate));
         }
 
         /// <summary>
@@ -41,6 +42,30 @@ namespace OnionPattern.Api.Controllers.Platform
         public IActionResult Get(int id)
         {
             return ExecuteAndHandleRequest(() => requestAggregate.GetPlatformByIdRequest.Execute(id));
+        }
+
+        /// <summary>
+        /// Delete Platform by it's id.
+        /// </summary>
+        /// <param name="id">Id of the Platform</param>
+        /// <returns></returns>
+        [HttpDelete]
+        [Route("Delete/{id:int}")]
+        public IActionResult Delete(int id)
+        {
+            return ExecuteAndHandleRequest(() => requestAggregate.DeletePlatformByIdRequest.Execute(id));
+        }
+
+        /// <summary>
+        /// Updates Platforms Name by it's Id
+        /// </summary>
+        /// <param name="input">Id and NewName for updating.</param>
+        /// <returns></returns>
+        [HttpPut]
+        [Route("UpdateName/")]
+        public IActionResult Put(UpdatePlatformNameInputDto input)
+        {
+            return ExecuteAndHandleRequest(() => requestAggregate.UpdatePlatformNameRequest.Execute(input));
         }
     }
 }

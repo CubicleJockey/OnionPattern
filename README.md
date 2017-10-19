@@ -9,7 +9,7 @@
  * [Helpful Links](#helpfullinks)
 
 
-####  Overview: (#overview)
+####  Overview:
 This is a project in which I am creating myself an example of Onion Pattern/Onion Architecture. To perform this we need loosely
 coupled code. Understanding Dependency Injection will be helpful to fulfill the needs of providing concrete types to the loosely coupled interfaces. See Jeffrey Palermo article below for description of what 
 Onion Architecture is.

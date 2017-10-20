@@ -20,7 +20,8 @@ namespace OnionPattern.Service.Requests.Platform.Async
                                                                           (getPlatformByIdRequestAsync = new GetPlatformByIdRequestAsync(RepositoryAsync, RepositoryAsyncAggregate));
 
         private IUpdatePlatformNameRequestAsync updatePlatformNameRequestAsync;
-        public IUpdatePlatformNameRequestAsync UpdatePlatformNameRequestAsync => throw new NotImplementedException();
+        public IUpdatePlatformNameRequestAsync UpdatePlatformNameRequestAsync => updatePlatformNameRequestAsync ?? 
+                                                                                (updatePlatformNameRequestAsync = new UpdatePlatformNameRequestAsync(RepositoryAsync, RepositoryAsyncAggregate));
 
         private IDeletePlatformByIdRequestAsync deletePlatformByIdRequestAsync;
         public IDeletePlatformByIdRequestAsync DeletePlatformByIdRequestAsync => throw new NotImplementedException();

@@ -16,10 +16,9 @@ namespace OnionPattern.Service.Requests.Platform
 
         public PlatformResponseDto Execute(int id)
         {
-            Log.Information("Retrieving Platform by Id: [{Id}]...", id);
-
             CheckInputValidity(id);
-
+            Log.Information("Retrieving Platform by Id: [{Id}]...", id);
+            
             var platformResponse = new PlatformResponseDto();
             try
             {

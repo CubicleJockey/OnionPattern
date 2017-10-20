@@ -19,8 +19,9 @@ namespace OnionPattern.Service.Requests.Platform
             var platformResponse = new PlatformResponseDto();
             try
             {
+                Log.Information("Deleting Platform with Id: [{Id}]", id);
                 CheckInputValidity(id);
-
+                
                 var platform = Repository.SingleOrDefault(p => p.Id == id);
                 if (platform == null)
                 {

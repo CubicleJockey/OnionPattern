@@ -57,10 +57,13 @@ namespace OnionPattern.Service.Tests.Requests.Platform
             [TestMethod]
             public void InputIsNull()
             {
-                Action execute = () => request.Execute(null);
+                var response = request.Execute(null);
 
-                execute.ShouldThrow<ArgumentNullException>()
-                    .WithMessage($"Value cannot be null.{Environment.NewLine}Parameter name: input");
+                response.Should().NotBeNull();
+                response.ErrorSummary.Should().NotBeNullOrWhiteSpace();
+                response.ErrorSummary.Should().BeEquivalentTo($"Value cannot be null.{Environment.NewLine}Parameter name: input");
+                response.StatusCode.HasValue.Should().BeTrue();
+                response.StatusCode.ShouldBeEquivalentTo(500);
             }
 
             [DataTestMethod]
@@ -69,10 +72,13 @@ namespace OnionPattern.Service.Tests.Requests.Platform
             public void InvalidInputIdNotValid(int Id)
             {
                 var invalidInput = new UpdatePlatformNameInputDto { Id = Id, NewName = "Something" };
-                Action execute = () => request.Execute(invalidInput);
+                var response = request.Execute(invalidInput);
 
-                execute.ShouldThrow<ArgumentException>()
-                    .WithMessage($"Input {nameof(Id)} must be 1 or greater.");
+                response.Should().NotBeNull();
+                response.ErrorSummary.Should().NotBeNullOrWhiteSpace();
+                response.ErrorSummary.Should().BeEquivalentTo($"Input {nameof(Id)} must be 1 or greater.");
+                response.StatusCode.HasValue.Should().BeTrue();
+                response.StatusCode.ShouldBeEquivalentTo(500);
             }
 
             [DataTestMethod]
@@ -82,10 +88,13 @@ namespace OnionPattern.Service.Tests.Requests.Platform
             public void InvalidInputNameIsEmpty(string name)
             {
                 var invalidInput = new UpdatePlatformNameInputDto { Id = 666, NewName = name };
-                Action execute = () => request.Execute(invalidInput);
+               var response = request.Execute(invalidInput);
 
-                execute.ShouldThrow<ArgumentException>()
-                    .WithMessage("Input NewName cannot be empty.");
+                response.Should().NotBeNull();
+                response.ErrorSummary.Should().NotBeNullOrWhiteSpace();
+                response.ErrorSummary.Should().BeEquivalentTo("Input NewName cannot be empty.");
+                response.StatusCode.HasValue.Should().BeTrue();
+                response.StatusCode.ShouldBeEquivalentTo(500);
             }
         }
     }

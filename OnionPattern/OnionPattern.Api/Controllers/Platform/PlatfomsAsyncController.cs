@@ -46,11 +46,28 @@ namespace OnionPattern.Api.Controllers.Platform
             return await ExecuteAndHandleRequestAsync(() => RequestAsyncAggregate.GetPlatformByIdRequestAsync.ExecuteAsync(id));
         }
 
+        /// <summary>
+        /// Creates a Platform
+        /// </summary>
+        /// <param name="input">Inputs to create a Platform.</param>
+        /// <returns></returns>
         [HttpPost]
         [Route("Create/")]
         public async Task<IActionResult> Post(CreatePlatformInputDto input)
         {
             return await ExecuteAndHandleRequestAsync(() => RequestAsyncAggregate.CreatePlatformRequestAsync.ExecuteAsync(input));
+        }
+
+        /// <summary>
+        /// Updates the Name of a Platform of a given id.
+        /// </summary>
+        /// <param name="input">Inputs required to update the name of a platform.</param>
+        /// <returns></returns>
+        [HttpPut]
+        [Route("Update/")]
+        public async Task<IActionResult> Put(UpdatePlatformNameInputDto input)
+        {
+            return await ExecuteAndHandleRequestAsync(() => RequestAsyncAggregate.UpdatePlatformNameRequestAsync.ExecuteAsync(input));
         }
     }
 }

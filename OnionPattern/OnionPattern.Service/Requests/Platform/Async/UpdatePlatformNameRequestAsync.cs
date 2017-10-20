@@ -1,32 +1,33 @@
 ﻿using System;
+using System.Threading.Tasks;
 using AutoMapper;
 using OnionPattern.Domain.DataTransferObjects.Platform;
 using OnionPattern.Domain.DataTransferObjects.Platform.Input;
 using OnionPattern.Domain.Repository;
-using OnionPattern.Domain.Services.Requests.Platform;
+using OnionPattern.Domain.Services.Requests.Platform.Async;
 using Serilog;
 
-namespace OnionPattern.Service.Requests.Platform
+namespace OnionPattern.Service.Requests.Platform.Async
 {
-    public class UpdatePlatformNameRequest : BaseServiceRequest<Domain.Entities.Platform>, IUpdatePlatformNameRequest
+    public class UpdatePlatformNameRequestAsync : BaseServiceRequestAsync<Domain.Entities.Platform>, IUpdatePlatformNameRequestAsync
     {
-        public UpdatePlatformNameRequest(IRepository<Domain.Entities.Platform> repository, IRepositoryAggregate repositoryAggregate) 
+        public UpdatePlatformNameRequestAsync(IRepositoryAsync<Domain.Entities.Platform> repository, IRepositoryAsyncAggregate repositoryAggregate) 
             : base(repository, repositoryAggregate) { }
 
-        #region Implementation of IUpdatePlatformNameRequest
+        #region Implementation of IUpdatePlatformNameRequestAsync
 
-        public PlatformResponseDto Execute(UpdatePlatformNameInputDto input)
+        public async Task<PlatformResponseDto> ExecuteAsync(UpdatePlatformNameInputDto input)
         {
-            
             var platformResponse = new PlatformResponseDto();
             try
             {
                 CheckInputValidity(input);
-                Log.Information("Updating name Platform with Id: [{Id}] to [{NewName}]...", input.Id, input.NewName);
-                var platformToUpdate = Repository.SingleOrDefault(p => p.Id == input.Id);
+                Log.Information("Updating Plattform with Id: [{Id}] with new Name: [{NewName}]...", input?.Id, input?.NewName);
+
+                var platformToUpdate = await Repository.SingleOrDefaultAsync(p => p.Id == input.Id);
                 if (platformToUpdate == null)
                 {
-                    var exception = new Exception($"Failed to find platform with Id: [{input.Id}].");
+                    var exception = new Exception($"Failed to find Platform with Id:[{input.Id}]");
                     Log.Error(exception, EXCEPTION_MESSAGE_TEMPLATE, exception.Message);
                     HandleErrors(platformResponse, exception, 404);
                 }
@@ -34,29 +35,28 @@ namespace OnionPattern.Service.Requests.Platform
                 {
                     var previousName = platformToUpdate.Name;
                     platformToUpdate.Name = input.NewName;
-                    var updatedPlatform = Repository.Update(platformToUpdate);
+                    var updatedPlatform = await Repository.UpdateAsync(platformToUpdate);
 
                     platformResponse = Mapper.Map(updatedPlatform, platformResponse);
                     platformResponse.StatusCode = 200;
 
-                    Log.Information("Updated Platform from [{PreviousName}] to [{NewName}].", previousName, input.NewName);
+                    Log.Information("Updated Platform Name [{PreviousName}] to [{Name}].", previousName, platformResponse.Name);
                 }
             }
             catch (Exception x)
             {
-                Log.Error(x, "Failed to update Platform.");
+                Log.Error(x, "Failed to update Platform with Id: [{Id}].", input?.Id);
                 HandleErrors(platformResponse, x);
             }
             return platformResponse;
         }
 
         #endregion
-
         private void CheckInputValidity(UpdatePlatformNameInputDto input)
         {
             if (input == null) { throw new ArgumentNullException(nameof(input)); }
             if (input.Id <= 0) { throw new ArgumentException($"Input {nameof(input.Id)} must be 1 or greater."); }
-            if(string.IsNullOrWhiteSpace(input.NewName)) { throw new ArgumentException($"Input {nameof(input.NewName)} cannot be empty."); }
+            if (string.IsNullOrWhiteSpace(input.NewName)) { throw new ArgumentException($"Input {nameof(input.NewName)} cannot be empty."); }
         }
     }
 }

@@ -45,6 +45,18 @@ namespace OnionPattern.Api.Controllers.Platform
         }
 
         /// <summary>
+        /// Creates a Platform
+        /// </summary>
+        /// <param name="input">Input values needed to create a Platform.</param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("Create/")]
+        public IActionResult Post(CreatePlatformInputDto input)
+        {
+            return ExecuteAndHandleRequest(() => requestAggregate.CreatePlatformRequest.Execute(input));
+        }
+
+        /// <summary>
         /// Delete Platform by it's id.
         /// </summary>
         /// <param name="id">Id of the Platform</param>

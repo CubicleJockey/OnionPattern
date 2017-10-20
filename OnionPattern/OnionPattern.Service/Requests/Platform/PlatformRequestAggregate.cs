@@ -1,7 +1,5 @@
-﻿using System;
-using OnionPattern.Domain.Repository;
+﻿using OnionPattern.Domain.Repository;
 using OnionPattern.Domain.Services.Requests.Platform;
-using OnionPattern.Service.Requests.Game;
 
 namespace OnionPattern.Service.Requests.Platform
 {
@@ -26,7 +24,7 @@ namespace OnionPattern.Service.Requests.Platform
         public IDeletePlatformByIdRequest DeletePlatformByIdRequest => deletePlatformByIdRequest ?? (deletePlatformByIdRequest = new DeletePlatformByIdRequest(Repository, RepositoryAggregate));
 
         private ICreatePlatformRequest createPlatformRequest;
-        public ICreatePlatformRequest CreatePlatformRequest => throw new NotImplementedException();
+        public ICreatePlatformRequest CreatePlatformRequest => createPlatformRequest ?? (createPlatformRequest = new CreatePlatformRequest(Repository, RepositoryAggregate));
     }
 
     #endregion

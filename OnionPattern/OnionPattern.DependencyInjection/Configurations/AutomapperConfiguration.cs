@@ -2,6 +2,7 @@
 using OnionPattern.Domain.DataTransferObjects.Game;
 using OnionPattern.Domain.DataTransferObjects.Game.Input;
 using OnionPattern.Domain.DataTransferObjects.Platform;
+using OnionPattern.Domain.DataTransferObjects.Platform.Input;
 using OnionPattern.Domain.Entities;
 using OnionPattern.Mapping.Game;
 using OnionPattern.Mapping.Platform;
@@ -29,6 +30,7 @@ namespace OnionPattern.DependencyInjection.Configurations
         private static void ConfigurePlatformMappings(IProfileExpression configs)
         {
             configs.CreateMap<Platform, PlatformResponseDto>().ConvertUsing<PlatformToPlatformResponseDtoTypeConverter>();
+            configs.CreateMap<CreatePlatformInputDto, Platform>().ConvertUsing<CreatePlatformInputDtoToPlatformTypeConverter>();
         }
     }
 }

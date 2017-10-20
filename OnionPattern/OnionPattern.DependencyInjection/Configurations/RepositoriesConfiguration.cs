@@ -7,7 +7,6 @@ using OnionPattern.Domain.Configurations;
 using OnionPattern.Domain.Constants;
 using OnionPattern.Domain.Entities;
 using OnionPattern.Domain.Repository;
-using System;
 
 namespace OnionPattern.DependencyInjection.Configurations
 {

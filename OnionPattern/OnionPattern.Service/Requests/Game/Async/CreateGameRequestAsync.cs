@@ -21,7 +21,7 @@ namespace OnionPattern.Service.Requests.Game.Async
             var gameResponse = new GameResponseDto();
             try
             {
-                Log.Information("Creating Game Entry for [{NewName}]...", input.Name);
+                Log.Information("Creating Game Entry for [{NewName}]...", input?.Name);
                 var gameEntity = Mapper.Map<CreateGameInputDto, Domain.Entities.Game>(input);
                 gameResponse = Mapper.Map(await Repository.CreateAsync(gameEntity), gameResponse);
                 gameResponse.StatusCode = 200;
@@ -29,7 +29,7 @@ namespace OnionPattern.Service.Requests.Game.Async
             }
             catch (Exception x)
             {
-                Log.Error(x, "Failed to Create Game: [{NewName}].", input.Name);
+                Log.Error(x, "Failed to Create Game: [{NewName}].", input?.Name);
                 HandleErrors(gameResponse, x);
             }
             return gameResponse;

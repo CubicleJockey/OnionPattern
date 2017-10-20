@@ -12,14 +12,14 @@ namespace OnionPattern.Api.Controllers.Platform
     [Route("api/v1/[controller]")]
     public class PlatformsController : BaseController
     {
-        private readonly IPlatformRequestAggregate requestAggregate;
+        private readonly IPlatformRequestAggregate RequestAggregate;
 
         /// <summary>
         /// Ctor
         /// </summary>
         public PlatformsController(IPlatformRequestAggregate requestAggregate)
         {
-            this.requestAggregate = requestAggregate ?? throw new ArgumentNullException(nameof(requestAggregate));
+            this.RequestAggregate = requestAggregate ?? throw new ArgumentNullException(nameof(requestAggregate));
         }
 
         /// <summary>
@@ -29,7 +29,7 @@ namespace OnionPattern.Api.Controllers.Platform
         [HttpGet]
         public IActionResult Get()
         {
-            return ExecuteAndHandleRequest(() => requestAggregate.GetAllPlatformsRequest.Execute());
+            return ExecuteAndHandleRequest(() => RequestAggregate.GetAllPlatformsRequest.Execute());
         }
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace OnionPattern.Api.Controllers.Platform
         [Route("{id:int}")]
         public IActionResult Get(int id)
         {
-            return ExecuteAndHandleRequest(() => requestAggregate.GetPlatformByIdRequest.Execute(id));
+            return ExecuteAndHandleRequest(() => RequestAggregate.GetPlatformByIdRequest.Execute(id));
         }
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace OnionPattern.Api.Controllers.Platform
         [Route("Create/")]
         public IActionResult Post(CreatePlatformInputDto input)
         {
-            return ExecuteAndHandleRequest(() => requestAggregate.CreatePlatformRequest.Execute(input));
+            return ExecuteAndHandleRequest(() => RequestAggregate.CreatePlatformRequest.Execute(input));
         }
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace OnionPattern.Api.Controllers.Platform
         [Route("Delete/{id:int}")]
         public IActionResult Delete(int id)
         {
-            return ExecuteAndHandleRequest(() => requestAggregate.DeletePlatformByIdRequest.Execute(id));
+            return ExecuteAndHandleRequest(() => RequestAggregate.DeletePlatformByIdRequest.Execute(id));
         }
 
         /// <summary>
@@ -77,7 +77,7 @@ namespace OnionPattern.Api.Controllers.Platform
         [Route("UpdateName/")]
         public IActionResult Put(UpdatePlatformNameInputDto input)
         {
-            return ExecuteAndHandleRequest(() => requestAggregate.UpdatePlatformNameRequest.Execute(input));
+            return ExecuteAndHandleRequest(() => RequestAggregate.UpdatePlatformNameRequest.Execute(input));
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using OnionPattern.Domain.DataTransferObjects.Platform.Input;
 using OnionPattern.Domain.Services.Requests.Platform.Async;
 
 namespace OnionPattern.Api.Controllers.Platform
@@ -43,6 +44,13 @@ namespace OnionPattern.Api.Controllers.Platform
         public async Task<IActionResult> Get(int id)
         {
             return await ExecuteAndHandleRequestAsync(() => RequestAsyncAggregate.GetPlatformByIdRequestAsync.ExecuteAsync(id));
+        }
+
+        [HttpPost]
+        [Route("Create/")]
+        public async Task<IActionResult> Post(CreatePlatformInputDto input)
+        {
+            return await ExecuteAndHandleRequestAsync(() => RequestAsyncAggregate.CreatePlatformRequestAsync.ExecuteAsync(input));
         }
     }
 }

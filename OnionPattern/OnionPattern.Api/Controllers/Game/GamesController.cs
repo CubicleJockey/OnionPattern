@@ -13,7 +13,7 @@ namespace OnionPattern.Api.Controllers.Game
     [Route("api/v1/[controller]")]
     public class GamesController : BaseController
     {
-        private readonly IGameRequestAggregate gameRequestAggregate;
+        private readonly IGameRequestAggregate GameRequestAggregate;
 
         /// <summary>
         /// Video Games Controller
@@ -21,7 +21,7 @@ namespace OnionPattern.Api.Controllers.Game
         /// <param name="gameRequestAggregate"></param>
         public GamesController(IGameRequestAggregate gameRequestAggregate)
         {
-            this.gameRequestAggregate = gameRequestAggregate ?? throw new ArgumentNullException(nameof(gameRequestAggregate));
+            this.GameRequestAggregate = gameRequestAggregate ?? throw new ArgumentNullException(nameof(gameRequestAggregate));
         }
         
         /// <summary>
@@ -31,7 +31,7 @@ namespace OnionPattern.Api.Controllers.Game
         [HttpGet]
         public IActionResult Get()
         {
-            return ExecuteAndHandleRequest(() => gameRequestAggregate.GetAllGamesRequest.Execute());
+            return ExecuteAndHandleRequest(() => GameRequestAggregate.GetAllGamesRequest.Execute());
         }
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace OnionPattern.Api.Controllers.Game
         [Route("{id}")]
         public IActionResult Get(int id)
         {
-            return ExecuteAndHandleRequest(() => gameRequestAggregate.GetGameByIdRequest.Execute(id));
+            return ExecuteAndHandleRequest(() => GameRequestAggregate.GetGameByIdRequest.Execute(id));
         }
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace OnionPattern.Api.Controllers.Game
         [Route("ByGenre/{genre}")]
         public IActionResult Get(string genre)
         {
-            return ExecuteAndHandleRequest(() => gameRequestAggregate.GetGamesByGenreRequest.Execute(genre));
+            return ExecuteAndHandleRequest(() => GameRequestAggregate.GetGamesByGenreRequest.Execute(genre));
         }
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace OnionPattern.Api.Controllers.Game
         [Route("Create/")]
         public IActionResult Post(CreateGameInputDto game)
         {
-            return ExecuteAndHandleRequest(() => gameRequestAggregate.CreateGameRequest.Execute(game));
+            return ExecuteAndHandleRequest(() => GameRequestAggregate.CreateGameRequest.Execute(game));
         }
 
         /// <summary>
@@ -79,7 +79,7 @@ namespace OnionPattern.Api.Controllers.Game
         [Route("Update/")]
         public IActionResult Put(UpdateGameTitleInputDto input)
         {
-            return ExecuteAndHandleRequest(() => gameRequestAggregate.UpdateGameTitleRequest.Execute(input));
+            return ExecuteAndHandleRequest(() => GameRequestAggregate.UpdateGameTitleRequest.Execute(input));
         }
 
         /// <summary>
@@ -91,7 +91,7 @@ namespace OnionPattern.Api.Controllers.Game
         [Route("Delete/{id}")]
         public IActionResult Delete(int id)
         {
-            return ExecuteAndHandleRequest(() => gameRequestAggregate.DeleteGameByIdRequest.Execute(id));
+            return ExecuteAndHandleRequest(() => GameRequestAggregate.DeleteGameByIdRequest.Execute(id));
         }
     }
 }

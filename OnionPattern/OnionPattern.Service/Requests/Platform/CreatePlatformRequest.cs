@@ -20,7 +20,7 @@ namespace OnionPattern.Service.Requests.Platform
             var platformResponse = new PlatformResponseDto();
             try
             {
-                Log.Information("Creating Platform [{Name}]...", input.Name);
+                Log.Information("Creating Platform [{Name}]...", input?.Name);
                 var platformToCreate = Mapper.Map<CreatePlatformInputDto, Domain.Entities.Platform>(input);
                 var createdPlatform = Repository.Create(platformToCreate);
 
@@ -31,7 +31,7 @@ namespace OnionPattern.Service.Requests.Platform
             }
             catch (Exception x)
             {
-                Log.Error(x, "Failed to create Platform [{Name}]", input.Name);
+                Log.Error(x, "Failed to create Platform [{Name}]", input?.Name);
                 HandleErrors(platformResponse, x);
             }
             return platformResponse;

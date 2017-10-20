@@ -26,7 +26,8 @@ namespace OnionPattern.Service.Requests.Platform.Async
         public IDeletePlatformByIdRequestAsync DeletePlatformByIdRequestAsync => throw new NotImplementedException();
 
         private ICreatePlatformRequestAsync createPlatformRequestAsync;
-        public ICreatePlatformRequestAsync CreatePlatformRequestAsync => throw new NotImplementedException();
+        public ICreatePlatformRequestAsync CreatePlatformRequestAsync => createPlatformRequestAsync ?? 
+                                                                        (createPlatformRequestAsync = new CreatePlatformRequestAsync(RepositoryAsync, RepositoryAsyncAggregate));
 
         #endregion
     }

@@ -14,7 +14,7 @@ namespace OnionPattern.Api.Controllers.Game
     [Route("api/v1/[controller]")]
     public class GamesAsyncController : BaseAsyncController
     {
-        private readonly IGameRequestAggregateAsync gameRequestAggregateAsync;
+        private readonly IGameRequestAggregateAsync GameRequestAggregateAsync;
 
         /// <summary>
         /// Video Games Controller
@@ -22,7 +22,7 @@ namespace OnionPattern.Api.Controllers.Game
         /// <param name="gameRequestAggregateAsync"></param>
         public GamesAsyncController(IGameRequestAggregateAsync gameRequestAggregateAsync)
         {
-            this.gameRequestAggregateAsync = gameRequestAggregateAsync ?? throw new ArgumentNullException(nameof(gameRequestAggregateAsync));
+            this.GameRequestAggregateAsync = gameRequestAggregateAsync ?? throw new ArgumentNullException(nameof(gameRequestAggregateAsync));
         }
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace OnionPattern.Api.Controllers.Game
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            return await ExecuteAndHandleRequestAsync(() => gameRequestAggregateAsync.GetAllGamesRequestAsync.ExecuteAsync());
+            return await ExecuteAndHandleRequestAsync(() => GameRequestAggregateAsync.GetAllGamesRequestAsync.ExecuteAsync());
         }
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace OnionPattern.Api.Controllers.Game
         [Route("{id}")]
         public async Task<IActionResult> Get(int id)
         {
-            return await ExecuteAndHandleRequestAsync(() => gameRequestAggregateAsync.GetGameByIdRequestAsync.ExecuteAsync(id));
+            return await ExecuteAndHandleRequestAsync(() => GameRequestAggregateAsync.GetGameByIdRequestAsync.ExecuteAsync(id));
         }
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace OnionPattern.Api.Controllers.Game
         [Route("ByGenre/{genre}")]
         public async Task<IActionResult> Get(string genre)
         {
-            return await ExecuteAndHandleRequestAsync(() => gameRequestAggregateAsync.GetGamesByGenreRequestAsync.ExecuteAsync(genre));
+            return await ExecuteAndHandleRequestAsync(() => GameRequestAggregateAsync.GetGamesByGenreRequestAsync.ExecuteAsync(genre));
         }
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace OnionPattern.Api.Controllers.Game
         [Route("Create/")]
         public async Task<IActionResult> Post(CreateGameInputDto game)
         {
-            return await ExecuteAndHandleRequestAsync(() => gameRequestAggregateAsync.CreateGameRequestAsync.ExecuteAsync(game));
+            return await ExecuteAndHandleRequestAsync(() => GameRequestAggregateAsync.CreateGameRequestAsync.ExecuteAsync(game));
         }
 
         /// <summary>
@@ -80,7 +80,7 @@ namespace OnionPattern.Api.Controllers.Game
         [Route("Update/")]
         public async Task<IActionResult> Put(UpdateGameTitleInputDto input)
         {
-            return await ExecuteAndHandleRequestAsync(() => gameRequestAggregateAsync.UpdateGameTitleRequestAsync.ExecuteAsync(input));
+            return await ExecuteAndHandleRequestAsync(() => GameRequestAggregateAsync.UpdateGameTitleRequestAsync.ExecuteAsync(input));
         }
 
         /// <summary>
@@ -92,7 +92,7 @@ namespace OnionPattern.Api.Controllers.Game
         [Route("Delete/{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            return await ExecuteAndHandleRequestAsync(() => gameRequestAggregateAsync.DeleteGameByIdRequestAsync.ExecuteAsync(id));
+            return await ExecuteAndHandleRequestAsync(() => GameRequestAggregateAsync.DeleteGameByIdRequestAsync.ExecuteAsync(id));
         }
     }
 }

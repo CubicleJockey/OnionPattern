@@ -1,4 +1,5 @@
-﻿using FakeItEasy;
+﻿using System;
+using FakeItEasy;
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -12,6 +13,14 @@ namespace OnionPattern.DataAccess.EF.Tests.Repository
         [TestClass]
         public class ConstructorTests
         {
+            [TestMethod]
+            public void ContextIsNull()
+            {
+                Action ctor = () => new RepositoryAsync<DummyEntity>(null);
+
+                ctor.ShouldThrow<ArgumentNullException>()
+                    .WithMessage($"Value cannot be null.{Environment.NewLine}Parameter name: context");
+            }
 
             [TestMethod]
             public void Inheritence()

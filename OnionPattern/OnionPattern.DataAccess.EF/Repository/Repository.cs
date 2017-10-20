@@ -20,7 +20,7 @@ namespace OnionPattern.DataAccess.EF.Repository
         /// <param name="context"></param>
         public Repository(DbContext context)
         {
-            this.context = context ?? throw new ArgumentNullException($"{nameof(context)} cannot be null.");
+            this.context = context ?? throw new ArgumentNullException(nameof(context));
             dataSet = context.Set<TEntity>();
         }
 

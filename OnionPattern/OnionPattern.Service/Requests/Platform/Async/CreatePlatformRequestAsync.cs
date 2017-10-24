@@ -38,10 +38,10 @@ namespace OnionPattern.Service.Requests.Platform.Async
                     Log.Information("Created Platform [{Name}]", platformResponse.Name);
                 }
             }
-            catch (Exception x)
+            catch (Exception exception)
             {
-                Log.Error(x, "Failed to create Platform [{Name}].", input?.Name);
-                HandleErrors(platformResponse, x);
+                Log.Error(exception, "Failed to create Platform [{Name}].", input?.Name);
+                HandleErrors(platformResponse, exception);
             }
             return platformResponse;
         }

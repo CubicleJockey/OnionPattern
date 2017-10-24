@@ -43,10 +43,10 @@ namespace OnionPattern.Service.Requests.Game.Async
                     gameResponse.StatusCode = 200;
                 }
             }
-            catch (Exception x)
+            catch (Exception exception)
             {
-                Log.Error(x, EXCEPTION_MESSAGE_TEMPLATE, x.Message);
-                HandleErrors(gameResponse, x);
+                Log.Error(exception, EXCEPTION_MESSAGE_TEMPLATE, exception.Message);
+                HandleErrors(gameResponse, exception);
             }
             return gameResponse;
         }

@@ -25,10 +25,10 @@ namespace OnionPattern.Service.Requests.Game
                 gameResponse = Mapper.Map(Repository.Create(gameEntity), gameResponse);
                 gameResponse.StatusCode = 200;
             }
-            catch (Exception x)
+            catch (Exception exception)
             {
-                Log.Error(x, "Failed to Create Game: [{NewName}].", game?.Name);
-                HandleErrors(gameResponse, x);
+                Log.Error(exception, "Failed to Create Game: [{NewName}].", game?.Name);
+                HandleErrors(gameResponse, exception);
             }
             return gameResponse;
         }

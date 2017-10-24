@@ -37,10 +37,10 @@ namespace OnionPattern.Service.Requests.Game.Async
                     gameListResponse.StatusCode = 200;
                 }
             }
-            catch (Exception x)
+            catch (Exception exception)
             {
-                Log.Error(x, "Failed to get Game for Genre [{Genre}].", genre);
-                HandleErrors(gameListResponse, x);
+                Log.Error(exception, "Failed to get Game for Genre [{Genre}].", genre);
+                HandleErrors(gameListResponse, exception);
             }
             return gameListResponse;
         }

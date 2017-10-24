@@ -43,10 +43,10 @@ namespace OnionPattern.Service.Requests.Platform.Async
                     Log.Information("Updated Platform Name [{PreviousName}] to [{Name}].", previousName, platformResponse.Name);
                 }
             }
-            catch (Exception x)
+            catch (Exception exception)
             {
-                Log.Error(x, "Failed to update Platform with Id: [{Id}].", input?.Id);
-                HandleErrors(platformResponse, x);
+                Log.Error(exception, "Failed to update Platform with Id: [{Id}].", input?.Id);
+                HandleErrors(platformResponse, exception);
             }
             return platformResponse;
         }

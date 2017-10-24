@@ -42,10 +42,10 @@ namespace OnionPattern.Service.Requests.Platform
                     Log.Information("Updated Platform from [{PreviousName}] to [{NewName}].", previousName, input.NewName);
                 }
             }
-            catch (Exception x)
+            catch (Exception exception)
             {
-                Log.Error(x, "Failed to update Platform.");
-                HandleErrors(platformResponse, x);
+                Log.Error(exception, "Failed to update Platform.");
+                HandleErrors(platformResponse, exception);
             }
             return platformResponse;
         }

@@ -31,8 +31,6 @@ namespace OnionPattern.Service.Requests.Game
                 }
                 else
                 {
-                    //TODO: Aggregate the Platforms data.
-
                     gameListResponse = new GameListResponseDto
                     {
                         Games = games,
@@ -42,10 +40,10 @@ namespace OnionPattern.Service.Requests.Game
                     Log.Information("Retrieved [{Count}] Games.", count);
                 }
             }
-            catch (Exception x)
+            catch (Exception exception)
             {
-                Log.Error(x, "Failed to get All Games List. {Message}", x.Message);
-                HandleErrors(gameListResponse, x);
+                Log.Error(exception, "Failed to get All Games List. {Message}", exception.Message);
+                HandleErrors(gameListResponse, exception);
             }
             return gameListResponse;
         }

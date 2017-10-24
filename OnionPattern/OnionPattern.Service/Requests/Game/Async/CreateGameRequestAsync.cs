@@ -27,10 +27,10 @@ namespace OnionPattern.Service.Requests.Game.Async
                 gameResponse.StatusCode = 200;
                 Log.Information("Created Game Entry for [{NewName}] with Id: [{Id}]", gameResponse.Name, gameResponse.Id);
             }
-            catch (Exception x)
+            catch (Exception exception)
             {
-                Log.Error(x, "Failed to Create Game: [{NewName}].", input?.Name);
-                HandleErrors(gameResponse, x);
+                Log.Error(exception, "Failed to Create Game: [{NewName}].", input?.Name);
+                HandleErrors(gameResponse, exception);
             }
             return gameResponse;
         }

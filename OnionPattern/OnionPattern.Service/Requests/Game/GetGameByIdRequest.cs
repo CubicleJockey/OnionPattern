@@ -35,10 +35,10 @@ namespace OnionPattern.Service.Requests.Game
                     gameResponse.StatusCode = 200;
                 }
             }
-            catch (Exception x)
+            catch (Exception exception)
             {
-                Log.Error(x, "Failed to get Game for title [{Id}].", id);
-                HandleErrors(gameResponse, x);
+                Log.Error(exception, "Failed to get Game for title [{Id}].", id);
+                HandleErrors(gameResponse, exception);
             }
             return gameResponse;
         }

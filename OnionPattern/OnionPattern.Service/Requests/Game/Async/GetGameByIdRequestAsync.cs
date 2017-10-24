@@ -37,10 +37,10 @@ namespace OnionPattern.Service.Requests.Game.Async
                     Log.Information("Retrieved [{NewName}] for Id: [{Id}].", gameResponse.Name, id);
                 }
             }
-            catch (Exception x)
+            catch (Exception exception)
             {
-                Log.Error(x, "Failed to get Game for title [{Id}].", id);
-                HandleErrors(gameResponse, x);
+                Log.Error(exception, "Failed to get Game for title [{Id}].", id);
+                HandleErrors(gameResponse, exception);
             }
             return gameResponse;
         }

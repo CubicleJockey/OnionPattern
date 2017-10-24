@@ -52,10 +52,10 @@ namespace OnionPattern.Service.Requests.Game.Async
                     Log.Information("Deleted Game [{NewName}] for Id:[{Id}].", toDelete.Name, toDelete.Id);
                 }
             }
-            catch (Exception x)
+            catch (Exception exception)
             {
-                Log.Error(x, "Failed to Delete Game.");
-                HandleErrors(gameResponse, x);
+                Log.Error(exception, "Failed to Delete Game.");
+                HandleErrors(gameResponse, exception);
             }
             return gameResponse;
         }

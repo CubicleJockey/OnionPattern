@@ -40,10 +40,10 @@ namespace OnionPattern.Service.Requests.Game.Async
                     Log.Information("Retrieved [{Count}] Games.", count);
                 }
             }
-            catch (Exception x)
+            catch (Exception exception)
             {
-                Log.Error(x, "Failed to get All Games List.");
-                HandleErrors(gameListResponse, x);
+                Log.Error(exception, "Failed to get All Games List.");
+                HandleErrors(gameListResponse, exception);
             }
             return gameListResponse;
         }

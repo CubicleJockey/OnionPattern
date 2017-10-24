@@ -35,10 +35,10 @@ namespace OnionPattern.Service.Requests.Platform
                     Log.Information("Retrieved [{NewName}] for Id: [{Id}].", platformResponse.Name, id);
                 }
             }
-            catch (Exception x)
+            catch (Exception exception)
             {
-                Log.Error("Failed to get Platforms List. [{Message}].", x.Message);
-                HandleErrors(platformResponse, x);
+                Log.Error("Failed to get Platforms List. [{Message}].", exception.Message);
+                HandleErrors(platformResponse, exception);
             }
             return platformResponse;
         }

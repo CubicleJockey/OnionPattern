@@ -27,10 +27,10 @@ namespace OnionPattern.Api.Controllers
         /// Log which version of the controller is being called on what method.
         /// </summary>
         /// <param name="controllerName">Controller Name</param>
-        /// <param name="callingMethod">Calling Method Name</param>
-        protected void LogApiVersion(string controllerName, string callingMethod)
+        protected IActionResult ApiVersion(string controllerName)
         {
-            Log.Information("{ControllerName} requested Api-Version is [{GetRequestedApiVersion}].", controllerName, HttpContext.GetRequestedApiVersion());
+            var content = $"{controllerName} requested Api-Version is [{HttpContext.GetRequestedApiVersion()}].";
+            return Ok(content);
         }
     }
 }

@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using OnionPattern.Api.Controllers.Game;
 using OnionPattern.Api.StartupConfigurations;
 using OnionPattern.DataAccess.EF;
 using OnionPattern.DependencyInjection;
@@ -56,10 +55,6 @@ namespace OnionPattern.Api
             });
 
             services.AddMvc();
-            //services.AddMvc(mvc =>
-            //{
-            //    mvc.Conventions.Add(new DefaultRoutePrefixConvention());
-            //});
 
             LoadAppSettings.IntoInjector(services, Configuration);
 

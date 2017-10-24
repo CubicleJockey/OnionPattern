@@ -2,8 +2,6 @@
 using OnionPattern.Domain.Errors;
 using System;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc.Filters;
-using Serilog;
 
 namespace OnionPattern.Api.Controllers
 {
@@ -29,10 +27,10 @@ namespace OnionPattern.Api.Controllers
         /// Log which version of the controller is being called on what method.
         /// </summary>
         /// <param name="controllerName">Controller Name</param>
-        /// <param name="callingMethod">Calling Method Name</param>
-        protected void LogApiVersion(string controllerName, string callingMethod)
+        protected async Task<IActionResult> ApiVersion(string controllerName)
         {
-            Log.Information("{ControllerName} requested Api-Version is [{GetRequestedApiVersion}].", controllerName, HttpContext.GetRequestedApiVersion());
+            var content = $"{controllerName} requested Api-Version is [{HttpContext.GetRequestedApiVersion()}].";
+            return await Task.FromResult(Ok(content));
         }
     }
 }

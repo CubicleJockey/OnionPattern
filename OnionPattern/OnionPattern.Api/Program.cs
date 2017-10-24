@@ -1,11 +1,10 @@
-﻿using System.IO;
-using System.Net;
-using Microsoft.AspNetCore;
+﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using OnionPattern.Api.StartupConfigurations;
 using OnionPattern.Domain.Constants;
+using System.IO;
+using System.Net;
 
 namespace OnionPattern.Api
 {

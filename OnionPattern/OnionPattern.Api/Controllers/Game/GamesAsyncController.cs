@@ -12,18 +12,19 @@ namespace OnionPattern.Api.Controllers.Game
     /// </summary>
     [ApiVersion("1.0")]
     [Produces("application/json")]
-    [Route("api/v1/[controller]")]
+    [Route("api/[controller]")]
     public class GamesAsyncController : BaseAsyncController
     {
         private readonly IGameRequestAggregateAsync GameRequestAggregateAsync;
 
+        /// <inheritdoc />
         /// <summary>
         /// Video Games Controller
         /// </summary>
         /// <param name="gameRequestAggregateAsync"></param>
         public GamesAsyncController(IGameRequestAggregateAsync gameRequestAggregateAsync)
         {
-            this.GameRequestAggregateAsync = gameRequestAggregateAsync ?? throw new ArgumentNullException(nameof(gameRequestAggregateAsync));
+            GameRequestAggregateAsync = gameRequestAggregateAsync ?? throw new ArgumentNullException(nameof(gameRequestAggregateAsync));
         }
 
         /// <summary>

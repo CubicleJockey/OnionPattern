@@ -10,17 +10,19 @@ namespace OnionPattern.Api.Controllers.Platform
     /// Platform Controller
     /// </summary>
     [ApiVersion("1.0")]
-    [Route("api/v1/[controller]")]
+    [Produces("application/json")]
+    [Route("api/[controller]")]
     public class PlatformsController : BaseController
     {
         private readonly IPlatformRequestAggregate RequestAggregate;
 
+        /// <inheritdoc />
         /// <summary>
         /// Ctor
         /// </summary>
         public PlatformsController(IPlatformRequestAggregate requestAggregate)
         {
-            this.RequestAggregate = requestAggregate ?? throw new ArgumentNullException(nameof(requestAggregate));
+            RequestAggregate = requestAggregate ?? throw new ArgumentNullException(nameof(requestAggregate));
         }
 
         /// <summary>

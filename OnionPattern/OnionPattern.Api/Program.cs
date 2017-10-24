@@ -37,6 +37,8 @@ namespace OnionPattern.Api
                     config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                         .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true);
                     config.AddEnvironmentVariables();
+
+                    
                 })
                 .UseKestrel(options =>
                 {

@@ -1,15 +1,14 @@
-﻿using System;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+using OnionPattern.Api.Controllers.Game;
 using OnionPattern.Api.StartupConfigurations;
 using OnionPattern.DataAccess.EF;
 using OnionPattern.DependencyInjection;
 using OnionPattern.DependencyInjection.Data;
-using OnionPattern.Domain.Configurations;
 using OnionPattern.Domain.Constants;
 
 namespace OnionPattern.Api
@@ -48,7 +47,19 @@ namespace OnionPattern.Api
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
+            services.AddApiVersioning(apiVersioningOptions => {
+                apiVersioningOptions.ReportApiVersions = true;
+                apiVersioningOptions.AssumeDefaultVersionWhenUnspecified = true;
+                apiVersioningOptions.DefaultApiVersion = new ApiVersion(1, 0);
+
+                //apiVersioningOptions.Conventions.Controller<GamesController>().HasApiVersion(new ApiVersion(1, 0));
+            });
+
             services.AddMvc();
+            //services.AddMvc(mvc =>
+            //{
+            //    mvc.Conventions.Add(new DefaultRoutePrefixConvention());
+            //});
 
             LoadAppSettings.IntoInjector(services, Configuration);
 

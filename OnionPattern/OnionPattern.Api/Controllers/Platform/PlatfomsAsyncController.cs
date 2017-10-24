@@ -12,11 +12,12 @@ namespace OnionPattern.Api.Controllers.Platform
     /// </summary>
     [ApiVersion("1.0")]
     [Produces("application/json")]
-    [Route("api/v1/[controller]")]
+    [Route("api/[controller]")]
     public class PlatfomsAsyncController : BaseAsyncController
     {
         private IPlatformRequestAsyncAggregate RequestAsyncAggregate { get; }
 
+        /// <inheritdoc />
         /// <summary>
         /// Ctor
         /// </summary>

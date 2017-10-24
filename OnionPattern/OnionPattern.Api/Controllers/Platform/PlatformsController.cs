@@ -11,7 +11,7 @@ namespace OnionPattern.Api.Controllers.Platform
     /// </summary>
     [ApiVersion("1.0")]
     [Produces("application/json")]
-    [Route("api/[controller]")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     public class PlatformsController : BaseController
     {
         private readonly IPlatformRequestAggregate RequestAggregate;

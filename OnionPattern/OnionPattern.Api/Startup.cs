@@ -46,13 +46,7 @@ namespace OnionPattern.Api
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-            services.AddApiVersioning(apiVersioningOptions => {
-                apiVersioningOptions.ReportApiVersions = true;
-                apiVersioningOptions.AssumeDefaultVersionWhenUnspecified = true;
-                apiVersioningOptions.DefaultApiVersion = new ApiVersion(1, 0);
-
-                //apiVersioningOptions.Conventions.Controller<GamesController>().HasApiVersion(new ApiVersion(1, 0));
-            });
+            services.AddApiVersioning(apiVersioningOptions => { apiVersioningOptions.ReportApiVersions = true; });
 
             services.AddMvc();
 

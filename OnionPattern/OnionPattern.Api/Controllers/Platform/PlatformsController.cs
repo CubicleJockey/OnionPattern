@@ -9,6 +9,7 @@ namespace OnionPattern.Api.Controllers.Platform
     /// <summary>
     /// Platform Controller
     /// </summary>
+    [ApiVersion("1.0")]
     [Route("api/v1/[controller]")]
     public class PlatformsController : BaseController
     {

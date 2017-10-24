@@ -10,6 +10,7 @@ namespace OnionPattern.Api.Controllers.Platform
     /// <summary>
     /// Async version of the Platform Controller
     /// </summary>
+    [ApiVersion("1.0")]
     [Produces("application/json")]
     [Route("api/v1/[controller]")]
     public class PlatfomsAsyncController : BaseAsyncController

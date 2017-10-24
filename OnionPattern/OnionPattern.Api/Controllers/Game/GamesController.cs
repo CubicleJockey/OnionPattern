@@ -9,6 +9,7 @@ namespace OnionPattern.Api.Controllers.Game
     /// <summary>
     /// Games Controller
     /// </summary>
+    [ApiVersion("1.0")]
     [Produces("application/json")]
     [Route("api/v1/[controller]")]
     public class GamesController : BaseController

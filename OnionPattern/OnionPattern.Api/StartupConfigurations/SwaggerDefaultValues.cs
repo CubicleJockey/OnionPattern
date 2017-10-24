@@ -24,11 +24,13 @@ namespace OnionPattern.Api.StartupConfigurations
             {
                 var description = context.ApiDescription.ParameterDescriptions.FirstOrDefault(p => p.Name == parameter.Name);
 
+                if (description == null) { continue; }
                 if (string.IsNullOrWhiteSpace(parameter.Description))
                 {
                     parameter.Description = description.ModelMetadata.Description;
                 }
 
+                if (description.RouteInfo == null) { continue; }
                 if (parameter.Default == null)
                 {
                     parameter.Default = description.RouteInfo.DefaultValue;

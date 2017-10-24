@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -45,6 +45,11 @@ namespace OnionPattern.Api
         /// </summary>
         public void ConfigureServices(IServiceCollection services)
         {
+            // Add the versioned api explorer, which also adds IApiVersionDescriptionProvider service
+            // Note: the specified format code will format the version as "'v'major[.minor][-status]"
+            // Note: Requires package: Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer
+            services.AddMvcCore().AddVersionedApiExplorer(o => o.GroupNameFormat = "'v'VVV");
+
             // Add framework services.
             services.AddApiVersioning(apiVersioningOptions => { apiVersioningOptions.ReportApiVersions = true; });
 
@@ -63,7 +68,7 @@ namespace OnionPattern.Api
         /// </summary>
         /// <param name="app"></param>
         /// <param name="loggerFactory"></param>
-        public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory, IApiVersionDescriptionProvider apiVersionDescriptionProvider)
         {
             loggerFactory.AddConsole(Configuration.GetSection(AppSettingsSections.Logging));
             loggerFactory.AddDebug();
@@ -74,7 +79,7 @@ namespace OnionPattern.Api
 
                 app.UseStaticFiles();
 
-               SwaggerStartupConfiguration.Configure(app);
+               SwaggerStartupConfiguration.Configure(app, apiVersionDescriptionProvider);
             }
 
             

@@ -65,9 +65,6 @@ namespace OnionPattern.Api
         /// <param name="apiVersionDescriptionProvider"></param>
         public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory, IApiVersionDescriptionProvider apiVersionDescriptionProvider)
         {
-            loggerFactory.AddConsole(Configuration.GetSection(AppSettingsSections.Logging));
-            loggerFactory.AddDebug();
-
             if (environment.IsEnvironment(EnvironmentTypes.Local))
             {
                 app.UseDeveloperExceptionPage();
@@ -76,7 +73,6 @@ namespace OnionPattern.Api
 
                SwaggerStartupConfiguration.Configure(app, apiVersionDescriptionProvider);
             }
-
             
             if (EnvironmentVariables.GetInMemoryDbValue())
             {

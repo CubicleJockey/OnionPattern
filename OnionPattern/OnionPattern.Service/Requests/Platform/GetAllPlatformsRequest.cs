@@ -9,11 +9,20 @@ namespace OnionPattern.Service.Requests.Platform
 {
     public class GetAllPlatformsRequest : BaseServiceRequest<Domain.Entities.Platform>, IGetAllPlatformsRequest
     {
+        /// <inheritdoc />
+        /// <summary>
+        ///     Request to retrieve a list of all of the Platforms.
+        /// </summary>
+        /// <exception cref="T:System.ArgumentNullException">Condition.</exception>
         public GetAllPlatformsRequest(IRepository<Domain.Entities.Platform> repository, IRepositoryAggregate repositoryAggregate) 
             : base(repository, repositoryAggregate) {}
 
         #region Implementation of IGetAllPlatformsRequest
 
+        /// <summary>
+        /// Execute the request.
+        /// </summary>
+        /// <returns></returns>
         public PlatformListResponseDto Execute()
         {
             Log.Information("Retrieving Platform List...");

@@ -10,11 +10,21 @@ namespace OnionPattern.Service.Requests.Platform
 {
     public class UpdatePlatformNameRequest : BaseServiceRequest<Domain.Entities.Platform>, IUpdatePlatformNameRequest
     {
+        /// <inheritdoc />
+        /// <summary>
+        ///     Request to update a Platforms Name
+        /// </summary>
+        /// <exception cref="T:System.ArgumentNullException">Condition.</exception>
         public UpdatePlatformNameRequest(IRepository<Domain.Entities.Platform> repository, IRepositoryAggregate repositoryAggregate) 
             : base(repository, repositoryAggregate) { }
 
         #region Implementation of IUpdatePlatformNameRequest
 
+        /// <summary>
+        /// Execute the request based on the input properties.
+        /// </summary>
+        /// <param name="input">Inputs required to update a Platform.</param>
+        /// <returns></returns>
         public PlatformResponseDto Execute(UpdatePlatformNameInputDto input)
         {
             

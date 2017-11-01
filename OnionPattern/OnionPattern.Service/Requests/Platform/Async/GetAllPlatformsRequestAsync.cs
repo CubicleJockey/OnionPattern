@@ -11,11 +11,20 @@ namespace OnionPattern.Service.Requests.Platform.Async
 {
     public class GetAllPlatformsRequestAsync : BaseServiceRequestAsync<Domain.Entities.Platform>, IGetAllPlatformsRequestAsync
     {
+        /// <inheritdoc />
+        /// <summary>
+        ///     Request a list of all the Platforms asynchronously.
+        /// </summary>
+        /// <exception cref="T:System.ArgumentNullException">Condition.</exception>
         public GetAllPlatformsRequestAsync(IRepositoryAsync<Domain.Entities.Platform> repository, IRepositoryAsyncAggregate repositoryAggregate) 
             : base(repository, repositoryAggregate) { }
 
         #region Implementation of IGetAllPlatformsRequestAsync
 
+        /// <summary>
+        /// Execute Request ashynchronouly.
+        /// </summary>
+        /// <returns></returns>
         public async Task<PlatformListResponseDto> ExecuteAsync()
         {
             Log.Information("Retrieving Platform List...");

@@ -9,11 +9,21 @@ namespace OnionPattern.Service.Requests.Platform
 {
     public class GetPlatformByIdRequest : BaseServiceRequest<Domain.Entities.Platform>, IGetPlatformByIdRequest
     {
+        /// <inheritdoc />
+        /// <summary>
+        ///     Request to get a Platform by it's Id.
+        /// </summary>
+        /// <exception cref="T:System.ArgumentNullException">Condition.</exception>
         public GetPlatformByIdRequest(IRepository<Domain.Entities.Platform> repository, IRepositoryAggregate repositoryAggregate) 
             : base(repository, repositoryAggregate) { }
 
         #region Implementation of IGetPlatformByIdRequest
 
+        /// <summary>
+        /// Execute the request
+        /// </summary>
+        /// <param name="id">Id of the Platform to retreive.</param>
+        /// <returns></returns>
         public PlatformResponseDto Execute(int id)
         {
             CheckInputValidity(id);

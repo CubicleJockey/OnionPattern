@@ -11,11 +11,21 @@ namespace OnionPattern.Service.Requests.Platform.Async
 {
     public class UpdatePlatformNameRequestAsync : BaseServiceRequestAsync<Domain.Entities.Platform>, IUpdatePlatformNameRequestAsync
     {
+        /// <inheritdoc />
+        /// <summary>
+        ///     Request to update a Platform's name asynchronously.
+        /// </summary>
+        /// <exception cref="T:System.ArgumentNullException">Condition.</exception>
         public UpdatePlatformNameRequestAsync(IRepositoryAsync<Domain.Entities.Platform> repository, IRepositoryAsyncAggregate repositoryAggregate) 
             : base(repository, repositoryAggregate) { }
 
         #region Implementation of IUpdatePlatformNameRequestAsync
 
+        /// <summary>
+        /// Executes the request asynchronously.
+        /// </summary>
+        /// <param name="input">Inputs required to update the Platform.</param>
+        /// <returns></returns>
         public async Task<PlatformResponseDto> ExecuteAsync(UpdatePlatformNameInputDto input)
         {
             var platformResponse = new PlatformResponseDto();

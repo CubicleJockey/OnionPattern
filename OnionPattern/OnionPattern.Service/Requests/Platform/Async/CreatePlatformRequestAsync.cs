@@ -11,11 +11,21 @@ namespace OnionPattern.Service.Requests.Platform.Async
 {
     public class CreatePlatformRequestAsync : BaseServiceRequestAsync<Domain.Entities.Platform>, ICreatePlatformRequestAsync
     {
+        /// <inheritdoc />
+        /// <summary>
+        ///     Request to create a Platform asynchronously.
+        /// </summary>
+        /// <exception cref="T:System.ArgumentNullException">Condition.</exception>
         public CreatePlatformRequestAsync(IRepositoryAsync<Domain.Entities.Platform> repository, IRepositoryAsyncAggregate repositoryAggregate) 
             : base(repository, repositoryAggregate) { }
 
         #region Implementation of ICreatePlatformRequestAsync
 
+        /// <summary>
+        /// Executes the request asynchronously based on input properties..
+        /// </summary>
+        /// <param name="input">Required input properties to create a Platform.</param>
+        /// <returns></returns>
         public async Task<PlatformResponseDto> ExecuteAsync(CreatePlatformInputDto input)
         {
             var platformResponse = new PlatformResponseDto();

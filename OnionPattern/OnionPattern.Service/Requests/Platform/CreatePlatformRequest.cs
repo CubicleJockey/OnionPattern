@@ -10,11 +10,21 @@ namespace OnionPattern.Service.Requests.Platform
 {
     public class CreatePlatformRequest : BaseServiceRequest<Domain.Entities.Platform>, ICreatePlatformRequest
     {
+        /// <inheritdoc />
+        /// <summary>
+        ///     Request to create a Platform
+        /// </summary>
+        /// <exception cref="T:System.ArgumentNullException">Condition.</exception>
         public CreatePlatformRequest(IRepository<Domain.Entities.Platform> repository, IRepositoryAggregate repositoryAggregate) 
             : base(repository, repositoryAggregate) { }
 
         #region Implementation of ICreatePlatformRequest
 
+        /// <summary>
+        /// Execute the Request based on the input propreties.
+        /// </summary>
+        /// <param name="input">Input properties required to create a Platform.</param>
+        /// <returns></returns>
         public PlatformResponseDto Execute(CreatePlatformInputDto input)
         {
             var platformResponse = new PlatformResponseDto();

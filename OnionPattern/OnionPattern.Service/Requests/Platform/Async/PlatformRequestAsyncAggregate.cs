@@ -1,5 +1,4 @@
-﻿using System;
-using OnionPattern.Domain.Repository;
+﻿using OnionPattern.Domain.Repository;
 using OnionPattern.Domain.Services.Requests.Platform.Async;
 
 namespace OnionPattern.Service.Requests.Platform.Async
@@ -26,7 +25,8 @@ namespace OnionPattern.Service.Requests.Platform.Async
                                                                                 (updatePlatformNameRequestAsync = new UpdatePlatformNameRequestAsync(RepositoryAsync, RepositoryAsyncAggregate));
 
         private IDeletePlatformByIdRequestAsync deletePlatformByIdRequestAsync;
-        public IDeletePlatformByIdRequestAsync DeletePlatformByIdRequestAsync => throw new NotImplementedException();
+        public IDeletePlatformByIdRequestAsync DeletePlatformByIdRequestAsync => deletePlatformByIdRequestAsync ??
+                                                                                 (deletePlatformByIdRequestAsync = new DeletePlatformByIdRequestAsync(RepositoryAsync, RepositoryAsyncAggregate));
 
         private ICreatePlatformRequestAsync createPlatformRequestAsync;
         public ICreatePlatformRequestAsync CreatePlatformRequestAsync => createPlatformRequestAsync ?? 

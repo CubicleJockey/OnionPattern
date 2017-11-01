@@ -21,6 +21,7 @@ namespace OnionPattern.Api.Controllers.Platform
         /// <summary>
         /// Ctor
         /// </summary>
+        /// <exception cref="ArgumentNullException">Condition.</exception>
         public PlatfomsAsyncController(IPlatformRequestAsyncAggregate requestAsyncAggregate)
         {
             RequestAsyncAggregate = requestAsyncAggregate ?? throw new ArgumentNullException(nameof(requestAsyncAggregate));
@@ -61,15 +62,26 @@ namespace OnionPattern.Api.Controllers.Platform
         }
 
         /// <summary>
-        /// Updates the Name of a Platform of a given id.
+        /// Updates Platforms Name by it's Id
         /// </summary>
-        /// <param name="input">Inputs required to update the name of a platform.</param>
+        /// <param name="input">Id and NewName for updating.</param>
         /// <returns></returns>
         [HttpPut]
-        [Route("Update/")]
+        [Route("UpdateName/")]
         public async Task<IActionResult> Put(UpdatePlatformNameInputDto input)
         {
             return await ExecuteAndHandleRequestAsync(() => RequestAsyncAggregate.UpdatePlatformNameRequestAsync.ExecuteAsync(input));
+        }
+        /// <summary>
+        /// Delete Platform by it's id.
+        /// </summary>
+        /// <param name="id">Id of the Platform</param>
+        /// <returns></returns>
+        [HttpDelete]
+        [Route("Delete/{id:int}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            return await ExecuteAndHandleRequestAsync(() => RequestAsyncAggregate.DeletePlatformByIdRequestAsync.ExecuteAsync(id));
         }
     }
 }

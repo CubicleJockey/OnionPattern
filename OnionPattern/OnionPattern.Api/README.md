@@ -14,6 +14,7 @@ This example provides both synchronous and asynchronous versions of each api-con
  * [Microsoft.AspNetCore.Mvc.Versioning](https://github.com/Microsoft/aspnet-api-versioning/wiki)
  * [Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer](https://github.com/Microsoft/aspnet-api-versioning/wiki)
  * [Swashbuckle Integration](https://github.com/Microsoft/aspnet-api-versioning/wiki/Swashbuckle-Integration)
+ * [Seq - Download](https://getseq.net)
 
 #### SQL Server Developer Edition if Running by #1
  * [SQL Server Developer Edition](https://www.microsoft.com/en-cy/sql-server/sql-server-downloads)

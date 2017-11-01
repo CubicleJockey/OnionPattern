@@ -83,8 +83,12 @@ namespace OnionPattern.Api
                 //Enable Seq [Non-Production uses get a Single User License]
                 loggerConfig.WriteTo.Seq("http://localhost:5341");
 
+                //Set Serilog
+                Log.Logger = loggerConfig.CreateLogger();
+
                 logging.AddConfiguration(hostingContext.Configuration.GetSection(AppSettingsSections.Logging));
                 logging.AddConsole();
+                logging.AddEventSourceLogger();
                 logging.AddDebug();
             };
 

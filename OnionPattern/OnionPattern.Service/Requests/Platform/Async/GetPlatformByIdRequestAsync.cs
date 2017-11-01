@@ -10,11 +10,21 @@ namespace OnionPattern.Service.Requests.Platform.Async
 {
     public class GetPlatformByIdRequestAsync : BaseServiceRequestAsync<Domain.Entities.Platform>, IGetPlatformByIdRequestAsync
     {
+        /// <inheritdoc />
+        /// <summary>
+        ///     Request to get a Platform by it's Id asynchronously.
+        /// </summary>
+        /// <exception cref="T:System.ArgumentNullException">Condition.</exception>
         public GetPlatformByIdRequestAsync(IRepositoryAsync<Domain.Entities.Platform> repository, IRepositoryAsyncAggregate repositoryAggregate) 
             : base(repository, repositoryAggregate) { }
 
         #region Implementation of IGetPlatformByIdRequestAsync
 
+        /// <summary>
+        /// Executes the request asynchronously.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<PlatformResponseDto> ExecuteAsync(int id)
         {
             Log.Information("Retrieving Platform by Id: [{Id}]...", id);

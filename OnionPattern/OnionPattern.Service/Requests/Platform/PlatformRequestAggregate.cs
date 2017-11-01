@@ -1,11 +1,13 @@
-﻿using OnionPattern.Domain.Repository;
+﻿using System;
+using OnionPattern.Domain.Repository;
 using OnionPattern.Domain.Services.Requests.Platform;
 
 namespace OnionPattern.Service.Requests.Platform
 {
     public class PlatformRequestAggregate : BaseRequestAggregate<Domain.Entities.Platform>, IPlatformRequestAggregate
     {
-
+        /// <inheritdoc />
+        /// <exception cref="T:System.ArgumentNullException">Condition.</exception>
         public PlatformRequestAggregate(IRepository<Domain.Entities.Platform> repository, IRepositoryAggregate repositoryAggregate)
             : base(repository, repositoryAggregate) { }
 

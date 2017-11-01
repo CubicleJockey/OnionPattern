@@ -6,6 +6,8 @@ namespace OnionPattern.Service.Requests.Platform.Async
 {
     public class PlatformRequestAsyncAggregate : BaseRequestAsyncAggregate<Domain.Entities.Platform>, IPlatformRequestAsyncAggregate
     {
+        /// <inheritdoc />
+        /// <exception cref="T:System.ArgumentNullException">Condition.</exception>
         public PlatformRequestAsyncAggregate(IRepositoryAsync<Domain.Entities.Platform> repositoryAsync, IRepositoryAsyncAggregate repositoryAsyncAggregate) 
             : base(repositoryAsync, repositoryAsyncAggregate) { }
 

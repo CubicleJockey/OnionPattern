@@ -1,38 +1,39 @@
 ﻿using System;
+using System.Threading.Tasks;
 using AutoMapper;
 using OnionPattern.Domain.DataTransferObjects.Platform;
 using OnionPattern.Domain.Repository;
-using OnionPattern.Domain.Services.Requests.Platform;
+using OnionPattern.Domain.Services.Requests.Platform.Async;
 using Serilog;
 
-namespace OnionPattern.Service.Requests.Platform
+namespace OnionPattern.Service.Requests.Platform.Async
 {
-    public class DeletePlatformByIdRequest : BaseServiceRequest<Domain.Entities.Platform>, IDeletePlatformByIdRequest
+    public class DeletePlatformByIdRequestAsync : BaseServiceRequestAsync<Domain.Entities.Platform>, IDeletePlatformByIdRequestAsync
     {
         /// <inheritdoc />
         /// <summary>
-        ///     Request to delete a Platform by it's Id.
+        ///     Request
         /// </summary>
         /// <exception cref="T:System.ArgumentNullException">Condition.</exception>
-        public DeletePlatformByIdRequest(IRepository<Domain.Entities.Platform> repository, IRepositoryAggregate repositoryAggregate) 
+        public DeletePlatformByIdRequestAsync(IRepositoryAsync<Domain.Entities.Platform> repository, IRepositoryAsyncAggregate repositoryAggregate)
             : base(repository, repositoryAggregate) { }
 
-        #region Implementation of IDeletePlatformByIdRequest
+        #region Implementation of IDeletePlatformByIdRequestAsync
 
         /// <summary>
-        /// Execute the Request
+        /// 
         /// </summary>
-        /// <param name="id">Id of the Platform to delete.</param>
+        /// <param name="id"></param>
         /// <returns></returns>
-        public PlatformResponseDto Execute(int id)
+        public async Task<PlatformResponseDto> ExecuteAsync(int id)
         {
             var platformResponse = new PlatformResponseDto();
             try
             {
                 Log.Information("Deleting Platform with Id: [{Id}]...", id);
                 CheckInputValidity(id);
-                
-                var platform = Repository.SingleOrDefault(p => p.Id == id);
+
+                var platform = await Repository.SingleOrDefaultAsync(p => p.Id == id);
                 if (platform == null)
                 {
                     var exception = new Exception($"Platform not found for Id: [{id}]");
@@ -59,7 +60,7 @@ namespace OnionPattern.Service.Requests.Platform
 
         private void CheckInputValidity(int id)
         {
-            if(id <= 0) { throw new ArgumentException($"{nameof(id)} must be 1 or greater."); }
+            if (id <= 0) { throw new ArgumentException($"{nameof(id)} must be 1 or greater."); }
         }
     }
 }

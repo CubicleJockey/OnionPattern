@@ -72,4 +72,7 @@
   <ItemGroup>
     <PreDeploy Include="Pre.Scripts\DeleteIfExists.PreDeployment.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="README.md" />
+  </ItemGroup>
 </Project>

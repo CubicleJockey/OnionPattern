@@ -29,15 +29,15 @@ SET IDENTITY_INSERT [dbo].[Platform] OFF
 --Insert Games
 SET IDENTITY_INSERT [dbo].[Game] ON 
 
-INSERT INTO [dbo].[Game](Id, [Name], Genre, Price, ReleaseDate) VALUES(1, 'The Legend of Zelda', 'Adventure\RPG', 24.99, '08/22/1987')
-INSERT INTO [dbo].[Game](Id, [Name], Genre, Price, ReleaseDate) VALUES(2, 'Zelda II: The Adventure of Link', 'Adventure\RPG', 30.16, '09/26/1988')
-INSERT INTO [dbo].[Game](Id, [Name], Genre, Price, ReleaseDate) VALUES(3, 'The Legend of Zelda: A Link To The Past', 'Adventure\RPG', 40.13, '11/21/1991')
-INSERT INTO [dbo].[Game](Id, [Name], Genre, Price, ReleaseDate) VALUES(4, 'The Legend of Zelda: Ocarina of Time', 'Adventure\RPG', 69.69, '11/21/1998')
-INSERT INTO [dbo].[Game](Id, [Name], Genre, Price, ReleaseDate) VALUES(5, 'The Legend of Zelda: Majora''s Mask', 'Adventure\RPG', 120.56, '04/27/2000')
-INSERT INTO [dbo].[Game](Id, [Name], Genre, Price, ReleaseDate) VALUES(6, 'The Legend of Zelda: The Wind Waker', 'Adventure\RPG', 13.13, '12/13/2002')
-INSERT INTO [dbo].[Game](Id, [Name], Genre, Price, ReleaseDate) VALUES(7, 'The Legend of Zelda: Twilight Princess', 'Adventure\RPG', 10000.12, '12/02/2006')
-INSERT INTO [dbo].[Game](Id, [Name], Genre, Price, ReleaseDate) VALUES(8, 'The Legend of Zelda: Skyward Sword', 'Adventure\RPG', 10000.12, '11/18/2011')
-INSERT INTO [dbo].[Game](Id, [Name], Genre, Price, ReleaseDate) VALUES(9, 'The Legend of Zelda: Breath of the Wild', 'Adventure\RPG', 10000.12, '03/03/2017')
+INSERT INTO [dbo].[Game](Id, [Name], Genre, Price, ReleaseDate) VALUES(1, 'The Legend of Zelda', 'Adventure|RPG', 24.99, '08/22/1987')
+INSERT INTO [dbo].[Game](Id, [Name], Genre, Price, ReleaseDate) VALUES(2, 'Zelda II: The Adventure of Link', 'Adventure|RPG', 30.16, '09/26/1988')
+INSERT INTO [dbo].[Game](Id, [Name], Genre, Price, ReleaseDate) VALUES(3, 'The Legend of Zelda: A Link To The Past', 'Adventure|RPG', 40.13, '11/21/1991')
+INSERT INTO [dbo].[Game](Id, [Name], Genre, Price, ReleaseDate) VALUES(4, 'The Legend of Zelda: Ocarina of Time', 'Adventure|RPG', 69.69, '11/21/1998')
+INSERT INTO [dbo].[Game](Id, [Name], Genre, Price, ReleaseDate) VALUES(5, 'The Legend of Zelda: Majora''s Mask', 'Adventure|RPG', 120.56, '04/27/2000')
+INSERT INTO [dbo].[Game](Id, [Name], Genre, Price, ReleaseDate) VALUES(6, 'The Legend of Zelda: The Wind Waker', 'Adventure|RPG', 13.13, '12/13/2002')
+INSERT INTO [dbo].[Game](Id, [Name], Genre, Price, ReleaseDate) VALUES(7, 'The Legend of Zelda: Twilight Princess', 'Adventure|RPG', 10000.12, '12/02/2006')
+INSERT INTO [dbo].[Game](Id, [Name], Genre, Price, ReleaseDate) VALUES(8, 'The Legend of Zelda: Skyward Sword', 'Adventure|RPG', 10000.12, '11/18/2011')
+INSERT INTO [dbo].[Game](Id, [Name], Genre, Price, ReleaseDate) VALUES(9, 'The Legend of Zelda: Breath of the Wild', 'Adventure|RPG', 10000.12, '03/03/2017')
 
 SET IDENTITY_INSERT [dbo].[Game] OFF 
 

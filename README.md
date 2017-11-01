@@ -33,6 +33,7 @@ Onion Architecture is.
  * [Swagger UI](https://swagger.io/swagger-ui/) - Api Tester
  * [Serilog](https://serilog.net)
  * [AutoMapper](http://automapper.org)
+ * [Seq](http://docs.getseq.net/docs/getting-started)
 
 #### Architecture:
 ![Architecture Diagram](OnionPattern.DependencyGraph.PNG)

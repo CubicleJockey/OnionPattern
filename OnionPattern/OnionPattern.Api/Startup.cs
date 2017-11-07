@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.Configuration;
@@ -6,8 +7,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using OnionPattern.Api.StartupConfigurations;
 using OnionPattern.DataAccess.EF;
+using OnionPattern.DataAccess.EF.Mock.Data;
 using OnionPattern.DependencyInjection;
-using OnionPattern.DependencyInjection.Data;
 using OnionPattern.Domain.Constants;
 
 namespace OnionPattern.Api
@@ -56,7 +57,7 @@ namespace OnionPattern.Api
             // Swagger
             SwaggerStartupConfiguration.ConfigureService(services, environment);
         }
-        
+
         /// <summary>
         /// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         /// </summary>
@@ -77,7 +78,7 @@ namespace OnionPattern.Api
             if (EnvironmentVariables.GetInMemoryDbValue())
             {
                 var context = app.ApplicationServices.GetService<VideoGameContext>();
-                DependencyDataInjector.Inject(context);
+                MockDataInjector.Inject(context);
             }
             app.UseMvc();
         }

@@ -45,7 +45,7 @@ namespace OnionPattern.Mapping.Tests.Game
                     ReleaseDate = DateTime.Now.AddDays(-15)
                 };
 
-                var response = converter.Convert(source, default(Domain.Entities.Game), default(ResolutionContext));
+                var response = converter.Convert(source, default, default);
                 response.Should().NotBeNull();
                 response.Should().BeAssignableTo<IGame>();
                 response.Should().BeOfType<Domain.Entities.Game>();

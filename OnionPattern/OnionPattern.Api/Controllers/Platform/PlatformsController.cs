@@ -30,6 +30,7 @@ namespace OnionPattern.Api.Controllers.Platform
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [Route("all")]
         public IActionResult Get()
         {
             return ExecuteAndHandleRequest(() => RequestAggregate.GetAllPlatformsRequest.Execute());
@@ -41,7 +42,7 @@ namespace OnionPattern.Api.Controllers.Platform
         /// <param name="id">Id of the Platform</param>
         /// <returns></returns>
         [HttpGet]
-        [Route("{id:int}")]
+        [Route("get/{id:int}")]
         public IActionResult Get(int id)
         {
             return ExecuteAndHandleRequest(() => RequestAggregate.GetPlatformByIdRequest.Execute(id));

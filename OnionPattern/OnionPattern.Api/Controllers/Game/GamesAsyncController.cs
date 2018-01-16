@@ -47,7 +47,7 @@ namespace OnionPattern.Api.Controllers.Game
         /// <param name="id">Id of the Game.</param>
         /// <returns></returns>
         [HttpGet]
-        [Route("{id}")]
+        [Route("get/{id:int}")]
         public async Task<IActionResult> Get(int id)
         {
             return await ExecuteAndHandleRequestAsync(() => GameRequestAggregateAsync.GetGameByIdRequestAsync.ExecuteAsync(id));

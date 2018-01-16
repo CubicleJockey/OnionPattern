@@ -31,6 +31,7 @@ namespace OnionPattern.Api.Controllers.Game
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [Route("all")]
         public IActionResult Get()
         {
             return ExecuteAndHandleRequest(() => GameRequestAggregate.GetAllGamesRequest.Execute());
@@ -42,7 +43,7 @@ namespace OnionPattern.Api.Controllers.Game
         /// <param name="id">Id of the Game.</param>
         /// <returns></returns>
         [HttpGet]
-        [Route("{id}")]
+        [Route("get/{id}")]
         public IActionResult Get(int id)
         {
             return ExecuteAndHandleRequest(() => GameRequestAggregate.GetGameByIdRequest.Execute(id));

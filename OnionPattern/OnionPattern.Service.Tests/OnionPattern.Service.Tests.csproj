@@ -21,12 +21,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="FakeItEasy" Version="4.1.1" />
+    <PackageReference Include="FakeItEasy" Version="4.3.0" />
     <PackageReference Include="FluentAssertions" Version="4.19.4" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.3.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.5.0" />
     <PackageReference Include="MSTest.TestAdapter" Version="1.2.0" />
     <PackageReference Include="MSTest.TestFramework" Version="1.2.0" />
-    <PackageReference Include="Serilog-FakeItEasy" Version="1.0.3-Beta" />
+    <PackageReference Include="Serilog-FakeItEasy" Version="1.0.4" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,4 +1,7 @@
-﻿using System;
+﻿using static System.Console;
+
+using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using OnionPattern.Domain.DataTransferObjects.Game.Input;
@@ -10,7 +13,7 @@ namespace OnionPattern.Api.Controllers.Game
     /// <summary>
     /// Async version of Game Controller
     /// </summary>
-    [ApiVersion("1.0")]
+    [ApiVersion("1")]
     [Produces("application/json")]
     [Route("api/v{version:apiVersion}/[controller]")]
     public class GamesAsyncController : BaseAsyncController
@@ -32,6 +35,7 @@ namespace OnionPattern.Api.Controllers.Game
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [Route("all")]
         public async Task<IActionResult> Get()
         {
             return await ExecuteAndHandleRequestAsync(() => GameRequestAggregateAsync.GetAllGamesRequestAsync.ExecuteAsync());

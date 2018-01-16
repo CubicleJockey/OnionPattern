@@ -1,4 +1,5 @@
-﻿using FakeItEasy;
+﻿using System;
+using FakeItEasy;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -14,11 +15,13 @@ namespace OnionPattern.Api.Tests.Controllers.Platform
         public class ConstructorTests
         {
             private IPlatformRequestAsyncAggregate fakePlatformRequestAsyncAggregate;
+            private PlatfomsAsyncController controller;
 
             [TestInitialize]
             public void TestInitalize()
             {
                 fakePlatformRequestAsyncAggregate = A.Fake<IPlatformRequestAsyncAggregate>();
+                controller = new PlatfomsAsyncController(fakePlatformRequestAsyncAggregate);
             }
 
             [TestCleanup]
@@ -28,15 +31,33 @@ namespace OnionPattern.Api.Tests.Controllers.Platform
             }
 
             [TestMethod]
-            public void Inheritence()
+            public void IPlatformRequestAsyncAggregatetIsNull()
             {
-                var controller = new PlatfomsAsyncController(fakePlatformRequestAsyncAggregate);
+                Action ctor = () => new PlatformsController(null);
 
-                controller.Should().NotBeNull();
+                ctor.ShouldThrow<ArgumentNullException>()
+                    .WithMessage($"Value cannot be null.{Environment.NewLine}Parameter name: requestAggregate");
+            }
+
+            [TestMethod]
+            public void ShouldInheritFromController()
+            {
                 controller.Should().BeAssignableTo<Controller>();
+            }
+
+            [TestMethod]
+            public void ShouldInheritFromBaseAsyncController()
+            {
                 controller.Should().BeAssignableTo<BaseAsyncController>();
+            }
+
+
+            [TestMethod]
+            public void ShouldBeTypeOfPlatfomsAsyncController()
+            {
                 controller.Should().BeOfType<PlatfomsAsyncController>();
             }
+
         }
     }
 }

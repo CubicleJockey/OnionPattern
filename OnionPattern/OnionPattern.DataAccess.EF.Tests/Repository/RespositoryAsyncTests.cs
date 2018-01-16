@@ -13,23 +13,34 @@ namespace OnionPattern.DataAccess.EF.Tests.Repository
         [TestClass]
         public class ConstructorTests
         {
+            private DbContext fakeDbContext;
+            private RepositoryAsync<DummyEntity> repository;
+
+            [TestInitialize]
+            public void TestInitalize()
+            {
+                fakeDbContext = A.Fake<DbContext>();
+                repository = new RepositoryAsync<DummyEntity>(fakeDbContext);
+            }
+
             [TestMethod]
             public void ContextIsNull()
             {
-                Action ctor = () => new RepositoryAsync<DummyEntity>(null);
+                Action ctor = () => new Repository<DummyEntity>(null);
 
                 ctor.ShouldThrow<ArgumentNullException>()
                     .WithMessage($"Value cannot be null.{Environment.NewLine}Parameter name: context");
             }
 
             [TestMethod]
-            public void Inheritence()
+            public void ShouldInheritFromIRepository()
             {
-                var fakeDbContext = A.Fake<DbContext>();
-                var repository = new RepositoryAsync<DummyEntity>(fakeDbContext);
-
-                repository.Should().NotBeNull();
                 repository.Should().BeAssignableTo<IRepositoryAsync<DummyEntity>>();
+            }
+
+            [TestMethod]
+            public void ShouldBeOfTypeRepository()
+            {
                 repository.Should().BeOfType<RepositoryAsync<DummyEntity>>();
             }
         }

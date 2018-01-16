@@ -16,11 +16,13 @@ namespace OnionPattern.Api.Tests.Controllers.Platform
         public class ConstructorTests
         {
             private IPlatformRequestAggregate fakePlatformRequestAggregate;
+            private PlatformsController controller;
 
             [TestInitialize]
             public void TestInitalize()
             {
                 fakePlatformRequestAggregate = A.Fake<IPlatformRequestAggregate>();
+                controller = new PlatformsController(fakePlatformRequestAggregate);
             }
 
             [TestCleanup]
@@ -30,7 +32,7 @@ namespace OnionPattern.Api.Tests.Controllers.Platform
             }
 
             [TestMethod]
-            public void GetAllGamesRequestIsNull()
+            public void IPlatformRequestAggregateIsNull()
             {
                 Action ctor = () => new PlatformsController(null);
 
@@ -39,13 +41,20 @@ namespace OnionPattern.Api.Tests.Controllers.Platform
             }
 
             [TestMethod]
-            public void Inheritence()
+            public void ShouldInheritFromController()
             {
-                var controller = new PlatformsController(fakePlatformRequestAggregate);
-
-                controller.Should().NotBeNull();
                 controller.Should().BeAssignableTo<Controller>();
+            }
+
+            [TestMethod]
+            public void ShouldInheritFromBaseController()
+            {
                 controller.Should().BeAssignableTo<BaseController>();
+            }
+
+            [TestMethod]
+            public void ShouldBeTypeOfPlatfomsController()
+            {
                 controller.Should().BeOfType<PlatformsController>();
             }
         }

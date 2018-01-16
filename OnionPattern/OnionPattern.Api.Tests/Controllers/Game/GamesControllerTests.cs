@@ -1,7 +1,9 @@
 ﻿using System;
 using FakeItEasy;
 using FluentAssertions;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using OnionPattern.Api.Controllers;
 using OnionPattern.Api.Controllers.Game;
 using OnionPattern.Domain.Services.Requests.Game;
 
@@ -13,11 +15,13 @@ namespace OnionPattern.Api.Tests.Controllers.Game
         public class ConstructorTests
         {
             private IGameRequestAggregate fakeGameRequestAggregate;
+            private  GamesController controller;
 
             [TestInitialize]
             public void TestInitalize()
             {
                 fakeGameRequestAggregate = A.Fake<IGameRequestAggregate>();
+                controller = new GamesController(fakeGameRequestAggregate);
             }
 
             [TestCleanup]
@@ -27,12 +31,31 @@ namespace OnionPattern.Api.Tests.Controllers.Game
             }
 
             [TestMethod]
-            public void GameRequestAggregateIsNull()
+            public void IGameRequestAggregateIsNull()
             {
                 Action ctor = () => new GamesController(null);
 
                 ctor.ShouldThrow<ArgumentNullException>()
                     .WithMessage($"Value cannot be null.{Environment.NewLine}Parameter name: gameRequestAggregate");
+            }
+
+            [TestMethod]
+            public void ShouldInheritFromController()
+            {
+                controller.Should().BeAssignableTo<Controller>();
+            }
+
+            [TestMethod]
+            public void ShouldInheritFromBaseAsyncController()
+            {
+                controller.Should().BeAssignableTo<BaseController>();
+            }
+
+
+            [TestMethod]
+            public void ShouldBeTypeOfGamesController()
+            {
+                controller.Should().BeOfType<GamesController>();
             }
         }
     }

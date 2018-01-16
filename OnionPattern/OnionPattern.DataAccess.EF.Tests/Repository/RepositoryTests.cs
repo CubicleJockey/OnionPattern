@@ -13,6 +13,16 @@ namespace OnionPattern.DataAccess.EF.Tests.Repository
         [TestClass]
         public class ConstructorTests
         {
+            private DbContext fakeDbContext;
+            private Repository<DummyEntity> repository;
+
+            [TestInitialize]
+            public void TestInitalize()
+            {
+                fakeDbContext = A.Fake<DbContext>();
+                repository = new Repository<DummyEntity>(fakeDbContext);
+            }
+
             [TestMethod]
             public void ContextIsNull()
             {
@@ -23,13 +33,14 @@ namespace OnionPattern.DataAccess.EF.Tests.Repository
             }
 
             [TestMethod]
-            public void Inheritence()
+            public void ShouldInheritFromIRepository()
             {
-                var fakeDbContext = A.Fake<DbContext>();
-                var repository = new Repository<DummyEntity>(fakeDbContext);
-
-                repository.Should().NotBeNull();
                 repository.Should().BeAssignableTo<IRepository<DummyEntity>>();
+            }
+
+            [TestMethod]
+            public void ShouldBeOfTypeRepository()
+            {
                 repository.Should().BeOfType<Repository<DummyEntity>>();
             }
         }

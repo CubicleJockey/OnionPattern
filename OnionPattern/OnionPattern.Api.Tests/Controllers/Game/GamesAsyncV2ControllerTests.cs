@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
 using FakeItEasy;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
@@ -9,19 +11,19 @@ using OnionPattern.Domain.Services.Requests.Game.Async;
 
 namespace OnionPattern.Api.Tests.Controllers.Game
 {
-    public class GamesAsyncControllerTests
+    public class GamesAsyncV2ControllerTests
     {
         [TestClass]
         public class ConstructorTests
         {
             private IGameRequestAggregateAsync fakeGameRequestAggregateAsync;
-            private GamesAsyncController controller;
+            private GamesAsyncV2Controller controller;
 
             [TestInitialize]
             public void TestInitialize()
             {
                 fakeGameRequestAggregateAsync = A.Fake<IGameRequestAggregateAsync>();
-                controller = new GamesAsyncController(fakeGameRequestAggregateAsync);
+                controller = new GamesAsyncV2Controller(fakeGameRequestAggregateAsync);
             }
 
             [TestCleanup]
@@ -55,8 +57,9 @@ namespace OnionPattern.Api.Tests.Controllers.Game
             [TestMethod]
             public void ShouldBeTypeOfGamesAsyncController()
             {
-                controller.Should().BeOfType<GamesAsyncController>();
+                controller.Should().BeOfType<GamesAsyncV2Controller>();
             }
+
         }
     }
 }

@@ -15,6 +15,7 @@ GO
 
 --Insert Platforms
 SET IDENTITY_INSERT [dbo].[Platform] ON 
+GO
 
 INSERT INTO [dbo].[Platform](Id, [Name], ReleaseDate) VALUES(1, 'Nintendo', '07/15/1983')
 INSERT INTO [dbo].[Platform](Id, [Name], ReleaseDate) VALUES(2, 'Super Nintendo', '11/21/1990')
@@ -25,9 +26,11 @@ INSERT INTO [dbo].[Platform](Id, [Name], ReleaseDate) VALUES(6, 'Nintendo Wii U'
 INSERT INTO [dbo].[Platform](Id, [Name], ReleaseDate) VALUES(7, 'Nintendo Switch', '03/03/2017')
 
 SET IDENTITY_INSERT [dbo].[Platform] OFF
+GO
 
 --Insert Games
 SET IDENTITY_INSERT [dbo].[Game] ON 
+GO
 
 INSERT INTO [dbo].[Game](Id, [Name], Genre, Price, ReleaseDate) VALUES(1, 'The Legend of Zelda', 'Adventure|RPG', 24.99, '08/22/1987')
 INSERT INTO [dbo].[Game](Id, [Name], Genre, Price, ReleaseDate) VALUES(2, 'Zelda II: The Adventure of Link', 'Adventure|RPG', 30.16, '09/26/1988')
@@ -39,7 +42,8 @@ INSERT INTO [dbo].[Game](Id, [Name], Genre, Price, ReleaseDate) VALUES(7, 'The L
 INSERT INTO [dbo].[Game](Id, [Name], Genre, Price, ReleaseDate) VALUES(8, 'The Legend of Zelda: Skyward Sword', 'Adventure|RPG', 10000.12, '11/18/2011')
 INSERT INTO [dbo].[Game](Id, [Name], Genre, Price, ReleaseDate) VALUES(9, 'The Legend of Zelda: Breath of the Wild', 'Adventure|RPG', 10000.12, '03/03/2017')
 
-SET IDENTITY_INSERT [dbo].[Game] OFF 
+SET IDENTITY_INSERT [dbo].[Game] OFF
+GO
 
 --Insert GamePlatforms
 INSERT INTO [dbo].[GamePlatform](GameId, PlatformId) VALUES(1, 1)

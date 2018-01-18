@@ -1,30 +1,15 @@
 pipeline {
     agent any
-    stages {
-		stage('nuget restore'){
-			checkout scm
-		}
-        stage('build') {
-            steps {
-                parallel("nuget restore": {
-                   bat 'nuget restore OnionPattern.sln'
-                },
-                        "second": {
-                            echo "world"
-                        }
-                )
-            }
-        }
-        stage('Archive') {
-            steps {
-                parallel("first": {
-                    echo "hello"
-                },
-                        "second": {
-                            echo "world"
-                        }
-                )
-            }
-        }
-    }
+    node {
+	stage 'Checkout'
+		checkout scm
+
+	stage 'Build'
+		bat 'nuget restore OnionPattern.sln'
+		bat "\"${tool 'MSBuild'}\" OnionPattern.sln /p:Configuration=Release /p:Platform=\"Any CPU\" /p:ProductVersion=1.0.0.${env.BUILD_NUMBER}"
+
+	stage 'Archive'
+		archive 'OnionPattern/bin/Release/**'
+
+	}
 }

@@ -1,14 +1,15 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using OnionPattern.Api.StartupConfigurations;
+using OnionPattern.DataAccess.EF;
+using OnionPattern.DataAccess.EF.Mock.Data;
 using OnionPattern.DependencyInjection;
-using OnionPattern.Domain.Configurations;
 using OnionPattern.Domain.Constants;
-using Serilog;
 
 namespace OnionPattern.Api
 {
@@ -45,7 +46,8 @@ namespace OnionPattern.Api
         /// </summary>
         public void ConfigureServices(IServiceCollection services)
         {
-            // Add framework services.
+            ConfigureApiVersioning(services);
+
             services.AddMvc();
 
             LoadAppSettings.IntoInjector(services, Configuration);
@@ -53,7 +55,7 @@ namespace OnionPattern.Api
             DependencyInjectorHost.Configure(services);
 
             // Swagger
-            SwaggerStartupConfiguration.Create(services, environment);
+            SwaggerStartupConfiguration.ConfigureService(services, environment);
         }
 
         /// <summary>
@@ -61,28 +63,35 @@ namespace OnionPattern.Api
         /// </summary>
         /// <param name="app"></param>
         /// <param name="loggerFactory"></param>
-        public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
+        /// <param name="apiVersionDescriptionProvider"></param>
+        public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory, IApiVersionDescriptionProvider apiVersionDescriptionProvider)
         {
-            loggerFactory.AddConsole(Configuration.GetSection(AppSettingsSections.Logging));
-            loggerFactory.AddDebug();
-
             if (environment.IsEnvironment(EnvironmentTypes.Local))
             {
                 app.UseDeveloperExceptionPage();
 
                 app.UseStaticFiles();
 
-                // Enable middleware to serve generated Swagger as a JSON endpoint
-                app.UseSwagger();
-
-                // Enable middleware to serve swagger-ui assets (HTML, JS, CSS etc.)
-                app.UseSwaggerUI(config =>
-                {
-                    config.SwaggerEndpoint("/swagger/v1/swagger.json", "Onion Pattern V1");
-                });
+               SwaggerStartupConfiguration.Configure(app, apiVersionDescriptionProvider);
             }
-
+            
+            if (EnvironmentVariables.GetInMemoryDbValue())
+            {
+                var context = app.ApplicationServices.GetService<VideoGameContext>();
+                MockDataInjector.Inject(context);
+            }
             app.UseMvc();
+        }
+
+        private static void ConfigureApiVersioning(IServiceCollection services)
+        {
+            // Add the versioned api explorer, which also adds IApiVersionDescriptionProvider service
+            // Note: the specified format code will format the version as "'v'major[.minor][-status]"
+            // Note: Requires package: Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer
+            services.AddMvcCore().AddVersionedApiExplorer(o => o.GroupNameFormat = "'v'VVV");
+
+            // Add framework services.
+            services.AddApiVersioning(apiVersioningOptions => { apiVersioningOptions.ReportApiVersions = true; });
         }
     }
 }

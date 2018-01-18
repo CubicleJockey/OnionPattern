@@ -9,14 +9,18 @@ namespace OnionPattern.Domain.Tests.Entities
         [TestClass]
         public class ConstructorTests
         {
-            [TestMethod]
-            public void Inheritence()
-            {
-                var platform = new Platform();
+            private Platform entity;
 
-                platform.Should().NotBeNull();
-                platform.Should().BeAssignableTo<VideoGameEntity>();
-                platform.Should().BeOfType<Platform>();
+            [TestInitialize]
+            public void TestInitailize()
+            {
+                entity = new Platform();
+            }
+
+            [TestMethod]
+            public void ShouldInheritFromVideoGameEntity()
+            {
+                entity.Should().BeAssignableTo<VideoGameEntity>();
             }
         }
     }

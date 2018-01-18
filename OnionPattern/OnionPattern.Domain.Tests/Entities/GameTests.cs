@@ -9,14 +9,24 @@ namespace OnionPattern.Domain.Tests.Entities
         [TestClass]
         public class ConstructorTests
         {
-            [TestMethod]
-            public void Inheritence()
-            {
-                var game = new Game();
+            private Game entity;
 
-                game.Should().NotBeNull();
-                game.Should().BeAssignableTo<VideoGameEntity>();
-                game.Should().BeOfType<Game>();
+            [TestInitialize]
+            public void TestInitialize()
+            {
+                entity = new Game();
+            }
+
+            [TestMethod]
+            public void ShouldInheritFromVideoGameEntity()
+            {
+                entity.Should().BeAssignableTo<VideoGameEntity>();
+            }
+
+            [TestMethod]
+            public void ShouldBeOfTypeGame()
+            {
+                entity.Should().BeOfType<Game>();
             }
         }
     }

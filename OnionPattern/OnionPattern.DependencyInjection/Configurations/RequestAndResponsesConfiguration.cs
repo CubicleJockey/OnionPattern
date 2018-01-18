@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using OnionPattern.Domain.Entities;
 using OnionPattern.Domain.Repository;
 using OnionPattern.Domain.Services.Requests.Game;
@@ -10,7 +9,7 @@ using OnionPattern.Service.Requests.Game;
 using OnionPattern.Service.Requests.Game.Async;
 using OnionPattern.Service.Requests.Platform;
 using OnionPattern.Service.Requests.Platform.Async;
-using Serilog;
+using System;
 
 namespace OnionPattern.DependencyInjection.Configurations
 {
@@ -18,94 +17,62 @@ namespace OnionPattern.DependencyInjection.Configurations
     {
         public static void Configure(IServiceCollection services)
         {
-            ConfigureGame(services);
-            ConfigurePlatform(services);
+            ConfigureGameRequestAggregates(services);
+            ConfigurePlatformAggregate(services);
         }
 
-        private static void ConfigureGame(IServiceCollection services)
+        private static void ConfigureGameRequestAggregates(IServiceCollection services)
         {
-            #region Non-Async
-            services.AddTransient<IGetAllGamesRequest>(context =>
+            services.AddTransient<IGameRequestAggregate>(context =>
             {
                 var dependencies = GetRequestDependencies<Game>(context);
-                return new GetAllGamesRequest(dependencies.Repository, dependencies.RepositoryAggregate, dependencies.logger);
-            });
-            
-            services.AddTransient<IGetGameByIdRequest>(context =>
-            {
-                var dependencies = GetRequestDependencies<Game>(context);
-                return new GetGameByIdRequest(dependencies.Repository, dependencies.RepositoryAggregate, dependencies.logger);
-            });
-            
-            services.AddTransient<IDeleteGameByIdRequest>(context =>
-            {
-                var dependencies = GetRequestDependencies<Game>(context);
-                return new DeleteGameByIdRequest(dependencies.Repository, dependencies.RepositoryAggregate, dependencies.logger);
+                return new GameRequestAggregate(dependencies.Repository, dependencies.RepositoryAggregate);
             });
 
-            services.AddTransient<ICreateGameRequest>(context =>
+            services.AddTransient<IGameRequestAggregateAsync>(context =>
             {
-                var dependencies = GetRequestDependencies<Game>(context);
-                return new CreateGameRequest(dependencies.Repository, dependencies.RepositoryAggregate, dependencies.logger);
+                var dependencies = GetRequestAsyncDependencies<Game>(context);
+                return new GameRequestAsyncAggregate(dependencies.Repository, dependencies.RepositoryAggregate);
             });
-
-            services.AddTransient<IUpdateGameRequest>(context =>
-            {
-                var dependencies = GetRequestDependencies<Game>(context);
-                return new UpdateGameTitleRequest(dependencies.Repository, dependencies.RepositoryAggregate, dependencies.logger);
-            });
-            #endregion Non-Async
-
-            #region Async
-            services.AddTransient<IGetGameByIdRequestAsync>(context =>
-            {
-                var asyncDependencies = GetAsyncDependencies<Game>(context);
-                return new GetGameByIdRequestAsync(asyncDependencies.Repository, asyncDependencies.RepositoryAggregate, asyncDependencies.logger);
-            });
-
-            services.AddTransient<IGetAllGamesRequestAsync>(context =>
-            {
-                var asyncDependencies = GetAsyncDependencies<Game>(context);
-                return new GetAllGamesRequestAsync(asyncDependencies.Repository, asyncDependencies.RepositoryAggregate, asyncDependencies.logger);
-            });
-            #endregion Async
         }
 
-        private static void ConfigurePlatform(IServiceCollection services)
+        private static void ConfigurePlatformAggregate(IServiceCollection services)
         {
             #region Non-Async
-            services.AddTransient<IGetAllPlatformsRequest>(context =>
+            services.AddTransient<IPlatformRequestAggregate>(context =>
             {
                 var dependencies = GetRequestDependencies<Platform>(context);
-                return new GetAllPlatformsRequest(dependencies.Repository, dependencies.RepositoryAggregate, dependencies.logger);
+                return new PlatformRequestAggregate(dependencies.Repository, dependencies.RepositoryAggregate);
             });
             #endregion Non-Async
 
             #region Async
-            services.AddTransient<IGetAllPlatformsRequestAsync>(context =>
+            services.AddTransient<IPlatformRequestAsyncAggregate>(context =>
             {
-                var asyncDependencies = GetAsyncDependencies<Platform>(context);
-                return new GetAllPlatformsRequestAsync(asyncDependencies.Repository, asyncDependencies.RepositoryAggregate, asyncDependencies.logger);
+                var asyncDependencies = GetRequestAsyncDependencies<Platform>(context);
+                return new PlatformRequestAsyncAggregate(asyncDependencies.Repository, asyncDependencies.RepositoryAggregate);
             });
             #endregion Async
         }
 
-        private static (IRepository<TEntity> Repository, IRepositoryAggregate RepositoryAggregate, ILogger logger) GetRequestDependencies<TEntity>(IServiceProvider context) where TEntity : VideoGameEntity
+        #region Get Dependency Methods
+
+        private static (IRepository<TEntity> Repository, IRepositoryAggregate RepositoryAggregate) GetRequestDependencies<TEntity>(IServiceProvider context) where TEntity : VideoGameEntity
         {
             var repository = context.GetService<IRepository<TEntity>>();
             var repositoryAggregate = context.GetService<IRepositoryAggregate>();
-            var logger = context.GetService<ILogger>();
 
-            return (repository, repositoryAggregate, logger);
+            return (repository, repositoryAggregate);
         }
 
-        private static (IRepositoryAsync<TEntity> Repository, IRepositoryAsyncAggregate RepositoryAggregate, ILogger logger) GetAsyncDependencies<TEntity>(IServiceProvider context) where TEntity : VideoGameEntity
+        private static (IRepositoryAsync<TEntity> Repository, IRepositoryAsyncAggregate RepositoryAggregate) GetRequestAsyncDependencies<TEntity>(IServiceProvider context) where TEntity : VideoGameEntity
         {
             var repository = context.GetService<IRepositoryAsync<TEntity>>();
             var repositoryAggregate = context.GetService<IRepositoryAsyncAggregate>();
-            var logger = context.GetService<ILogger>();
 
-            return (repository, repositoryAggregate, logger);
+            return (repository, repositoryAggregate);
         }
+
+        #endregion Get Dependency Methods
     }
 }

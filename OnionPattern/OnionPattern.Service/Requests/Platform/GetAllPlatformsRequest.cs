@@ -9,14 +9,23 @@ namespace OnionPattern.Service.Requests.Platform
 {
     public class GetAllPlatformsRequest : BaseServiceRequest<Domain.Entities.Platform>, IGetAllPlatformsRequest
     {
-        public GetAllPlatformsRequest(IRepository<Domain.Entities.Platform> repository, IRepositoryAggregate repositoryAggregate, ILogger logger) 
-            : base(repository, repositoryAggregate, logger) {}
+        /// <inheritdoc />
+        /// <summary>
+        ///     Request to retrieve a list of all of the Platforms.
+        /// </summary>
+        /// <exception cref="T:System.ArgumentNullException">Condition.</exception>
+        public GetAllPlatformsRequest(IRepository<Domain.Entities.Platform> repository, IRepositoryAggregate repositoryAggregate) 
+            : base(repository, repositoryAggregate) {}
 
         #region Implementation of IGetAllPlatformsRequest
 
+        /// <summary>
+        /// Execute the request.
+        /// </summary>
+        /// <returns></returns>
         public PlatformListResponseDto Execute()
         {
-            Log.Logger.Information("Retrieving Platform List...");
+            Log.Information("Retrieving Platform List...");
             var platformListResponse = new PlatformListResponseDto();
             try
             {
@@ -24,19 +33,22 @@ namespace OnionPattern.Service.Requests.Platform
                 if (platforms == null || !platforms.Any())
                 {
                     var exception = new Exception("No Platforms Returned.");
+                    Log.Error(exception, EXCEPTION_MESSAGE_TEMPLATE, exception.Message);
                     HandleErrors(platformListResponse, exception, 404);
                 }
                 else
                 {
                     platformListResponse.Platforms = platforms;
                     platformListResponse.StatusCode = 200;
-                    Log.Logger.Information($"Retrieved [{platformListResponse.Platforms.Count()}] Platforms.");
+
+                    var count = platforms.Length;
+                    Log.Information("Retrieved [{Count}] Platforms.", count);
                 }
             }
-            catch (Exception x)
+            catch (Exception exception)
             {
-                Log.Logger.Error($"Failed to get Platforms List. [{x.Message}].");
-                HandleErrors(platformListResponse, x);
+                Log.Error(exception, "Failed to get Platforms List.");
+                HandleErrors(platformListResponse, exception);
             }
             return platformListResponse;
         }

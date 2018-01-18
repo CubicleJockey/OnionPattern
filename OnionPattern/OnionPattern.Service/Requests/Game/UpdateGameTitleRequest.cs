@@ -8,58 +8,55 @@ using AutoMapper;
 
 namespace OnionPattern.Service.Requests.Game
 {
-    public class UpdateGameTitleRequest : BaseServiceRequest<Domain.Entities.Game>, IUpdateGameRequest
+    public class UpdateGameTitleRequest : BaseServiceRequest<Domain.Entities.Game>, IUpdateGameTitleRequest
     {
-        public UpdateGameTitleRequest(IRepository<Domain.Entities.Game> repository, 
-                                      IRepositoryAggregate repositoryAggregate, 
-                                      ILogger logger) 
-            : base(repository, repositoryAggregate, logger) { }
+        public UpdateGameTitleRequest(IRepository<Domain.Entities.Game> repository, IRepositoryAggregate repositoryAggregate) 
+            : base(repository, repositoryAggregate) { }
 
-        #region Implementation of IUpdateGameRequest
+        #region Implementation of IUpdateGameTitleRequest
 
         public GameResponseDto Execute(UpdateGameTitleInputDto input)
         {
+
             var gameResponse = new GameResponseDto();
             try
             {
-                Logger.Information($"Updating GameId: [{input.Id}] to new title [{input.NewTitle}]...");
+                CheckInputValidity(input);
 
-                if (input.Id <= 0)
-                {
-                    var exception = new ArgumentException($"{nameof(input.Id)} must be 1 or more.");
-                    HandleErrors(gameResponse, exception);
-                    return gameResponse;
-                }
-                if (string.IsNullOrWhiteSpace(input.NewTitle))
-                {
-                    var exception = new ArgumentException($"{nameof(input.NewTitle)} cannot be empty.");
-                    HandleErrors(gameResponse, exception);
-                    return gameResponse;
-                }
-
+                Log.Information("Updating GameId: [{Id}] to new title [{NewTitle}]...", input.Id, input.NewTitle);
+                
                 var gameToUpdate = Repository.SingleOrDefault(game => game.Id == input.Id);
                 if (gameToUpdate == null)
                 {
                     var exception = new Exception($"Failed to find game for id: [{input.Id}].");
+                    Log.Error(exception, EXCEPTION_MESSAGE_TEMPLATE, exception.Message);
                     HandleErrors(gameResponse, exception, 404);
                     return gameResponse;
                 }
 
                 gameToUpdate.Name = input.NewTitle;
+
                 var updatedGame = Repository.Update(gameToUpdate);
-                gameResponse = Mapper.Map<Domain.Entities.Game, GameResponseDto>(updatedGame);
+                gameResponse = Mapper.Map(updatedGame, gameResponse);
                 gameResponse.StatusCode = 200;
 
-                Logger.Information($"Successful updated GameId: [{input.Id}] to title [{input.NewTitle}].");
+                Log.Information("Successful updated GameId: [{Id}] to title [{NewTitle}].", input.Id, input.NewTitle);
             }
-            catch (Exception x)
+            catch (Exception exception)
             {
-                Logger.Error($"Failed to update title to [{input.NewTitle}] for GameId: [{input.Id}].");
-                HandleErrors(gameResponse, x);
+                Log.Error(exception, EXCEPTION_MESSAGE_TEMPLATE, exception.Message);
+                HandleErrors(gameResponse, exception);
             }
             return gameResponse;
         }
 
         #endregion
+
+        private void CheckInputValidity(UpdateGameTitleInputDto input)
+        {
+            if (input == null) { throw new ArgumentNullException(nameof(input)); }
+            if (input.Id <= 0) { throw new ArgumentException($"Input {nameof(input.Id)} must be 1 or greater."); }
+            if (string.IsNullOrWhiteSpace(input.NewTitle)) { throw new ArgumentException($"Input {nameof(input.NewTitle)} cannot be empty."); }
+        }
     }
 }

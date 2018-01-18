@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using OnionPattern.Domain.Interfaces;
 
 namespace OnionPattern.Service.Tests.Requests.Platform
 {
@@ -32,7 +33,7 @@ namespace OnionPattern.Service.Tests.Requests.Platform
             [TestMethod]
             public void Inheritence()
             {
-                var request = new GetAllPlatformsRequest(FakeRepository, FakeRepositoryAggregate, FakeLogger);
+                var request = new GetAllPlatformsRequest(FakeRepository, FakeRepositoryAggregate);
 
                 request.Should().NotBeNull();
                 request.Should().BeAssignableTo<IGetAllPlatformsRequest>();
@@ -65,7 +66,7 @@ namespace OnionPattern.Service.Tests.Requests.Platform
 
                 A.CallTo(getAll).Returns(platforms);
 
-                var request = new GetAllPlatformsRequest(FakeRepository, FakeRepositoryAggregate, FakeLogger);
+                var request = new GetAllPlatformsRequest(FakeRepository, FakeRepositoryAggregate);
                 request.Should().NotBeNull();    
                 
                 var response = request.Execute();

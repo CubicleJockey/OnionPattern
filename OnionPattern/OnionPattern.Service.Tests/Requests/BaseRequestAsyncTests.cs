@@ -3,6 +3,7 @@ using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OnionPattern.Domain.Repository;
 using System;
+using OnionPattern.Service.Tests.Requests.Mocks;
 using Serilog;
 
 namespace OnionPattern.Service.Tests.Requests
@@ -35,7 +36,7 @@ namespace OnionPattern.Service.Tests.Requests
             [TestMethod]
             public void RepositoryIsNull()
             {
-                Action ctor = () => new MockBaseRequestAsync(null, fakeRepositoryAggregate, fakeLogger);
+                Action ctor = () => new MockBaseRequestAsync(null, fakeRepositoryAggregate);
                 ctor.ShouldThrow<ArgumentNullException>()
                     .WithMessage($"Value cannot be null.{Environment.NewLine}Parameter name: repository cannot be null.");
             }
@@ -43,23 +44,15 @@ namespace OnionPattern.Service.Tests.Requests
             [TestMethod]
             public void RepositoryAggregateIsNull()
             {
-                Action ctor = () => new MockBaseRequestAsync(fakeRepository, null, fakeLogger);
+                Action ctor = () => new MockBaseRequestAsync(fakeRepository, null);
                 ctor.ShouldThrow<ArgumentNullException>()
                     .WithMessage($"Value cannot be null.{Environment.NewLine}Parameter name: repositoryAggregate cannot be null.");
             }
 
             [TestMethod]
-            public void LoggerIsNull()
-            {
-                Action ctor = () => new MockBaseRequestAsync(fakeRepository, fakeRepositoryAggregate, null);
-                ctor.ShouldThrow<ArgumentNullException>()
-                    .WithMessage($"Value cannot be null.{Environment.NewLine}Parameter name: logger cannot be null.");
-            }
-
-            [TestMethod]
             public void IsValid()
             {
-                var baseRequest = new MockBaseRequestAsync(fakeRepository, fakeRepositoryAggregate, fakeLogger);
+                var baseRequest = new MockBaseRequestAsync(fakeRepository, fakeRepositoryAggregate);
 
                 baseRequest.Should().NotBeNull();
                 baseRequest.Should().BeAssignableTo<BaseServiceRequestAsync<FakeEntity>>();

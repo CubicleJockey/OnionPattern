@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                bat 'echo "Hello World"'
+                bat 'nuget restore OnionPattern.sln'
                 bat '''
                     echo "Multiline shell steps"
                 '''

@@ -1,6 +1,6 @@
 pipeline {
     agent any
-    
+	
 	branchName = env.BRANCH_NAME
 	solutionName = "OnionPattern"
 	solutionFileName = "${solutionName}.sln"
@@ -8,24 +8,15 @@ pipeline {
 	deployable_branches = ["master","develop"]
 	
     stages {
-        stage('Clean and Checkout'){  
-            try { checkout scm } catch(caughtError) { deleteDir(); checkout scm }  
-			
-			stage('Build Artifacts'){
-				bat([script: "nuget restore ${solutionFileName} -source ${nugetSources}", encoding: "UTF-8" ])
-					createArtifact()
-				}
-			}
-
-			def createArtifact(){
-				 if(deployable_branches.contains(branchName)){
-						bat([script: "${tool 'MSBuild'}" ${solutionFileName} /t:Rebuild)							
-				 }
-				 else
-				 {
-					 bat([script: "${tool 'MSBuild'}" ${solutionFileName} /t:Rebuild /p:IsAutoBuild=True /p:Configuration=Release", encoding: "UTF-8" ]) 
-				 }
-			}          
+        stage('Checkout'){
+			checkout scm
+		}
+		stage('Build'){
+			bat 'nuget restore OnionPattern.sln'
+			bat "\"${tool 'MSBuild'}\" OnionPattern.sln /p:Configuration=Release /p:Platform=\"Any CPU\" /p:ProductVersion=1.0.0.${env.BUILD_NUMBER}"
+		}
+		stage('Archive'){
+			archive 'ProjectName/bin/Release/**'		
 		}
 	}
 }

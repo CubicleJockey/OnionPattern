@@ -1,12 +1,6 @@
 pipeline {
     agent any
 	
-	branchName = env.BRANCH_NAME
-	solutionName = "OnionPattern"
-	solutionFileName = "${solutionName}.sln"
-	nugetSources = "https://nuget.org/api/v3/"
-	deployable_branches = ["master","develop"]
-	
     stages {
         stage('Checkout'){
 			checkout scm

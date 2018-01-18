@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        def ret = sh(script:
+        def ret = bat(script:
          	'''dotnet --info 		
 			dotnet restore OnionPattern/OnionPattern.Api.csproj 
 			dotnet publish -c Release -o ./obj/Release OnionPattern/OnionPattern.Api.csproj''', 

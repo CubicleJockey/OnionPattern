@@ -28,6 +28,7 @@
     <PackageReference Include="MSTest.TestFramework" Version="1.2.0" />
     <PackageReference Include="Serilog-FakeItEasy" Version="1.0.4" />
     <PackageReference Include="TeamCity.VSTest.TestAdapter" Version="1.0.7" />
+
   </ItemGroup>
 
   <ItemGroup>

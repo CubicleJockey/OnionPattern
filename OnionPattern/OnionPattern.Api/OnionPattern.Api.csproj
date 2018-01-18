@@ -16,13 +16,13 @@
 
   <ItemGroup>
     <Compile Remove="logs\**" />
+    <Compile Remove="wwwroot\**" />
     <Content Remove="logs\**" />
+    <Content Remove="wwwroot\**" />
     <EmbeddedResource Remove="logs\**" />
+    <EmbeddedResource Remove="wwwroot\**" />
     <None Remove="logs\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="wwwroot\" />
+    <None Remove="wwwroot\**" />
   </ItemGroup>
 
   <ItemGroup>

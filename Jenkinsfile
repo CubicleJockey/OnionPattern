@@ -19,7 +19,7 @@ pipeline {
 
 			def createArtifact(){
 				 if(deployable_branches.contains(branchName)){
-						bat([script: "\"${tool 'MSBuild'}\" ${solutionFileName} /t:Rebuild /p:IsAutoBuild=True)							
+						bat([script: "\"${tool 'MSBuild'}\" ${solutionFileName} /t:Rebuild)							
 				 }
 				 else
 				 {

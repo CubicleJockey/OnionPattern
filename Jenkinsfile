@@ -10,17 +10,17 @@ pipeline {
                 '''
 			}
         }
-	stage('Test') {
-	    steps {
-		bat '''
-			dotnet test OnionPattern/OnionPattern.Api.Tests/OnionPattern.Api.Tests.csproj
-		'''
-	    }
-	}
+		stage('Test') {
+			steps {
+				bat '''
+					dotnet test OnionPattern/OnionPattern.Api.Tests/OnionPattern.Api.Tests.csproj
+				'''
+			}
+		}
     }	
     post {
-	always {
-	    mstest 'build/reports/**/*.xml'
-	}
+		always {
+			MSTest 'build/reports/**/*.xml'
+		}
     }
 }

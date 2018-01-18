@@ -1,4 +1,5 @@
-﻿using FakeItEasy;
+﻿using System;
+using FakeItEasy;
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -12,14 +13,34 @@ namespace OnionPattern.DataAccess.EF.Tests.Repository
         [TestClass]
         public class ConstructorTests
         {
-            [TestMethod]
-            public void Inheritence()
-            {
-                var fakeDbContext = A.Fake<DbContext>();
-                var repository = new Repository<DummyEntity>(fakeDbContext);
+            private DbContext fakeDbContext;
+            private Repository<DummyEntity> repository;
 
-                repository.Should().NotBeNull();
+            [TestInitialize]
+            public void TestInitalize()
+            {
+                fakeDbContext = A.Fake<DbContext>();
+                repository = new Repository<DummyEntity>(fakeDbContext);
+            }
+
+            [TestMethod]
+            public void ContextIsNull()
+            {
+                Action ctor = () => new Repository<DummyEntity>(null);
+
+                ctor.ShouldThrow<ArgumentNullException>()
+                    .WithMessage($"Value cannot be null.{Environment.NewLine}Parameter name: context");
+            }
+
+            [TestMethod]
+            public void ShouldInheritFromIRepository()
+            {
                 repository.Should().BeAssignableTo<IRepository<DummyEntity>>();
+            }
+
+            [TestMethod]
+            public void ShouldBeOfTypeRepository()
+            {
                 repository.Should().BeOfType<Repository<DummyEntity>>();
             }
         }

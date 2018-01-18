@@ -10,8 +10,8 @@ namespace OnionPattern.Service.Requests.Game
 {
     public class CreateGameRequest : BaseServiceRequest<Domain.Entities.Game>, ICreateGameRequest
     {
-        public CreateGameRequest(IRepository<Domain.Entities.Game> repository, IRepositoryAggregate repositoryAggregate, ILogger logger) 
-            : base(repository, repositoryAggregate, logger) { }
+        public CreateGameRequest(IRepository<Domain.Entities.Game> repository, IRepositoryAggregate repositoryAggregate) 
+            : base(repository, repositoryAggregate) { }
 
         #region Implementation of ICreateGameRequest
 
@@ -20,15 +20,15 @@ namespace OnionPattern.Service.Requests.Game
             var gameResponse = new GameResponseDto();
             try
             {
-                Logger.Information($"Creating Game Entry for [{game.Name}].");
+                Log.Information("Creating Game Entry for [{NewName}].", game?.Name);
                 var gameEntity = Mapper.Map<CreateGameInputDto, Domain.Entities.Game>(game);
-                gameResponse = Mapper.Map<Domain.Entities.Game, GameResponseDto>(Repository.Create(gameEntity));
+                gameResponse = Mapper.Map(Repository.Create(gameEntity), gameResponse);
                 gameResponse.StatusCode = 200;
             }
-            catch (Exception x)
+            catch (Exception exception)
             {
-                Logger.Information($"Failed to Create Game: [{game.Name}].");
-                HandleErrors(gameResponse, x);
+                Log.Error(exception, "Failed to Create Game: [{NewName}].", game?.Name);
+                HandleErrors(gameResponse, exception);
             }
             return gameResponse;
         }

@@ -3,6 +3,7 @@ using AutoMapper;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OnionPattern.Domain.DataTransferObjects.Game;
+using OnionPattern.Domain.Interfaces;
 using OnionPattern.Mapping.Game;
 
 namespace OnionPattern.Mapping.Tests.Game
@@ -25,13 +26,16 @@ namespace OnionPattern.Mapping.Tests.Game
         [TestClass]
         public class MethodsTests
         {
+            private readonly GameToGameResponseDtoTypeConverter converter;
+
+            public MethodsTests()
+            {
+                converter = new GameToGameResponseDtoTypeConverter();
+            }
+
             [TestMethod]
             public void ValidConversion()
             {
-                var converter = new GameToGameResponseDtoTypeConverter();
-                converter.Should().NotBeNull();
-
-
                 var source = new Domain.Entities.Game
                 {
                     Id = 1,

@@ -27,7 +27,7 @@ namespace OnionPattern.Service.Tests.Requests.Games.Async
             [TestMethod]
             public void Inheritence()
             {
-                var request = new GetAllGamesRequestAsync(FakeRepositoryAsync, FakeRepositoryAsyncAggregate, FakeLogger);
+                var request = new GetAllGamesRequestAsync(FakeRepositoryAsync, FakeRepositoryAsyncAggregate);
 
                 request.Should().NotBeNull();
                 request.Should().BeAssignableTo<IGetAllGamesRequestAsync>();

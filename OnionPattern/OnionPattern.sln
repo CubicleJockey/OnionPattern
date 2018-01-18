@@ -1,14 +1,16 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.16
+VisualStudioVersion = 15.0.27004.2006
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnionPattern.Domain", "OnionPatter.Domain\OnionPattern.Domain.csproj", "{DD510D19-E406-4F06-9AD7-7A049DBE131F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnionPattern.Domain", "OnionPattern.Domain\OnionPattern.Domain.csproj", "{DD510D19-E406-4F06-9AD7-7A049DBE131F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{EE64414B-EA19-4CD6-8EC5-82D14970EFC4}"
 	ProjectSection(SolutionItems) = preProject
 		..\.gitattributes = ..\.gitattributes
 		..\.gitignore = ..\.gitignore
+		..\LICENSE.md = ..\LICENSE.md
+		..\OnionPattern.DependencyGraph.PNG = ..\OnionPattern.DependencyGraph.PNG
 		..\README.md = ..\README.md
 	EndProjectSection
 EndProject
@@ -36,9 +38,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnionPattern.Api.Tests", "O
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "OnionPattern.Database", "OnionPattern.Database\OnionPattern.Database.sqlproj", "{0D72D142-FAE7-4984-A47F-47F10969F4B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnionPattern.Mapping", "OnionPattern.Mapping\OnionPattern.Mapping.csproj", "{AA56B2A6-72B2-414F-8F65-8CC50492DD85}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnionPattern.Mapping", "OnionPattern.Mapping\OnionPattern.Mapping.csproj", "{AA56B2A6-72B2-414F-8F65-8CC50492DD85}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnionPattern.Mapping.Tests", "OnionPattern.Mapping.Tests\OnionPattern.Mapping.Tests.csproj", "{07C8421D-3EFE-451D-9020-59FE56FE9027}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnionPattern.Mapping.Tests", "OnionPattern.Mapping.Tests\OnionPattern.Mapping.Tests.csproj", "{07C8421D-3EFE-451D-9020-59FE56FE9027}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mocks", "Mocks", "{9B09E51A-CCEF-4926-B207-669279E98E97}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnionPattern.DataAccess.EF.Mock.Data", "OnionPattern.DataAccess.EF.Mock.Data\OnionPattern.DataAccess.EF.Mock.Data.csproj", "{8CEAE445-E492-4B78-B975-11BC52616FD0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -100,6 +106,10 @@ Global
 		{07C8421D-3EFE-451D-9020-59FE56FE9027}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{07C8421D-3EFE-451D-9020-59FE56FE9027}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{07C8421D-3EFE-451D-9020-59FE56FE9027}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8CEAE445-E492-4B78-B975-11BC52616FD0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CEAE445-E492-4B78-B975-11BC52616FD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CEAE445-E492-4B78-B975-11BC52616FD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CEAE445-E492-4B78-B975-11BC52616FD0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -118,6 +128,8 @@ Global
 		{0D72D142-FAE7-4984-A47F-47F10969F4B5} = {CDDBCFD6-438C-4583-A9C0-22EE5425E605}
 		{AA56B2A6-72B2-414F-8F65-8CC50492DD85} = {CDDBCFD6-438C-4583-A9C0-22EE5425E605}
 		{07C8421D-3EFE-451D-9020-59FE56FE9027} = {BD86FAFB-0DB9-46FA-BE21-350642B83A51}
+		{9B09E51A-CCEF-4926-B207-669279E98E97} = {CDDBCFD6-438C-4583-A9C0-22EE5425E605}
+		{8CEAE445-E492-4B78-B975-11BC52616FD0} = {9B09E51A-CCEF-4926-B207-669279E98E97}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {10BC7194-6404-43FB-9E97-A476E27278E2}

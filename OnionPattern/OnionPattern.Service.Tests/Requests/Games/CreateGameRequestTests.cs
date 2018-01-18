@@ -26,7 +26,7 @@ namespace OnionPattern.Service.Tests.Requests.Games
             [TestMethod]
             public void Inheritence()
             {
-                var request = new CreateGameRequest(FakeRepository, FakeRepositoryAggregate, FakeLogger);
+                var request = new CreateGameRequest(FakeRepository, FakeRepositoryAggregate);
 
                 request.Should().NotBeNull();
                 request.Should().BeAssignableTo<ICreateGameRequest>();

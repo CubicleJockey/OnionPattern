@@ -10,22 +10,23 @@ namespace OnionPattern.Service.Requests.Game.Async
 {
     public class GetAllGamesRequestAsync : BaseServiceRequestAsync<Domain.Entities.Game>, IGetAllGamesRequestAsync
     {
-        public GetAllGamesRequestAsync(IRepositoryAsync<Domain.Entities.Game> repository, IRepositoryAsyncAggregate repositoryAggregate, ILogger logger) 
-            : base(repository, repositoryAggregate, logger) { }
+        public GetAllGamesRequestAsync(IRepositoryAsync<Domain.Entities.Game> repository, IRepositoryAsyncAggregate repositoryAggregate) 
+            : base(repository, repositoryAggregate) { }
 
         #region Implementation of IGetAllGamesRequestAsync
 
-        public async Task<GameListResponseDto> Execute()
+        public async Task<GameListResponseDto> ExecuteAsync()
         {
-            Logger.Information("Retrieving Games List (async)...");
+            Log.Information("Retrieving Games List...");
             var gameListResponse = new GameListResponseDto();
             try
             {
                 var games = (await Repository.GetAllAsync())?.ToArray();
 
-                if (games == null || !Enumerable.Any<Domain.Entities.Game>(games))
+                if (games == null || !games.Any())
                 {
                     var exception = new Exception("No Games Returned.");
+                    Log.Error(exception, EXCEPTION_MESSAGE_TEMPLATE, exception.Message);
                     HandleErrors(gameListResponse, exception, 404);
                 }
                 else
@@ -35,13 +36,14 @@ namespace OnionPattern.Service.Requests.Game.Async
                         Games = games,
                         StatusCode = 200
                     };
-                    Logger.Information($"Retrieved [{gameListResponse.Games.Count()}] Games (async).");
+                    var count = games.Length;
+                    Log.Information("Retrieved [{Count}] Games.", count);
                 }
             }
-            catch (Exception x)
+            catch (Exception exception)
             {
-                Logger.Error($"Failed to get All Games List. {x.Message}");
-                HandleErrors(gameListResponse, x);
+                Log.Error(exception, "Failed to get All Games List.");
+                HandleErrors(gameListResponse, exception);
             }
             return gameListResponse;
         }

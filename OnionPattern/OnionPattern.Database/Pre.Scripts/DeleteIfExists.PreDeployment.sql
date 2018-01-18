@@ -14,6 +14,11 @@ USE [master]
 GO
 
 IF EXISTS(SELECT * FROM [sys].[databases] WHERE name = 'VideoGames')
-DROP DATABASE VideoGames
+BEGIN
+	DROP DATABASE VideoGames
+END
 
 CREATE DATABASE VideoGames
+
+USE [VideoGames]
+GO

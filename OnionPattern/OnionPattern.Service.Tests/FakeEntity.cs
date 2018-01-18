@@ -2,5 +2,5 @@
 
 namespace OnionPattern.Service.Tests
 {
-    public class FakeEntity : VideoGameEntity { }
+    public sealed class FakeEntity : VideoGameEntity { }
 }

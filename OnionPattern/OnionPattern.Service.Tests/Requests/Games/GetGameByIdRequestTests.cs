@@ -29,7 +29,7 @@ namespace OnionPattern.Service.Tests.Requests.Games
             [TestMethod]
             public void Inheritence()
             {
-                var request = new GetGameByIdRequest(FakeRepository, FakeRepositoryAggregate, FakeLogger);
+                var request = new GetGameByIdRequest(FakeRepository, FakeRepositoryAggregate);
 
                 request.Should().NotBeNull();
                 request.Should().BeAssignableTo<IGetGameByIdRequest>();

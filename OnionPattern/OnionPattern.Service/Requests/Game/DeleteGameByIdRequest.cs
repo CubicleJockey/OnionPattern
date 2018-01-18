@@ -9,8 +9,8 @@ namespace OnionPattern.Service.Requests.Game
 {
     public class DeleteGameByIdRequest : BaseServiceRequest<Domain.Entities.Game>, IDeleteGameByIdRequest
     {
-        public DeleteGameByIdRequest(IRepository<Domain.Entities.Game> repository, IRepositoryAggregate repositoryAggregate, ILogger logger) 
-            : base(repository, repositoryAggregate, logger) { }
+        public DeleteGameByIdRequest(IRepository<Domain.Entities.Game> repository, IRepositoryAggregate repositoryAggregate) 
+            : base(repository, repositoryAggregate) { }
 
         #region Implementation of IDeleteGameByIdRequest
 
@@ -19,40 +19,41 @@ namespace OnionPattern.Service.Requests.Game
             var gameResponse = new GameResponseDto();
             try
             {
-                Logger.Information($"Deleting Game by Id:[{id}]...");
+                Log.Information("Deleting Game by Id:[{Id}]...", id);
                 var toDelete = Repository.SingleOrDefault(game => game.Id == id);
                 if (toDelete == null)
                 {
                     var exception = new Exception($"No Game found for Id:[{id}].");
+                    Log.Error(exception, EXCEPTION_MESSAGE_TEMPLATE, exception.Message);
                     HandleErrors(gameResponse, exception, 404);
                 }
                 else
                 {
                     #region Delete GamePlatform References
 
-                    Log.Information($"Retrieving GamePlatoforms for Game: [{toDelete.Name}] with Id: [{toDelete.Id}].");
+                    Log.Information("Retrieving GamePlatoforms for Game: [{NewName}] with Id: [{Id}].", toDelete.Name, toDelete.Id);
                     var gamePlatforms = RepositoryAggregate.GamePlatforms.Find(gp => gp.Id == id)?.ToArray();
                     if(gamePlatforms != null && gamePlatforms.Any())
                     {
-                        Log.Logger.Information($"Deleting [{gamePlatforms.Length}] GamePlatforms for Game: [{toDelete.Name}]...");
+                        Log.Information("Deleting [{Length}] GamePlatforms for Game: [{NewName}]...", gamePlatforms.Length, toDelete.Name);
                         foreach (var gp in gamePlatforms)
                         {
                             RepositoryAggregate.GamePlatforms.Delete(gp);
                         }
-                        Log.Logger.Information($"Finished deleting GamePlatform enteries. Procceeding to delete Game: {toDelete.Name} with Id: [{toDelete.Id}].");
+                        Log.Information("Finished deleting GamePlatform enteries. Procceeding to delete Game: {NewName} with Id: [{Id}].", toDelete.Name, toDelete.Id);
                     }
 
                     #endregion Delete GamePlatform References
 
                     Repository.Delete(toDelete);
                     gameResponse.StatusCode = 200;
-                    Logger.Information($"Deleted Game [{toDelete.Name}] for Id:[{toDelete.Id}].");
+                    Log.Information("Deleted Game [{NewName}] for Id:[{Id}].", toDelete.Name, toDelete.Id);
                 }
             }
-            catch (Exception x)
+            catch (Exception exception)
             {
-                Logger.Error($"Failed to Delete Game. [{x.Message}].");
-                HandleErrors(gameResponse, x);
+                Log.Error(exception, "Failed to Delete Game. [{Message}].", exception.Message);
+                HandleErrors(gameResponse, exception);
             }
             return gameResponse;
         }

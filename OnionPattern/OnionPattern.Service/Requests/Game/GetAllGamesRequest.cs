@@ -9,15 +9,15 @@ namespace OnionPattern.Service.Requests.Game
 {
     public class GetAllGamesRequest : BaseServiceRequest<Domain.Entities.Game>, IGetAllGamesRequest
     {
-        public GetAllGamesRequest(IRepository<Domain.Entities.Game> repository, IRepositoryAggregate repositoryAggregate, ILogger logger) 
-            : base(repository, repositoryAggregate, logger) { }
+        public GetAllGamesRequest(IRepository<Domain.Entities.Game> repository, IRepositoryAggregate repositoryAggregate) 
+            : base(repository, repositoryAggregate) { }
 
 
         #region Implementation of IGetAllGamesRequest
 
         public GameListResponseDto Execute()
         {
-            Logger.Information("Retrieving Games List...");
+            Log.Information("Retrieving Games List...");
             var gameListResponse = new GameListResponseDto();
             try
             {
@@ -26,24 +26,24 @@ namespace OnionPattern.Service.Requests.Game
                 if (games == null || !games.Any())
                 {
                     var exception = new Exception("No Games Returned.");
+                    Log.Error(EXCEPTION_MESSAGE_TEMPLATE, exception.Message);
                     HandleErrors(gameListResponse, exception, 404);
                 }
                 else
                 {
-                    //TODO: Aggregate the Platforms data.
-
                     gameListResponse = new GameListResponseDto
                     {
                         Games = games,
                         StatusCode = 200
                     };
-                    Logger.Information($"Retrieved [{gameListResponse.Games.Count()}] Games.");
+                    var count = games.Length;
+                    Log.Information("Retrieved [{Count}] Games.", count);
                 }
             }
-            catch (Exception x)
+            catch (Exception exception)
             {
-                Logger.Error($"Failed to get All Games List. {x.Message}");
-                HandleErrors(gameListResponse, x);
+                Log.Error(exception, "Failed to get All Games List. {Message}", exception.Message);
+                HandleErrors(gameListResponse, exception);
             }
             return gameListResponse;
         }

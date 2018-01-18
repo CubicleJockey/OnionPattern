@@ -13,7 +13,7 @@ pipeline {
         stage('Test') {
 			steps {
 				bat '''
-					dotnet test OnionPattern/OnionPattern.*.Tests/OnionPattern.*.Tests.csproj
+					dotnet test OnionPattern/OnionPattern.Api.Tests/OnionPattern.Api.Tests.csproj
 				'''
 			}
 		}

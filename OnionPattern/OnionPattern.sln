@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2006
+VisualStudioVersion = 15.0.27130.2024
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnionPattern.Domain", "OnionPattern.Domain\OnionPattern.Domain.csproj", "{DD510D19-E406-4F06-9AD7-7A049DBE131F}"
 EndProject
@@ -36,15 +36,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnionPattern.Api", "OnionPa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnionPattern.Api.Tests", "OnionPattern.Api.Tests\OnionPattern.Api.Tests.csproj", "{E883E6B4-DD55-4444-B0E1-465DAFD01834}"
 EndProject
-Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "OnionPattern.Database", "OnionPattern.Database\OnionPattern.Database.sqlproj", "{0D72D142-FAE7-4984-A47F-47F10969F4B5}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnionPattern.Mapping", "OnionPattern.Mapping\OnionPattern.Mapping.csproj", "{AA56B2A6-72B2-414F-8F65-8CC50492DD85}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnionPattern.Mapping.Tests", "OnionPattern.Mapping.Tests\OnionPattern.Mapping.Tests.csproj", "{07C8421D-3EFE-451D-9020-59FE56FE9027}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mocks", "Mocks", "{9B09E51A-CCEF-4926-B207-669279E98E97}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnionPattern.DataAccess.EF.Mock.Data", "OnionPattern.DataAccess.EF.Mock.Data\OnionPattern.DataAccess.EF.Mock.Data.csproj", "{8CEAE445-E492-4B78-B975-11BC52616FD0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnionPattern.DataAccess.EF.Mock.Data", "OnionPattern.DataAccess.EF.Mock.Data\OnionPattern.DataAccess.EF.Mock.Data.csproj", "{8CEAE445-E492-4B78-B975-11BC52616FD0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -92,12 +90,6 @@ Global
 		{E883E6B4-DD55-4444-B0E1-465DAFD01834}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E883E6B4-DD55-4444-B0E1-465DAFD01834}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E883E6B4-DD55-4444-B0E1-465DAFD01834}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0D72D142-FAE7-4984-A47F-47F10969F4B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0D72D142-FAE7-4984-A47F-47F10969F4B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0D72D142-FAE7-4984-A47F-47F10969F4B5}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{0D72D142-FAE7-4984-A47F-47F10969F4B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0D72D142-FAE7-4984-A47F-47F10969F4B5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0D72D142-FAE7-4984-A47F-47F10969F4B5}.Release|Any CPU.Deploy.0 = Release|Any CPU
 		{AA56B2A6-72B2-414F-8F65-8CC50492DD85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AA56B2A6-72B2-414F-8F65-8CC50492DD85}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AA56B2A6-72B2-414F-8F65-8CC50492DD85}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -125,7 +117,6 @@ Global
 		{8C6EFEA2-FCBA-4A7E-A3A9-F4B75C8CAFD9} = {BD86FAFB-0DB9-46FA-BE21-350642B83A51}
 		{E8E2CA5C-A352-4E9C-A6DF-4C2CF01DE8A3} = {CDDBCFD6-438C-4583-A9C0-22EE5425E605}
 		{E883E6B4-DD55-4444-B0E1-465DAFD01834} = {BD86FAFB-0DB9-46FA-BE21-350642B83A51}
-		{0D72D142-FAE7-4984-A47F-47F10969F4B5} = {CDDBCFD6-438C-4583-A9C0-22EE5425E605}
 		{AA56B2A6-72B2-414F-8F65-8CC50492DD85} = {CDDBCFD6-438C-4583-A9C0-22EE5425E605}
 		{07C8421D-3EFE-451D-9020-59FE56FE9027} = {BD86FAFB-0DB9-46FA-BE21-350642B83A51}
 		{9B09E51A-CCEF-4926-B207-669279E98E97} = {CDDBCFD6-438C-4583-A9C0-22EE5425E605}

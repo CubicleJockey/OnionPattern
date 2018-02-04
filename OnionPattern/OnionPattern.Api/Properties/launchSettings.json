@@ -5,7 +5,7 @@
       "launchBrowser": true,
       "launchUrl": "http://localhost:52532/swagger",
       "environmentVariables": {
-        "InMemoryDb": "true",
+        "InMemoryDb": "false",
         "ASPNETCORE_ENVIRONMENT": "Local"
       },
       "applicationUrl": "http://localhost:52532/swagger"

@@ -7,6 +7,7 @@ using OnionPattern.Domain.Constants;
 using System.IO;
 using System.Net;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
+using OnionPattern.Api.StartupConfigurations;
 using Serilog;
 using Serilog.Events;
 using Serilog.Formatting.Compact;
@@ -67,30 +68,11 @@ namespace OnionPattern.Api
                 });
             };
 
-        private static Action<WebHostBuilderContext, ILoggingBuilder> ConfigureLogging =>
-            (hostingContext, logging) =>
-            {
-                var loggerConfig = new LoggerConfiguration();
+        private static void ConfigureLogging(WebHostBuilderContext context, ILoggingBuilder logging)
+        {
+            SerilogConfiguration.Configure(context.HostingEnvironment, context.Configuration, logging, "OnionPattern.Api");
+        }
 
-                loggerConfig
-                    .MinimumLevel.Verbose()
-                    .MinimumLevel.Override(nameof(Microsoft), LogEventLevel.Verbose)
-                    .WriteTo.ColoredConsole()
-                    .Enrich.FromLogContext()
-                    .Enrich.WithProperty("Application", "OnionPattern.Api")
-                    .WriteTo.RollingFile(new CompactJsonFormatter(), "logs/onionpattern-api.log");
-
-                //Enable Seq [Non-Production uses get a Single User License]
-                loggerConfig.WriteTo.Seq("http://localhost:5341");
-
-                //Set Serilog
-                Log.Logger = loggerConfig.CreateLogger();
-
-                logging.AddConfiguration(hostingContext.Configuration.GetSection(AppSettingsSections.Logging));
-                logging.AddConsole();
-                logging.AddEventSourceLogger();
-                logging.AddDebug();
-            };
 
         #endregion Program Configurations
     }

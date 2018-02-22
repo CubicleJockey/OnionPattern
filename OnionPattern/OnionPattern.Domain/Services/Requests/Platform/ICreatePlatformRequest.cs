@@ -1,10 +1,10 @@
-﻿using OnionPattern.Domain.DataTransferObjects.Platform;
-using OnionPattern.Domain.DataTransferObjects.Platform.Input;
+﻿using OnionPattern.Domain.Platform.Requests;
+using OnionPattern.Domain.Platform.Responses;
 
 namespace OnionPattern.Domain.Services.Requests.Platform
 {
     public interface ICreatePlatformRequest
     {
-        PlatformResponseDto Execute(CreatePlatformInputDto input);
+        PlatformResponse Execute(CreatePlatformInput input);
     }
 }

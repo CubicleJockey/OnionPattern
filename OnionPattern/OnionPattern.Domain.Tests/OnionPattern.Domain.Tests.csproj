@@ -30,4 +30,10 @@
     <ProjectReference Include="..\OnionPattern.Domain\OnionPattern.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Entities\" />
+    <Folder Include="Game\Requests\" />
+    <Folder Include="Platform\Requests\" />
+  </ItemGroup>
+
 </Project>

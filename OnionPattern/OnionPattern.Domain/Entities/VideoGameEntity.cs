@@ -15,6 +15,6 @@ namespace OnionPattern.Domain.Entities
         public bool IsValid { get; set; }
 
         [NotMapped]
-        public ICollection<ValidationError> ValidationErrors { get; set; }
+        public ICollection<ValidationError> ValidationErrors { get; set; } = new List<ValidationError>();
     }
 }

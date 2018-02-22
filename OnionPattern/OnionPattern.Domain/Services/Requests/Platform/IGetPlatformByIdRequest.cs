@@ -1,9 +1,9 @@
-﻿using OnionPattern.Domain.DataTransferObjects.Platform;
+﻿using OnionPattern.Domain.Platform.Responses;
 
 namespace OnionPattern.Domain.Services.Requests.Platform
 {
     public interface IGetPlatformByIdRequest
     {
-        PlatformResponseDto Execute(int id);
+        PlatformResponse Execute(int id);
     }
 }

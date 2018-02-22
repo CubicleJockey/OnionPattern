@@ -1,24 +1,24 @@
 ﻿using AutoMapper;
-using OnionPattern.Domain.DataTransferObjects.Game;
 using OnionPattern.Domain.Repository;
 using OnionPattern.Domain.Services.Requests.Game.Async;
 using Serilog;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using OnionPattern.Domain.Game.Responses;
 
 namespace OnionPattern.Service.Requests.Game.Async
 {
-    public class GetGamesByGenreRequestAsync : BaseServiceRequestAsync<Domain.Entities.Game>, IGetGamesByGenreRequestAsync
+    public class GetGamesByGenreRequestAsync : BaseServiceRequestAsync<Domain.Game.Entities.Game>, IGetGamesByGenreRequestAsync
     {
-        public GetGamesByGenreRequestAsync(IRepositoryAsync<Domain.Entities.Game> repository, IRepositoryAsyncAggregate repositoryAggregate) 
+        public GetGamesByGenreRequestAsync(IRepositoryAsync<Domain.Game.Entities.Game> repository, IRepositoryAsyncAggregate repositoryAggregate) 
             : base(repository, repositoryAggregate) { }
 
         #region Implementation of IGetGamesByGenreRequestAsync
 
-        public async Task<GameListResponseDto> ExecuteAsync(string genre)
+        public async Task<GameListResponse> ExecuteAsync(string genre)
         {
-            var gameListResponse = new GameListResponseDto();
+            var gameListResponse = new GameListResponse();
             try
             {
                 Log.Information("Retrieving game Genre : [{Genre}]", genre);
@@ -33,7 +33,7 @@ namespace OnionPattern.Service.Requests.Game.Async
                 else
                 {
                     //NOTE: Not sure if I want to do something like AutoMapper for this example.
-                    gameListResponse.Games = games.Select(Mapper.Map<Domain.Entities.Game, GameResponseDto>);
+                    gameListResponse.Games = games;
                     gameListResponse.StatusCode = 200;
                 }
             }

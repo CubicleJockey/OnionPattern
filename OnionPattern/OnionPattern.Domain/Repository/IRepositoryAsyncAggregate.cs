@@ -4,8 +4,8 @@ namespace OnionPattern.Domain.Repository
 {
     public interface IRepositoryAsyncAggregate
     {
-        IRepositoryAsync<Game> Games { get; }
-        IRepositoryAsync<Platform> Platforms { get; }
+        IRepositoryAsync<Game.Entities.Game> Games { get; }
+        IRepositoryAsync<Platform.Entities.Platform> Platforms { get; }
         IRepositoryAsync<GamePlatform> GamePlatforms { get; }
     }
 }

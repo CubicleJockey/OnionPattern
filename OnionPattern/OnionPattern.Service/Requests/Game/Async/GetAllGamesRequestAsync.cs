@@ -1,24 +1,24 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using OnionPattern.Domain.DataTransferObjects.Game;
+using OnionPattern.Domain.Game.Responses;
 using OnionPattern.Domain.Repository;
 using OnionPattern.Domain.Services.Requests.Game.Async;
 using Serilog;
 
 namespace OnionPattern.Service.Requests.Game.Async
 {
-    public class GetAllGamesRequestAsync : BaseServiceRequestAsync<Domain.Entities.Game>, IGetAllGamesRequestAsync
+    public class GetAllGamesRequestAsync : BaseServiceRequestAsync<Domain.Game.Entities.Game>, IGetAllGamesRequestAsync
     {
-        public GetAllGamesRequestAsync(IRepositoryAsync<Domain.Entities.Game> repository, IRepositoryAsyncAggregate repositoryAggregate) 
+        public GetAllGamesRequestAsync(IRepositoryAsync<Domain.Game.Entities.Game> repository, IRepositoryAsyncAggregate repositoryAggregate) 
             : base(repository, repositoryAggregate) { }
 
         #region Implementation of IGetAllGamesRequestAsync
 
-        public async Task<GameListResponseDto> ExecuteAsync()
+        public async Task<GameListResponse> ExecuteAsync()
         {
             Log.Information("Retrieving Games List...");
-            var gameListResponse = new GameListResponseDto();
+            var gameListResponse = new GameListResponse();
             try
             {
                 var games = (await Repository.GetAllAsync())?.ToArray();
@@ -31,7 +31,7 @@ namespace OnionPattern.Service.Requests.Game.Async
                 }
                 else
                 {
-                    gameListResponse = new GameListResponseDto
+                    gameListResponse = new GameListResponse
                     {
                         Games = games,
                         StatusCode = 200

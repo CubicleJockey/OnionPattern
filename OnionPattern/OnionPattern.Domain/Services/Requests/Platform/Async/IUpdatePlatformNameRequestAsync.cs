@@ -1,11 +1,11 @@
 ﻿using System.Threading.Tasks;
-using OnionPattern.Domain.DataTransferObjects.Platform;
-using OnionPattern.Domain.DataTransferObjects.Platform.Input;
+using OnionPattern.Domain.Platform.Requests;
+using OnionPattern.Domain.Platform.Responses;
 
 namespace OnionPattern.Domain.Services.Requests.Platform.Async
 {
     public interface IUpdatePlatformNameRequestAsync
     {
-        Task<PlatformResponseDto> ExecuteAsync(UpdatePlatformNameInputDto input);
+        Task<PlatformResponse> ExecuteAsync(UpdatePlatformNameInput input);
     }
 }

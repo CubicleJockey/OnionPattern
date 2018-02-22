@@ -1,21 +1,21 @@
 ﻿using System;
 using System.Threading.Tasks;
 using AutoMapper;
-using OnionPattern.Domain.DataTransferObjects.Platform;
+using OnionPattern.Domain.Platform.Responses;
 using OnionPattern.Domain.Repository;
 using OnionPattern.Domain.Services.Requests.Platform.Async;
 using Serilog;
 
 namespace OnionPattern.Service.Requests.Platform.Async
 {
-    public class DeletePlatformByIdRequestAsync : BaseServiceRequestAsync<Domain.Entities.Platform>, IDeletePlatformByIdRequestAsync
+    public class DeletePlatformByIdRequestAsync : BaseServiceRequestAsync<Domain.Platform.Entities.Platform>, IDeletePlatformByIdRequestAsync
     {
         /// <inheritdoc />
         /// <summary>
         ///     Request
         /// </summary>
         /// <exception cref="T:System.ArgumentNullException">Condition.</exception>
-        public DeletePlatformByIdRequestAsync(IRepositoryAsync<Domain.Entities.Platform> repository, IRepositoryAsyncAggregate repositoryAggregate)
+        public DeletePlatformByIdRequestAsync(IRepositoryAsync<Domain.Platform.Entities.Platform> repository, IRepositoryAsyncAggregate repositoryAggregate)
             : base(repository, repositoryAggregate) { }
 
         #region Implementation of IDeletePlatformByIdRequestAsync
@@ -25,9 +25,9 @@ namespace OnionPattern.Service.Requests.Platform.Async
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public async Task<PlatformResponseDto> ExecuteAsync(int id)
+        public async Task<PlatformResponse> ExecuteAsync(int id)
         {
-            var platformResponse = new PlatformResponseDto();
+            var platformResponse = new PlatformResponse();
             try
             {
                 Log.Information("Deleting Platform with Id: [{Id}]...", id);

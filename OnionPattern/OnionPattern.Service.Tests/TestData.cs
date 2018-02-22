@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using OnionPattern.Domain.Entities;
+using OnionPattern.Domain.Game.Entities;
+using OnionPattern.Domain.Platform.Entities;
 
 namespace OnionPattern.Service.Tests
 {

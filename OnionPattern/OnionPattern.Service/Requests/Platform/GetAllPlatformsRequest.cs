@@ -1,20 +1,20 @@
 ﻿using System;
 using System.Linq;
-using OnionPattern.Domain.DataTransferObjects.Platform;
+using OnionPattern.Domain.Platform.Responses;
 using OnionPattern.Domain.Repository;
 using OnionPattern.Domain.Services.Requests.Platform;
 using Serilog;
 
 namespace OnionPattern.Service.Requests.Platform
 {
-    public class GetAllPlatformsRequest : BaseServiceRequest<Domain.Entities.Platform>, IGetAllPlatformsRequest
+    public class GetAllPlatformsRequest : BaseServiceRequest<Domain.Platform.Entities.Platform>, IGetAllPlatformsRequest
     {
         /// <inheritdoc />
         /// <summary>
         ///     Request to retrieve a list of all of the Platforms.
         /// </summary>
         /// <exception cref="T:System.ArgumentNullException">Condition.</exception>
-        public GetAllPlatformsRequest(IRepository<Domain.Entities.Platform> repository, IRepositoryAggregate repositoryAggregate) 
+        public GetAllPlatformsRequest(IRepository<Domain.Platform.Entities.Platform> repository, IRepositoryAggregate repositoryAggregate) 
             : base(repository, repositoryAggregate) {}
 
         #region Implementation of IGetAllPlatformsRequest
@@ -23,10 +23,10 @@ namespace OnionPattern.Service.Requests.Platform
         /// Execute the request.
         /// </summary>
         /// <returns></returns>
-        public PlatformListResponseDto Execute()
+        public PlatformListResponse Execute()
         {
             Log.Information("Retrieving Platform List...");
-            var platformListResponse = new PlatformListResponseDto();
+            var platformListResponse = new PlatformListResponse();
             try
             {
                 var platforms = Repository.GetAll()?.ToArray();

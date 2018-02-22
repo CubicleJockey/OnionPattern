@@ -8,7 +8,7 @@ namespace OnionPattern.Service.Tests.Requests.Platform
     public class DeletePlatformByIdRequestTests
     {
         [TestClass]
-        public class ConstructorTests : TestBase<Domain.Entities.Platform>
+        public class ConstructorTests : TestBase<Domain.Platform.Entities.Platform>
         {
             [TestInitialize]
             public void TestInitialize()
@@ -28,14 +28,14 @@ namespace OnionPattern.Service.Tests.Requests.Platform
                 var request = new DeletePlatformByIdRequest(FakeRepository, FakeRepositoryAggregate);
 
                 request.Should().NotBeNull();
-                request.Should().BeAssignableTo<BaseServiceRequest<Domain.Entities.Platform>>();
+                request.Should().BeAssignableTo<BaseServiceRequest<Domain.Platform.Entities.Platform>>();
                 request.Should().BeAssignableTo<IDeletePlatformByIdRequest>();
                 request.Should().BeOfType<DeletePlatformByIdRequest>();
             }
         }
 
         [TestClass]
-        public class MethodsTests : TestBase<Domain.Entities.Platform>
+        public class MethodsTests : TestBase<Domain.Platform.Entities.Platform>
         {
             private IDeletePlatformByIdRequest request;
 
@@ -60,8 +60,9 @@ namespace OnionPattern.Service.Tests.Requests.Platform
                 var response = request.Execute(id);
 
                 response.Should().NotBeNull();
-                response.ErrorSummary.Should().NotBeNullOrWhiteSpace();
-                response.ErrorSummary.Should().BeEquivalentTo($"{nameof(id)} must be 1 or greater.");
+                response.ErrorResponse.Should().NotBeNull();
+                response.ErrorResponse.ErrorSummary.Should().NotBeNullOrWhiteSpace();
+                response.ErrorResponse.ErrorSummary.Should().BeEquivalentTo($"{nameof(id)} must be 1 or greater.");
                 response.StatusCode.HasValue.Should().BeTrue();
                 response.StatusCode.Should().Be(500);
             }

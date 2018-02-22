@@ -1,22 +1,22 @@
-﻿using OnionPattern.Domain.DataTransferObjects.Game;
-using OnionPattern.Domain.Repository;
+﻿using OnionPattern.Domain.Repository;
 using OnionPattern.Domain.Services.Requests.Game;
 using System;
 using AutoMapper;
+using OnionPattern.Domain.Game.Responses;
 using Serilog;
 
 namespace OnionPattern.Service.Requests.Game
 {
-    public class GetGameByIdRequest : BaseServiceRequest<Domain.Entities.Game>, IGetGameByIdRequest
+    public class GetGameByIdRequest : BaseServiceRequest<Domain.Game.Entities.Game>, IGetGameByIdRequest
     {
-        public GetGameByIdRequest(IRepository<Domain.Entities.Game> repository, IRepositoryAggregate repositoryAggregate) 
+        public GetGameByIdRequest(IRepository<Domain.Game.Entities.Game> repository, IRepositoryAggregate repositoryAggregate) 
             : base(repository, repositoryAggregate) { }
 
         #region Implementation of IGetGameByIdRequest
 
-        public GameResponseDto Execute(int id)
+        public GameResponse Execute(int id)
         {
-            var gameResponse = new GameResponseDto();
+            var gameResponse = new GameResponse();
             try
             {
                 Log.Information("Retrieving game title : [{Id}]", id);

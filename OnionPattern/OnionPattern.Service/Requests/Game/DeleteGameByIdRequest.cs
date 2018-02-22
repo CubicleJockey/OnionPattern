@@ -1,22 +1,22 @@
 ﻿using System;
 using System.Linq;
-using OnionPattern.Domain.DataTransferObjects.Game;
+using OnionPattern.Domain.Game.Responses;
 using OnionPattern.Domain.Repository;
 using OnionPattern.Domain.Services.Requests.Game;
 using Serilog;
 
 namespace OnionPattern.Service.Requests.Game
 {
-    public class DeleteGameByIdRequest : BaseServiceRequest<Domain.Entities.Game>, IDeleteGameByIdRequest
+    public class DeleteGameByIdRequest : BaseServiceRequest<Domain.Game.Entities.Game>, IDeleteGameByIdRequest
     {
-        public DeleteGameByIdRequest(IRepository<Domain.Entities.Game> repository, IRepositoryAggregate repositoryAggregate) 
+        public DeleteGameByIdRequest(IRepository<Domain.Game.Entities.Game> repository, IRepositoryAggregate repositoryAggregate) 
             : base(repository, repositoryAggregate) { }
 
         #region Implementation of IDeleteGameByIdRequest
 
-        public GameResponseDto Execute(int id)
+        public GameResponse Execute(int id)
         {
-            var gameResponse = new GameResponseDto();
+            var gameResponse = new GameResponse();
             try
             {
                 Log.Information("Deleting Game by Id:[{Id}]...", id);

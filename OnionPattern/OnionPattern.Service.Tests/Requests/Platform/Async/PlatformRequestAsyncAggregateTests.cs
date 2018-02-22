@@ -9,7 +9,7 @@ namespace OnionPattern.Service.Tests.Requests.Platform.Async
     public class PlatformRequestAsyncAggregateTests
     {
         [TestClass]
-        public class ConstructorTests : TestBaseAsync<Domain.Entities.Platform>
+        public class ConstructorTests : TestBaseAsync<Domain.Platform.Entities.Platform>
         {
             [TestInitialize]
             public void TestInitialize()
@@ -29,7 +29,7 @@ namespace OnionPattern.Service.Tests.Requests.Platform.Async
                 var requestAsyncAggregate = new PlatformRequestAsyncAggregate(FakeRepositoryAsync, FakeRepositoryAsyncAggregate);
 
                 requestAsyncAggregate.Should().NotBeNull();
-                requestAsyncAggregate.Should().BeAssignableTo<BaseRequestAsyncAggregate<Domain.Entities.Platform>>();
+                requestAsyncAggregate.Should().BeAssignableTo<BaseRequestAsyncAggregate<Domain.Platform.Entities.Platform>>();
                 requestAsyncAggregate.Should().BeAssignableTo<IPlatformRequestAsyncAggregate>();
                 requestAsyncAggregate.Should().BeOfType<PlatformRequestAsyncAggregate>();
             }

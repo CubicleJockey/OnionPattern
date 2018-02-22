@@ -17,7 +17,7 @@ namespace OnionPattern.Api.Controllers
         /// <typeparam name="TReturn">Return Type of the Action</typeparam>
         /// <param name="action">Action to ExecuteAsync</param>
         /// <returns>IActionResult</returns>
-        protected virtual async Task<IActionResult> ExecuteAndHandleRequestAsync<TReturn>(Func<Task<TReturn>> action) where TReturn : ErrorDetail
+        protected virtual async Task<IActionResult> ExecuteAndHandleRequestAsync<TReturn>(Func<Task<TReturn>> action) where TReturn : IError
         {
             var response = await action();
             return new ObjectResult(response) { StatusCode = response.StatusCode };

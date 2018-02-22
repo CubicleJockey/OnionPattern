@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using OnionPattern.DependencyInjection.Configurations;
+using OnionPattern.Mapping;
 
 namespace OnionPattern.DependencyInjection
 {
@@ -9,7 +10,7 @@ namespace OnionPattern.DependencyInjection
         {
             RepositoriesConfiguration.Configure(services);
             RequestAndResponsesConfiguration.Configure(services);
-            AutomapperConfiguration.Configure();
+            MappingProfileInitilizer.ConfigureMappings();
             LoggingConfiguration.Configure(services);
         }
     }

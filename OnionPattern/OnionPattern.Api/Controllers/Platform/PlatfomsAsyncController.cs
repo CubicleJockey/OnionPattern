@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using OnionPattern.Domain.DataTransferObjects.Platform.Input;
+using OnionPattern.Domain.Platform.Requests;
 using OnionPattern.Domain.Services.Requests.Platform.Async;
 
 namespace OnionPattern.Api.Controllers.Platform
@@ -57,7 +57,7 @@ namespace OnionPattern.Api.Controllers.Platform
         /// <returns></returns>
         [HttpPost]
         [Route("Create/")]
-        public async Task<IActionResult> Post(CreatePlatformInputDto input)
+        public async Task<IActionResult> Post(CreatePlatformInput input)
         {
             return await ExecuteAndHandleRequestAsync(() => RequestAsyncAggregate.CreatePlatformRequestAsync.ExecuteAsync(input));
         }
@@ -69,7 +69,7 @@ namespace OnionPattern.Api.Controllers.Platform
         /// <returns></returns>
         [HttpPut]
         [Route("UpdateName/")]
-        public async Task<IActionResult> Put(UpdatePlatformNameInputDto input)
+        public async Task<IActionResult> Put(UpdatePlatformNameInput input)
         {
             return await ExecuteAndHandleRequestAsync(() => RequestAsyncAggregate.UpdatePlatformNameRequestAsync.ExecuteAsync(input));
         }

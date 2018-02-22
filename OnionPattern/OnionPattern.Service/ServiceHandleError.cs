@@ -10,17 +10,17 @@ namespace OnionPattern.Service
         /// <summary>
         /// Fill in Error Details.
         /// </summary>
-        /// <param name="detail">ErrorDetails Object</param>
+        /// <param name="error">ErrorDetails Object</param>
         /// <param name="message">The Exception</param>
         /// <param name="statusCode">IFF ErrorDetail.StatusCode is null will it use this parameter.</param>
-        protected void HandleErrors(ErrorDetail detail, Exception message, int statusCode = 500)
+        protected void HandleErrors(IError error, Exception message, int statusCode = 500)
         {
-            if (!detail.StatusCode.HasValue)
+            if (!error.StatusCode.HasValue)
             {
-                detail.StatusCode = statusCode;
+                error.StatusCode = statusCode;
             }
-            detail.ErrorSummary = message.Message;
-            detail.InnerException = message.InnerException;
+            error.ErrorResponse.ErrorSummary = message.Message;
+            error.ErrorResponse.InnerException = message.InnerException;
         }
     }
 }

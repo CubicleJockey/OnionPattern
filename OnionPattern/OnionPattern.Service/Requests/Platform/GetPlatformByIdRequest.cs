@@ -1,20 +1,20 @@
 ﻿using System;
 using AutoMapper;
-using OnionPattern.Domain.DataTransferObjects.Platform;
+using OnionPattern.Domain.Platform.Responses;
 using OnionPattern.Domain.Repository;
 using OnionPattern.Domain.Services.Requests.Platform;
 using Serilog;
 
 namespace OnionPattern.Service.Requests.Platform
 {
-    public class GetPlatformByIdRequest : BaseServiceRequest<Domain.Entities.Platform>, IGetPlatformByIdRequest
+    public class GetPlatformByIdRequest : BaseServiceRequest<Domain.Platform.Entities.Platform>, IGetPlatformByIdRequest
     {
         /// <inheritdoc />
         /// <summary>
         ///     Request to get a Platform by it's Id.
         /// </summary>
         /// <exception cref="T:System.ArgumentNullException">Condition.</exception>
-        public GetPlatformByIdRequest(IRepository<Domain.Entities.Platform> repository, IRepositoryAggregate repositoryAggregate) 
+        public GetPlatformByIdRequest(IRepository<Domain.Platform.Entities.Platform> repository, IRepositoryAggregate repositoryAggregate) 
             : base(repository, repositoryAggregate) { }
 
         #region Implementation of IGetPlatformByIdRequest
@@ -24,12 +24,12 @@ namespace OnionPattern.Service.Requests.Platform
         /// </summary>
         /// <param name="id">Id of the Platform to retreive.</param>
         /// <returns></returns>
-        public PlatformResponseDto Execute(int id)
+        public PlatformResponse Execute(int id)
         {
             CheckInputValidity(id);
             Log.Information("Retrieving Platform by Id: [{Id}]...", id);
             
-            var platformResponse = new PlatformResponseDto();
+            var platformResponse = new PlatformResponse();
             try
             {
                 var platform = Repository.SingleOrDefault(p => p.Id == id);
@@ -42,7 +42,7 @@ namespace OnionPattern.Service.Requests.Platform
                 {
                     platformResponse = Mapper.Map(platform, platformResponse);
                     platformResponse.StatusCode = 200;
-                    Log.Information("Retrieved [{NewName}] for Id: [{Id}].", platformResponse.Name, id);
+                    Log.Information("Retrieved [{NewName}] for Id: [{Id}].", platformResponse.Platform.Name, id);
                 }
             }
             catch (Exception exception)

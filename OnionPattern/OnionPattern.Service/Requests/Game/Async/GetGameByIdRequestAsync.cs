@@ -1,23 +1,23 @@
 ﻿using AutoMapper;
-using OnionPattern.Domain.DataTransferObjects.Game;
 using OnionPattern.Domain.Repository;
 using OnionPattern.Domain.Services.Requests.Game.Async;
 using System;
 using System.Threading.Tasks;
+using OnionPattern.Domain.Game.Responses;
 using Serilog;
 
 namespace OnionPattern.Service.Requests.Game.Async
 {
-    public class GetGameByIdRequestAsync : BaseServiceRequestAsync<Domain.Entities.Game>, IGetGameByIdRequestAsync
+    public class GetGameByIdRequestAsync : BaseServiceRequestAsync<Domain.Game.Entities.Game>, IGetGameByIdRequestAsync
     {
-        public GetGameByIdRequestAsync(IRepositoryAsync<Domain.Entities.Game> repository, IRepositoryAsyncAggregate repositoryAggregate) 
+        public GetGameByIdRequestAsync(IRepositoryAsync<Domain.Game.Entities.Game> repository, IRepositoryAsyncAggregate repositoryAggregate) 
             : base(repository, repositoryAggregate) { }
 
         #region Implementation of IGetGameByIdRequestAsync
 
-        public async Task<GameResponseDto> ExecuteAsync(int id)
+        public async Task<GameResponse> ExecuteAsync(int id)
         {
-            var gameResponse = new GameResponseDto();
+            var gameResponse = new GameResponse();
             try
             {
                 Log.Information("Retrieving game title : [{Id}]...", id);
@@ -34,7 +34,7 @@ namespace OnionPattern.Service.Requests.Game.Async
                     //NOTE: Not sure if I want to do something like AutoMapper for this example.
                     gameResponse = Mapper.Map(game, gameResponse);
                     gameResponse.StatusCode = 200;
-                    Log.Information("Retrieved [{NewName}] for Id: [{Id}].", gameResponse.Name, id);
+                    Log.Information("Retrieved [{NewName}] for Id: [{Id}].", gameResponse.Game.Name, id);
                 }
             }
             catch (Exception exception)

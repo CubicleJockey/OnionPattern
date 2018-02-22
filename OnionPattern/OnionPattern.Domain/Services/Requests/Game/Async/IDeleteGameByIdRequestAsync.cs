@@ -1,10 +1,10 @@
 ﻿using System.Threading.Tasks;
-using OnionPattern.Domain.DataTransferObjects.Game;
+using OnionPattern.Domain.Game.Responses;
 
 namespace OnionPattern.Domain.Services.Requests.Game.Async
 {
     public interface IDeleteGameByIdRequestAsync
     {
-        Task<GameResponseDto> ExecuteAsync(int id);
+        Task<GameResponse> ExecuteAsync(int id);
     }
 }

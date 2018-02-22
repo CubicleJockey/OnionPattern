@@ -1,20 +1,20 @@
 ﻿using System;
 using AutoMapper;
-using OnionPattern.Domain.DataTransferObjects.Platform;
+using OnionPattern.Domain.Platform.Responses;
 using OnionPattern.Domain.Repository;
 using OnionPattern.Domain.Services.Requests.Platform;
 using Serilog;
 
 namespace OnionPattern.Service.Requests.Platform
 {
-    public class DeletePlatformByIdRequest : BaseServiceRequest<Domain.Entities.Platform>, IDeletePlatformByIdRequest
+    public class DeletePlatformByIdRequest : BaseServiceRequest<Domain.Platform.Entities.Platform>, IDeletePlatformByIdRequest
     {
         /// <inheritdoc />
         /// <summary>
         ///     Request to delete a Platform by it's Id.
         /// </summary>
         /// <exception cref="T:System.ArgumentNullException">Condition.</exception>
-        public DeletePlatformByIdRequest(IRepository<Domain.Entities.Platform> repository, IRepositoryAggregate repositoryAggregate) 
+        public DeletePlatformByIdRequest(IRepository<Domain.Platform.Entities.Platform> repository, IRepositoryAggregate repositoryAggregate) 
             : base(repository, repositoryAggregate) { }
 
         #region Implementation of IDeletePlatformByIdRequest
@@ -24,9 +24,9 @@ namespace OnionPattern.Service.Requests.Platform
         /// </summary>
         /// <param name="id">Id of the Platform to delete.</param>
         /// <returns></returns>
-        public PlatformResponseDto Execute(int id)
+        public PlatformResponse Execute(int id)
         {
-            var platformResponse = new PlatformResponseDto();
+            var platformResponse = new PlatformResponse();
             try
             {
                 Log.Information("Deleting Platform with Id: [{Id}]...", id);

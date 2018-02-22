@@ -3,6 +3,7 @@ using FakeItEasy;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OnionPattern.Domain.Entities;
+using OnionPattern.Domain.Game.Entities;
 using OnionPattern.Domain.Services.Requests.Game;
 using OnionPattern.Service.Requests;
 using OnionPattern.Service.Requests.Game;

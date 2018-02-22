@@ -1,10 +1,10 @@
-﻿using OnionPattern.Domain.DataTransferObjects.Game;
-using OnionPattern.Domain.DataTransferObjects.Game.Input;
+﻿using OnionPattern.Domain.Game.Requests;
+using OnionPattern.Domain.Game.Responses;
 
 namespace OnionPattern.Domain.Services.Requests.Game
 {
     public interface ICreateGameRequest
     {
-        GameResponseDto Execute(CreateGameInputDto input);
+        GameResponse Execute(CreateGameInput input);
     }
 }

@@ -39,7 +39,7 @@ namespace OnionPattern.Service.Requests.Game.Async
                 else
                 {
                     gameToUpdate.Name = input.NewTitle;
-                    gameResponse = Mapper.Map(await Repository.UpdateAsync(gameToUpdate), gameResponse);
+                    gameResponse.Game = await Repository.UpdateAsync(gameToUpdate);
                     gameResponse.StatusCode = 200;
                 }
             }

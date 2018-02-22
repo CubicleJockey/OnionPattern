@@ -22,7 +22,7 @@ namespace OnionPattern.Service.Requests.Game
             {
                 Log.Information("Creating Game Entry for [{NewName}].", game?.Name);
                 var gameEntity = Mapper.Map<CreateGameInput, Domain.Game.Entities.Game>(game);
-                gameResponse = Mapper.Map(Repository.Create(gameEntity), gameResponse);
+                gameResponse.Game = Repository.Create(gameEntity);
                 gameResponse.StatusCode = 200;
             }
             catch (Exception exception)

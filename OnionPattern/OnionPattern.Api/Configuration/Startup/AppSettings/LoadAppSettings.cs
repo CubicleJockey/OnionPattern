@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using OnionPattern.Domain.Configurations;
 using OnionPattern.Domain.Constants;
 
-namespace OnionPattern.Api.StartupConfigurations
+namespace OnionPattern.Api.Configuration.Startup.AppSettings
 {
     /// <summary>
     /// Loads the Appsettings file configurations into the dependency injector.

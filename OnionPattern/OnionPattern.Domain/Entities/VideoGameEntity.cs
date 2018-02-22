@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Newtonsoft.Json;
 using OnionPattern.Domain.Validation;
 
 namespace OnionPattern.Domain.Entities
@@ -11,10 +12,10 @@ namespace OnionPattern.Domain.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        [NotMapped]
+        [NotMapped, JsonIgnore]
         public bool IsValid { get; set; }
 
-        [NotMapped]
+        [NotMapped, JsonIgnore]
         public ICollection<ValidationError> ValidationErrors { get; set; } = new List<ValidationError>();
     }
 }

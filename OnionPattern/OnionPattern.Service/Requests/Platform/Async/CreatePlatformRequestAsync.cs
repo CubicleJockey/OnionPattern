@@ -42,7 +42,7 @@ namespace OnionPattern.Service.Requests.Platform.Async
                 }
                 else
                 {
-                    platformResponse = Mapper.Map(createdPlatform, platformResponse);
+                    platformResponse.Platform = createdPlatform;
                     platformResponse.StatusCode = 200;
 
                     Log.Information("Created Platform [{Name}]", platformResponse.Platform.Name);

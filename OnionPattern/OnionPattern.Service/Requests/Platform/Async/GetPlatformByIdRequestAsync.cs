@@ -43,7 +43,7 @@ namespace OnionPattern.Service.Requests.Platform.Async
                 }
                 else
                 {
-                    platformResponse = Mapper.Map(platform, platformResponse);
+                    platformResponse.Platform = platform;
                     platformResponse.StatusCode = 200;
                     Log.Information("Retrieved [{NewName}] for Id: [{Id}].", platformResponse.Platform.Name, id);
                 }

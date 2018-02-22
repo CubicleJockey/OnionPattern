@@ -34,7 +34,7 @@ namespace OnionPattern.Service.Requests.Platform
                 var platformToCreate = Mapper.Map<CreatePlatformInput, Domain.Platform.Entities.Platform>(input);
                 var createdPlatform = Repository.Create(platformToCreate);
 
-                platformResponse = Mapper.Map(createdPlatform, platformResponse);
+                platformResponse.Platform = createdPlatform;
                 platformResponse.StatusCode = 200;
 
                 Log.Information("Created Platform [{Name}]", createdPlatform.Name);

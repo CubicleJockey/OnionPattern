@@ -23,7 +23,7 @@ namespace OnionPattern.Service.Requests.Game.Async
             {
                 Log.Information("Creating Game Entry for [{NewName}]...", input?.Name);
                 var gameEntity = Mapper.Map<CreateGameInput, Domain.Game.Entities.Game>(input);
-                gameResponse = Mapper.Map(await Repository.CreateAsync(gameEntity), gameResponse);
+                gameResponse.Game = await Repository.CreateAsync(gameEntity);
                 gameResponse.StatusCode = 200;
                 Log.Information("Created Game Entry for [{NewName}] with Id: [{Id}]", gameResponse.Game.Name, gameResponse.Game.Id);
             }

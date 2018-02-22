@@ -46,7 +46,7 @@ namespace OnionPattern.Service.Requests.Platform
                     platformToUpdate.Name = input.NewName;
                     var updatedPlatform = Repository.Update(platformToUpdate);
 
-                    platformResponse = Mapper.Map(updatedPlatform, platformResponse);
+                    platformResponse.Platform = updatedPlatform;
                     platformResponse.StatusCode = 200;
 
                     Log.Information("Updated Platform from [{PreviousName}] to [{NewName}].", previousName, input.NewName);

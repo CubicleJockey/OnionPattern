@@ -43,9 +43,7 @@ namespace OnionPattern.Service.Tests.Requests.Games
         [TestClass]
         public class MethodsTests : TestBase<Game>
         {
-            private IUpdateGameTitleRequest request;
-            private Expression<Action> UpdatingInfoLog;
-
+            private UpdateGameTitleRequest request;
 
             [TestInitialize]
             public void TestInitalize()

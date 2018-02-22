@@ -20,7 +20,7 @@ namespace OnionPattern.Domain.Tests.Game.Responses
             [TestMethod]
             public void InheritsFromIListResponse()
             {
-                Entity.Should().NotBeAssignableTo<IListResponse>();
+                Entity.Should().BeAssignableTo<IListResponse>();
             }
         }
     }

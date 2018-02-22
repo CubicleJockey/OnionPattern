@@ -12,12 +12,6 @@ namespace OnionPattern.Domain.Tests.Game.Responses
         public class ConstructorTests : TestBase<GameResponse>
         {
             [TestMethod]
-            public void InheritsFromIGame()
-            {
-                Entity.Should().BeAssignableTo<IGame>();
-            }
-
-            [TestMethod]
             public void InheritsFromIError()
             {
                 Entity.Should().BeAssignableTo<IError>();

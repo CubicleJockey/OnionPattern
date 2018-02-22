@@ -19,6 +19,8 @@ namespace OnionPattern.Service
             {
                 error.StatusCode = statusCode;
             }
+
+            if(error.ErrorResponse == null) {  error.ErrorResponse = new ErrorResponse(); }
             error.ErrorResponse.ErrorSummary = message.Message;
             error.ErrorResponse.InnerException = message.InnerException;
         }

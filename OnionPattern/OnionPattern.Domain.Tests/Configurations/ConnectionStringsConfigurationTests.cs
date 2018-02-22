@@ -17,7 +17,7 @@ namespace OnionPattern.Domain.Tests.Configurations
             connectionStringsConfiguration.Should().NotBeNull();
 
             connectionStringsConfiguration.VideoGamesConnection.Should().NotBeNullOrWhiteSpace();
-            connectionStringsConfiguration.VideoGamesConnection.Should().Be(Configuration[MockAppSettings.ConnectionStringsKeys.VideoGamesConnection]);
+            connectionStringsConfiguration.VideoGamesConnection.Should().Be(Configuration[MockAppSettings.ConfigurationKeys.VideoGamesConnection]);
         }
     }
 }

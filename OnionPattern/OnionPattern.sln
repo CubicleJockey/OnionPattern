@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2006
+VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnionPattern.Domain", "OnionPattern.Domain\OnionPattern.Domain.csproj", "{DD510D19-E406-4F06-9AD7-7A049DBE131F}"
 EndProject
@@ -44,7 +44,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnionPattern.Mapping.Tests"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mocks", "Mocks", "{9B09E51A-CCEF-4926-B207-669279E98E97}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnionPattern.DataAccess.EF.Mock.Data", "OnionPattern.DataAccess.EF.Mock.Data\OnionPattern.DataAccess.EF.Mock.Data.csproj", "{8CEAE445-E492-4B78-B975-11BC52616FD0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnionPattern.DataAccess.EF.Mock.Data", "OnionPattern.DataAccess.EF.Mock.Data\OnionPattern.DataAccess.EF.Mock.Data.csproj", "{8CEAE445-E492-4B78-B975-11BC52616FD0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnionPattern.MockData", "OnionPattern.MockData\OnionPattern.MockData.csproj", "{8ABE0CF2-C022-4219-8A94-4B5C8CDF1D0B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -110,6 +112,10 @@ Global
 		{8CEAE445-E492-4B78-B975-11BC52616FD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8CEAE445-E492-4B78-B975-11BC52616FD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8CEAE445-E492-4B78-B975-11BC52616FD0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8ABE0CF2-C022-4219-8A94-4B5C8CDF1D0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8ABE0CF2-C022-4219-8A94-4B5C8CDF1D0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8ABE0CF2-C022-4219-8A94-4B5C8CDF1D0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8ABE0CF2-C022-4219-8A94-4B5C8CDF1D0B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -130,6 +136,7 @@ Global
 		{07C8421D-3EFE-451D-9020-59FE56FE9027} = {BD86FAFB-0DB9-46FA-BE21-350642B83A51}
 		{9B09E51A-CCEF-4926-B207-669279E98E97} = {CDDBCFD6-438C-4583-A9C0-22EE5425E605}
 		{8CEAE445-E492-4B78-B975-11BC52616FD0} = {9B09E51A-CCEF-4926-B207-669279E98E97}
+		{8ABE0CF2-C022-4219-8A94-4B5C8CDF1D0B} = {BD86FAFB-0DB9-46FA-BE21-350642B83A51}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {10BC7194-6404-43FB-9E97-A476E27278E2}

@@ -12,12 +12,12 @@ namespace OnionPattern.Domain.Tests.Configurations
         [TestMethod]
         public void Valid()
         {
-            var connectionStringsConfiguration = Configuration.GetSection(AppSettingsSections.ConnectionStrings).Get<LogLocationConfiguration>();
+            var connectionStringsConfiguration = Configuration.GetSection(AppSettingsSections.LogLocations).Get<LogLocationConfiguration>();
 
             connectionStringsConfiguration.Should().NotBeNull();
 
             connectionStringsConfiguration.FileName.Should().NotBeNullOrWhiteSpace();
-            connectionStringsConfiguration.FileName.Should().Be(Configuration[MockAppSettings.ConnectionStringsKeys.VideoGamesConnection]);
+            connectionStringsConfiguration.FileName.Should().Be(Configuration[MockAppSettings.ConfigurationKeys.LogLocationsLocal]);
         }
     }
 }

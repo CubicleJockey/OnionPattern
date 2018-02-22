@@ -9,13 +9,23 @@ namespace OnionPattern.Service.Tests
         [TestClass]
         public class ConstructorTests
         {
-            [TestMethod]
-            public void Inheritence()
-            {
-                var mockBaseServiceRequest = A.Fake<BaseServiceRequestAsync<FakeEntity>>();
+            private readonly BaseServiceRequestAsync<FakeEntity> fakeBaseServiceRequestAsync;
 
-                mockBaseServiceRequest.Should().NotBeNull();
-                mockBaseServiceRequest.Should().BeAssignableTo<BaseServiceRequestAsync<FakeEntity>>();
+            public ConstructorTests()
+            {
+                fakeBaseServiceRequestAsync = A.Fake<BaseServiceRequestAsync<FakeEntity>>();
+            }
+
+            [TestCleanup]
+            public void TestCleanup()
+            {
+                Fake.ClearConfiguration(fakeBaseServiceRequestAsync);
+            }
+
+            [TestMethod]
+            public void InheritsFromServiceHandleError()
+            {
+                fakeBaseServiceRequestAsync.Should().BeAssignableTo<ServiceHandleError>();
             }
         }
     }

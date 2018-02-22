@@ -1,9 +1,8 @@
-﻿using System;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using OnionPattern.Domain.Game.Entities;
+﻿using OnionPattern.Domain.Game.Entities;
 using OnionPattern.Domain.GamePlatform.Entities;
 using OnionPattern.Domain.Platform.Entities;
+using System;
+using System.Threading.Tasks;
 
 namespace OnionPattern.DataAccess.EF.Mock.Data
 {
@@ -63,63 +62,63 @@ namespace OnionPattern.DataAccess.EF.Mock.Data
                 {
                     Name = "The Legend of Zelda",
                     Genre = @"Adventure|RPG",
-                    Price = 24.99,
+                    Price = 24.99M,
                     ReleaseDate = new DateTime(1987, 8, 22)
                 },
                 new Game
                 {
                     Name = "Zelda II: The Adventure of Link",
                     Genre = @"Adventure|RPG",
-                    Price = 30.16,
+                    Price = 30.16M,
                     ReleaseDate = new DateTime(1988, 9, 26)
                 },
                 new Game
                 {
                     Name = "The Legend of Zelda: A Link To The Past",
                     Genre = @"Adventure|RPG",
-                    Price = 40.13,
+                    Price = 40.13M,
                     ReleaseDate = new DateTime(1991, 11, 21)
                 },
                 new Game
                 {
                     Name = "The Legend of Zelda: Ocarina of Time",
                     Genre = @"Adventure|RPG",
-                    Price = 69.69,
+                    Price = 69.69M,
                     ReleaseDate = new DateTime(1998, 11, 21)
                 },
                 new Game
                 {
                     Name = "The Legend of Zelda: Majora's Mask",
                     Genre = @"Adventure|RPG",
-                    Price = 120.56,
+                    Price = 120.56M,
                     ReleaseDate = new DateTime(2000, 4, 27)
                 },
                 new Game
                 {
                     Name = "The Legend of Zelda: The Wind Waker",
                     Genre = @"Adventure|RPG",
-                    Price = 13.13,
+                    Price = 13.13M,
                     ReleaseDate = new DateTime(2002, 12, 13)
                 },
                 new Game
                 {
                     Name = "The Legend of Zelda: Twilight Princess",
                     Genre = @"Adventure|RPG",
-                    Price = 10000.12,
+                    Price = 10000.12M,
                     ReleaseDate = new DateTime(2006, 12, 02)
                 },
                 new Game
                 {
                     Name = "The Legend of Zelda: Skyward Sword",
                     Genre = @"Adventure|RPG",
-                    Price = 465.56,
+                    Price = 465.56M,
                     ReleaseDate = new DateTime(2011, 11, 18)
                 },
                 new Game
                 {
                     Name = "The Legend of Zelda: Breath of the Wild",
                     Genre = @"Adventure|RPG",
-                    Price = 69.99,
+                    Price = 69.99M,
                     ReleaseDate = new DateTime(2017, 3, 3)
                 }
             };

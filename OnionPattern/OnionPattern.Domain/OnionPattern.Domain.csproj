@@ -10,16 +10,17 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="Exceptions\**" />
+    <Compile Remove="GamePlatform\Requests\**" />
+    <Compile Remove="GamePlatform\Responses\**" />
     <EmbeddedResource Remove="Exceptions\**" />
+    <EmbeddedResource Remove="GamePlatform\Requests\**" />
+    <EmbeddedResource Remove="GamePlatform\Responses\**" />
     <None Remove="Exceptions\**" />
+    <None Remove="GamePlatform\Requests\**" />
+    <None Remove="GamePlatform\Responses\**" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="11.0.1" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="4.4.1" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="GamePlatform\Entities\" />
-    <Folder Include="GamePlatform\Requests\" />
-    <Folder Include="GamePlatform\Responses\" />
   </ItemGroup>
 </Project>

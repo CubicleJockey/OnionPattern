@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using OnionPattern.Domain.Entities;
 
 namespace OnionPattern.Domain.Platform.Entities
 {
@@ -9,6 +8,6 @@ namespace OnionPattern.Domain.Platform.Entities
         public string Name { get; set; }
         public DateTime ReleaseDate { get; set; }
 
-        public ICollection<GamePlatform> GamePlatforms { get; set; }
+        public ICollection<GamePlatform.Entities.GamePlatform> GamePlatforms { get; set; }
     }
 }

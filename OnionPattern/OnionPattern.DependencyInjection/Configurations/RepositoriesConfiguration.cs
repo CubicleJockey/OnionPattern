@@ -4,10 +4,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using OnionPattern.DataAccess.EF;
 using OnionPattern.DataAccess.EF.Repository;
+using OnionPattern.Domain;
 using OnionPattern.Domain.Configurations;
 using OnionPattern.Domain.Constants;
-using OnionPattern.Domain.Entities;
 using OnionPattern.Domain.Game.Entities;
+using OnionPattern.Domain.GamePlatform.Entities;
 using OnionPattern.Domain.Platform.Entities;
 using OnionPattern.Domain.Repository;
 

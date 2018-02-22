@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using OnionPattern.Domain.Entities;
 using OnionPattern.Domain.Repository;
 using OnionPattern.Domain.Services.Requests.Game;
 using OnionPattern.Domain.Services.Requests.Game.Async;
@@ -10,6 +9,7 @@ using OnionPattern.Service.Requests.Game.Async;
 using OnionPattern.Service.Requests.Platform;
 using OnionPattern.Service.Requests.Platform.Async;
 using System;
+using OnionPattern.Domain;
 using OnionPattern.Domain.Game.Entities;
 using OnionPattern.Domain.Platform.Entities;
 

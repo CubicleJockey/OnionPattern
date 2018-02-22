@@ -2,7 +2,6 @@
 using System.Linq.Expressions;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using OnionPattern.Domain.Entities;
 using OnionPattern.Domain.Game.Entities;
 using OnionPattern.Domain.Game.Requests;
 using OnionPattern.Domain.Services.Requests.Game;

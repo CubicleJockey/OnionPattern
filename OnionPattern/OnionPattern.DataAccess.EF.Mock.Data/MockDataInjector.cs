@@ -1,8 +1,8 @@
-﻿using OnionPattern.Domain.Entities;
-using System;
+﻿using System;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using OnionPattern.Domain.Game.Entities;
+using OnionPattern.Domain.GamePlatform.Entities;
 using OnionPattern.Domain.Platform.Entities;
 
 namespace OnionPattern.DataAccess.EF.Mock.Data

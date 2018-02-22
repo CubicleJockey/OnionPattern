@@ -1,4 +1,4 @@
-﻿using OnionPattern.Domain.Entities;
+﻿using OnionPattern.Domain;
 
 namespace OnionPattern.DataAccess.EF.Tests.Repository
 {

@@ -1,5 +1,5 @@
 ﻿using FakeItEasy;
-using OnionPattern.Domain.Entities;
+using OnionPattern.Domain;
 using OnionPattern.Domain.Repository;
 using Serilog;
 

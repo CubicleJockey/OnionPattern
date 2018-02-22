@@ -1,6 +1,6 @@
-﻿using OnionPattern.Domain.Entities;
-using OnionPattern.Domain.Repository;
+﻿using OnionPattern.Domain.Repository;
 using System;
+using OnionPattern.Domain;
 
 namespace OnionPattern.Service
 {

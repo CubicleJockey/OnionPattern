@@ -10,7 +10,7 @@ namespace OnionPattern.Domain.Tests.Constants
         [TestMethod]
         public void ValidValues()
         {
-            EnvironmentTypes.Local.Should().BeEquivalentTo("Local");
+            EnvironmentTypes.Local.Should().Be("Local");
         }
     }
 }

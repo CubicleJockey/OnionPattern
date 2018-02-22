@@ -1,6 +1,5 @@
 ﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using OnionPattern.Domain.Entities;
 
 namespace OnionPattern.Domain.Tests.GamePlatform.Entities
 {
@@ -9,12 +8,12 @@ namespace OnionPattern.Domain.Tests.GamePlatform.Entities
         [TestClass]
         public class ConstructorTests
         {
-            private Domain.Entities.GamePlatform entity;
+            private Domain.GamePlatform.Entities.GamePlatform entity;
 
             [TestInitialize]
             public void TestIntialize()
             {
-                entity = new Domain.Entities.GamePlatform();
+                entity = new Domain.GamePlatform.Entities.GamePlatform();
             }
 
             [TestMethod]
@@ -26,7 +25,7 @@ namespace OnionPattern.Domain.Tests.GamePlatform.Entities
             [TestMethod]
             public void ShouldBeOfTypeGamePlatform()
             {
-                entity.Should().BeOfType<Domain.Entities.GamePlatform>();
+                entity.Should().BeOfType<Domain.GamePlatform.Entities.GamePlatform>();
             }
         }
     }

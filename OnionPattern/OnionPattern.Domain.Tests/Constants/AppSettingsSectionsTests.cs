@@ -10,9 +10,9 @@ namespace OnionPattern.Domain.Tests.Constants
         [TestMethod]
         public void ValidValues()
         {
-            AppSettingsSections.ConnectionStrings.Should().BeEquivalentTo("ConnectionStrings");
-            AppSettingsSections.Logging.Should().BeEquivalentTo("Logging");
-            AppSettingsSections.LogLocations.Should().BeEquivalentTo("LogLocations");
+            AppSettingsSections.ConnectionStrings.Should().Be("ConnectionStrings");
+            AppSettingsSections.Logging.Should().Be("Logging");
+            AppSettingsSections.LogLocations.Should().Be("LogLocations");
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿using System;
-using OnionPattern.Domain.Entities;
+using OnionPattern.Domain;
 using OnionPattern.Domain.Repository;
 
 namespace OnionPattern.Service.Requests

@@ -1,4 +1,4 @@
-﻿namespace OnionPattern.Domain.Entities
+﻿namespace OnionPattern.Domain.GamePlatform.Entities
 {
     public class GamePlatform : VideoGameEntity
     {

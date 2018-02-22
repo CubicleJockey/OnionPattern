@@ -3,10 +3,10 @@ using OnionPattern.Domain.Services.Requests.Game;
 
 namespace OnionPattern.Service.Requests.Game
 {
-    public class GameRequestAggregate : BaseRequestAggregate<Domain.Entities.Game>, IGameRequestAggregate
+    public class GameRequestAggregate : BaseRequestAggregate<Domain.Game.Entities.Game>, IGameRequestAggregate
     {
 
-        public GameRequestAggregate(IRepository<Domain.Entities.Game> repository, IRepositoryAggregate repositoryAggregate) 
+        public GameRequestAggregate(IRepository<Domain.Game.Entities.Game> repository, IRepositoryAggregate repositoryAggregate) 
             : base(repository, repositoryAggregate)  {}
 
         #region Implementation of IGameRequestAggregate

@@ -1,14 +1,14 @@
 ﻿using FakeItEasy;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using OnionPattern.Domain.DataTransferObjects.Platform;
 using OnionPattern.Domain.Services.Requests.Platform;
 using OnionPattern.Service.Requests.Platform;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using OnionPattern.Domain.Interfaces;
+using OnionPattern.Domain.Platform;
+using OnionPattern.Domain.Platform.Responses;
 
 namespace OnionPattern.Service.Tests.Requests.Platform
 {
@@ -16,7 +16,7 @@ namespace OnionPattern.Service.Tests.Requests.Platform
     {
 
         [TestClass]
-        public class ConstructorTests : TestBase<Domain.Entities.Platform>
+        public class ConstructorTests : TestBase<Domain.Platform.Entities.Platform>
         {
             [TestInitialize]
             public void TestInitialize()
@@ -37,13 +37,13 @@ namespace OnionPattern.Service.Tests.Requests.Platform
 
                 request.Should().NotBeNull();
                 request.Should().BeAssignableTo<IGetAllPlatformsRequest>();
-                request.Should().BeAssignableTo<BaseServiceRequest<Domain.Entities.Platform>>();
+                request.Should().BeAssignableTo<BaseServiceRequest<Domain.Platform.Entities.Platform>>();
                 request.Should().BeOfType<GetAllPlatformsRequest>();
             }
         }
 
         [TestClass]
-        public class MethodTests : TestBase<Domain.Entities.Platform>
+        public class MethodTests : TestBase<Domain.Platform.Entities.Platform>
         {
             [TestInitialize]
             public void TestInitalize()
@@ -60,7 +60,7 @@ namespace OnionPattern.Service.Tests.Requests.Platform
             [TestMethod]
             public void Execute()
             {
-               Expression<Func<IEnumerable<Domain.Entities.Platform>>> getAll = () => FakeRepository.GetAll();
+               Expression<Func<IEnumerable<Domain.Platform.Entities.Platform>>> getAll = () => FakeRepository.GetAll();
 
                 var platforms = TestData.GetPlatforms().ToArray();
 
@@ -71,7 +71,7 @@ namespace OnionPattern.Service.Tests.Requests.Platform
                 
                 var response = request.Execute();
                 response.Should().NotBeNull();
-                response.Should().BeOfType<PlatformListResponseDto>();
+                response.Should().BeOfType<PlatformListResponse>();
 
                 response.Platforms.Should().NotBeNullOrEmpty();
 
@@ -86,9 +86,9 @@ namespace OnionPattern.Service.Tests.Requests.Platform
                 void CheckValues(IPlatform platform, IPlatform expected)
                 {
                     platform.Should().NotBeNull();
-                    platform.Id.ShouldBeEquivalentTo(expected.Id);
+                    platform.Id.Should().Be(expected.Id);
                     platform.Name.Should().BeEquivalentTo(expected.Name);
-                    platform.ReleaseDate.ShouldBeEquivalentTo(expected.ReleaseDate);
+                    platform.ReleaseDate.Should().Be(expected.ReleaseDate);
                 }
 
                 A.CallTo(getAll).MustHaveHappened(Repeated.Exactly.Once);

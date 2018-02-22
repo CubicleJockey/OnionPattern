@@ -2,8 +2,9 @@
 using System.Linq.Expressions;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using OnionPattern.Domain.DataTransferObjects.Game.Input;
 using OnionPattern.Domain.Entities;
+using OnionPattern.Domain.Game.Entities;
+using OnionPattern.Domain.Game.Requests;
 using OnionPattern.Domain.Services.Requests.Game;
 using OnionPattern.Service.Requests.Game;
 using SerilogFakeItEasy;
@@ -42,9 +43,7 @@ namespace OnionPattern.Service.Tests.Requests.Games
         [TestClass]
         public class MethodsTests : TestBase<Game>
         {
-            private IUpdateGameTitleRequest request;
-            private Expression<Action> UpdatingInfoLog;
-
+            private UpdateGameTitleRequest request;
 
             [TestInitialize]
             public void TestInitalize()
@@ -64,8 +63,9 @@ namespace OnionPattern.Service.Tests.Requests.Games
             {
                 var response =  request.Execute(null);
                 response.Should().NotBeNull();
-                response.ErrorSummary.Should().NotBeNullOrWhiteSpace();
-                response.ErrorSummary.Should().BeEquivalentTo($"Value cannot be null.{Environment.NewLine}Parameter name: input");
+                response.ErrorResponse.Should().NotBeNull();
+                response.ErrorResponse.ErrorSummary.Should().NotBeNullOrWhiteSpace();
+                response.ErrorResponse.ErrorSummary.Should().BeEquivalentTo($"Value cannot be null.{Environment.NewLine}Parameter name: input");
             }
 
             [DataTestMethod]
@@ -73,12 +73,13 @@ namespace OnionPattern.Service.Tests.Requests.Games
             [DataRow(0)]
             public void InvalidInputIdNotValid(int Id)
             {
-                var invalidInput = new UpdateGameTitleInputDto{ Id = Id, NewTitle = "Something" };
+                var invalidInput = new UpdateGameTitleInput{ Id = Id, NewTitle = "Something" };
                 var response =  request.Execute(invalidInput);
 
                 response.Should().NotBeNull();
-                response.ErrorSummary.Should().NotBeNullOrWhiteSpace();
-                response.ErrorSummary.Should().BeEquivalentTo($"Input {nameof(Id)} must be 1 or greater.");
+                response.ErrorResponse.Should().NotBeNull();
+                response.ErrorResponse.ErrorSummary.Should().NotBeNullOrWhiteSpace();
+                response.ErrorResponse.ErrorSummary.Should().BeEquivalentTo($"Input {nameof(Id)} must be 1 or greater.");
             }
 
             [DataTestMethod]
@@ -87,12 +88,12 @@ namespace OnionPattern.Service.Tests.Requests.Games
             [DataRow("      ")]
             public void InvalidInputNameIsEmpty(string name)
             {
-                var invalidInput = new UpdateGameTitleInputDto { Id = 666, NewTitle = name };
+                var invalidInput = new UpdateGameTitleInput { Id = 666, NewTitle = name };
                 var response = request.Execute(invalidInput);
 
                 response.Should().NotBeNull();
-                response.ErrorSummary.Should().NotBeNullOrWhiteSpace();
-                response.ErrorSummary.Should().BeEquivalentTo($"Input {nameof(invalidInput.NewTitle)} cannot be empty.");
+                response.ErrorResponse.ErrorSummary.Should().NotBeNullOrWhiteSpace();
+                response.ErrorResponse.ErrorSummary.Should().BeEquivalentTo($"Input {nameof(invalidInput.NewTitle)} cannot be empty.");
             }
         }
     }

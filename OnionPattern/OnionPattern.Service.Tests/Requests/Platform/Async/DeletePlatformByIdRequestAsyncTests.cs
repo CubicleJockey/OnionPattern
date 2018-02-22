@@ -9,7 +9,7 @@ namespace OnionPattern.Service.Tests.Requests.Platform.Async
     public class DeletePlatformByIdRequestAsyncTests
     {
         [TestClass]
-        public class ConstructorTests : TestBaseAsync<Domain.Entities.Platform>
+        public class ConstructorTests : TestBaseAsync<Domain.Platform.Entities.Platform>
         {
             [TestInitialize]
             public void TestInitialize()
@@ -29,14 +29,14 @@ namespace OnionPattern.Service.Tests.Requests.Platform.Async
                 var request = new DeletePlatformByIdRequestAsync(FakeRepositoryAsync, FakeRepositoryAsyncAggregate);
 
                 request.Should().NotBeNull();
-                request.Should().BeAssignableTo<BaseServiceRequestAsync<Domain.Entities.Platform>>();
+                request.Should().BeAssignableTo<BaseServiceRequestAsync<Domain.Platform.Entities.Platform>>();
                 request.Should().BeAssignableTo<IDeletePlatformByIdRequestAsync>();
                 request.Should().BeOfType<DeletePlatformByIdRequestAsync>();
             }
         }
 
         [TestClass]
-        public class MethodsTests : TestBaseAsync<Domain.Entities.Platform>
+        public class MethodsTests : TestBaseAsync<Domain.Platform.Entities.Platform>
         {
             private IDeletePlatformByIdRequestAsync request;
 
@@ -61,10 +61,10 @@ namespace OnionPattern.Service.Tests.Requests.Platform.Async
                 var response = await request.ExecuteAsync(id);
 
                 response.Should().NotBeNull();
-                response.ErrorSummary.Should().NotBeNullOrWhiteSpace();
-                response.ErrorSummary.Should().BeEquivalentTo($"{nameof(id)} must be 1 or greater.");
+                response.ErrorResponse.ErrorSummary.Should().NotBeNullOrWhiteSpace();
+                response.ErrorResponse.ErrorSummary.Should().BeEquivalentTo($"{nameof(id)} must be 1 or greater.");
                 response.StatusCode.HasValue.Should().BeTrue();
-                response.StatusCode.ShouldBeEquivalentTo(500);
+                response.StatusCode.Should().Be(500);
             }
         }
     }

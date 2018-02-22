@@ -3,11 +3,11 @@ using OnionPattern.Domain.Services.Requests.Platform.Async;
 
 namespace OnionPattern.Service.Requests.Platform.Async
 {
-    public class PlatformRequestAsyncAggregate : BaseRequestAsyncAggregate<Domain.Entities.Platform>, IPlatformRequestAsyncAggregate
+    public class PlatformRequestAsyncAggregate : BaseRequestAsyncAggregate<Domain.Platform.Entities.Platform>, IPlatformRequestAsyncAggregate
     {
         /// <inheritdoc />
         /// <exception cref="T:System.ArgumentNullException">Condition.</exception>
-        public PlatformRequestAsyncAggregate(IRepositoryAsync<Domain.Entities.Platform> repositoryAsync, IRepositoryAsyncAggregate repositoryAsyncAggregate) 
+        public PlatformRequestAsyncAggregate(IRepositoryAsync<Domain.Platform.Entities.Platform> repositoryAsync, IRepositoryAsyncAggregate repositoryAsyncAggregate) 
             : base(repositoryAsync, repositoryAsyncAggregate) { }
 
         #region Implementation of IPlatformRequestAsyncAggregate

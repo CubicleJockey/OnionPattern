@@ -2,21 +2,21 @@
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using OnionPattern.Domain.DataTransferObjects.Platform;
+using OnionPattern.Domain.Platform.Responses;
 using OnionPattern.Domain.Repository;
 using OnionPattern.Domain.Services.Requests.Platform.Async;
 using Serilog;
 
 namespace OnionPattern.Service.Requests.Platform.Async
 {
-    public class GetAllPlatformsRequestAsync : BaseServiceRequestAsync<Domain.Entities.Platform>, IGetAllPlatformsRequestAsync
+    public class GetAllPlatformsRequestAsync : BaseServiceRequestAsync<Domain.Platform.Entities.Platform>, IGetAllPlatformsRequestAsync
     {
         /// <inheritdoc />
         /// <summary>
         ///     Request a list of all the Platforms asynchronously.
         /// </summary>
         /// <exception cref="T:System.ArgumentNullException">Condition.</exception>
-        public GetAllPlatformsRequestAsync(IRepositoryAsync<Domain.Entities.Platform> repository, IRepositoryAsyncAggregate repositoryAggregate) 
+        public GetAllPlatformsRequestAsync(IRepositoryAsync<Domain.Platform.Entities.Platform> repository, IRepositoryAsyncAggregate repositoryAggregate) 
             : base(repository, repositoryAggregate) { }
 
         #region Implementation of IGetAllPlatformsRequestAsync
@@ -25,10 +25,10 @@ namespace OnionPattern.Service.Requests.Platform.Async
         /// Execute Request ashynchronouly.
         /// </summary>
         /// <returns></returns>
-        public async Task<PlatformListResponseDto> ExecuteAsync()
+        public async Task<PlatformListResponse> ExecuteAsync()
         {
             Log.Information("Retrieving Platform List...");
-            var platformListResponse = new PlatformListResponseDto();
+            var platformListResponse = new PlatformListResponse();
             try
             {
                 var platforms = (await Repository.GetAllAsync())?.ToArray();
@@ -40,7 +40,7 @@ namespace OnionPattern.Service.Requests.Platform.Async
                 }
                 else
                 {
-                    platformListResponse.Platforms = platforms.Select(Mapper.Map<Domain.Entities.Platform, PlatformResponseDto>);
+                    platformListResponse.Platforms = platforms;
                     platformListResponse.StatusCode = 200;
 
                     var count = platforms.Length;

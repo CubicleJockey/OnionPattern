@@ -3,9 +3,9 @@ using OnionPattern.Domain.Services.Requests.Game.Async;
 
 namespace OnionPattern.Service.Requests.Game.Async
 {
-    public class GameRequestAsyncAggregate : BaseRequestAsyncAggregate<Domain.Entities.Game>, IGameRequestAggregateAsync
+    public class GameRequestAsyncAggregate : BaseRequestAsyncAggregate<Domain.Game.Entities.Game>, IGameRequestAggregateAsync
     {
-        public GameRequestAsyncAggregate(IRepositoryAsync<Domain.Entities.Game> repositoryAsync, IRepositoryAsyncAggregate repositoryAsyncAggregate)
+        public GameRequestAsyncAggregate(IRepositoryAsync<Domain.Game.Entities.Game> repositoryAsync, IRepositoryAsyncAggregate repositoryAsyncAggregate)
             : base(repositoryAsync, repositoryAsyncAggregate) { }
 
         #region Implementation of IGameRequestAggregateAsync

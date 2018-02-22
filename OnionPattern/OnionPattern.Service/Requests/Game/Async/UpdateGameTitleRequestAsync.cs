@@ -1,25 +1,25 @@
-﻿using OnionPattern.Domain.DataTransferObjects.Game;
-using OnionPattern.Domain.DataTransferObjects.Game.Input;
-using OnionPattern.Domain.Repository;
+﻿using OnionPattern.Domain.Repository;
 using OnionPattern.Domain.Services.Requests.Game.Async;
 using Serilog;
 using System;
 using System.Threading.Tasks;
 using AutoMapper;
+using OnionPattern.Domain.Game.Requests;
+using OnionPattern.Domain.Game.Responses;
 
 namespace OnionPattern.Service.Requests.Game.Async
 {
-    public class UpdateGameTitleRequestAsync : BaseServiceRequestAsync<Domain.Entities.Game>, IUpdateGameTitleRequestAsync
+    public class UpdateGameTitleRequestAsync : BaseServiceRequestAsync<Domain.Game.Entities.Game>, IUpdateGameTitleRequestAsync
     {
-        public UpdateGameTitleRequestAsync(IRepositoryAsync<Domain.Entities.Game> repository, IRepositoryAsyncAggregate repositoryAggregate) 
+        public UpdateGameTitleRequestAsync(IRepositoryAsync<Domain.Game.Entities.Game> repository, IRepositoryAsyncAggregate repositoryAggregate) 
             : base(repository, repositoryAggregate) { }
 
         #region Implementation of IUpdateGameTitleRequestAsync
 
-        public async Task<GameResponseDto> ExecuteAsync(UpdateGameTitleInputDto input)
+        public async Task<GameResponse> ExecuteAsync(UpdateGameTitleInput input)
         {
             Log.Information("Updating title for game with id: [{Id}]...", input.Id);
-            var gameResponse = new GameResponseDto();
+            var gameResponse = new GameResponse();
             try
             {
                 if (string.IsNullOrWhiteSpace(input.NewTitle))
@@ -39,7 +39,7 @@ namespace OnionPattern.Service.Requests.Game.Async
                 else
                 {
                     gameToUpdate.Name = input.NewTitle;
-                    gameResponse = Mapper.Map(await Repository.UpdateAsync(gameToUpdate), gameResponse);
+                    gameResponse.Game = await Repository.UpdateAsync(gameToUpdate);
                     gameResponse.StatusCode = 200;
                 }
             }

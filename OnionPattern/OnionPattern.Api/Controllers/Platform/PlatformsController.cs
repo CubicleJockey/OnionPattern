@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
-using OnionPattern.Domain.DataTransferObjects.Platform.Input;
+using OnionPattern.Domain.Platform.Requests;
 using OnionPattern.Domain.Services.Requests.Platform;
 
 namespace OnionPattern.Api.Controllers.Platform
@@ -55,7 +55,7 @@ namespace OnionPattern.Api.Controllers.Platform
         /// <returns></returns>
         [HttpPost]
         [Route("Create/")]
-        public IActionResult Post(CreatePlatformInputDto input)
+        public IActionResult Post(CreatePlatformInput input)
         {
             return ExecuteAndHandleRequest(() => RequestAggregate.CreatePlatformRequest.Execute(input));
         }
@@ -79,7 +79,7 @@ namespace OnionPattern.Api.Controllers.Platform
         /// <returns></returns>
         [HttpPut]
         [Route("UpdateName/")]
-        public IActionResult Put(UpdatePlatformNameInputDto input)
+        public IActionResult Put(UpdatePlatformNameInput input)
         {
             return ExecuteAndHandleRequest(() => RequestAggregate.UpdatePlatformNameRequest.Execute(input));
         }

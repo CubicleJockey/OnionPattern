@@ -10,6 +10,8 @@ using OnionPattern.Service.Requests.Game.Async;
 using OnionPattern.Service.Requests.Platform;
 using OnionPattern.Service.Requests.Platform.Async;
 using System;
+using OnionPattern.Domain.Game.Entities;
+using OnionPattern.Domain.Platform.Entities;
 
 namespace OnionPattern.DependencyInjection.Configurations
 {

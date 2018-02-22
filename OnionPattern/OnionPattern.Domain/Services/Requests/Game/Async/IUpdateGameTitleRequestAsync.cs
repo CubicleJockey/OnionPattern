@@ -1,11 +1,11 @@
 ﻿using System.Threading.Tasks;
-using OnionPattern.Domain.DataTransferObjects.Game;
-using OnionPattern.Domain.DataTransferObjects.Game.Input;
+using OnionPattern.Domain.Game.Requests;
+using OnionPattern.Domain.Game.Responses;
 
 namespace OnionPattern.Domain.Services.Requests.Game.Async
 {
     public interface IUpdateGameTitleRequestAsync
     {
-        Task<GameResponseDto> ExecuteAsync(UpdateGameTitleInputDto input);
+        Task<GameResponse> ExecuteAsync(UpdateGameTitleInput input);
     }
 }

@@ -1,21 +1,21 @@
 ﻿using System;
 using System.Threading.Tasks;
 using AutoMapper;
-using OnionPattern.Domain.DataTransferObjects.Platform;
+using OnionPattern.Domain.Platform.Responses;
 using OnionPattern.Domain.Repository;
 using OnionPattern.Domain.Services.Requests.Platform.Async;
 using Serilog;
 
 namespace OnionPattern.Service.Requests.Platform.Async
 {
-    public class GetPlatformByIdRequestAsync : BaseServiceRequestAsync<Domain.Entities.Platform>, IGetPlatformByIdRequestAsync
+    public class GetPlatformByIdRequestAsync : BaseServiceRequestAsync<Domain.Platform.Entities.Platform>, IGetPlatformByIdRequestAsync
     {
         /// <inheritdoc />
         /// <summary>
         ///     Request to get a Platform by it's Id asynchronously.
         /// </summary>
         /// <exception cref="T:System.ArgumentNullException">Condition.</exception>
-        public GetPlatformByIdRequestAsync(IRepositoryAsync<Domain.Entities.Platform> repository, IRepositoryAsyncAggregate repositoryAggregate) 
+        public GetPlatformByIdRequestAsync(IRepositoryAsync<Domain.Platform.Entities.Platform> repository, IRepositoryAsyncAggregate repositoryAggregate) 
             : base(repository, repositoryAggregate) { }
 
         #region Implementation of IGetPlatformByIdRequestAsync
@@ -25,13 +25,13 @@ namespace OnionPattern.Service.Requests.Platform.Async
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public async Task<PlatformResponseDto> ExecuteAsync(int id)
+        public async Task<PlatformResponse> ExecuteAsync(int id)
         {
             Log.Information("Retrieving Platform by Id: [{Id}]...", id);
 
             CheckInputValidity(id);
 
-            var platformResponse = new PlatformResponseDto();
+            var platformResponse = new PlatformResponse();
             try
             {
                 var platform = await Repository.SingleOrDefaultAsync(p => p.Id == id);
@@ -43,9 +43,9 @@ namespace OnionPattern.Service.Requests.Platform.Async
                 }
                 else
                 {
-                    platformResponse = Mapper.Map(platform, platformResponse);
+                    platformResponse.Platform = platform;
                     platformResponse.StatusCode = 200;
-                    Log.Information("Retrieved [{NewName}] for Id: [{Id}].", platformResponse.Name, id);
+                    Log.Information("Retrieved [{NewName}] for Id: [{Id}].", platformResponse.Platform.Name, id);
                 }
             }
             catch (Exception exception)

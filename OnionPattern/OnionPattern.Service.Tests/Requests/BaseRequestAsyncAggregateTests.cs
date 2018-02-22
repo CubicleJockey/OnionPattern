@@ -31,7 +31,8 @@ namespace OnionPattern.Service.Tests.Requests
             {
                 Action ctor = () => new MockBaseRequestAsyncAggregate(null, FakeRepositoryAsyncAggregate);
 
-                ctor.ShouldThrow<ArgumentNullException>()
+                ctor.Should()
+                    .Throw<ArgumentNullException>()
                     .WithMessage($"Value cannot be null.{Environment.NewLine}Parameter name: repositoryAsync cannot be null.");
             }
 
@@ -40,7 +41,8 @@ namespace OnionPattern.Service.Tests.Requests
             {
                 Action ctor = () => new MockBaseRequestAsyncAggregate(FakeRepositoryAsync, null);
 
-                ctor.ShouldThrow<ArgumentNullException>()
+                ctor.Should()
+                    .Throw<ArgumentNullException>()
                     .WithMessage($"Value cannot be null.{Environment.NewLine}Parameter name: repositoryAsyncAggregate cannot be null.");
             }
 

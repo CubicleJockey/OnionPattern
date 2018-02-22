@@ -4,7 +4,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using OnionPattern.Domain.DataTransferObjects.Game.Input;
+using OnionPattern.Domain.Game.Requests;
 using OnionPattern.Domain.Services.Requests.Game.Async;
 
 namespace OnionPattern.Api.Controllers.Game
@@ -72,7 +72,7 @@ namespace OnionPattern.Api.Controllers.Game
         /// <returns></returns>
         [HttpPost]
         [Route("Create/")]
-        public async Task<IActionResult> Post(CreateGameInputDto game)
+        public async Task<IActionResult> Post(CreateGameInput game)
         {
             return await ExecuteAndHandleRequestAsync(() => GameRequestAggregateAsync.CreateGameRequestAsync.ExecuteAsync(game));
         }
@@ -84,7 +84,7 @@ namespace OnionPattern.Api.Controllers.Game
         /// <returns></returns>
         [HttpPut]
         [Route("Update/")]
-        public async Task<IActionResult> Put(UpdateGameTitleInputDto input)
+        public async Task<IActionResult> Put(UpdateGameTitleInput input)
         {
             return await ExecuteAndHandleRequestAsync(() => GameRequestAggregateAsync.UpdateGameTitleRequestAsync.ExecuteAsync(input));
         }

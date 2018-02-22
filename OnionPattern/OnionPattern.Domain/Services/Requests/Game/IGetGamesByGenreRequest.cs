@@ -1,9 +1,9 @@
-﻿using OnionPattern.Domain.DataTransferObjects.Game;
+﻿using OnionPattern.Domain.Game.Responses;
 
 namespace OnionPattern.Domain.Services.Requests.Game
 {
     public interface IGetGamesByGenreRequest
     {
-        GameListResponseDto Execute(string genre);
+        GameListResponse Execute(string genre);
     }
 }

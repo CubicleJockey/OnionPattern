@@ -1,28 +1,28 @@
 ﻿using System;
 using AutoMapper;
-using OnionPattern.Domain.DataTransferObjects.Game;
-using OnionPattern.Domain.DataTransferObjects.Game.Input;
+using OnionPattern.Domain.Game.Requests;
+using OnionPattern.Domain.Game.Responses;
 using OnionPattern.Domain.Repository;
 using OnionPattern.Domain.Services.Requests.Game;
 using Serilog;
 
 namespace OnionPattern.Service.Requests.Game
 {
-    public class CreateGameRequest : BaseServiceRequest<Domain.Entities.Game>, ICreateGameRequest
+    public class CreateGameRequest : BaseServiceRequest<Domain.Game.Entities.Game>, ICreateGameRequest
     {
-        public CreateGameRequest(IRepository<Domain.Entities.Game> repository, IRepositoryAggregate repositoryAggregate) 
+        public CreateGameRequest(IRepository<Domain.Game.Entities.Game> repository, IRepositoryAggregate repositoryAggregate) 
             : base(repository, repositoryAggregate) { }
 
         #region Implementation of ICreateGameRequest
 
-        public GameResponseDto Execute(CreateGameInputDto game)
+        public GameResponse Execute(CreateGameInput game)
         {
-            var gameResponse = new GameResponseDto();
+            var gameResponse = new GameResponse();
             try
             {
                 Log.Information("Creating Game Entry for [{NewName}].", game?.Name);
-                var gameEntity = Mapper.Map<CreateGameInputDto, Domain.Entities.Game>(game);
-                gameResponse = Mapper.Map(Repository.Create(gameEntity), gameResponse);
+                var gameEntity = Mapper.Map<CreateGameInput, Domain.Game.Entities.Game>(game);
+                gameResponse.Game = Repository.Create(gameEntity);
                 gameResponse.StatusCode = 200;
             }
             catch (Exception exception)

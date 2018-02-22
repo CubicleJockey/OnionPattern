@@ -1,21 +1,21 @@
 ﻿using System;
 using AutoMapper;
-using OnionPattern.Domain.DataTransferObjects.Platform;
-using OnionPattern.Domain.DataTransferObjects.Platform.Input;
+using OnionPattern.Domain.Platform.Requests;
+using OnionPattern.Domain.Platform.Responses;
 using OnionPattern.Domain.Repository;
 using OnionPattern.Domain.Services.Requests.Platform;
 using Serilog;
 
 namespace OnionPattern.Service.Requests.Platform
 {
-    public class CreatePlatformRequest : BaseServiceRequest<Domain.Entities.Platform>, ICreatePlatformRequest
+    public class CreatePlatformRequest : BaseServiceRequest<Domain.Platform.Entities.Platform>, ICreatePlatformRequest
     {
         /// <inheritdoc />
         /// <summary>
         ///     Request to create a Platform
         /// </summary>
         /// <exception cref="T:System.ArgumentNullException">Condition.</exception>
-        public CreatePlatformRequest(IRepository<Domain.Entities.Platform> repository, IRepositoryAggregate repositoryAggregate) 
+        public CreatePlatformRequest(IRepository<Domain.Platform.Entities.Platform> repository, IRepositoryAggregate repositoryAggregate) 
             : base(repository, repositoryAggregate) { }
 
         #region Implementation of ICreatePlatformRequest
@@ -25,16 +25,16 @@ namespace OnionPattern.Service.Requests.Platform
         /// </summary>
         /// <param name="input">Input properties required to create a Platform.</param>
         /// <returns></returns>
-        public PlatformResponseDto Execute(CreatePlatformInputDto input)
+        public PlatformResponse Execute(CreatePlatformInput input)
         {
-            var platformResponse = new PlatformResponseDto();
+            var platformResponse = new PlatformResponse();
             try
             {
                 Log.Information("Creating Platform [{Name}]...", input?.Name);
-                var platformToCreate = Mapper.Map<CreatePlatformInputDto, Domain.Entities.Platform>(input);
+                var platformToCreate = Mapper.Map<CreatePlatformInput, Domain.Platform.Entities.Platform>(input);
                 var createdPlatform = Repository.Create(platformToCreate);
 
-                platformResponse = Mapper.Map(createdPlatform, platformResponse);
+                platformResponse.Platform = createdPlatform;
                 platformResponse.StatusCode = 200;
 
                 Log.Information("Created Platform [{Name}]", createdPlatform.Name);

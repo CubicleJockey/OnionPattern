@@ -1,22 +1,22 @@
 ﻿using System;
 using System.Threading.Tasks;
 using AutoMapper;
-using OnionPattern.Domain.DataTransferObjects.Platform;
-using OnionPattern.Domain.DataTransferObjects.Platform.Input;
+using OnionPattern.Domain.Platform.Requests;
+using OnionPattern.Domain.Platform.Responses;
 using OnionPattern.Domain.Repository;
 using OnionPattern.Domain.Services.Requests.Platform.Async;
 using Serilog;
 
 namespace OnionPattern.Service.Requests.Platform.Async
 {
-    public class UpdatePlatformNameRequestAsync : BaseServiceRequestAsync<Domain.Entities.Platform>, IUpdatePlatformNameRequestAsync
+    public class UpdatePlatformNameRequestAsync : BaseServiceRequestAsync<Domain.Platform.Entities.Platform>, IUpdatePlatformNameRequestAsync
     {
         /// <inheritdoc />
         /// <summary>
         ///     Request to update a Platform's name asynchronously.
         /// </summary>
         /// <exception cref="T:System.ArgumentNullException">Condition.</exception>
-        public UpdatePlatformNameRequestAsync(IRepositoryAsync<Domain.Entities.Platform> repository, IRepositoryAsyncAggregate repositoryAggregate) 
+        public UpdatePlatformNameRequestAsync(IRepositoryAsync<Domain.Platform.Entities.Platform> repository, IRepositoryAsyncAggregate repositoryAggregate) 
             : base(repository, repositoryAggregate) { }
 
         #region Implementation of IUpdatePlatformNameRequestAsync
@@ -26,9 +26,9 @@ namespace OnionPattern.Service.Requests.Platform.Async
         /// </summary>
         /// <param name="input">Inputs required to update the Platform.</param>
         /// <returns></returns>
-        public async Task<PlatformResponseDto> ExecuteAsync(UpdatePlatformNameInputDto input)
+        public async Task<PlatformResponse> ExecuteAsync(UpdatePlatformNameInput input)
         {
-            var platformResponse = new PlatformResponseDto();
+            var platformResponse = new PlatformResponse();
             try
             {
                 CheckInputValidity(input);
@@ -47,10 +47,10 @@ namespace OnionPattern.Service.Requests.Platform.Async
                     platformToUpdate.Name = input.NewName;
                     var updatedPlatform = await Repository.UpdateAsync(platformToUpdate);
 
-                    platformResponse = Mapper.Map(updatedPlatform, platformResponse);
+                    platformResponse.Platform = updatedPlatform;
                     platformResponse.StatusCode = 200;
 
-                    Log.Information("Updated Platform Name [{PreviousName}] to [{Name}].", previousName, platformResponse.Name);
+                    Log.Information("Updated Platform Name [{PreviousName}] to [{Name}].", previousName, platformResponse.Platform.Name);
                 }
             }
             catch (Exception exception)
@@ -62,7 +62,7 @@ namespace OnionPattern.Service.Requests.Platform.Async
         }
 
         #endregion
-        private void CheckInputValidity(UpdatePlatformNameInputDto input)
+        private void CheckInputValidity(UpdatePlatformNameInput input)
         {
             if (input == null) { throw new ArgumentNullException(nameof(input)); }
             if (input.Id <= 0) { throw new ArgumentException($"Input {nameof(input.Id)} must be 1 or greater."); }

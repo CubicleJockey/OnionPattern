@@ -2,23 +2,23 @@
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using OnionPattern.Domain.DataTransferObjects.Game;
+using OnionPattern.Domain.Game.Responses;
 using OnionPattern.Domain.Repository;
 using OnionPattern.Domain.Services.Requests.Game.Async;
 using Serilog;
 
 namespace OnionPattern.Service.Requests.Game.Async
 {
-    public class DeleteGameByIdRequestAsync : BaseServiceRequestAsync<Domain.Entities.Game>, IDeleteGameByIdRequestAsync
+    public class DeleteGameByIdRequestAsync : BaseServiceRequestAsync<Domain.Game.Entities.Game>, IDeleteGameByIdRequestAsync
     {
-        public DeleteGameByIdRequestAsync(IRepositoryAsync<Domain.Entities.Game> repository, IRepositoryAsyncAggregate repositoryAggregate) 
+        public DeleteGameByIdRequestAsync(IRepositoryAsync<Domain.Game.Entities.Game> repository, IRepositoryAsyncAggregate repositoryAggregate) 
             : base(repository, repositoryAggregate) { }
 
         #region Implementation of IDeleteGameByIdRequestAsync
 
-        public async Task<GameResponseDto> ExecuteAsync(int id)
+        public async Task<GameResponse> ExecuteAsync(int id)
         {
-            var gameResponse = new GameResponseDto();
+            var gameResponse = new GameResponse();
             try
             {
                 Log.Information("Deleting Game by Id:[{Id}]...", id);
@@ -47,7 +47,7 @@ namespace OnionPattern.Service.Requests.Game.Async
 
                     #endregion Delete GamePlatform References
 
-                    gameResponse = Mapper.Map(await Repository.DeleteAsync(toDelete), gameResponse);
+                    gameResponse.Game = await Repository.DeleteAsync(toDelete);
                     gameResponse.StatusCode = 200;
                     Log.Information("Deleted Game [{NewName}] for Id:[{Id}].", toDelete.Name, toDelete.Id);
                 }

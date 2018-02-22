@@ -5,8 +5,8 @@
         public int GameId { get; set; }
         public int PlatformId { get; set; }
 
-        public Game Game { get; set; }
-        public Platform Plathform { get; set; }
+        public Game.Entities.Game Game { get; set; }
+        public Platform.Entities.Platform Plathform { get; set; }
     
     }
 }

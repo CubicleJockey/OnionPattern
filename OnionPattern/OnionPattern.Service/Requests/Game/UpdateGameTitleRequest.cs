@@ -1,24 +1,24 @@
-﻿using OnionPattern.Domain.DataTransferObjects.Game;
-using OnionPattern.Domain.DataTransferObjects.Game.Input;
-using OnionPattern.Domain.Repository;
+﻿using OnionPattern.Domain.Repository;
 using OnionPattern.Domain.Services.Requests.Game;
 using Serilog;
 using System;
 using AutoMapper;
+using OnionPattern.Domain.Game.Requests;
+using OnionPattern.Domain.Game.Responses;
 
 namespace OnionPattern.Service.Requests.Game
 {
-    public class UpdateGameTitleRequest : BaseServiceRequest<Domain.Entities.Game>, IUpdateGameTitleRequest
+    public class UpdateGameTitleRequest : BaseServiceRequest<Domain.Game.Entities.Game>, IUpdateGameTitleRequest
     {
-        public UpdateGameTitleRequest(IRepository<Domain.Entities.Game> repository, IRepositoryAggregate repositoryAggregate) 
+        public UpdateGameTitleRequest(IRepository<Domain.Game.Entities.Game> repository, IRepositoryAggregate repositoryAggregate) 
             : base(repository, repositoryAggregate) { }
 
         #region Implementation of IUpdateGameTitleRequest
 
-        public GameResponseDto Execute(UpdateGameTitleInputDto input)
+        public GameResponse Execute(UpdateGameTitleInput input)
         {
 
-            var gameResponse = new GameResponseDto();
+            var gameResponse = new GameResponse();
             try
             {
                 CheckInputValidity(input);
@@ -37,7 +37,7 @@ namespace OnionPattern.Service.Requests.Game
                 gameToUpdate.Name = input.NewTitle;
 
                 var updatedGame = Repository.Update(gameToUpdate);
-                gameResponse = Mapper.Map(updatedGame, gameResponse);
+                gameResponse.Game = updatedGame;
                 gameResponse.StatusCode = 200;
 
                 Log.Information("Successful updated GameId: [{Id}] to title [{NewTitle}].", input.Id, input.NewTitle);
@@ -52,7 +52,7 @@ namespace OnionPattern.Service.Requests.Game
 
         #endregion
 
-        private void CheckInputValidity(UpdateGameTitleInputDto input)
+        private void CheckInputValidity(UpdateGameTitleInput input)
         {
             if (input == null) { throw new ArgumentNullException(nameof(input)); }
             if (input.Id <= 0) { throw new ArgumentException($"Input {nameof(input.Id)} must be 1 or greater."); }

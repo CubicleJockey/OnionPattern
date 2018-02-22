@@ -16,14 +16,14 @@ namespace OnionPattern.Service.Tests.Requests.Platform
             [TestMethod]
             public void Inheritence()
             {
-                var fakeRepository = A.Fake<IRepository<Domain.Entities.Platform>>();
+                var fakeRepository = A.Fake<IRepository<Domain.Platform.Entities.Platform>>();
                 var fakeRepositoryAggregate = A.Fake<IRepositoryAggregate>();
 
                 var platformRequestAggregate = new PlatformRequestAggregate(fakeRepository, fakeRepositoryAggregate);
 
                 platformRequestAggregate.Should().NotBeNull();
                 platformRequestAggregate.Should().BeAssignableTo<IPlatformRequestAggregate>();
-                platformRequestAggregate.Should().BeAssignableTo<BaseRequestAggregate<Domain.Entities.Platform>>();
+                platformRequestAggregate.Should().BeAssignableTo<BaseRequestAggregate<Domain.Platform.Entities.Platform>>();
                 platformRequestAggregate.Should().BeOfType<PlatformRequestAggregate>();
             }
         }

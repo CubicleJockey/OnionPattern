@@ -8,7 +8,7 @@ namespace OnionPattern.Service.Tests.Requests.Platform.Async
     public class CreatePlatformRequestAsyncTests
     {
         [TestClass]
-        public class ConstructorTests : TestBaseAsync<Domain.Entities.Platform>
+        public class ConstructorTests : TestBaseAsync<Domain.Platform.Entities.Platform>
         {
             [TestInitialize]
             public void TestInitialize()
@@ -28,7 +28,7 @@ namespace OnionPattern.Service.Tests.Requests.Platform.Async
                 var request = new CreatePlatformRequestAsync(FakeRepositoryAsync, FakeRepositoryAsyncAggregate);
 
                 request.Should().NotBeNull();
-                request.Should().BeAssignableTo<BaseServiceRequestAsync<Domain.Entities.Platform>>();
+                request.Should().BeAssignableTo<BaseServiceRequestAsync<Domain.Platform.Entities.Platform>>();
                 request.Should().BeAssignableTo<ICreatePlatformRequestAsync>();
                 request.Should().BeOfType<CreatePlatformRequestAsync>();
             }

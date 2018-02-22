@@ -1,10 +1,10 @@
 ﻿using System.Threading.Tasks;
-using OnionPattern.Domain.DataTransferObjects.Platform;
+using OnionPattern.Domain.Platform.Responses;
 
 namespace OnionPattern.Domain.Services.Requests.Platform.Async
 {
     public interface IDeletePlatformByIdRequestAsync
     {
-        Task<PlatformResponseDto> ExecuteAsync(int id);
+        Task<PlatformResponse> ExecuteAsync(int id);
     }
 }

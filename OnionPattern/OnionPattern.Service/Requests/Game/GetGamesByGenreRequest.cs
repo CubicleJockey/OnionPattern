@@ -1,23 +1,21 @@
-﻿using System;
-using System.Linq;
-using AutoMapper;
-using OnionPattern.Domain.DataTransferObjects.Game;
+﻿using OnionPattern.Domain.Game.Responses;
 using OnionPattern.Domain.Repository;
 using OnionPattern.Domain.Services.Requests.Game;
 using Serilog;
+using System;
 
 namespace OnionPattern.Service.Requests.Game
 {
-    public class GetGamesByGenreRequest : BaseServiceRequest<Domain.Entities.Game>, IGetGamesByGenreRequest
+    public class GetGamesByGenreRequest : BaseServiceRequest<Domain.Game.Entities.Game>, IGetGamesByGenreRequest
     {
-        public GetGamesByGenreRequest(IRepository<Domain.Entities.Game> repository, IRepositoryAggregate repositoryAggregate) 
+        public GetGamesByGenreRequest(IRepository<Domain.Game.Entities.Game> repository, IRepositoryAggregate repositoryAggregate) 
             : base(repository, repositoryAggregate) { }
 
         #region Implementation of IGetGamesByGenreRequest
 
-        public GameListResponseDto Execute(string genre)
+        public GameListResponse Execute(string genre)
         {
-            var gameListResponse = new GameListResponseDto();
+            var gameListResponse = new GameListResponse();
             try
             {
                 Log.Information("Retrieving game Genre : [{Genre}]", genre);
@@ -32,7 +30,7 @@ namespace OnionPattern.Service.Requests.Game
                 else
                 {
                     //NOTE: Not sure if I want to do something like AutoMapper for this example.
-                    gameListResponse.Games = games.Select(Mapper.Map<Domain.Entities.Game, GameResponseDto>);
+                    gameListResponse.Games = games;
                     gameListResponse.StatusCode = 200;
                 }
             }

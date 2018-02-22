@@ -1,10 +1,10 @@
 ﻿using System.Threading.Tasks;
-using OnionPattern.Domain.DataTransferObjects.Game;
+using OnionPattern.Domain.Game.Responses;
 
 namespace OnionPattern.Domain.Services.Requests.Game.Async
 {
     public interface IGetGamesByGenreRequestAsync
     {
-        Task<GameListResponseDto> ExecuteAsync(string genre);
+        Task<GameListResponse> ExecuteAsync(string genre);
     }
 }

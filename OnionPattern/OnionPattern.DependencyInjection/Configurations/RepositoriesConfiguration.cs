@@ -7,6 +7,8 @@ using OnionPattern.DataAccess.EF.Repository;
 using OnionPattern.Domain.Configurations;
 using OnionPattern.Domain.Constants;
 using OnionPattern.Domain.Entities;
+using OnionPattern.Domain.Game.Entities;
+using OnionPattern.Domain.Platform.Entities;
 using OnionPattern.Domain.Repository;
 
 namespace OnionPattern.DependencyInjection.Configurations

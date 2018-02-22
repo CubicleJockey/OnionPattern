@@ -9,7 +9,7 @@ namespace OnionPattern.Service.Tests.Requests.Platform
     public class GetPlatformByIdRequestTests
     {
         [TestClass]
-        public class ConstructorTests : TestBase<Domain.Entities.Platform>
+        public class ConstructorTests : TestBase<Domain.Platform.Entities.Platform>
         {
             [TestInitialize]
             public void TestInitalize()
@@ -29,14 +29,14 @@ namespace OnionPattern.Service.Tests.Requests.Platform
                 var request = new GetPlatformByIdRequest(FakeRepository, FakeRepositoryAggregate);
 
                 request.Should().NotBeNull();
-                request.Should().BeAssignableTo<BaseServiceRequest<Domain.Entities.Platform>>();
+                request.Should().BeAssignableTo<BaseServiceRequest<Domain.Platform.Entities.Platform>>();
                 request.Should().BeAssignableTo<IGetPlatformByIdRequest>();
                 request.Should().BeOfType<GetPlatformByIdRequest>();
             }
         }
 
         [TestClass]
-        public class MethodsTests : TestBase<Domain.Entities.Platform>
+        public class MethodsTests : TestBase<Domain.Platform.Entities.Platform>
         {
             private IGetPlatformByIdRequest request;
 
@@ -60,8 +60,9 @@ namespace OnionPattern.Service.Tests.Requests.Platform
             {
                 Action execute = () => request.Execute(id);
 
-                execute.ShouldThrow<ArgumentException>()
-                    .WithMessage($"{nameof(id)} must be 1 or greater.");
+                execute.Should()
+                       .Throw<ArgumentException>()
+                       .WithMessage($"{nameof(id)} must be 1 or greater.");
             }
         }
     }

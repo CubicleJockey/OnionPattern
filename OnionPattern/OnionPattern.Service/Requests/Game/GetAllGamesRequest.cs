@@ -1,24 +1,24 @@
-﻿using OnionPattern.Domain.DataTransferObjects.Game;
-using OnionPattern.Domain.Repository;
+﻿using OnionPattern.Domain.Repository;
 using OnionPattern.Domain.Services.Requests.Game;
 using Serilog;
 using System;
 using System.Linq;
+using OnionPattern.Domain.Game.Responses;
 
 namespace OnionPattern.Service.Requests.Game
 {
-    public class GetAllGamesRequest : BaseServiceRequest<Domain.Entities.Game>, IGetAllGamesRequest
+    public class GetAllGamesRequest : BaseServiceRequest<Domain.Game.Entities.Game>, IGetAllGamesRequest
     {
-        public GetAllGamesRequest(IRepository<Domain.Entities.Game> repository, IRepositoryAggregate repositoryAggregate) 
+        public GetAllGamesRequest(IRepository<Domain.Game.Entities.Game> repository, IRepositoryAggregate repositoryAggregate) 
             : base(repository, repositoryAggregate) { }
 
 
         #region Implementation of IGetAllGamesRequest
 
-        public GameListResponseDto Execute()
+        public GameListResponse Execute()
         {
             Log.Information("Retrieving Games List...");
-            var gameListResponse = new GameListResponseDto();
+            var gameListResponse = new GameListResponse();
             try
             {
                 var games = Repository.GetAll()?.ToArray();
@@ -31,7 +31,7 @@ namespace OnionPattern.Service.Requests.Game
                 }
                 else
                 {
-                    gameListResponse = new GameListResponseDto
+                    gameListResponse = new GameListResponse
                     {
                         Games = games,
                         StatusCode = 200

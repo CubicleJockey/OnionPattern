@@ -28,7 +28,8 @@ namespace OnionPattern.DataAccess.EF.Tests.Repository
             {
                 Action ctor = () => new Repository<DummyEntity>(null);
 
-                ctor.ShouldThrow<ArgumentNullException>()
+                ctor.Should()
+                    .Throw<ArgumentNullException>()
                     .WithMessage($"Value cannot be null.{Environment.NewLine}Parameter name: context");
             }
 

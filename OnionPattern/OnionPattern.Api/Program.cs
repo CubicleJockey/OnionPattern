@@ -1,16 +1,11 @@
-﻿using System;
-using Microsoft.AspNetCore;
+﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using OnionPattern.Domain.Constants;
+using OnionPattern.Api.Configuration.Program;
+using System;
 using System.IO;
-using System.Net;
-using Microsoft.AspNetCore.Server.Kestrel.Core;
-using OnionPattern.Api.StartupConfigurations;
-using Serilog;
-using Serilog.Events;
-using Serilog.Formatting.Compact;
 
 namespace OnionPattern.Api
 {
@@ -19,6 +14,8 @@ namespace OnionPattern.Api
     /// </summary>
     public class Program
     {
+        private static WebHostBuilderContext webHostBuilderContext;
+
         /// <summary>
         /// Main entry into the program.
         /// </summary>
@@ -40,8 +37,8 @@ namespace OnionPattern.Api
         public static IWebHost BuildWebHost(string[] args)
         {
             return WebHost.CreateDefaultBuilder(args)
-                .ConfigureAppConfiguration(AppConfiguration)
-                .UseKestrel(ConfigureKestrel)
+                .ConfigureAppConfiguration(SetupAppConfig)
+                .UseKestrel(SetupKestrel)
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .ConfigureLogging(ConfigureLogging)
                 .UseStartup<Startup>()
@@ -50,23 +47,20 @@ namespace OnionPattern.Api
 
         #region Program Configurations
 
-        private static Action<WebHostBuilderContext, IConfigurationBuilder> AppConfiguration =>
-            (hostingContext, config) =>
-            {
-                var env = hostingContext.HostingEnvironment;
-                config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                    .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true);
-                config.AddEnvironmentVariables();
-            };
+        private static void SetupAppConfig(WebHostBuilderContext hostBuilderContext, IConfigurationBuilder config)
+        {
+            config
+                .AddJsonFile("appsettings.json", true, true)
+                .AddJsonFile($"appsettings.{hostBuilderContext.HostingEnvironment.EnvironmentName}.json", true, true)
+                .AddEnvironmentVariables();
 
-        private static Action<KestrelServerOptions> ConfigureKestrel =>
-            options =>
-            {
-                options.Listen(IPAddress.Loopback, 52532, listenOptions =>
-                {
-                    listenOptions.NoDelay = true;
-                });
-            };
+            webHostBuilderContext = hostBuilderContext;
+        }
+
+        private static void SetupKestrel(KestrelServerOptions options)
+        {
+            KestrelConfiguration.Configure(options, webHostBuilderContext.HostingEnvironment, webHostBuilderContext.Configuration, 52532);
+        }
 
         private static void ConfigureLogging(WebHostBuilderContext context, ILoggingBuilder logging)
         {

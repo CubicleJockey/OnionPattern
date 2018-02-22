@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
-using OnionPattern.Domain.DataTransferObjects.Game.Input;
+using OnionPattern.Domain.Game.Requests;
 using OnionPattern.Domain.Services.Requests.Game;
 
 namespace OnionPattern.Api.Controllers.Game
@@ -68,7 +68,7 @@ namespace OnionPattern.Api.Controllers.Game
         /// <returns></returns>
         [HttpPost]
         [Route("Create/")]
-        public IActionResult Post(CreateGameInputDto game)
+        public IActionResult Post(CreateGameInput game)
         {
             return ExecuteAndHandleRequest(() => GameRequestAggregate.CreateGameRequest.Execute(game));
         }
@@ -80,7 +80,7 @@ namespace OnionPattern.Api.Controllers.Game
         /// <returns></returns>
         [HttpPut]
         [Route("Update/")]
-        public IActionResult Put(UpdateGameTitleInputDto input)
+        public IActionResult Put(UpdateGameTitleInput input)
         {
             return ExecuteAndHandleRequest(() => GameRequestAggregate.UpdateGameTitleRequest.Execute(input));
         }

@@ -62,4 +62,8 @@
     <ProjectReference Include="..\OnionPattern.Domain\OnionPattern.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Configuration\Startup\Logging\" />
+  </ItemGroup>
+
 </Project>

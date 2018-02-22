@@ -52,8 +52,8 @@ namespace OnionPattern.Mapping.Tests.Game
 
                 response.Name.Should().BeEquivalentTo(source.Name);
                 response.Genre.Should().BeEquivalentTo(source.Genre);
-                response.Price.ShouldBeEquivalentTo(source.Price);
-                response.ReleaseDate.ShouldBeEquivalentTo(source.ReleaseDate);
+                response.Price.Should().Be(source.Price);
+                response.ReleaseDate.Should().Be(source.ReleaseDate);
             }
         }
     }

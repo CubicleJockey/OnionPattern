@@ -64,7 +64,7 @@ namespace OnionPattern.Service.Tests.Requests.Platform.Async
                 response.ErrorSummary.Should().NotBeNullOrWhiteSpace();
                 response.ErrorSummary.Should().BeEquivalentTo($"{nameof(id)} must be 1 or greater.");
                 response.StatusCode.HasValue.Should().BeTrue();
-                response.StatusCode.ShouldBeEquivalentTo(500);
+                response.StatusCode.Should().Be(500);
             }
         }
     }

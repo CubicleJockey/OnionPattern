@@ -1,9 +1,9 @@
 ﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using OnionPattern.Api.StartupConfigurations;
+using OnionPattern.Api.Configuration.Startup.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace OnionPattern.Api.Tests.StartupConfigurations
+namespace OnionPattern.Api.Tests.Configuration.Startup.Swagger
 {
     public class SwaggerDefaultValuesTests
     {

@@ -50,11 +50,11 @@ namespace OnionPattern.Mapping.Tests.Game
                 response.Should().BeAssignableTo<IGame>();
                 response.Should().BeOfType<GameResponseDto>();
 
-                response.Id.ShouldBeEquivalentTo(source.Id);
+                response.Id.Should().Be(source.Id);
                 response.Name.Should().BeEquivalentTo(source.Name);
                 response.Genre.Should().BeEquivalentTo(source.Genre);
-                response.Price.ShouldBeEquivalentTo(source.Price);
-                response.ReleaseDate.ShouldBeEquivalentTo(source.ReleaseDate);
+                response.Price.Should().Be(source.Price);
+                response.ReleaseDate.Should().Be(source.ReleaseDate);
             }
         }
     }

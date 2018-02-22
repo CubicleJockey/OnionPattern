@@ -12,7 +12,7 @@ namespace OnionPattern.Domain.Tests.Constants
         public void ValidValues()
         {
             EnvironmentVariables.InMemoryDb.Should().BeEquivalentTo("InMemoryDb");
-            EnvironmentVariables.ASPNETCORE_ENVIRONMENT.ShouldAllBeEquivalentTo("ASPNETCORE_ENVIRONMENT");
+            EnvironmentVariables.ASPNETCORE_ENVIRONMENT.Should().Be("ASPNETCORE_ENVIRONMENT");
         }
 
         [TestMethod]

@@ -1,12 +1,12 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using System;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using OnionPattern.Domain.Constants;
 using Serilog;
 using Serilog.Events;
-using System;
 
-namespace OnionPattern.Api.StartupConfigurations
+namespace OnionPattern.Api.Configuration.Program
 {
     /// <summary>
     /// Configurations for Serilog

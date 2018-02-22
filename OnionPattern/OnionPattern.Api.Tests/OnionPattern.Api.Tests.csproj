@@ -28,4 +28,9 @@
     <ProjectReference Include="..\OnionPattern.Domain\OnionPattern.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Configuration\Program\" />
+    <Folder Include="StartupConfigurations\" />
+  </ItemGroup>
+
 </Project>

@@ -86,9 +86,9 @@ namespace OnionPattern.Service.Tests.Requests.Platform
                 void CheckValues(IPlatform platform, IPlatform expected)
                 {
                     platform.Should().NotBeNull();
-                    platform.Id.ShouldBeEquivalentTo(expected.Id);
+                    platform.Id.Should().Be(expected.Id);
                     platform.Name.Should().BeEquivalentTo(expected.Name);
-                    platform.ReleaseDate.ShouldBeEquivalentTo(expected.ReleaseDate);
+                    platform.ReleaseDate.Should().Be(expected.ReleaseDate);
                 }
 
                 A.CallTo(getAll).MustHaveHappened(Repeated.Exactly.Once);

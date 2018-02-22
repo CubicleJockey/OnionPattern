@@ -46,9 +46,9 @@ namespace OnionPattern.Mapping.Tests.Platform
                 var result = converter.Convert(expected, default(PlatformResponseDto), default(ResolutionContext));
 
                 result.Should().NotBeNull();
-                result.Id.ShouldBeEquivalentTo(expected.Id);
-                result.Name.Should().BeEquivalentTo(expected.Name);
-                result.ReleaseDate.ShouldBeEquivalentTo(expected.ReleaseDate);
+                result.Id.Should().Be(expected.Id);
+                result.Name.Should().Be(expected.Name);
+                result.ReleaseDate.Should().Be(expected.ReleaseDate);
             }
         }
     }

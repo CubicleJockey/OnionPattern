@@ -5,9 +5,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using OnionPattern.Api.StartupConfigurations;
+using OnionPattern.Api.Configuration.Program;
 
-namespace OnionPattern.Api.Tests.StartupConfigurations
+namespace OnionPattern.Api.Tests.Configuration.Startup.Swagger
 {
     [TestClass]
     public class SerilogConfigurationTests

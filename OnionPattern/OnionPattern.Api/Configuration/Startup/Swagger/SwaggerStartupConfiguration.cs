@@ -6,7 +6,7 @@ using Microsoft.DotNet.PlatformAbstractions;
 using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
 
-namespace OnionPattern.Api.StartupConfigurations
+namespace OnionPattern.Api.Configuration.Startup.Swagger
 {
     /// <summary>
     /// Swagger Startup Configuration

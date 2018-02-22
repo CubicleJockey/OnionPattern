@@ -23,7 +23,8 @@ namespace OnionPattern.Mapping.Tests
                 var destination = new DummyObject();
                 Action guard = () => converter.TestGuard(null, ref destination);
 
-                guard.ShouldThrow<ArgumentNullException>()
+                guard.Should()
+                    .Throw<ArgumentNullException>()
                     .WithMessage($"Value cannot be null.{Environment.NewLine}Parameter name: source");
             }
 
@@ -50,7 +51,7 @@ namespace OnionPattern.Mapping.Tests
                 converter.TestGuard(source, ref destination);
 
                 destination.Should().NotBeNull();
-                destination.Id.ShouldBeEquivalentTo(EXPECTEDID);
+                destination.Id.Should().Be(EXPECTEDID);
                 destination.Name.Should().BeEquivalentTo(EXPECTEDNAME);
             }
         }

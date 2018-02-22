@@ -66,7 +66,7 @@ namespace OnionPattern.Service.Tests.Requests.Platform.Async
                 response.ErrorSummary.Should().NotBeNullOrWhiteSpace();
                 response.ErrorSummary.Should().BeEquivalentTo($"Value cannot be null.{Environment.NewLine}Parameter name: input");
                 response.StatusCode.HasValue.Should().BeTrue();
-                response.StatusCode.ShouldBeEquivalentTo(500);
+                response.StatusCode.Should().Be(500);
             }
 
             [DataTestMethod]
@@ -81,7 +81,7 @@ namespace OnionPattern.Service.Tests.Requests.Platform.Async
                 response.ErrorSummary.Should().NotBeNullOrWhiteSpace();
                 response.ErrorSummary.Should().BeEquivalentTo($"Input {nameof(Id)} must be 1 or greater.");
                 response.StatusCode.HasValue.Should().BeTrue();
-                response.StatusCode.ShouldBeEquivalentTo(500);
+                response.StatusCode.Should().Be(500);
             }
 
             [DataTestMethod]
@@ -97,7 +97,7 @@ namespace OnionPattern.Service.Tests.Requests.Platform.Async
                 response.ErrorSummary.Should().NotBeNullOrWhiteSpace();
                 response.ErrorSummary.Should().BeEquivalentTo("Input NewName cannot be empty.");
                 response.StatusCode.HasValue.Should().BeTrue();
-                response.StatusCode.ShouldBeEquivalentTo(500);
+                response.StatusCode.Should().Be(500);
             }
         }
     }

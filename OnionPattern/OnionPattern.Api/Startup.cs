@@ -1,10 +1,12 @@
-﻿using System;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using OnionPattern.Api.Configuration.Startup.ApiVersioning;
+using OnionPattern.Api.Configuration.Startup.Logging;
+using OnionPattern.Api.Configuration.Startup.Swagger;
 using OnionPattern.Api.StartupConfigurations;
 using OnionPattern.DataAccess.EF;
 using OnionPattern.DataAccess.EF.Mock.Data;
@@ -28,17 +30,17 @@ namespace OnionPattern.Api
         /// <summary>
         /// Ctor
         /// </summary>
-        /// <param name="env">Hosting Environment</param>
-        public Startup(IHostingEnvironment env)
+        /// <param name="environment">Hosting Environment</param>
+        public Startup(IHostingEnvironment environment)
         {
             var builder = new ConfigurationBuilder()
-                .SetBasePath(env.ContentRootPath)
+                .SetBasePath(environment.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                .AddJsonFile($"appsettings.{environment.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
 
-            environment = env;
+            this.environment = environment;
         }
 
         /// <summary>
@@ -46,7 +48,7 @@ namespace OnionPattern.Api
         /// </summary>
         public void ConfigureServices(IServiceCollection services)
         {
-            ConfigureApiVersioning(services);
+            ApiVersioningConfiguration.ConfigureService(services);
 
             services.AddMvc();
 
@@ -61,37 +63,30 @@ namespace OnionPattern.Api
         /// <summary>
         /// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         /// </summary>
-        /// <param name="app"></param>
+        /// <param name="application"></param>
         /// <param name="loggerFactory"></param>
         /// <param name="apiVersionDescriptionProvider"></param>
-        public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory, IApiVersionDescriptionProvider apiVersionDescriptionProvider)
+        public void Configure(IApplicationBuilder application, 
+                              ILoggerFactory loggerFactory, 
+                              IApiVersionDescriptionProvider apiVersionDescriptionProvider)
         {
             if (environment.IsEnvironment(EnvironmentTypes.Local))
             {
-                app.UseDeveloperExceptionPage();
+                application.UseDeveloperExceptionPage();
 
-                app.UseStaticFiles();
+                application.UseStaticFiles();
 
-               SwaggerStartupConfiguration.Configure(app, apiVersionDescriptionProvider);
+                SwaggerStartupConfiguration.Configure(application, apiVersionDescriptionProvider);
             }
-            
+
+            CorrelationMiddleware.Configure(application);
+
             if (EnvironmentVariables.GetInMemoryDbValue())
             {
-                var context = app.ApplicationServices.GetService<VideoGameContext>();
+                var context = application.ApplicationServices.GetService<VideoGameContext>();
                 MockDataInjector.Inject(context);
             }
-            app.UseMvc();
-        }
-
-        private static void ConfigureApiVersioning(IServiceCollection services)
-        {
-            // Add the versioned api explorer, which also adds IApiVersionDescriptionProvider service
-            // Note: the specified format code will format the version as "'v'major[.minor][-status]"
-            // Note: Requires package: Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer
-            services.AddMvcCore().AddVersionedApiExplorer(o => o.GroupNameFormat = "'v'VVV");
-
-            // Add framework services.
-            services.AddApiVersioning(apiVersioningOptions => { apiVersioningOptions.ReportApiVersions = true; });
+            application.UseMvc();
         }
     }
 }

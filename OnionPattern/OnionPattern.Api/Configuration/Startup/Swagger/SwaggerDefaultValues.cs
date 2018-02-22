@@ -1,8 +1,8 @@
-﻿using Swashbuckle.AspNetCore.Swagger;
+﻿using System.Linq;
+using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
-using System.Linq;
 
-namespace OnionPattern.Api.StartupConfigurations
+namespace OnionPattern.Api.Configuration.Startup.Swagger
 {
     /// <summary>
     /// Represents the Swagger/Swashbuckle operation filter used to document the implicit API version parameter.

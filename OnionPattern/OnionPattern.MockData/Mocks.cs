@@ -27,8 +27,8 @@ namespace OnionPattern.MockData
         public static IQueryable<Platform> GeneratePlatforms(int count = 10)
         {
             return platformFaker.GenerateForever()
-                .Take(count)
-                .AsQueryable();
+                                .Take(count)
+                                .AsQueryable();
         }
 
         #region Helper Methods

@@ -1,8 +1,8 @@
-﻿using FluentAssertions;
+﻿using FakeItEasy;
+using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OnionPattern.Service.Requests;
 using OnionPattern.Service.Tests.Requests;
-using OnionPattern.Service.Tests.Requests.Mocks;
 
 namespace OnionPattern.Service.Tests
 {
@@ -38,11 +38,9 @@ namespace OnionPattern.Service.Tests
             [TestMethod]
             public void Inheritence()
             {
-                var requestAggregate = new MockBaseRequestAggregate(FakeRepository, FakeRepositoryAggregate);
+                var requestAggregate = A.Fake<BaseRequestAggregate<FakeEntity>>();
 
-                requestAggregate.Should().NotBeNull();
                 requestAggregate.Should().BeAssignableTo<BaseRequestAggregate<FakeEntity>>();
-                requestAggregate.Should().BeOfType<MockBaseRequestAggregate>();
             }
         }
     }

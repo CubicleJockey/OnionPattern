@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using OnionPattern.Domain.Services.Requests.Platform.Async;
 using OnionPattern.Service.Requests;
 using OnionPattern.Service.Tests.Requests.Mocks;
+using System;
 
 namespace OnionPattern.Service.Tests.Requests
 {

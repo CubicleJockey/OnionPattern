@@ -1,6 +1,6 @@
-﻿using FluentAssertions;
+﻿using FakeItEasy;
+using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using OnionPattern.Service.Tests.Requests.Mocks;
 
 namespace OnionPattern.Service.Tests.Requests
 {
@@ -36,11 +36,9 @@ namespace OnionPattern.Service.Tests.Requests
             [TestMethod]
             public void IsValid()
             {
-                var baseRequest = new MockBaseRequest(FakeRepository, FakeRepositoryAggregate);
+                var baseRequest = A.Fake<BaseServiceRequest<FakeEntity>>();
 
-                baseRequest.Should().NotBeNull();
                 baseRequest.Should().BeAssignableTo<BaseServiceRequest<FakeEntity>>();
-                baseRequest.Should().BeOfType<MockBaseRequest>();
             }
         }
     }

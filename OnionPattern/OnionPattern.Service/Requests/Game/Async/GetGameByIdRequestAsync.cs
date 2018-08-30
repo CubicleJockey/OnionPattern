@@ -1,17 +1,16 @@
-﻿using AutoMapper;
+﻿using OnionPattern.Domain.Game.Responses;
 using OnionPattern.Domain.Repository;
 using OnionPattern.Domain.Services.Requests.Game.Async;
+using Serilog;
 using System;
 using System.Threading.Tasks;
-using OnionPattern.Domain.Game.Responses;
-using Serilog;
 
 namespace OnionPattern.Service.Requests.Game.Async
 {
     public class GetGameByIdRequestAsync : BaseServiceRequestAsync<Domain.Game.Entities.Game>, IGetGameByIdRequestAsync
     {
-        public GetGameByIdRequestAsync(IRepositoryAsync<Domain.Game.Entities.Game> repository, IRepositoryAsyncAggregate repositoryAggregate) 
-            : base(repository, repositoryAggregate) { }
+        public GetGameByIdRequestAsync(IRepositoryAsync<Domain.Game.Entities.Game> repositoryAsync, IRepositoryAsyncAggregate repositoryAsyncAggregate)
+            : base(repositoryAsync, repositoryAsyncAggregate) { }
 
         #region Implementation of IGetGameByIdRequestAsync
 

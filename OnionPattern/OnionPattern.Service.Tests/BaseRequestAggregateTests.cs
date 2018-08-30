@@ -3,7 +3,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OnionPattern.Service.Requests;
 using OnionPattern.Service.Tests.Requests;
 using OnionPattern.Service.Tests.Requests.Mocks;
-using System;
 
 namespace OnionPattern.Service.Tests
 {
@@ -27,21 +26,13 @@ namespace OnionPattern.Service.Tests
             [TestMethod]
             public void RepositoryIsNull()
             {
-                Action ctor = () => new MockBaseRequestAggregate(null, FakeRepositoryAggregate);
-
-                ctor.Should()
-                    .Throw<ArgumentNullException>()
-                    .WithMessage($"Value cannot be null.{Environment.NewLine}Parameter name: repository");
+                TestConstructor<BaseRequestAggregate<FakeEntity>>(null, FakeRepositoryAggregate);
             }
 
             [TestMethod]
             public void RepositoryAggregateIsNull()
             {
-                Action ctor = () => new MockBaseRequestAggregate(FakeRepository, null);
-
-                ctor.Should()
-                    .Throw<ArgumentNullException>()
-                    .WithMessage($"Value cannot be null.{Environment.NewLine}Parameter name: repositoryAggregate");
+                TestConstructor<BaseRequestAggregate<FakeEntity>>(FakeRepository, null);
             }
 
             [TestMethod]

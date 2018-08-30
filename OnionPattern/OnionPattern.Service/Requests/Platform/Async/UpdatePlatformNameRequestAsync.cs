@@ -1,11 +1,10 @@
-﻿using System;
-using System.Threading.Tasks;
-using AutoMapper;
-using OnionPattern.Domain.Platform.Requests;
+﻿using OnionPattern.Domain.Platform.Requests;
 using OnionPattern.Domain.Platform.Responses;
 using OnionPattern.Domain.Repository;
 using OnionPattern.Domain.Services.Requests.Platform.Async;
 using Serilog;
+using System;
+using System.Threading.Tasks;
 
 namespace OnionPattern.Service.Requests.Platform.Async
 {
@@ -16,8 +15,8 @@ namespace OnionPattern.Service.Requests.Platform.Async
         ///     Request to update a Platform's name asynchronously.
         /// </summary>
         /// <exception cref="T:System.ArgumentNullException">Condition.</exception>
-        public UpdatePlatformNameRequestAsync(IRepositoryAsync<Domain.Platform.Entities.Platform> repository, IRepositoryAsyncAggregate repositoryAggregate) 
-            : base(repository, repositoryAggregate) { }
+        public UpdatePlatformNameRequestAsync(IRepositoryAsync<Domain.Platform.Entities.Platform> repositoryAsync, IRepositoryAsyncAggregate repositoryAsyncAggregate)
+            : base(repositoryAsync, repositoryAsyncAggregate) { }
 
         #region Implementation of IUpdatePlatformNameRequestAsync
 

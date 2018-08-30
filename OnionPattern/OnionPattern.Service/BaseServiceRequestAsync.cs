@@ -14,10 +14,10 @@ namespace OnionPattern.Service
         protected IRepositoryAsyncAggregate RepositoryAggregate { get; }
 
         /// <exception cref="ArgumentNullException">Condition.</exception>
-        protected BaseServiceRequestAsync(IRepositoryAsync<TEntity> repository, IRepositoryAsyncAggregate repositoryAggregate)
+        protected BaseServiceRequestAsync(IRepositoryAsync<TEntity> repositoryAsync, IRepositoryAsyncAggregate repositoryAsyncAggregate)
         {
-            Repository = repository ?? throw new ArgumentNullException(nameof(repository));
-            RepositoryAggregate = repositoryAggregate ?? throw new ArgumentNullException(nameof(repositoryAggregate));
+            Repository = repositoryAsync ?? throw new ArgumentNullException(nameof(repositoryAsync));
+            RepositoryAggregate = repositoryAsyncAggregate ?? throw new ArgumentNullException(nameof(repositoryAsyncAggregate));
         }
     }
 }

@@ -1,18 +1,17 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
-using OnionPattern.Domain.Game.Responses;
+﻿using OnionPattern.Domain.Game.Responses;
 using OnionPattern.Domain.Repository;
 using OnionPattern.Domain.Services.Requests.Game.Async;
 using Serilog;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace OnionPattern.Service.Requests.Game.Async
 {
     public class DeleteGameByIdRequestAsync : BaseServiceRequestAsync<Domain.Game.Entities.Game>, IDeleteGameByIdRequestAsync
     {
-        public DeleteGameByIdRequestAsync(IRepositoryAsync<Domain.Game.Entities.Game> repository, IRepositoryAsyncAggregate repositoryAggregate) 
-            : base(repository, repositoryAggregate) { }
+        public DeleteGameByIdRequestAsync(IRepositoryAsync<Domain.Game.Entities.Game> repositoryAsync, IRepositoryAsyncAggregate repositoryAsyncAggregate)
+            : base(repositoryAsync, repositoryAsyncAggregate) { }
 
         #region Implementation of IDeleteGameByIdRequestAsync
 

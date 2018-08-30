@@ -1,8 +1,8 @@
-﻿using System;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OnionPattern.Domain.Services.Requests.Platform;
 using OnionPattern.Service.Requests.Platform;
+using System;
 
 namespace OnionPattern.Service.Tests.Requests.Platform
 {
@@ -11,27 +11,32 @@ namespace OnionPattern.Service.Tests.Requests.Platform
         [TestClass]
         public class ConstructorTests : TestBase<Domain.Platform.Entities.Platform>
         {
+            private GetPlatformByIdRequest request;
+
             [TestInitialize]
             public void TestInitalize()
             {
                 InitializeFakes();
+                request = new GetPlatformByIdRequest(FakeRepository, FakeRepositoryAggregate);
             }
 
             [TestCleanup]
             public void TestCleanup()
             {
                 ClearFakes();
+                request = null;
             }
 
             [TestMethod]
-            public void Inheritence()
+            public void InheritsFromIGetPlatformByIdRequest()
             {
-                var request = new GetPlatformByIdRequest(FakeRepository, FakeRepositoryAggregate);
-
-                request.Should().NotBeNull();
-                request.Should().BeAssignableTo<BaseServiceRequest<Domain.Platform.Entities.Platform>>();
                 request.Should().BeAssignableTo<IGetPlatformByIdRequest>();
-                request.Should().BeOfType<GetPlatformByIdRequest>();
+            }
+
+            [TestMethod]
+            public void InheritsFromBaseServiceRequest()
+            {
+                request.Should().BeAssignableTo<BaseServiceRequest<Domain.Platform.Entities.Platform>>();
             }
         }
 

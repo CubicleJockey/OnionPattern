@@ -10,27 +10,32 @@ namespace OnionPattern.Service.Tests.Requests.Platform
         [TestClass]
         public class ConstructorTests : TestBase<Domain.Platform.Entities.Platform>
         {
+            private DeletePlatformByIdRequest request;
+
             [TestInitialize]
             public void TestInitialize()
             {
                 InitializeFakes();
+                request = new DeletePlatformByIdRequest(FakeRepository, FakeRepositoryAggregate);
             }
 
             [TestCleanup]
             public void TestCleanup()
             {
                 ClearFakes();
+                request = null;
             }
 
             [TestMethod]
-            public void Inheritence()
+            public void InheritsFromIDeletePlatformByIdRequest()
             {
-                var request = new DeletePlatformByIdRequest(FakeRepository, FakeRepositoryAggregate);
-
-                request.Should().NotBeNull();
-                request.Should().BeAssignableTo<BaseServiceRequest<Domain.Platform.Entities.Platform>>();
                 request.Should().BeAssignableTo<IDeletePlatformByIdRequest>();
-                request.Should().BeOfType<DeletePlatformByIdRequest>();
+            }
+
+            [TestMethod]
+            public void InheritsFromBaseServiceRequest()
+            {
+                request.Should().BeAssignableTo<BaseServiceRequest<Domain.Platform.Entities.Platform>>();
             }
         }
 

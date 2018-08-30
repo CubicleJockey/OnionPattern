@@ -1,9 +1,9 @@
-﻿using System;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OnionPattern.Domain.Platform.Requests;
 using OnionPattern.Domain.Services.Requests.Platform;
 using OnionPattern.Service.Requests.Platform;
+using System;
 
 namespace OnionPattern.Service.Tests.Requests.Platform
 {
@@ -12,27 +12,32 @@ namespace OnionPattern.Service.Tests.Requests.Platform
         [TestClass]
         public class ConstructorTests : TestBase<Domain.Platform.Entities.Platform>
         {
+            private UpdatePlatformNameRequest request;
+
             [TestInitialize]
             public void TestInitialize()
             {
                 InitializeFakes();
+                request = new UpdatePlatformNameRequest(FakeRepository, FakeRepositoryAggregate);
             }
 
             [TestCleanup]
             public void TestCleanup()
             {
                 ClearFakes();
+                request = null;
             }
 
             [TestMethod]
-            public void Inheritence()
+            public void InheritsFromIUpdatePlatformNameRequest()
             {
-                var request = new UpdatePlatformNameRequest(FakeRepository, FakeRepositoryAggregate);
-
-                request.Should().NotBeNull();
-                request.Should().BeAssignableTo<BaseServiceRequest<Domain.Platform.Entities.Platform>>();
                 request.Should().BeAssignableTo<IUpdatePlatformNameRequest>();
-                request.Should().BeOfType<UpdatePlatformNameRequest>();
+            }
+
+            [TestMethod]
+            public void InheritsFromBaseServiceRequest()
+            {
+                request.Should().BeAssignableTo<BaseServiceRequest<Domain.Platform.Entities.Platform>>();
             }
         }
 
@@ -90,7 +95,7 @@ namespace OnionPattern.Service.Tests.Requests.Platform
             public void InvalidInputNameIsEmpty(string name)
             {
                 var invalidInput = new UpdatePlatformNameInput { Id = 666, NewName = name };
-               var response = request.Execute(invalidInput);
+                var response = request.Execute(invalidInput);
 
                 response.Should().NotBeNull();
                 response.ErrorResponse.Should().NotBeNull();

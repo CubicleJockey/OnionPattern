@@ -35,6 +35,7 @@
     <ProjectReference Include="..\OnionPattern.Domain\OnionPattern.Domain.csproj" />
     <ProjectReference Include="..\OnionPattern.MockData\OnionPattern.MockData.csproj" />
     <ProjectReference Include="..\OnionPattern.Service\OnionPattern.Service.csproj" />
+    <ProjectReference Include="..\OnionPattern.TestUtils\OnionPattern.TestUtils.csproj" />
   </ItemGroup>
 
 </Project>

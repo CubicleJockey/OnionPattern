@@ -4,7 +4,7 @@ using OnionPattern.Domain.Game.Entities;
 using OnionPattern.Domain.Game.Requests;
 using OnionPattern.Domain.Services.Requests.Game;
 using OnionPattern.Service.Requests.Game;
-using System;
+using OnionPattern.TestUtils;
 
 namespace OnionPattern.Service.Tests.Requests.Games
 {
@@ -67,7 +67,7 @@ namespace OnionPattern.Service.Tests.Requests.Games
                 response.Should().NotBeNull();
                 response.ErrorResponse.Should().NotBeNull();
                 response.ErrorResponse.ErrorSummary.Should().NotBeNullOrWhiteSpace();
-                response.ErrorResponse.ErrorSummary.Should().BeEquivalentTo($"Value cannot be null.{Environment.NewLine}Parameter name: input");
+                response.ErrorResponse.ErrorSummary.Should().BeEquivalentTo(ExceptionMessages.ArgumentNull("input"));
             }
 
             [DataTestMethod]

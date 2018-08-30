@@ -2,9 +2,10 @@
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OnionPattern.Domain.Repository;
-using System;
 using OnionPattern.Service.Tests.Requests.Mocks;
+using OnionPattern.TestUtils;
 using Serilog;
+using System;
 
 namespace OnionPattern.Service.Tests.Requests
 {
@@ -39,7 +40,7 @@ namespace OnionPattern.Service.Tests.Requests
                 Action ctor = () => new MockBaseRequestAsync(null, fakeRepositoryAggregate);
                 ctor.Should()
                     .Throw<ArgumentNullException>()
-                    .WithMessage($"Value cannot be null.{Environment.NewLine}Parameter name: repository cannot be null.");
+                    .WithMessage(ExceptionMessages.ArgumentNull("repository"));
             }
 
             [TestMethod]
@@ -48,7 +49,7 @@ namespace OnionPattern.Service.Tests.Requests
                 Action ctor = () => new MockBaseRequestAsync(fakeRepository, null);
                 ctor.Should()
                     .Throw<ArgumentNullException>()
-                    .WithMessage($"Value cannot be null.{Environment.NewLine}Parameter name: repositoryAggregate cannot be null.");
+                    .WithMessage(ExceptionMessages.ArgumentNull("repositoryAggregate"));
             }
 
             [TestMethod]

@@ -6,26 +6,24 @@ namespace OnionPattern.Domain.Tests.GamePlatform.Entities
     public class GamePlatformsTests
     {
         [TestClass]
-        public class ConstructorTests
+        public class ConstructorTests : TestBase<Domain.GamePlatform.Entities.GamePlatform>
         {
-            private Domain.GamePlatform.Entities.GamePlatform entity;
-
             [TestInitialize]
             public void TestIntialize()
             {
-                entity = new Domain.GamePlatform.Entities.GamePlatform();
+                Entity = new Domain.GamePlatform.Entities.GamePlatform();
             }
 
             [TestMethod]
             public void ShouldInheritFromVideoGameEntity()
             {
-                entity.Should().BeAssignableTo<VideoGameEntity>();
+                Entity.Should().BeAssignableTo<VideoGameEntity>();
             }
 
             [TestMethod]
             public void ShouldBeOfTypeGamePlatform()
             {
-                entity.Should().BeOfType<Domain.GamePlatform.Entities.GamePlatform>();
+                Entity.Should().BeOfType<Domain.GamePlatform.Entities.GamePlatform>();
             }
         }
     }

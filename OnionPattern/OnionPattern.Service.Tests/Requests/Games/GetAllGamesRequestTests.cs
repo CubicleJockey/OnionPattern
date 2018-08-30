@@ -5,6 +5,7 @@ using OnionPattern.Domain.Game.Entities;
 using OnionPattern.Domain.Game.Responses;
 using OnionPattern.Domain.Services.Requests.Game;
 using OnionPattern.Service.Requests.Game;
+using OnionPattern.TestUtils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -92,8 +93,8 @@ namespace OnionPattern.Service.Tests.Requests.Games
             [TestMethod]
             public void ExecuteErrorThrown()
             {
-                const string EXPECTEDMESSAGE = "Oh noes n' stuff.";
-                var exception = new Exception(EXPECTEDMESSAGE);
+
+                var exception = new Exception(ExceptionMessages.GenericMessage);
 
                 A.CallTo(getAll).Throws(exception);
 
@@ -103,7 +104,7 @@ namespace OnionPattern.Service.Tests.Requests.Games
                 response.Games.Should().BeNull();
                 response.ErrorResponse.Should().NotBeNull();
                 response.ErrorResponse.ErrorSummary.Should().NotBeNullOrWhiteSpace();
-                response.ErrorResponse.ErrorSummary.Should().Be(EXPECTEDMESSAGE);
+                response.ErrorResponse.ErrorSummary.Should().Be(ExceptionMessages.GenericMessage);
 
                 A.CallTo(getAll).MustHaveHappenedOnceExactly();
             }

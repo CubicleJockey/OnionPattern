@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OnionPattern.Service.Requests;
 using OnionPattern.Service.Tests.Requests.Mocks;
+using OnionPattern.TestUtils;
 using System;
 
 namespace OnionPattern.Service.Tests.Requests
@@ -30,7 +31,7 @@ namespace OnionPattern.Service.Tests.Requests
 
                 ctor.Should()
                     .Throw<ArgumentNullException>()
-                    .WithMessage($"Value cannot be null.{Environment.NewLine}Parameter name: repositoryAsync cannot be null.");
+                    .WithMessage(ExceptionMessages.ArgumentNull("repositoryAsync"));
             }
 
             [TestMethod]
@@ -40,7 +41,7 @@ namespace OnionPattern.Service.Tests.Requests
 
                 ctor.Should()
                     .Throw<ArgumentNullException>()
-                    .WithMessage($"Value cannot be null.{Environment.NewLine}Parameter name: repositoryAsyncAggregate cannot be null.");
+                    .WithMessage(ExceptionMessages.ArgumentNull("repositoryAsyncAggregate"));
             }
 
             [TestMethod]

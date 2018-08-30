@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OnionPattern.Service.Tests.Requests.Mocks;
+using OnionPattern.TestUtils;
 using System;
 
 namespace OnionPattern.Service.Tests.Requests
@@ -10,7 +11,7 @@ namespace OnionPattern.Service.Tests.Requests
         [TestClass]
         public class ConstructorTests : TestBase<FakeEntity>
         {
-           [TestInitialize]
+            [TestInitialize]
             public void TestInitialize()
             {
                 InitializeFakes();
@@ -19,7 +20,7 @@ namespace OnionPattern.Service.Tests.Requests
             [TestCleanup]
             public void TestCleanup()
             {
-               ClearFakes();
+                ClearFakes();
             }
 
             [TestMethod]
@@ -28,7 +29,7 @@ namespace OnionPattern.Service.Tests.Requests
                 Action ctor = () => new MockBaseRequest(null, FakeRepositoryAggregate);
                 ctor.Should()
                     .Throw<ArgumentNullException>()
-                    .WithMessage($"Value cannot be null.{Environment.NewLine}Parameter name: repository cannot be null.");
+                    .WithMessage(ExceptionMessages.ArgumentNull("repository"));
             }
 
             [TestMethod]
@@ -37,7 +38,7 @@ namespace OnionPattern.Service.Tests.Requests
                 Action ctor = () => new MockBaseRequest(FakeRepository, null);
                 ctor.Should()
                     .Throw<ArgumentNullException>()
-                    .WithMessage($"Value cannot be null.{Environment.NewLine}Parameter name: repositoryAggregate cannot be null.");
+                    .WithMessage(ExceptionMessages.ArgumentNull("repositoryAggregate"));
             }
 
             [TestMethod]

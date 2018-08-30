@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OnionPattern.Domain.Platform.Requests;
 using OnionPattern.Domain.Services.Requests.Platform.Async;
 using OnionPattern.Service.Requests.Platform.Async;
-using System;
+using OnionPattern.TestUtils;
 using System.Threading.Tasks;
 
 namespace OnionPattern.Service.Tests.Requests.Platform.Async
@@ -68,7 +68,7 @@ namespace OnionPattern.Service.Tests.Requests.Platform.Async
                 response.Should().NotBeNull();
                 response.ErrorResponse.Should().NotBeNull();
                 response.ErrorResponse.ErrorSummary.Should().NotBeNullOrWhiteSpace();
-                response.ErrorResponse.ErrorSummary.Should().BeEquivalentTo($"Value cannot be null.{Environment.NewLine}Parameter name: input");
+                response.ErrorResponse.ErrorSummary.Should().BeEquivalentTo(ExceptionMessages.ArgumentNull("input"));
                 response.StatusCode.HasValue.Should().BeTrue();
                 response.StatusCode.Should().Be(500);
             }

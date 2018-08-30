@@ -4,6 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OnionPattern.Domain.Platform.Responses;
 using OnionPattern.Domain.Services.Requests.Platform;
 using OnionPattern.Service.Requests.Platform;
+using OnionPattern.TestUtils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +23,7 @@ namespace OnionPattern.Service.Tests.Requests.Platform
             [TestInitialize]
             public void TestInitialize()
             {
-               InitializeFakes();
+                InitializeFakes();
                 request = new GetAllPlatformsRequest(FakeRepository, FakeRepositoryAggregate);
             }
 
@@ -69,12 +70,12 @@ namespace OnionPattern.Service.Tests.Requests.Platform
             [TestMethod]
             public void Execute()
             {
-               var platforms = MockData.Mocks.GeneratePlatforms().ToArray();
+                var platforms = MockData.Mocks.GeneratePlatforms().ToArray();
 
                 A.CallTo(getAll).Returns(platforms);
 
-                request.Should().NotBeNull();    
-                
+                request.Should().NotBeNull();
+
                 var response = request.Execute();
                 response.Should().NotBeNull();
                 response.Should().BeOfType<PlatformListResponse>();
@@ -83,14 +84,14 @@ namespace OnionPattern.Service.Tests.Requests.Platform
                 response.ErrorResponse.Should().BeNull();
 
                 response.Platforms.Count().Should().Be(platforms.Length);
-                
+
                 A.CallTo(getAll).MustHaveHappened(Repeated.Exactly.Once);
             }
 
             [TestMethod]
             public void ExecuteErrorThrown()
             {
-                var exception = new Exception("Oh noes n' stuff.");
+                var exception = new Exception(ExceptionMessages.GenericMessage);
 
                 A.CallTo(getAll).Throws(exception);
 
@@ -100,7 +101,7 @@ namespace OnionPattern.Service.Tests.Requests.Platform
                 response.Platforms.Should().BeNull();
                 response.ErrorResponse.Should().NotBeNull();
                 response.ErrorResponse.ErrorSummary.Should().NotBeNullOrWhiteSpace();
-                response.ErrorResponse.ErrorSummary.Should().Be(exception.Message);
+                response.ErrorResponse.ErrorSummary.Should().Be(ExceptionMessages.GenericMessage);
 
                 A.CallTo(getAll).MustHaveHappened(Repeated.Exactly.Once);
             }

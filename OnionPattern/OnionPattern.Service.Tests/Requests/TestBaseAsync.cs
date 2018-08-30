@@ -1,7 +1,12 @@
 ﻿using FakeItEasy;
+using FakeItEasy.Core;
+using FluentAssertions;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OnionPattern.Domain;
 using OnionPattern.Domain.Repository;
 using Serilog;
+using System;
+using System.Linq;
 
 namespace OnionPattern.Service.Tests.Requests
 {
@@ -25,6 +30,33 @@ namespace OnionPattern.Service.Tests.Requests
             Fake.ClearConfiguration(FakeRepositoryAsync);
             Fake.ClearConfiguration(FakeRepositoryAsyncAggregate);
             Fake.ClearConfiguration(FakeLogger);
+        }
+
+        protected void TestConstructor<T>(IRepositoryAsync<FakeEntity> repositoryAsync, IRepositoryAsyncAggregate repositoryAsyncAggregate)
+        {
+            var propertyName = repositoryAsync == null ? nameof(repositoryAsync) : nameof(repositoryAsyncAggregate);
+
+            try
+            {
+                void Ctor() => A.Fake<T>(c => c.WithArgumentsForConstructor(new object[] { repositoryAsync, repositoryAsyncAggregate }));
+
+                //Trigger Construction
+                Ctor();
+            }
+            catch (FakeCreationException fce)
+            {
+                var messageParts = TestUtils.ExceptionMessages.ArgumentNull(propertyName).Split(Environment.NewLine);
+
+                var foundPart1 = fce.Message.Contains(messageParts.First());
+                foundPart1.Should().BeTrue();
+
+
+                var foundPart2 = fce.Message.Contains(messageParts.Last());
+                foundPart2.Should().BeTrue();
+
+                return;
+            }
+            Assert.Fail($"Should have thrown exception with message containing: [{TestUtils.ExceptionMessages.ArgumentNull(propertyName)}]");
         }
     }
 }

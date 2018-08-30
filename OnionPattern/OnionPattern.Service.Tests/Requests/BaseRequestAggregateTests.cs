@@ -1,8 +1,6 @@
 ﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OnionPattern.Service.Tests.Requests.Mocks;
-using OnionPattern.TestUtils;
-using System;
 
 namespace OnionPattern.Service.Tests.Requests
 {
@@ -26,19 +24,13 @@ namespace OnionPattern.Service.Tests.Requests
             [TestMethod]
             public void RepositoryIsNull()
             {
-                Action ctor = () => new MockBaseRequest(null, FakeRepositoryAggregate);
-                ctor.Should()
-                    .Throw<ArgumentNullException>()
-                    .WithMessage(ExceptionMessages.ArgumentNull("repository"));
+                TestConstructor<BaseServiceRequest<FakeEntity>>(null, FakeRepositoryAggregate);
             }
 
             [TestMethod]
             public void RepositoryAggregateIsNull()
             {
-                Action ctor = () => new MockBaseRequest(FakeRepository, null);
-                ctor.Should()
-                    .Throw<ArgumentNullException>()
-                    .WithMessage(ExceptionMessages.ArgumentNull("repositoryAggregate"));
+                TestConstructor<BaseServiceRequest<FakeEntity>>(FakeRepository, null);
             }
 
             [TestMethod]

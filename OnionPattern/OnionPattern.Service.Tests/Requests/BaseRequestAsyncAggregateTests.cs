@@ -27,11 +27,7 @@ namespace OnionPattern.Service.Tests.Requests
             [TestMethod]
             public void RepositoryAsyncIsNull()
             {
-                Action ctor = () => new MockBaseRequestAsyncAggregate(null, FakeRepositoryAsyncAggregate);
-
-                ctor.Should()
-                    .Throw<ArgumentNullException>()
-                    .WithMessage(ExceptionMessages.ArgumentNull("repositoryAsync"));
+                TestConstructor<BaseRequestAsyncAggregate<FakeEntity>>(null, FakeRepositoryAsyncAggregate);
             }
 
             [TestMethod]
@@ -42,6 +38,8 @@ namespace OnionPattern.Service.Tests.Requests
                 ctor.Should()
                     .Throw<ArgumentNullException>()
                     .WithMessage(ExceptionMessages.ArgumentNull("repositoryAsyncAggregate"));
+
+                TestConstructor<Service.Requests.BaseRequestAsyncAggregate<FakeEntity>>(FakeRepositoryAsync, null);
             }
 
             [TestMethod]

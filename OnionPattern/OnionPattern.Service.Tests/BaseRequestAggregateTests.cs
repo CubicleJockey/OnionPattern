@@ -31,7 +31,7 @@ namespace OnionPattern.Service.Tests
 
                 ctor.Should()
                     .Throw<ArgumentNullException>()
-                    .WithMessage($"Value cannot be null.{Environment.NewLine}Parameter name: repository cannot be null.");
+                    .WithMessage($"Value cannot be null.{Environment.NewLine}Parameter name: repository");
             }
 
             [TestMethod]
@@ -41,7 +41,7 @@ namespace OnionPattern.Service.Tests
 
                 ctor.Should()
                     .Throw<ArgumentNullException>()
-                    .WithMessage($"Value cannot be null.{Environment.NewLine}Parameter name: repositoryAggregate cannot be null.");
+                    .WithMessage($"Value cannot be null.{Environment.NewLine}Parameter name: repositoryAggregate");
             }
 
             [TestMethod]

@@ -16,8 +16,8 @@ namespace OnionPattern.Service
         /// <exception cref="ArgumentNullException">Condition.</exception>
         protected BaseServiceRequest(IRepository<TEntity> repository, IRepositoryAggregate repositoryAggregate)
         {
-            Repository = repository ?? throw new ArgumentNullException($"{nameof(repository)}");
-            RepositoryAggregate = repositoryAggregate ?? throw new ArgumentNullException($"{nameof(repositoryAggregate)}");
+            Repository = repository ?? throw new ArgumentNullException(nameof(repository));
+            RepositoryAggregate = repositoryAggregate ?? throw new ArgumentNullException(nameof(repositoryAggregate));
         }
     }
 }

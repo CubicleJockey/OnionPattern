@@ -11,27 +11,32 @@ namespace OnionPattern.Service.Tests.Requests.Games
         [TestClass]
         public class ConstructorTests : TestBase<Game>
         {
+            private GetGamesByGenreRequest request;
+
             [TestInitialize]
             public void TestInitailize()
             {
                 InitializeFakes();
+                request = new GetGamesByGenreRequest(FakeRepository, FakeRepositoryAggregate);
             }
 
             [TestCleanup]
             public void TestCleanup()
             {
                 ClearFakes();
+                request = null;
             }
 
             [TestMethod]
-            public void Inheritence()
+            public void InheritsFromIGetGamesByGenreRequest()
             {
-                var request = new GetGamesByGenreRequest(FakeRepository, FakeRepositoryAggregate);
-
-                request.Should().NotBeNull();
-                request.Should().BeAssignableTo<BaseServiceRequest<Game>>();
                 request.Should().BeAssignableTo<IGetGamesByGenreRequest>();
-                request.Should().BeOfType<GetGamesByGenreRequest>();
+            }
+
+            [TestMethod]
+            public void InheritsFromBaseServiceRequest()
+            {
+                request.Should().BeAssignableTo<BaseServiceRequest<Game>>();
             }
         }
     }

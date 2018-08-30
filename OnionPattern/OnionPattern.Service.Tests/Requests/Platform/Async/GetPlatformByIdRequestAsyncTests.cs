@@ -10,27 +10,32 @@ namespace OnionPattern.Service.Tests.Requests.Platform.Async
         [TestClass]
         public class ConstructorTests : TestBaseAsync<Domain.Platform.Entities.Platform>
         {
+            private GetPlatformByIdRequestAsync request;
+
             [TestInitialize]
             public void TestInitalize()
             {
                 InitializeFakes();
+                request = new GetPlatformByIdRequestAsync(FakeRepositoryAsync, FakeRepositoryAsyncAggregate);
             }
 
             [TestCleanup]
             public void TestCleanup()
             {
                 ClearFakes();
+                request = null;
             }
 
             [TestMethod]
-            public void Inheritence()
+            public void InheritsFromIGetPlatformByIdRequestAsync()
             {
-                var request = new GetPlatformByIdRequestAsync(FakeRepositoryAsync, FakeRepositoryAsyncAggregate);
-
-                request.Should().NotBeNull();
-                request.Should().BeAssignableTo<BaseServiceRequestAsync<Domain.Platform.Entities.Platform>>();
                 request.Should().BeAssignableTo<IGetPlatformByIdRequestAsync>();
-                request.Should().BeOfType<GetPlatformByIdRequestAsync>();
+            }
+
+            [TestMethod]
+            public void InheritsFromBaseServiceRequestAsync()
+            {
+                request.Should().BeAssignableTo<BaseServiceRequestAsync<Domain.Platform.Entities.Platform>>();
             }
         }
     }

@@ -1,5 +1,4 @@
-﻿using System;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OnionPattern.Domain.Game.Entities;
 using OnionPattern.Domain.Services.Requests.Game.Async;
@@ -13,27 +12,33 @@ namespace OnionPattern.Service.Tests.Requests.Games.Async
         [TestClass]
         public class ConstructorTests : TestBaseAsync<Game>
         {
+            private GameRequestAsyncAggregate requestAggreggate;
+
             [TestInitialize]
             public void TestInitalize()
             {
                 InitializeFakes();
+
+                requestAggreggate = new GameRequestAsyncAggregate(FakeRepositoryAsync, FakeRepositoryAsyncAggregate);
             }
 
             [TestCleanup]
             public void TestCleaanup()
             {
                 ClearFakes();
+                requestAggreggate = null;
             }
 
             [TestMethod]
-            public void Inheritence()
+            public void InheritsFromBaseRequestAsyncAggregate()
             {
-                var requestAggreggate = new GameRequestAsyncAggregate(FakeRepositoryAsync, FakeRepositoryAsyncAggregate);
-
-                requestAggreggate.Should().NotBeNull();
                 requestAggreggate.Should().BeAssignableTo<BaseRequestAsyncAggregate<Game>>();
+            }
+
+            [TestMethod]
+            public void InheritsFromIGameRequestAggregateAsync()
+            {
                 requestAggreggate.Should().BeAssignableTo<IGameRequestAggregateAsync>();
-                requestAggreggate.Should().BeAssignableTo<GameRequestAsyncAggregate>();
             }
         }
     }

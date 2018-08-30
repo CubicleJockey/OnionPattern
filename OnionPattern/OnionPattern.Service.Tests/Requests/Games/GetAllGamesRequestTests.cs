@@ -2,14 +2,13 @@
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OnionPattern.Domain.Game.Entities;
-using OnionPattern.Domain.Platform.Responses;
+using OnionPattern.Domain.Game.Responses;
 using OnionPattern.Domain.Services.Requests.Game;
 using OnionPattern.Service.Requests.Game;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using OnionPattern.Domain.Game.Responses;
 
 namespace OnionPattern.Service.Tests.Requests.Games
 {
@@ -87,13 +86,14 @@ namespace OnionPattern.Service.Tests.Requests.Games
 
                 response.Games.Count().Should().Be(games.Length);
 
-                A.CallTo(getAll).MustHaveHappened(Repeated.Exactly.Once);
+                A.CallTo(getAll).MustHaveHappenedOnceExactly();
             }
 
             [TestMethod]
             public void ExecuteErrorThrown()
             {
-                var exception = new Exception("Oh noes n' stuff.");
+                const string EXPECTEDMESSAGE = "Oh noes n' stuff.";
+                var exception = new Exception(EXPECTEDMESSAGE);
 
                 A.CallTo(getAll).Throws(exception);
 
@@ -103,9 +103,9 @@ namespace OnionPattern.Service.Tests.Requests.Games
                 response.Games.Should().BeNull();
                 response.ErrorResponse.Should().NotBeNull();
                 response.ErrorResponse.ErrorSummary.Should().NotBeNullOrWhiteSpace();
-                response.ErrorResponse.ErrorSummary.Should().Be(exception.Message);
+                response.ErrorResponse.ErrorSummary.Should().Be(EXPECTEDMESSAGE);
 
-                A.CallTo(getAll).MustHaveHappened(Repeated.Exactly.Once);
+                A.CallTo(getAll).MustHaveHappenedOnceExactly();
             }
         }
     }

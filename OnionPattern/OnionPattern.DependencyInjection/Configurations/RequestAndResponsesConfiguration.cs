@@ -27,14 +27,14 @@ namespace OnionPattern.DependencyInjection.Configurations
         {
             services.AddTransient<IGameRequestAggregate>(context =>
             {
-                var dependencies = GetRequestDependencies<Game>(context);
-                return new GameRequestAggregate(dependencies.Repository, dependencies.RepositoryAggregate);
+                var (repository, repositoryAggregate) = GetRequestDependencies<Game>(context);
+                return new GameRequestAggregate(repository, repositoryAggregate);
             });
 
             services.AddTransient<IGameRequestAggregateAsync>(context =>
             {
-                var dependencies = GetRequestAsyncDependencies<Game>(context);
-                return new GameRequestAsyncAggregate(dependencies.Repository, dependencies.RepositoryAggregate);
+                var (repositoryAsync, repositoryAsyncAggregate) = GetRequestAsyncDependencies<Game>(context);
+                return new GameRequestAsyncAggregate(repositoryAsync, repositoryAsyncAggregate);
             });
         }
 

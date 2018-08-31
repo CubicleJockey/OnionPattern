@@ -6,6 +6,7 @@ using OnionPattern.Domain.Game.Requests;
 using OnionPattern.Domain.Services.Requests.Game.Async;
 using OnionPattern.Mapping;
 using OnionPattern.Service.Requests.Game.Async;
+using OnionPattern.TestUtils;
 using System;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
@@ -88,6 +89,24 @@ namespace OnionPattern.Service.Tests.Requests.Games.Async
                 response.Should().NotBeNull();
                 response.StatusCode.Should().Be(200);
                 response.Game.Should().Be(expectedGame);
+                response.ErrorResponse.Should().BeNull();
+
+                A.CallTo(createGame).MustHaveHappenedOnceExactly();
+            }
+
+            [TestMethod]
+            public async Task ExecuteAsyncExeptionIsThrown()
+            {
+                A.CallTo(createGame).Throws(new Exception(ExceptionMessages.GenericMessage));
+
+                var response = await request.ExecuteAsync(A.Dummy<CreateGameInput>());
+
+                response.Should().NotBeNull();
+                response.StatusCode.Should().Be(500);
+                response.Game.Should().BeNull();
+                response.ErrorResponse.Should().NotBeNull();
+                response.ErrorResponse.ErrorSummary.Should().Be(ExceptionMessages.GenericMessage);
+                response.ErrorResponse.InnerException.Should().BeNull();
 
                 A.CallTo(createGame).MustHaveHappenedOnceExactly();
             }

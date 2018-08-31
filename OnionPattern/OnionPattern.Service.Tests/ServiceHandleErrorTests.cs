@@ -30,7 +30,7 @@ namespace OnionPattern.Service.Tests
             var fakeError = A.Fake<IError>();
             fakeError.StatusCode = null;
 
-            var exception = new Exception(ExceptionMessages.GenericMessage);
+            var exception = new Exception(ExceptionsUtility.GenericMessage);
 
             serviceHandleError.TestHandlerErrors(fakeError, exception);
 
@@ -92,11 +92,11 @@ namespace OnionPattern.Service.Tests
         public void ExceptionMessageButNoInnerException()
         {
             var fakeError = A.Fake<IError>();
-            var exception = new Exception(ExceptionMessages.GenericMessage, null);
+            var exception = new Exception(ExceptionsUtility.GenericMessage, null);
 
             serviceHandleError.TestHandlerErrors(fakeError, exception);
 
-            fakeError.ErrorResponse.ErrorSummary.Should().Be(ExceptionMessages.GenericMessage);
+            fakeError.ErrorResponse.ErrorSummary.Should().Be(ExceptionsUtility.GenericMessage);
             fakeError.ErrorResponse.InnerException.Should().BeNull();
         }
 
@@ -105,11 +105,11 @@ namespace OnionPattern.Service.Tests
         {
             const string INNEREXCEPTIONMESSAGE = "InnerDude";
             var fakeError = A.Fake<IError>();
-            var exception = new Exception(ExceptionMessages.GenericMessage, new Exception(INNEREXCEPTIONMESSAGE));
+            var exception = new Exception(ExceptionsUtility.GenericMessage, new Exception(INNEREXCEPTIONMESSAGE));
 
             serviceHandleError.TestHandlerErrors(fakeError, exception);
 
-            fakeError.ErrorResponse.ErrorSummary.Should().Be(ExceptionMessages.GenericMessage);
+            fakeError.ErrorResponse.ErrorSummary.Should().Be(ExceptionsUtility.GenericMessage);
             fakeError.ErrorResponse.InnerException.Should().NotBeNull();
             fakeError.ErrorResponse.InnerException.Message.Should().NotBeNullOrWhiteSpace();
             fakeError.ErrorResponse.InnerException.Message.Should().Be(INNEREXCEPTIONMESSAGE);

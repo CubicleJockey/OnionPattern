@@ -68,7 +68,7 @@ namespace OnionPattern.Service.Tests.Requests.Platform.Async
                 response.Should().NotBeNull();
                 response.ErrorResponse.Should().NotBeNull();
                 response.ErrorResponse.ErrorSummary.Should().NotBeNullOrWhiteSpace();
-                response.ErrorResponse.ErrorSummary.Should().BeEquivalentTo(ExceptionMessages.ArgumentNull("input"));
+                response.ErrorResponse.ErrorSummary.Should().BeEquivalentTo(ExceptionsUtility.ArgumentNull("input"));
                 response.StatusCode.HasValue.Should().BeTrue();
                 response.StatusCode.Should().Be(500);
             }

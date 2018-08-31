@@ -38,7 +38,7 @@ namespace OnionPattern.Api.Tests.Controllers.Platform
 
                 ctor.Should()
                     .Throw<ArgumentNullException>()
-                    .WithMessage(ExceptionMessages.ArgumentNull("requestAggregate"));
+                    .WithMessage(ExceptionsUtility.ArgumentNull("requestAggregate"));
             }
 
             [TestMethod]

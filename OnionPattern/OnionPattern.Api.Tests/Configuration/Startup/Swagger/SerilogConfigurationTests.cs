@@ -39,7 +39,7 @@ namespace OnionPattern.Api.Tests.Configuration.Startup.Swagger
 
             method.Should()
                   .Throw<ArgumentNullException>()
-                  .WithMessage(ExceptionMessages.ArgumentNull("hostingEnvironment"));
+                  .WithMessage(ExceptionsUtility.ArgumentNull("hostingEnvironment"));
         }
 
         [TestMethod]
@@ -49,7 +49,7 @@ namespace OnionPattern.Api.Tests.Configuration.Startup.Swagger
 
             method.Should()
                 .Throw<ArgumentNullException>()
-                .WithMessage(ExceptionMessages.ArgumentNull("configuration"));
+                .WithMessage(ExceptionsUtility.ArgumentNull("configuration"));
         }
 
         [TestMethod]
@@ -59,7 +59,7 @@ namespace OnionPattern.Api.Tests.Configuration.Startup.Swagger
 
             method.Should()
                 .Throw<ArgumentNullException>()
-                .WithMessage(ExceptionMessages.ArgumentNull("logging"));
+                .WithMessage(ExceptionsUtility.ArgumentNull("logging"));
         }
 
         [DataRow(default(string))]

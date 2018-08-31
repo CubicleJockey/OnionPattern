@@ -92,7 +92,7 @@ namespace OnionPattern.Service.Tests.Requests.Games.Async
             [TestMethod]
             public async Task ExecuteErrorThrown()
             {
-                var exception = new Exception(ExceptionMessages.GenericMessage);
+                var exception = new Exception(ExceptionsUtility.GenericMessage);
 
                 A.CallTo(getAll).Throws(exception);
 
@@ -102,7 +102,7 @@ namespace OnionPattern.Service.Tests.Requests.Games.Async
                 response.Games.Should().BeNull();
                 response.ErrorResponse.Should().NotBeNull();
                 response.ErrorResponse.ErrorSummary.Should().NotBeNullOrWhiteSpace();
-                response.ErrorResponse.ErrorSummary.Should().Be(ExceptionMessages.GenericMessage);
+                response.ErrorResponse.ErrorSummary.Should().Be(ExceptionsUtility.GenericMessage);
 
                 A.CallTo(getAll).MustHaveHappenedOnceExactly();
             }

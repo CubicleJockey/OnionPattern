@@ -1,11 +1,8 @@
-﻿using static System.Console;
-
-using System;
-using System.Threading;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using OnionPattern.Domain.Game.Requests;
 using OnionPattern.Domain.Services.Requests.Game.Async;
+using System;
+using System.Threading.Tasks;
 
 namespace OnionPattern.Api.Controllers.Game
 {

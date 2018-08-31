@@ -1,4 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using OnionPattern.Domain;
+using OnionPattern.Domain.Game.Entities;
+using OnionPattern.Domain.Platform.Entities;
 using OnionPattern.Domain.Repository;
 using OnionPattern.Domain.Services.Requests.Game;
 using OnionPattern.Domain.Services.Requests.Game.Async;
@@ -9,9 +12,6 @@ using OnionPattern.Service.Requests.Game.Async;
 using OnionPattern.Service.Requests.Platform;
 using OnionPattern.Service.Requests.Platform.Async;
 using System;
-using OnionPattern.Domain;
-using OnionPattern.Domain.Game.Entities;
-using OnionPattern.Domain.Platform.Entities;
 
 namespace OnionPattern.DependencyInjection.Configurations
 {
@@ -43,16 +43,16 @@ namespace OnionPattern.DependencyInjection.Configurations
             #region Non-Async
             services.AddTransient<IPlatformRequestAggregate>(context =>
             {
-                var dependencies = GetRequestDependencies<Platform>(context);
-                return new PlatformRequestAggregate(dependencies.Repository, dependencies.RepositoryAggregate);
+                var (repository, repositoryAggregate) = GetRequestDependencies<Platform>(context);
+                return new PlatformRequestAggregate(repository, repositoryAggregate);
             });
             #endregion Non-Async
 
             #region Async
             services.AddTransient<IPlatformRequestAsyncAggregate>(context =>
             {
-                var asyncDependencies = GetRequestAsyncDependencies<Platform>(context);
-                return new PlatformRequestAsyncAggregate(asyncDependencies.Repository, asyncDependencies.RepositoryAggregate);
+                var (repositoryAsync, repositoryAsyncAggregate) = GetRequestAsyncDependencies<Platform>(context);
+                return new PlatformRequestAsyncAggregate(repositoryAsync, repositoryAsyncAggregate);
             });
             #endregion Async
         }

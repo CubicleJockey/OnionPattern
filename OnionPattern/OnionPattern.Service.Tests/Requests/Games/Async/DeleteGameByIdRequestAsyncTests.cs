@@ -1,5 +1,4 @@
-﻿using FakeItEasy;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OnionPattern.Domain.Game.Entities;
 using OnionPattern.Domain.GamePlatform.Entities;
@@ -68,8 +67,8 @@ namespace OnionPattern.Service.Tests.Requests.Games.Async
                 InitializeFakes();
                 request = new DeleteGameByIdRequestAsync(FakeRepositoryAsync, FakeRepositoryAsyncAggregate);
 
-                gameSingleOrDefaultAsync =
-                    FakeRepositoryAsync.SingleOrDefaultAsync(A<Expression<Func<Game, bool>>>.Ignored);
+                //gameSingleOrDefaultAsync =
+                //    FakeRepositoryAsync.SingleOrDefaultAsync(A<Expression<Func<Game, bool>>>.Ignored);
             }
 
             [TestCleanup]

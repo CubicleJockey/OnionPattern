@@ -31,7 +31,7 @@ namespace OnionPattern.DataAccess.EF.Tests.Repository
 
                 ctor.Should()
                     .Throw<ArgumentNullException>()
-                    .WithMessage(ExceptionsUtility.ArgumentNull("context"));
+                    .WithMessage(ExceptionsUtility.NullArgument("context"));
             }
 
             [TestMethod]

@@ -39,7 +39,7 @@ namespace OnionPattern.Service.Tests.Requests
             }
             catch (FakeCreationException fce)
             {
-                var messageParts = TestUtils.ExceptionsUtility.ArgumentNull(propertyName).Split(Environment.NewLine);
+                var messageParts = TestUtils.ExceptionsUtility.NullArgument(propertyName).Split(Environment.NewLine);
 
                 var foundPart1 = fce.Message.Contains(messageParts.First());
                 foundPart1.Should().BeTrue();
@@ -50,7 +50,7 @@ namespace OnionPattern.Service.Tests.Requests
 
                 return;
             }
-            Assert.Fail($"Should have thrown exception with message containing: [{TestUtils.ExceptionsUtility.ArgumentNull(propertyName)}]");
+            Assert.Fail($"Should have thrown exception with message containing: [{TestUtils.ExceptionsUtility.NullArgument(propertyName)}]");
         }
     }
 }

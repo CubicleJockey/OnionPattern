@@ -67,7 +67,7 @@ namespace OnionPattern.Service.Tests.Requests.Games
                 response.Should().NotBeNull();
                 response.ErrorResponse.Should().NotBeNull();
                 response.ErrorResponse.ErrorSummary.Should().NotBeNullOrWhiteSpace();
-                response.ErrorResponse.ErrorSummary.Should().BeEquivalentTo(ExceptionsUtility.ArgumentNull("input"));
+                response.ErrorResponse.ErrorSummary.Should().BeEquivalentTo(ExceptionsUtility.NullArgument("input"));
             }
 
             [DataTestMethod]

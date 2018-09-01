@@ -38,7 +38,7 @@ namespace OnionPattern.Api.Tests.Controllers.Game
 
                 ctor.Should()
                     .Throw<ArgumentNullException>()
-                    .WithMessage(ExceptionsUtility.ArgumentNull("gameRequestAggregateAsync"));
+                    .WithMessage(ExceptionsUtility.NullArgument("gameRequestAggregateAsync"));
             }
 
             [TestMethod]

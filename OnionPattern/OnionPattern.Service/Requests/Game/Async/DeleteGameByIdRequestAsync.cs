@@ -32,7 +32,7 @@ namespace OnionPattern.Service.Requests.Game.Async
                 {
                     #region Delete GamePlatform References
 
-                    Log.Information("Retrieving GamePlatoforms for Game: [{NewName}] with Id: [{Id}].", toDelete.Name, toDelete.Id);
+                    Log.Information("Retrieving GamePlatforms for Game: [{NewName}] with Id: [{Id}].", toDelete.Name, toDelete.Id);
                     var gamePlatforms = (await RepositoryAggregate.GamePlatforms.FindAsync(gp => gp.Id == id))?.ToArray();
                     if (gamePlatforms != null && gamePlatforms.Any())
                     {
@@ -41,7 +41,7 @@ namespace OnionPattern.Service.Requests.Game.Async
                         {
                             await RepositoryAggregate.GamePlatforms.DeleteAsync(gp);
                         }
-                        Log.Information("Finished deleting GamePlatform enteries. Procceeding to delete Game: {NewName} with Id: [{Id}].", toDelete.Name, toDelete.Id);
+                        Log.Information("Finished deleting GamePlatform entries. Proceeding to delete Game: {NewName} with Id: [{Id}].", toDelete.Name, toDelete.Id);
                     }
 
                     #endregion Delete GamePlatform References

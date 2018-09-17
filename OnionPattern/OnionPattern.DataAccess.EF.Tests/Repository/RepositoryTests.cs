@@ -18,7 +18,7 @@ namespace OnionPattern.DataAccess.EF.Tests.Repository
             private Repository<DummyEntity> repository;
 
             [TestInitialize]
-            public void TestInitalize()
+            public void TestInitialize()
             {
                 fakeDbContext = A.Fake<DbContext>();
                 repository = new Repository<DummyEntity>(fakeDbContext);

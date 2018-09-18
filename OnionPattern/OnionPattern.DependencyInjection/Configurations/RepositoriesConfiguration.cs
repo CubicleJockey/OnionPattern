@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using OnionPattern.DataAccess.EF;
@@ -11,6 +10,7 @@ using OnionPattern.Domain.Game.Entities;
 using OnionPattern.Domain.GamePlatform.Entities;
 using OnionPattern.Domain.Platform.Entities;
 using OnionPattern.Domain.Repository;
+using System;
 
 namespace OnionPattern.DependencyInjection.Configurations
 {
@@ -34,21 +34,21 @@ namespace OnionPattern.DependencyInjection.Configurations
 
         private static void ConfigureNonAsync(IServiceCollection services)
         {
-            services.AddTransient<IRepository<Game>, Repository<Game>>(InitializeReposiotry<Game>());
-            services.AddTransient<IRepository<Platform>, Repository<Platform>>(InitializeReposiotry<Platform>());
-            services.AddTransient<IRepository<GamePlatform>, Repository<GamePlatform>>(InitializeReposiotry<GamePlatform>());
+            services.AddTransient<IRepository<Game>, Repository<Game>>(InitializeRepository<Game>());
+            services.AddTransient<IRepository<Platform>, Repository<Platform>>(InitializeRepository<Platform>());
+            services.AddTransient<IRepository<GamePlatform>, Repository<GamePlatform>>(InitializeRepository<GamePlatform>());
             services.AddTransient<IRepositoryAggregate, RepositoryAggregate>();
         }
-        
+
         private static void ConfigureAsync(IServiceCollection services)
         {
-            services.AddTransient<IRepositoryAsync<Game>, RepositoryAsync<Game>>(InitializeReposiotryAsync<Game>());
-            services.AddTransient<IRepositoryAsync<Platform>, RepositoryAsync<Platform>>(InitializeReposiotryAsync<Platform>());
-            services.AddTransient<IRepositoryAsync<GamePlatform>, RepositoryAsync<GamePlatform>>(InitializeReposiotryAsync<GamePlatform>());
+            services.AddTransient<IRepositoryAsync<Game>, RepositoryAsync<Game>>(InitializeRepositoryAsync<Game>());
+            services.AddTransient<IRepositoryAsync<Platform>, RepositoryAsync<Platform>>(InitializeRepositoryAsync<Platform>());
+            services.AddTransient<IRepositoryAsync<GamePlatform>, RepositoryAsync<GamePlatform>>(InitializeRepositoryAsync<GamePlatform>());
             services.AddTransient<IRepositoryAsyncAggregate, RepositoryAsyncAggregate>();
         }
 
-        private static Func<IServiceProvider, Repository<TEntity>> InitializeReposiotry<TEntity>() where TEntity : VideoGameEntity
+        private static Func<IServiceProvider, Repository<TEntity>> InitializeRepository<TEntity>() where TEntity : VideoGameEntity
         {
             return context =>
             {
@@ -57,7 +57,7 @@ namespace OnionPattern.DependencyInjection.Configurations
             };
         }
 
-        private static Func<IServiceProvider, RepositoryAsync<TEntity>> InitializeReposiotryAsync<TEntity>() where TEntity : VideoGameEntity
+        private static Func<IServiceProvider, RepositoryAsync<TEntity>> InitializeRepositoryAsync<TEntity>() where TEntity : VideoGameEntity
         {
             return context =>
             {

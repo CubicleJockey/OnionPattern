@@ -17,8 +17,8 @@ namespace OnionPattern.DataAccess.EF.Mock.Data
         public static async void InjectAsync(VideoGameContext context)
         {
             await InitializePlatforms(context);
-            await InitalizeGames(context);
-            await InitailizeGamePlatforms(context);
+            await InitializeGames(context);
+            await InitializeGamePlatforms(context);
 
             await context.SaveChangesAsync();
         }
@@ -35,7 +35,7 @@ namespace OnionPattern.DataAccess.EF.Mock.Data
         /// <exception cref="ArgumentException">The <paramref name="tasks">tasks</paramref> argument contains a null element.   -or-   The <paramref name="tasks">tasks</paramref> argument is an empty array.</exception>
         public static void Inject(VideoGameContext context)
         {
-            Task.WaitAll(InitializePlatforms(context), InitalizeGames(context), InitailizeGamePlatforms(context));
+            Task.WaitAll(InitializePlatforms(context), InitializeGames(context), InitializeGamePlatforms(context));
             context.SaveChanges();
         }
 
@@ -54,7 +54,7 @@ namespace OnionPattern.DataAccess.EF.Mock.Data
             await context.Platforms.AddRangeAsync(platforms);
         }
 
-        private static async Task InitalizeGames(IVideoGameContext context)
+        private static async Task InitializeGames(IVideoGameContext context)
         {
             var games = new[]
             {
@@ -125,7 +125,7 @@ namespace OnionPattern.DataAccess.EF.Mock.Data
             await context.Games.AddRangeAsync(games);
         }
 
-        private static async Task InitailizeGamePlatforms(IVideoGameContext context)
+        private static async Task InitializeGamePlatforms(IVideoGameContext context)
         {
             var gamePlatforms = new[]
             {

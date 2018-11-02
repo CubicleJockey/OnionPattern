@@ -16,13 +16,13 @@ namespace OnionPattern.Api.Tests.Controllers.Platform
         public class ConstructorTests
         {
             private IPlatformRequestAsyncAggregate fakePlatformRequestAsyncAggregate;
-            private PlatfomsAsyncController controller;
+            private PlatformsAsyncController controller;
 
             [TestInitialize]
             public void TestInitalize()
             {
                 fakePlatformRequestAsyncAggregate = A.Fake<IPlatformRequestAsyncAggregate>();
-                controller = new PlatfomsAsyncController(fakePlatformRequestAsyncAggregate);
+                controller = new PlatformsAsyncController(fakePlatformRequestAsyncAggregate);
             }
 
             [TestCleanup]
@@ -57,7 +57,7 @@ namespace OnionPattern.Api.Tests.Controllers.Platform
             [TestMethod]
             public void ShouldBeTypeOfPlatfomsAsyncController()
             {
-                controller.Should().BeOfType<PlatfomsAsyncController>();
+                controller.Should().BeOfType<PlatformsAsyncController>();
             }
 
         }

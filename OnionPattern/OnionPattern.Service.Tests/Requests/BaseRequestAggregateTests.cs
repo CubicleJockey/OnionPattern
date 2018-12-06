@@ -1,7 +1,6 @@
-﻿using FluentAssertions;
+﻿using FakeItEasy;
+using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using OnionPattern.Service.Tests.Requests.Mocks;
-using System;
 
 namespace OnionPattern.Service.Tests.Requests
 {
@@ -10,7 +9,7 @@ namespace OnionPattern.Service.Tests.Requests
         [TestClass]
         public class ConstructorTests : TestBase<FakeEntity>
         {
-           [TestInitialize]
+            [TestInitialize]
             public void TestInitialize()
             {
                 InitializeFakes();
@@ -19,35 +18,27 @@ namespace OnionPattern.Service.Tests.Requests
             [TestCleanup]
             public void TestCleanup()
             {
-               ClearFakes();
+                ClearFakes();
             }
 
             [TestMethod]
             public void RepositoryIsNull()
             {
-                Action ctor = () => new MockBaseRequest(null, FakeRepositoryAggregate);
-                ctor.Should()
-                    .Throw<ArgumentNullException>()
-                    .WithMessage($"Value cannot be null.{Environment.NewLine}Parameter name: repository cannot be null.");
+                TestConstructor<BaseServiceRequest<FakeEntity>>(null, FakeRepositoryAggregate);
             }
 
             [TestMethod]
             public void RepositoryAggregateIsNull()
             {
-                Action ctor = () => new MockBaseRequest(FakeRepository, null);
-                ctor.Should()
-                    .Throw<ArgumentNullException>()
-                    .WithMessage($"Value cannot be null.{Environment.NewLine}Parameter name: repositoryAggregate cannot be null.");
+                TestConstructor<BaseServiceRequest<FakeEntity>>(FakeRepository, null);
             }
 
             [TestMethod]
             public void IsValid()
             {
-                var baseRequest = new MockBaseRequest(FakeRepository, FakeRepositoryAggregate);
+                var baseRequest = A.Fake<BaseServiceRequest<FakeEntity>>();
 
-                baseRequest.Should().NotBeNull();
                 baseRequest.Should().BeAssignableTo<BaseServiceRequest<FakeEntity>>();
-                baseRequest.Should().BeOfType<MockBaseRequest>();
             }
         }
     }

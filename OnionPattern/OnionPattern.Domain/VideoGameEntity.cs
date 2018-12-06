@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Newtonsoft.Json;
 using OnionPattern.Domain.Validation;
 
-namespace OnionPattern.Domain.Entities
+namespace OnionPattern.Domain
 {
     public abstract class VideoGameEntity
     {

@@ -4,7 +4,7 @@ using System.Data.Common;
 using System.Linq;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
-using OnionPattern.Domain.Entities;
+using OnionPattern.Domain;
 using OnionPattern.Domain.Repository;
 
 namespace OnionPattern.DataAccess.EF.Repository

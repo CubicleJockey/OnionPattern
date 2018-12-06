@@ -1,6 +1,5 @@
 ﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using OnionPattern.Domain.Entities;
 using OnionPattern.Domain.Game.Entities;
 using OnionPattern.Domain.Services.Requests.Game.Async;
 using OnionPattern.Service.Requests.Game.Async;
@@ -12,27 +11,32 @@ namespace OnionPattern.Service.Tests.Requests.Games.Async
         [TestClass]
         public class ConstructorTests : TestBaseAsync<Game>
         {
+            private UpdateGameTitleRequestAsync request;
+
             [TestInitialize]
             public void TestInitialize()
             {
                 InitializeFakes();
+                request = new UpdateGameTitleRequestAsync(FakeRepositoryAsync, FakeRepositoryAsyncAggregate);
             }
 
             [TestCleanup]
             public void TestCleanup()
             {
                 ClearFakes();
+                request = null;
             }
 
             [TestMethod]
-            public void Inheritence()
+            public void InheritsFromIUpdateGameTitleRequestAsync()
             {
-                var request = new UpdateGameTitleRequestAsync(FakeRepositoryAsync, FakeRepositoryAsyncAggregate);
-
-                request.Should().NotBeNull();
-                request.Should().BeAssignableTo<BaseServiceRequestAsync<Game>>();
                 request.Should().BeAssignableTo<IUpdateGameTitleRequestAsync>();
-                request.Should().BeOfType<UpdateGameTitleRequestAsync>();
+            }
+
+            [TestMethod]
+            public void InheritsFromBaseServiceRequestAsync()
+            {
+                request.Should().BeAssignableTo<BaseServiceRequestAsync<Game>>();
             }
         }
     }

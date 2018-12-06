@@ -11,14 +11,18 @@ namespace OnionPattern.Api.Tests.Controllers
         [TestClass]
         public class ConstructorTests
         {
-            [TestMethod]
-            public void Inheritence()
-            {
-                var controller = A.Fake<BaseController>();
+            private BaseController controller;
 
-                controller.Should().NotBeNull();
+            [TestInitialize]
+            public void TestInitialize()
+            {
+                controller = A.Fake<BaseController>();
+            }
+
+            [TestMethod]
+            public void InheritsFromController()
+            {
                 controller.Should().BeAssignableTo<Controller>();
-                controller.Should().BeAssignableTo<BaseController>();
             }
         }
     }

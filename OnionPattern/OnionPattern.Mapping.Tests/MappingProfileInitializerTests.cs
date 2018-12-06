@@ -1,6 +1,7 @@
-﻿using System;
+﻿using AutoMapper;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace OnionPattern.Mapping.Tests
 {
@@ -10,7 +11,9 @@ namespace OnionPattern.Mapping.Tests
         [TestMethod]
         public void MappingProfilesAreValid()
         {
-            Action method = () => MappingProfileInitilizer.ConfigureMappings();
+            Mapper.Reset();
+
+            Action method = MappingProfileInitilizer.ConfigureMappings;
             method.Should().NotThrow();
         }
     }

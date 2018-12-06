@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using OnionPattern.Domain.Entities;
 using OnionPattern.Domain.Game.Entities;
+using OnionPattern.Domain.GamePlatform.Entities;
 using OnionPattern.Domain.Platform.Entities;
 
 namespace OnionPattern.DataAccess.EF

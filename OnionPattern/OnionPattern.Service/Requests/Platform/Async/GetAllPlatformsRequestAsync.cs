@@ -1,11 +1,10 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
-using OnionPattern.Domain.Platform.Responses;
+﻿using OnionPattern.Domain.Platform.Responses;
 using OnionPattern.Domain.Repository;
 using OnionPattern.Domain.Services.Requests.Platform.Async;
 using Serilog;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace OnionPattern.Service.Requests.Platform.Async
 {
@@ -16,8 +15,8 @@ namespace OnionPattern.Service.Requests.Platform.Async
         ///     Request a list of all the Platforms asynchronously.
         /// </summary>
         /// <exception cref="T:System.ArgumentNullException">Condition.</exception>
-        public GetAllPlatformsRequestAsync(IRepositoryAsync<Domain.Platform.Entities.Platform> repository, IRepositoryAsyncAggregate repositoryAggregate) 
-            : base(repository, repositoryAggregate) { }
+        public GetAllPlatformsRequestAsync(IRepositoryAsync<Domain.Platform.Entities.Platform> repositoryAsync, IRepositoryAsyncAggregate repositoryAsyncAggregate)
+            : base(repositoryAsync, repositoryAsyncAggregate) { }
 
         #region Implementation of IGetAllPlatformsRequestAsync
 

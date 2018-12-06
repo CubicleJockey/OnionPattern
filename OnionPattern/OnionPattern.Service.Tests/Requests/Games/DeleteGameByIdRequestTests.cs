@@ -1,6 +1,5 @@
 ﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using OnionPattern.Domain.Entities;
 using OnionPattern.Domain.Game.Entities;
 using OnionPattern.Domain.Services.Requests.Game;
 using OnionPattern.Service.Requests.Game;
@@ -12,27 +11,32 @@ namespace OnionPattern.Service.Tests.Requests.Games
         [TestClass]
         public class ConstructorTests : TestBase<Game>
         {
+            private DeleteGameByIdRequest request;
+
             [TestInitialize]
             public void TestInitialize()
             {
                 InitializeFakes();
+                request = new DeleteGameByIdRequest(FakeRepository, FakeRepositoryAggregate);
             }
 
             [TestCleanup]
             public void TestCleanup()
             {
                 ClearFakes();
+                request = null;
             }
 
             [TestMethod]
-            public void Inheritence()
+            public void InheritsFromIDeleteGameByIdRequest()
             {
-                var request = new DeleteGameByIdRequest(FakeRepository, FakeRepositoryAggregate);
-
-                request.Should().NotBeNull();
                 request.Should().BeAssignableTo<IDeleteGameByIdRequest>();
+            }
+
+            [TestMethod]
+            public void InheritsFromBaseServiceRequest()
+            {
                 request.Should().BeAssignableTo<BaseServiceRequest<Game>>();
-                request.Should().BeOfType<DeleteGameByIdRequest>();
             }
         }
     }

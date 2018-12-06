@@ -1,4 +1,4 @@
-﻿using OnionPattern.Domain.Entities;
+﻿using OnionPattern.Domain;
 using OnionPattern.Domain.Repository;
 using System;
 
@@ -14,10 +14,10 @@ namespace OnionPattern.Service
         protected IRepositoryAsyncAggregate RepositoryAggregate { get; }
 
         /// <exception cref="ArgumentNullException">Condition.</exception>
-        protected BaseServiceRequestAsync(IRepositoryAsync<TEntity> repository, IRepositoryAsyncAggregate repositoryAggregate)
+        protected BaseServiceRequestAsync(IRepositoryAsync<TEntity> repositoryAsync, IRepositoryAsyncAggregate repositoryAsyncAggregate)
         {
-            Repository = repository ?? throw new ArgumentNullException($"{nameof(repository)} cannot be null.");
-            RepositoryAggregate = repositoryAggregate ?? throw new ArgumentNullException($"{nameof(repositoryAggregate)} cannot be null.");
+            Repository = repositoryAsync ?? throw new ArgumentNullException(nameof(repositoryAsync));
+            RepositoryAggregate = repositoryAsyncAggregate ?? throw new ArgumentNullException(nameof(repositoryAsyncAggregate));
         }
     }
 }

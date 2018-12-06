@@ -1,9 +1,9 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
-using OnionPattern.Domain.Entities;
+﻿using Microsoft.EntityFrameworkCore;
 using OnionPattern.Domain.Game.Entities;
+using OnionPattern.Domain.GamePlatform.Entities;
 using OnionPattern.Domain.Platform.Entities;
 using OnionPattern.Domain.Repository;
+using System;
 
 namespace OnionPattern.DataAccess.EF.Repository
 {
@@ -13,7 +13,7 @@ namespace OnionPattern.DataAccess.EF.Repository
 
         public RepositoryAggregate(DbContext dbContext)
         {
-            this.dbContext = dbContext ?? throw new ArgumentNullException($"{nameof(dbContext)} cannot be null.");
+            this.dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
         }
 
         private IRepository<Game> games;

@@ -6,7 +6,7 @@ namespace OnionPattern.Domain.Tests.Configurations
     {
         public static IDictionary<string, string> DevConfiguration => GetDevConfiguration();
 
-        public static class ConnectionStringsKeys
+        public static class ConfigurationKeys
         {
             public static string VideoGamesConnection => "ConnectionStrings:VideoGamesConnection";
             public static string LogLocationsLocal => "LogLocations:FileName";
@@ -15,8 +15,8 @@ namespace OnionPattern.Domain.Tests.Configurations
         {
             return new Dictionary<string, string>
             {
-                { ConnectionStringsKeys.VideoGamesConnection, @"Server=(localdb)\mssqllocaldb;Database=Sentinel;Trusted_Connection=True;" },
-                { ConnectionStringsKeys.LogLocationsLocal, "logs/ler-dtapi.log" }
+                { ConfigurationKeys.VideoGamesConnection, @"Server=(localdb)\mssqllocaldb;Database=Sentinel;Trusted_Connection=True;" },
+                { ConfigurationKeys.LogLocationsLocal, "logs/ler-dtapi.log" }
             };
         }
     }

@@ -6,7 +6,9 @@ namespace OnionPattern.Mapping
     {
         public static void ConfigureMappings()
         {
-            Mapper.Initialize(configuration => {
+            Mapper.Reset();
+            Mapper.Initialize(configuration =>
+            {
                 configuration.AddProfile<GameMappingProfile>();
                 configuration.AddProfile<PlatformMappingProfile>();
             });

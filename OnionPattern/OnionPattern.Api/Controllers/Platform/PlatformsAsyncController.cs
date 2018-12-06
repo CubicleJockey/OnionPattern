@@ -1,8 +1,8 @@
-﻿using System;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using OnionPattern.Domain.Platform.Requests;
 using OnionPattern.Domain.Services.Requests.Platform.Async;
+using System;
+using System.Threading.Tasks;
 
 namespace OnionPattern.Api.Controllers.Platform
 {
@@ -13,7 +13,7 @@ namespace OnionPattern.Api.Controllers.Platform
     [ApiVersion("1")]
     [Produces("application/json")]
     [Route("api/v{version:apiVersion}/[controller]")]
-    public class PlatfomsAsyncController : BaseAsyncController
+    public class PlatformsAsyncController : BaseAsyncController
     {
         private IPlatformRequestAsyncAggregate RequestAsyncAggregate { get; }
 
@@ -22,7 +22,7 @@ namespace OnionPattern.Api.Controllers.Platform
         /// Ctor
         /// </summary>
         /// <exception cref="ArgumentNullException">Condition.</exception>
-        public PlatfomsAsyncController(IPlatformRequestAsyncAggregate requestAsyncAggregate)
+        public PlatformsAsyncController(IPlatformRequestAsyncAggregate requestAsyncAggregate)
         {
             RequestAsyncAggregate = requestAsyncAggregate ?? throw new ArgumentNullException(nameof(requestAsyncAggregate));
         }

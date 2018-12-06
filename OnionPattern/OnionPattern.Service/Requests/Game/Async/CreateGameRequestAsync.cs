@@ -1,18 +1,18 @@
-﻿using System;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using OnionPattern.Domain.Game.Requests;
 using OnionPattern.Domain.Game.Responses;
 using OnionPattern.Domain.Repository;
 using OnionPattern.Domain.Services.Requests.Game.Async;
 using Serilog;
+using System;
+using System.Threading.Tasks;
 
 namespace OnionPattern.Service.Requests.Game.Async
 {
     public class CreateGameRequestAsync : BaseServiceRequestAsync<Domain.Game.Entities.Game>, ICreateGameRequestAsync
     {
-        public CreateGameRequestAsync(IRepositoryAsync<Domain.Game.Entities.Game> repository, IRepositoryAsyncAggregate repositoryAggregate) 
-            : base(repository, repositoryAggregate) { }
+        public CreateGameRequestAsync(IRepositoryAsync<Domain.Game.Entities.Game> repositoryAsync, IRepositoryAsyncAggregate repositoryAsyncAggregate)
+            : base(repositoryAsync, repositoryAsyncAggregate) { }
 
         #region Implementation of ICreateGameRequestAsync
 

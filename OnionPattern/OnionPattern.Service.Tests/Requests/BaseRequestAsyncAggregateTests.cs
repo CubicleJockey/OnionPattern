@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using FakeItEasy;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using OnionPattern.Domain.Services.Requests.Platform.Async;
 using OnionPattern.Service.Requests;
-using OnionPattern.Service.Tests.Requests.Mocks;
 
 namespace OnionPattern.Service.Tests.Requests
 {
@@ -29,31 +25,22 @@ namespace OnionPattern.Service.Tests.Requests
             [TestMethod]
             public void RepositoryAsyncIsNull()
             {
-                Action ctor = () => new MockBaseRequestAsyncAggregate(null, FakeRepositoryAsyncAggregate);
-
-                ctor.Should()
-                    .Throw<ArgumentNullException>()
-                    .WithMessage($"Value cannot be null.{Environment.NewLine}Parameter name: repositoryAsync cannot be null.");
+                TestConstructor<BaseRequestAsyncAggregate<FakeEntity>>(null, FakeRepositoryAsyncAggregate);
             }
 
             [TestMethod]
             public void RepositoryAsyncAggregateIsNull()
             {
-                Action ctor = () => new MockBaseRequestAsyncAggregate(FakeRepositoryAsync, null);
 
-                ctor.Should()
-                    .Throw<ArgumentNullException>()
-                    .WithMessage($"Value cannot be null.{Environment.NewLine}Parameter name: repositoryAsyncAggregate cannot be null.");
+                TestConstructor<BaseRequestAsyncAggregate<FakeEntity>>(FakeRepositoryAsync, null);
             }
 
             [TestMethod]
             public void Inheritence()
             {
-                var baseRequestAsync = new MockBaseRequestAsyncAggregate(FakeRepositoryAsync, FakeRepositoryAsyncAggregate);
+                var baseRequestAsync = A.Fake<BaseRequestAsyncAggregate<FakeEntity>>();
 
-                baseRequestAsync.Should().NotBeNull();
                 baseRequestAsync.Should().BeAssignableTo<BaseRequestAsyncAggregate<FakeEntity>>();
-                baseRequestAsync.Should().BeOfType<MockBaseRequestAsyncAggregate>();
             }
         }
     }

@@ -1,12 +1,10 @@
-﻿using System;
-using System.Threading.Tasks;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OnionPattern.Domain.Platform.Requests;
-using OnionPattern.Domain.Services.Requests.Platform;
 using OnionPattern.Domain.Services.Requests.Platform.Async;
-using OnionPattern.Service.Requests.Platform;
 using OnionPattern.Service.Requests.Platform.Async;
+using OnionPattern.TestUtils;
+using System.Threading.Tasks;
 
 namespace OnionPattern.Service.Tests.Requests.Platform.Async
 {
@@ -15,27 +13,32 @@ namespace OnionPattern.Service.Tests.Requests.Platform.Async
         [TestClass]
         public class ConstructorTests : TestBaseAsync<Domain.Platform.Entities.Platform>
         {
+            private UpdatePlatformNameRequestAsync request;
+
             [TestInitialize]
             public void TestInitialize()
             {
                 InitializeFakes();
+                request = new UpdatePlatformNameRequestAsync(FakeRepositoryAsync, FakeRepositoryAsyncAggregate);
             }
 
             [TestCleanup]
             public void TestCleanup()
             {
                 ClearFakes();
+                request = null;
             }
 
             [TestMethod]
-            public void Inheritence()
+            public void InheritsFromIUpdatePlatformNameRequestAsync()
             {
-                var request = new UpdatePlatformNameRequestAsync(FakeRepositoryAsync, FakeRepositoryAsyncAggregate);
-
-                request.Should().NotBeNull();
-                request.Should().BeAssignableTo<BaseServiceRequestAsync<Domain.Platform.Entities.Platform>>();
                 request.Should().BeAssignableTo<IUpdatePlatformNameRequestAsync>();
-                request.Should().BeOfType<UpdatePlatformNameRequestAsync>();
+            }
+
+            [TestMethod]
+            public void InheritsFromBaseServiceRequestAsync()
+            {
+                request.Should().BeAssignableTo<BaseServiceRequestAsync<Domain.Platform.Entities.Platform>>();
             }
         }
 
@@ -65,7 +68,7 @@ namespace OnionPattern.Service.Tests.Requests.Platform.Async
                 response.Should().NotBeNull();
                 response.ErrorResponse.Should().NotBeNull();
                 response.ErrorResponse.ErrorSummary.Should().NotBeNullOrWhiteSpace();
-                response.ErrorResponse.ErrorSummary.Should().BeEquivalentTo($"Value cannot be null.{Environment.NewLine}Parameter name: input");
+                response.ErrorResponse.ErrorSummary.Should().BeEquivalentTo(ExceptionsUtility.NullArgument("input"));
                 response.StatusCode.HasValue.Should().BeTrue();
                 response.StatusCode.Should().Be(500);
             }

@@ -1,32 +1,29 @@
 ﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using OnionPattern.Domain.Entities;
 
 namespace OnionPattern.Domain.Tests.Game.Entities
 {
     public class GameTests
     {
         [TestClass]
-        public class ConstructorTests
+        public class ConstructorTests : TestBase<Domain.Game.Entities.Game>
         {
-            private Domain.Game.Entities.Game entity;
-
             [TestInitialize]
             public void TestInitialize()
             {
-                entity = new Domain.Game.Entities.Game();
+                Entity = new Domain.Game.Entities.Game();
             }
 
             [TestMethod]
             public void ShouldInheritFromVideoGameEntity()
             {
-                entity.Should().BeAssignableTo<VideoGameEntity>();
+                Entity.Should().BeAssignableTo<VideoGameEntity>();
             }
 
             [TestMethod]
             public void ShouldBeOfTypeGame()
             {
-                entity.Should().BeOfType<Domain.Game.Entities.Game>();
+                Entity.Should().BeOfType<Domain.Game.Entities.Game>();
             }
         }
     }

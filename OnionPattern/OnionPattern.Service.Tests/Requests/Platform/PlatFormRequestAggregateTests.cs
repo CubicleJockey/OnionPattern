@@ -1,7 +1,5 @@
-﻿using FakeItEasy;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using OnionPattern.Domain.Repository;
 using OnionPattern.Domain.Services.Requests.Platform;
 using OnionPattern.Service.Requests;
 using OnionPattern.Service.Requests.Platform;
@@ -11,20 +9,34 @@ namespace OnionPattern.Service.Tests.Requests.Platform
     public class PlatFormRequestAggregateTests
     {
         [TestClass]
-        public class ConstructorTests
+        public class ConstructorTests : TestBase<Domain.Platform.Entities.Platform>
         {
-            [TestMethod]
-            public void Inheritence()
+            private PlatformRequestAggregate requestAggregate;
+
+            [TestInitialize]
+            public void TestInitailize()
             {
-                var fakeRepository = A.Fake<IRepository<Domain.Platform.Entities.Platform>>();
-                var fakeRepositoryAggregate = A.Fake<IRepositoryAggregate>();
+                InitializeFakes();
+                requestAggregate = new PlatformRequestAggregate(FakeRepository, FakeRepositoryAggregate);
+            }
 
-                var platformRequestAggregate = new PlatformRequestAggregate(fakeRepository, fakeRepositoryAggregate);
+            [TestCleanup]
+            public void TestCleanup()
+            {
+                ClearFakes();
+                requestAggregate = null;
+            }
 
-                platformRequestAggregate.Should().NotBeNull();
-                platformRequestAggregate.Should().BeAssignableTo<IPlatformRequestAggregate>();
-                platformRequestAggregate.Should().BeAssignableTo<BaseRequestAggregate<Domain.Platform.Entities.Platform>>();
-                platformRequestAggregate.Should().BeOfType<PlatformRequestAggregate>();
+            [TestMethod]
+            public void InheritsFromIPlatformRequestAggregate()
+            {
+                requestAggregate.Should().BeAssignableTo<IPlatformRequestAggregate>();
+            }
+
+            [TestMethod]
+            public void InheritsFromBaseRequestAggregate()
+            {
+                requestAggregate.Should().BeAssignableTo<BaseRequestAggregate<Domain.Platform.Entities.Platform>>();
             }
         }
     }

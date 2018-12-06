@@ -1,10 +1,11 @@
-﻿using System;
-using FakeItEasy;
+﻿using FakeItEasy;
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OnionPattern.DataAccess.EF.Repository;
 using OnionPattern.Domain.Repository;
+using OnionPattern.TestUtils;
+using System;
 
 namespace OnionPattern.DataAccess.EF.Tests.Repository
 {
@@ -17,7 +18,7 @@ namespace OnionPattern.DataAccess.EF.Tests.Repository
             private Repository<DummyEntity> repository;
 
             [TestInitialize]
-            public void TestInitalize()
+            public void TestInitialize()
             {
                 fakeDbContext = A.Fake<DbContext>();
                 repository = new Repository<DummyEntity>(fakeDbContext);
@@ -30,7 +31,7 @@ namespace OnionPattern.DataAccess.EF.Tests.Repository
 
                 ctor.Should()
                     .Throw<ArgumentNullException>()
-                    .WithMessage($"Value cannot be null.{Environment.NewLine}Parameter name: context");
+                    .WithMessage(ExceptionsUtility.NullArgument("context"));
             }
 
             [TestMethod]

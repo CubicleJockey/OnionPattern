@@ -11,14 +11,14 @@ namespace OnionPattern.Domain.Tests.Constants
         [TestMethod]
         public void ValidValues()
         {
-            EnvironmentVariables.InMemoryDb.Should().BeEquivalentTo("InMemoryDb");
+            EnvironmentVariables.InMemoryDb.Should().Be("InMemoryDb");
             EnvironmentVariables.ASPNETCORE_ENVIRONMENT.Should().Be("ASPNETCORE_ENVIRONMENT");
         }
 
         [TestMethod]
         public void GetInMemoryDbValueIsFalse()
         {
-            Environment.SetEnvironmentVariable(EnvironmentVariables.InMemoryDb, "false");
+            Environment.SetEnvironmentVariable(EnvironmentVariables.InMemoryDb, bool.FalseString.ToLower());
             var result = EnvironmentVariables.GetInMemoryDbValue();
             result.Should().BeFalse();
         }
@@ -26,7 +26,7 @@ namespace OnionPattern.Domain.Tests.Constants
         [TestMethod]
         public void GetInMemoryDbValuesIsTrue()
         {
-            Environment.SetEnvironmentVariable(EnvironmentVariables.InMemoryDb, "true");
+            Environment.SetEnvironmentVariable(EnvironmentVariables.InMemoryDb, bool.TrueString.ToLower());
             var result = EnvironmentVariables.GetInMemoryDbValue();
             result.Should().BeTrue();
         }

@@ -1,11 +1,12 @@
-﻿using System;
-using FakeItEasy;
+﻿using FakeItEasy;
 using FluentAssertions;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OnionPattern.Api.Configuration.Program;
+using OnionPattern.TestUtils;
+using System;
 
 namespace OnionPattern.Api.Tests.Configuration.Startup.Swagger
 {
@@ -38,7 +39,7 @@ namespace OnionPattern.Api.Tests.Configuration.Startup.Swagger
 
             method.Should()
                   .Throw<ArgumentNullException>()
-                  .WithMessage($"Value cannot be null.{Environment.NewLine}Parameter name: hostingEnvironment");
+                  .WithMessage(ExceptionsUtility.NullArgument("hostingEnvironment"));
         }
 
         [TestMethod]
@@ -48,7 +49,7 @@ namespace OnionPattern.Api.Tests.Configuration.Startup.Swagger
 
             method.Should()
                 .Throw<ArgumentNullException>()
-                .WithMessage($"Value cannot be null.{Environment.NewLine}Parameter name: configuration");
+                .WithMessage(ExceptionsUtility.NullArgument("configuration"));
         }
 
         [TestMethod]
@@ -58,7 +59,7 @@ namespace OnionPattern.Api.Tests.Configuration.Startup.Swagger
 
             method.Should()
                 .Throw<ArgumentNullException>()
-                .WithMessage($"Value cannot be null.{Environment.NewLine}Parameter name: logging");
+                .WithMessage(ExceptionsUtility.NullArgument("logging"));
         }
 
         [DataRow(default(string))]

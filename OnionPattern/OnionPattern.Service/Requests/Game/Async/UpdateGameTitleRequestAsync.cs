@@ -1,18 +1,17 @@
-﻿using OnionPattern.Domain.Repository;
+﻿using OnionPattern.Domain.Game.Requests;
+using OnionPattern.Domain.Game.Responses;
+using OnionPattern.Domain.Repository;
 using OnionPattern.Domain.Services.Requests.Game.Async;
 using Serilog;
 using System;
 using System.Threading.Tasks;
-using AutoMapper;
-using OnionPattern.Domain.Game.Requests;
-using OnionPattern.Domain.Game.Responses;
 
 namespace OnionPattern.Service.Requests.Game.Async
 {
     public class UpdateGameTitleRequestAsync : BaseServiceRequestAsync<Domain.Game.Entities.Game>, IUpdateGameTitleRequestAsync
     {
-        public UpdateGameTitleRequestAsync(IRepositoryAsync<Domain.Game.Entities.Game> repository, IRepositoryAsyncAggregate repositoryAggregate) 
-            : base(repository, repositoryAggregate) { }
+        public UpdateGameTitleRequestAsync(IRepositoryAsync<Domain.Game.Entities.Game> repositoryAsync, IRepositoryAsyncAggregate repositoryAsyncAggregate)
+            : base(repositoryAsync, repositoryAsyncAggregate) { }
 
         #region Implementation of IUpdateGameTitleRequestAsync
 

@@ -1,9 +1,8 @@
-﻿using FluentAssertions;
+﻿using FakeItEasy;
+using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OnionPattern.Service.Requests;
 using OnionPattern.Service.Tests.Requests;
-using OnionPattern.Service.Tests.Requests.Mocks;
-using System;
 
 namespace OnionPattern.Service.Tests
 {
@@ -27,31 +26,21 @@ namespace OnionPattern.Service.Tests
             [TestMethod]
             public void RepositoryIsNull()
             {
-                Action ctor = () => new MockBaseRequestAggregate(null, FakeRepositoryAggregate);
-
-                ctor.Should()
-                    .Throw<ArgumentNullException>()
-                    .WithMessage($"Value cannot be null.{Environment.NewLine}Parameter name: repository cannot be null.");
+                TestConstructor<BaseRequestAggregate<FakeEntity>>(null, FakeRepositoryAggregate);
             }
 
             [TestMethod]
             public void RepositoryAggregateIsNull()
             {
-                Action ctor = () => new MockBaseRequestAggregate(FakeRepository, null);
-
-                ctor.Should()
-                    .Throw<ArgumentNullException>()
-                    .WithMessage($"Value cannot be null.{Environment.NewLine}Parameter name: repositoryAggregate cannot be null.");
+                TestConstructor<BaseRequestAggregate<FakeEntity>>(FakeRepository, null);
             }
 
             [TestMethod]
             public void Inheritence()
             {
-                var requestAggregate = new MockBaseRequestAggregate(FakeRepository, FakeRepositoryAggregate);
+                var requestAggregate = A.Fake<BaseRequestAggregate<FakeEntity>>();
 
-                requestAggregate.Should().NotBeNull();
                 requestAggregate.Should().BeAssignableTo<BaseRequestAggregate<FakeEntity>>();
-                requestAggregate.Should().BeOfType<MockBaseRequestAggregate>();
             }
         }
     }

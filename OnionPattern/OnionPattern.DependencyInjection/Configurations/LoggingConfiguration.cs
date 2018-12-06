@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Serilog;
-using System.IO;
 using Microsoft.Extensions.Options;
 using OnionPattern.Domain.Configurations;
+using Serilog;
+using System.IO;
 
 namespace OnionPattern.DependencyInjection.Configurations
 {
@@ -15,9 +15,23 @@ namespace OnionPattern.DependencyInjection.Configurations
 
             services.AddSingleton<ILogger>(context =>
             {
-                var directoryCheck = (new FileInfo(logLocationConfig.Value.FileName)).Directory;
+                var basicLoggingConfiguration = new LoggerConfiguration().MinimumLevel.Verbose().CreateLogger();
+
+                var fileName = logLocationConfig?.Value?.FileName;
+                if (string.IsNullOrWhiteSpace(fileName)) { return basicLoggingConfiguration; }
+
+                var file = new FileInfo(fileName);
+
+                var directoryCheck = file.Directory;
+
+                //Plain Logging
+                if (directoryCheck == null) { return basicLoggingConfiguration; }
+
                 directoryCheck.Refresh();
-                if (!directoryCheck.Exists) { directoryCheck.Create(); }
+                if (!directoryCheck.Exists)
+                {
+                    directoryCheck.Create();
+                }
 
                 return new LoggerConfiguration()
                     .MinimumLevel.Verbose()

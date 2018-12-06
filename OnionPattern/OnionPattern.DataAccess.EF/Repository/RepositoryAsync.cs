@@ -1,5 +1,4 @@
-﻿using OnionPattern.Domain.Entities;
-using OnionPattern.Domain.Repository;
+﻿using OnionPattern.Domain.Repository;
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
@@ -7,6 +6,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using OnionPattern.Domain;
 
 namespace OnionPattern.DataAccess.EF.Repository
 {

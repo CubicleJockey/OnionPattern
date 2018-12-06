@@ -1,13 +1,10 @@
-﻿using System;
-using System.Linq.Expressions;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using OnionPattern.Domain.Entities;
 using OnionPattern.Domain.Game.Entities;
 using OnionPattern.Domain.Game.Requests;
 using OnionPattern.Domain.Services.Requests.Game;
 using OnionPattern.Service.Requests.Game;
-using SerilogFakeItEasy;
+using OnionPattern.TestUtils;
 
 namespace OnionPattern.Service.Tests.Requests.Games
 {
@@ -16,27 +13,32 @@ namespace OnionPattern.Service.Tests.Requests.Games
         [TestClass]
         public class ConstructorTests : TestBase<Game>
         {
+            private UpdateGameTitleRequest request;
+
             [TestInitialize]
             public void TestInitailize()
             {
                 InitializeFakes();
+                request = new UpdateGameTitleRequest(FakeRepository, FakeRepositoryAggregate);
             }
 
             [TestCleanup]
             public void TestCleanup()
             {
                 ClearFakes();
+                request = null;
             }
 
             [TestMethod]
-            public void Inheritence()
+            public void InheritsFromIUpdateGameTitleRequest()
             {
-                var request = new UpdateGameTitleRequest(FakeRepository, FakeRepositoryAggregate);
-
-                request.Should().NotBeNull();
-                request.Should().BeAssignableTo<BaseServiceRequest<Game>>();
                 request.Should().BeAssignableTo<IUpdateGameTitleRequest>();
-                request.Should().BeOfType<UpdateGameTitleRequest>();
+            }
+
+            [TestMethod]
+            public void InheritsFromBaseServiceRequest()
+            {
+                request.Should().BeAssignableTo<BaseServiceRequest<Game>>();
             }
         }
 
@@ -61,11 +63,11 @@ namespace OnionPattern.Service.Tests.Requests.Games
             [TestMethod]
             public void InputIsNull()
             {
-                var response =  request.Execute(null);
+                var response = request.Execute(null);
                 response.Should().NotBeNull();
                 response.ErrorResponse.Should().NotBeNull();
                 response.ErrorResponse.ErrorSummary.Should().NotBeNullOrWhiteSpace();
-                response.ErrorResponse.ErrorSummary.Should().BeEquivalentTo($"Value cannot be null.{Environment.NewLine}Parameter name: input");
+                response.ErrorResponse.ErrorSummary.Should().BeEquivalentTo(ExceptionsUtility.NullArgument("input"));
             }
 
             [DataTestMethod]
@@ -73,8 +75,8 @@ namespace OnionPattern.Service.Tests.Requests.Games
             [DataRow(0)]
             public void InvalidInputIdNotValid(int Id)
             {
-                var invalidInput = new UpdateGameTitleInput{ Id = Id, NewTitle = "Something" };
-                var response =  request.Execute(invalidInput);
+                var invalidInput = new UpdateGameTitleInput { Id = Id, NewTitle = "Something" };
+                var response = request.Execute(invalidInput);
 
                 response.Should().NotBeNull();
                 response.ErrorResponse.Should().NotBeNull();

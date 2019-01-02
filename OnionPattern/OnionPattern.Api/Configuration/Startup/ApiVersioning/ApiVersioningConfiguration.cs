@@ -18,7 +18,8 @@ namespace OnionPattern.Api.Configuration.Startup.ApiVersioning
             // Add the versioned api explorer, which also adds IApiVersionDescriptionProvider service
             // Note: the specified format code will format the version as "'v'major[.minor][-status]"
             // Note: Requires package: Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer
-            services.AddMvcCore().AddVersionedApiExplorer(o => o.GroupNameFormat = "'v'VVV");
+            services.AddMvcCore();
+            services.AddVersionedApiExplorer(o => o.GroupNameFormat = "'v'VVV");
 
             // Add framework services.
             services.AddApiVersioning(apiVersioningOptions => { apiVersioningOptions.ReportApiVersions = true; });

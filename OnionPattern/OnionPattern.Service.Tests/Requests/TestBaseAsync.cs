@@ -32,7 +32,7 @@ namespace OnionPattern.Service.Tests.Requests
             Fake.ClearConfiguration(FakeLogger);
         }
 
-        protected void TestConstructor<T>(IRepositoryAsync<FakeEntity> repositoryAsync, IRepositoryAsyncAggregate repositoryAsyncAggregate)
+        protected void TestConstructor<T>(IRepositoryAsync<FakeEntity> repositoryAsync, IRepositoryAsyncAggregate repositoryAsyncAggregate) where T : class
         {
             var propertyName = repositoryAsync == null ? nameof(repositoryAsync) : nameof(repositoryAsyncAggregate);
 

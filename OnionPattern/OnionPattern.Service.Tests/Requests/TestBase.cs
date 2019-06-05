@@ -26,7 +26,7 @@ namespace OnionPattern.Service.Tests.Requests
             Fake.ClearConfiguration(FakeRepositoryAggregate);
         }
 
-        protected void TestConstructor<T>(IRepository<FakeEntity> repository, IRepositoryAggregate repositoryAggregate)
+        protected void TestConstructor<T>(IRepository<FakeEntity> repository, IRepositoryAggregate repositoryAggregate) where T : class
         {
             var propertyName = repository == null ? nameof(repository) : nameof(repositoryAggregate);
 

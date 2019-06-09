@@ -10,7 +10,7 @@ namespace OnionPattern.DependencyInjection
         {
             RepositoriesConfiguration.Configure(services);
             RequestAndResponsesConfiguration.Configure(services);
-            MappingProfileInitilizer.ConfigureMappings();
+            MappingProfileInitializer.ConfigureMappings();
             LoggingConfiguration.Configure(services);
         }
     }

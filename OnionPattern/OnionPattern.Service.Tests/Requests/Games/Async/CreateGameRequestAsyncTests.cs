@@ -21,7 +21,7 @@ namespace OnionPattern.Service.Tests.Requests.Games.Async
             private CreateGameRequestAsync request;
 
             [TestInitialize]
-            public void TestInitalize()
+            public void TestInitialize()
             {
                 InitializeFakes();
                 request = new CreateGameRequestAsync(FakeRepositoryAsync, FakeRepositoryAsyncAggregate);
@@ -57,7 +57,7 @@ namespace OnionPattern.Service.Tests.Requests.Games.Async
             public void TestInitialize()
             {
                 InitializeFakes();
-                MappingProfileInitilizer.ConfigureMappings();
+                MappingProfileInitializer.ConfigureMappings();
                 request = new CreateGameRequestAsync(FakeRepositoryAsync, FakeRepositoryAsyncAggregate);
                 createGame = () => FakeRepositoryAsync.CreateAsync(A<Game>.Ignored);
             }

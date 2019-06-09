@@ -2,7 +2,7 @@
 
 namespace OnionPattern.Mapping
 {
-    public static class MappingProfileInitilizer
+    public static class MappingProfileInitializer
     {
         public static void ConfigureMappings()
         {

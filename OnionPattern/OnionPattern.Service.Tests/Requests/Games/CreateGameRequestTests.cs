@@ -56,7 +56,7 @@ namespace OnionPattern.Service.Tests.Requests.Games
             public void TestInitialize()
             {
                 InitializeFakes();
-                MappingProfileInitilizer.ConfigureMappings();
+                MappingProfileInitializer.ConfigureMappings();
                 request = new CreateGameRequest(FakeRepository, FakeRepositoryAggregate);
                 createGame = () => FakeRepository.Create(A<Game>.Ignored);
             }

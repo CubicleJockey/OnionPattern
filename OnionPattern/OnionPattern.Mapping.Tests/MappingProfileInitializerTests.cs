@@ -13,7 +13,7 @@ namespace OnionPattern.Mapping.Tests
         {
             Mapper.Reset();
 
-            Action method = MappingProfileInitilizer.ConfigureMappings;
+            Action method = MappingProfileInitializer.ConfigureMappings;
             method.Should().NotThrow();
         }
     }

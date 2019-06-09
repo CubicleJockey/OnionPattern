@@ -4,7 +4,7 @@
     {
         protected TestBase()
         {
-            MappingProfileInitilizer.ConfigureMappings();
+            MappingProfileInitializer.ConfigureMappings();
         }
     }
 }
